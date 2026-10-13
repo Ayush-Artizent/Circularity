@@ -407,6 +407,42 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 .mbadge{display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink2);font-size:11px;font-weight:700;white-space:nowrap;flex:none}
 .vline{display:flex;align-items:center;gap:7px;margin-bottom:8px;min-width:0}.vline .vtxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .methodbox{border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:12px 14px;margin-bottom:14px}.methodbox .fld select,.methodbox .fld input{background:var(--panel)}
+
+.wfe g.up{color:#D9651E}.wfe g.ok path.l,.wfe g.bad path.l,.wfe g.up path.l{stroke-width:3}
+@media (prefers-reduced-motion:no-preference){.wfe g.run path.l{stroke-dasharray:7 5;animation:wfdash .5s linear infinite}@keyframes wfdash{to{stroke-dashoffset:-12}}}
+.wfn[data-st]{border-color:var(--stc)}
+.wfn[data-st=success] .st::before,.wfn[data-st=warning] .st::before{content:'✓ '}.wfn[data-st=failed] .st::before{content:'✕ '}.wfn[data-st=upstream_failed] .st::before{content:'! '}.wfn[data-st=running] .st::before{content:'… '}
+.wfn[data-st=success],.wfn[data-st=failed],.wfn[data-st=upstream_failed],.wfn[data-st=warning]{border-width:3px}
+.wfmini{position:absolute;right:10px;bottom:10px;width:190px;height:80px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px;box-shadow:var(--shadow);z-index:5;pointer-events:none}.wfmini svg{width:100%;height:100%;display:block}
+.runcnt{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line2)}
+.wfrun .filters{padding:8px 14px}.wfrun .filters input[type=search]{min-width:0}
+.wfrun tr[data-act]{cursor:pointer}.wfrun tr[data-act]:hover{background:var(--panel2)}
+
+.tgwrap{position:relative;border:1px solid var(--line);border-radius:8px;background:var(--panel2);overflow:hidden}
+.tgview{height:640px;overflow:auto;position:relative;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:20px 20px;background-attachment:local}
+#tgWorld{position:relative;transform-origin:0 0}
+.tgsv{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.tgsv .l{fill:none;stroke:var(--ink2);stroke-width:1.5;stroke-dasharray:3 4;opacity:.7}.tgsv circle{fill:var(--ink2);opacity:.7}
+.tgsv .hit{fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:help}
+.tgsv .tgl:hover .l{stroke:var(--ink);stroke-width:2.5;opacity:1;stroke-dasharray:none}
+.tgcl{position:absolute;border:2px dashed var(--mv-line);border-radius:10px;background:var(--yellow-soft);opacity:.9;pointer-events:none}
+.tgcn{position:absolute;left:12px;top:8px;font:700 13px var(--f-display);color:var(--ink)}
+.tgc{position:absolute;background:var(--panel);border:1.5px solid var(--ink);border-radius:6px;box-shadow:0 2px 6px rgba(20,20,20,.14)}
+.tgh{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:var(--panel3);border-bottom:1px solid var(--line);border-radius:5px 5px 0 0;cursor:grab;font-size:12.5px;touch-action:none;user-select:none}.tgh:active{cursor:grabbing}
+.tgm{border:0;background:none;font-weight:800;color:var(--ink2);padding:0 5px;font-size:15px;line-height:1}.tgm:hover{color:var(--ink)}
+.tgcol{display:flex;align-items:center;justify-content:space-between;padding:0 10px;height:19px;font:11px var(--f-mono);color:var(--ink2);cursor:help}.tgcol:hover{background:var(--panel2);color:var(--ink)}.tgcol i{width:6px;height:6px;border-radius:50%;background:var(--ink2);opacity:.5}
+.tgmore{padding:0 10px;font-size:11px;color:var(--muted);height:18px}
+.tgfk{display:block;margin:6px auto 7px;border:1px solid var(--ink);background:var(--panel);border-radius:4px;font-size:11px;font-weight:600;padding:3px 10px;color:var(--ink)}.tgfk:hover{background:var(--yellow);border-color:var(--ink)}
+.tgctl{position:absolute;right:12px;bottom:12px;display:flex;gap:6px;align-items:center;z-index:5;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 6px;box-shadow:var(--shadow)}
+
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.kpi{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--panel)}
+.kpi .kic{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--info-soft);color:var(--info)}.kpi .kic svg{width:20px;height:20px}
+.kpi.ok .kic{background:var(--ok-soft);color:var(--ok)}.kpi.warn .kic{background:var(--warn-soft);color:var(--warn)}.kpi.y .kic{background:var(--yellow-soft);color:var(--ink)}
+.kpi b{display:block;font:800 22px/1.1 var(--f-display)}.kpi span:not(.kic){font-size:12.5px;color:var(--ink2)}
+.hlth{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.hleg{flex:1;min-width:150px;display:grid;gap:7px;font-size:13px}.hleg div{display:flex;align-items:center;gap:8px}.hleg i{width:10px;height:10px;border-radius:50%;flex:none}.hleg b{margin-left:auto}
+.hbars{display:flex;align-items:flex-end;gap:3px;height:64px;margin-top:14px;border-bottom:1px solid var(--line2)}.hbars span{flex:1;display:flex;flex-direction:column-reverse;height:100%;justify-content:flex-start;cursor:help}.hbars span i{display:block;width:100%;min-height:0}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.smside{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1006,7 +1042,7 @@ const SOURCES=[
  {id:'mkt',type:'mkt',vendor:'Ritchie Bros. Market Data',ver:'Comparables API v2',url:'https://api.rbauction.example/v2',status:'stale',mode:'Polling · 60 min',interval:60,auth:'API key',freshMin:1140,compl:71,conf:58,rw:'Read',inputs:'Comparable transactions, realised prices, time-to-sale, buyer demand',read:['GET /comparables','GET /price-index'],write:[],step:[1],authority:['Market price'],owner:'Remarketing',records:402118,note:'Feed token expired 6 Oct; pricing falls back to the last fresh comparables and says so on every prediction.'},
  {id:'dlr',type:'dlr',vendor:'Machinio',ver:'Dealer API v1',url:'https://api.machinio.com/v1',status:'live',mode:'API + events',interval:0,auth:'API key',freshMin:18,compl:82,conf:78,rw:'Read',inputs:'Dealer offers, listing demand, fees, time-to-sale',read:['GET /listings','GET /offers'],write:[],step:[1],authority:['Dealer offer'],owner:'Remarketing',records:56780},
  {id:'rcy',type:'rcy',vendor:'Sims Lifecycle Services',ver:'Partner SFTP',url:'sftp://partner.sims.example/outbound',status:'manual',mode:'Controlled CSV import',interval:0,auth:'SFTP drop · signed manifest',freshMin:2880,compl:78,conf:82,rw:'Read (import)',inputs:'Approvals, material yields, rebates, fees, custody certificates',read:['IMPORT partner-rates.csv'],write:[],step:[1,9],authority:['Vendor certification'],owner:'Sustainability',records:1204,note:'No supported partner API. Manual import supports evaluation, not live automation.'},
- {id:'esg',type:'esg',vendor:'Persefoni',ver:'API v1',url:'https://api.persefoni.com/v1',status:'live',mode:'Polling · 60 min',interval:60,auth:'OAuth 2.0 client credentials',freshMin:38,compl:86,conf:81,rw:'Read',inputs:'Embodied-carbon factors, emissions factors, footprint methodology',read:['GET /emission-factors','GET /footprints'],write:[],step:[1,9],authority:['Emissions factor'],owner:'Sustainability',records:8830}
+ {id:'esg',type:'esg',vendor:'Persefoni',ver:'API v1',url:'https://api.persefoni.com/v1',status:'live',mode:'Polling · 60 min',interval:60,auth:'OAuth 2.0 client credentials',freshMin:3,compl:86,conf:81,rw:'Read',inputs:'Embodied-carbon factors, emissions factors, footprint methodology',read:['GET /emission-factors','GET /footprints'],write:[],step:[1,9],authority:['Emissions factor'],owner:'Sustainability',records:8830}
 ];
 SOURCES.forEach(s=>{const t=SRC_TYPES[s.type];s.cat=t.cat;s.name=t.label;s.short=t.short;s.env='Production';s.cfgVer='1.'+(2+s.id.length%5);s.lastSync=s.freshMin==null?null:_now0-s.freshMin*60000;s.updatedBy='Platform Admin';s.updatedAt=_now0-(2+s.id.length)*86400000;s.fresh=s.freshMin==null?'—':srcAge(s.freshMin);s.runs=[]});
 function srcAge(m){return m<1?'just now':m<60?Math.round(m)+' min':m<2880?Math.round(m/60)+' h':Math.round(m/1440)+' days'}
@@ -1698,7 +1734,7 @@ function smLogHTML(){return S.smLog.length?S.smLog.map(l=>{const s=SRC(l.id)||{v
 function intMap(){
   const f=SM_S();
   const dep=SOURCES.filter(s=>s.status==='unavailable'||s.status==='stale'||s.status==='manual');
-  return `<div class="smbar"><div class="row smchips" id="smChips">${smChipsHTML()}</div><span class="grow"></span>
+  return `<div class="kpis" id="smKpi">${smKpiHTML()}</div><div class="smbar"><div class="row smchips" id="smChips">${smChipsHTML()}</div><span class="grow"></span>
    <input type="search" id="smQ" class="smq" placeholder="Search system, vendor or owner" value="${esc(f.q)}" data-in="smQ" aria-label="Search sources">
    <label class="sr" for="smCat">Category</label><select class="sel" id="smCat" data-ch="smCat"><option value="">All categories</option>${Object.keys(SRC_CATS).map(c=>`<option value="${c}" ${f.cat===c?'selected':''}>${SRC_CATS[c]}</option>`).join('')}</select>
    <label class="sr" for="smMeth">Connection method</label><select class="sel" id="smMeth" data-ch="smMeth"><option value="">All methods</option>${Object.keys(CONN_METHODS).map(c=>`<option value="${c}" ${f.me===c?'selected':''}>${CONN_METHODS[c].label}</option>`).join('')}</select><button class="btn" data-act="srcSyncAll">Sync all</button><button class="btn pri" data-act="srcAdd" data-arg="">+ Add source</button></div>
@@ -1706,6 +1742,7 @@ function intMap(){
   <div id="smGrid">${smGridHTML()}</div>
   ${dep.length?`<div class="callout bad" style="margin-top:14px"><b>Integration dependencies.</b> ${dep.map(s=>`<button class="lnk" data-act="adapter" data-arg="${s.id}">${esc(s.name)} (${esc(s.vendor)})</button> is ${s.status==='unavailable'?'not connected':s.status==='stale'?'stale':'a manual import'}`).join('; ')}. Circularity names these as dependencies rather than inventing data.</div>`:''}
   <div class="sect"><div class="sh"><h2>Live sync activity</h2><span class="livedot"><i></i>Streaming</span></div><div class="panel" id="smLog" aria-live="off">${smLogHTML()}</div></div>
+  <div class="grid g3 smside" id="smSide" style="margin-top:16px;align-items:start">${smSideHTML()}</div>
   <div class="sect"><div class="sh"><h2>How data flows</h2></div>${flowDiagram()}</div>`}
 function flowDiagram(){
   const dot=x=>({live:'ok',stale:'warn',manual:'',unavailable:'bad'})[x.status];
@@ -1729,9 +1766,29 @@ function flowDiagram(){
    <div class="zbox"><b>Execution status</b><span class="note">Acknowledgement or error from the owning system, with retries and duplicates handled.</span><div class="row">${stp(9)}</div></div></div>`;
 }
 /* ---- live engine: ticking ages, scheduled syncs, DOM patches ---- */
-function smRefresh(){const g=$('#smGrid');if(g){g.innerHTML=smGridHTML();const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}}
+/* ---- Integration Hub extras: KPIs, health, exceptions, recent events ---- */
+function hhInit(){if(S.hh)return;const b=[];for(let i=0;i<24;i++){const h=parseInt(hashId('hh'+i),16);b.push({ok:18+h%30,warn:h%5===0?2+h%4:h%3===0?1:0,bad:h%11===0?2:h%7===0?1:0})}S.hh=b}
+function hhBump(state){hhInit();const l=S.hh[23];if(state==='failed')l.bad++;else if(state==='warning')l.warn++;else l.ok++}
+function smExceptions(){const o=[];SOURCES.forEach(s=>{if(s.status==='unavailable')o.push({src:s.name,obj:s.vendor,issue:'Not connected: no feed',sev:'High',st:'Open'});else if(s.status==='stale')o.push({src:s.name,obj:s.vendor,issue:'Feed token expired',sev:'High',st:'Open'});
+  if(s.status!=='unavailable'&&!(MAPPINGS[s.id]||[]).length)o.push({src:s.name,obj:s.vendor,issue:'No field mapping defined',sev:'High',st:'Open'});else if(s.status==='manual')o.push({src:s.name,obj:s.vendor,issue:'Manual import only, no live feed',sev:'Low',st:'In Progress'})});
+  CONFLICTS.filter(c=>c.status==='open').forEach(c=>o.push({src:c.a.src,obj:c.asset,issue:c.kind+' differs from '+c.b.src,sev:'Medium',st:'Open'}));return o}
+function hhTotals(){hhInit();const t={ok:0,warn:0,bad:0};S.hh.forEach(b=>{t.ok+=b.ok;t.warn+=b.warn;t.bad+=b.bad});t.run=SOURCES.filter(s=>s.syncing).length+(S.wf?S.wf.list.filter(w=>w.running).length:0);const n=t.ok+t.warn+t.bad;t.pct=n?t.ok/n*100:100;return t}
+function smKpiHTML(){wfInit();const t=hhTotals(),conn=SOURCES.filter(s=>s.status!=='unavailable').length,tbl=Object.keys(TBL_MODELS).reduce((a,k)=>a+(S.tg.m[k]?S.tg.m[k].t.length:TBL_MODELS[k].t.length),0),pub=S.wf.list.filter(w=>w.status==='published').length;
+  const k=(cls,ic,v,l)=>`<div class="kpi ${cls}"><span class="kic">${ic}</span><div><b class="num">${v}</b><span>${l}</span></div></div>`;
+  return k('ok',ICON.integration,conn,'Connected sources')+k('info',ICON.product,tbl,'Tables modelled')+k('y',ICON.play,pub,'Workflows published')+k('warn',ICON.flag,smExceptions().length,'Mappings need attention')+k('ok',ICON.check,t.pct.toFixed(1)+'%','Integration health')}
+function smSideHTML(){const t=hhTotals(),r=54,c=2*Math.PI*r,n=t.ok+t.warn+t.bad||1;let off=0;
+  const seg=(v,col)=>{const l=v/n*c,e=`<circle cx="70" cy="70" r="${r}" fill="none" stroke="${col}" stroke-width="16" stroke-dasharray="${l} ${c-l}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`;off+=l;return e};
+  const mx=Math.max(...S.hh.map(b=>b.ok+b.warn+b.bad));
+  const ex=smExceptions().slice(0,6),ev=EVENTS.slice(0,6),sevc={High:'bad',Medium:'warn',Low:'line'};
+  return `<div class="panel"><div class="ph"><h3>Integration health</h3><span class="note">Last 24 hours</span></div><div class="pb"><div class="hlth"><svg viewBox="0 0 140 140" width="132" height="132" role="img" aria-label="${t.pct.toFixed(1)} percent healthy"><circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--panel3)" stroke-width="16"/>${seg(t.ok,'var(--ok)')}${seg(t.warn,'#D4A800')}${seg(t.bad,'var(--bad)')}<text x="70" y="68" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">${t.pct.toFixed(1)}%</text><text x="70" y="86" text-anchor="middle" font-size="11" fill="var(--ink2)">Healthy</text></svg>
+   <div class="hleg"><div><i style="background:var(--ok)"></i>Successful<b class="num">${fmtN(t.ok)}</b></div><div><i style="background:#D4A800"></i>Warnings<b class="num">${fmtN(t.warn)}</b></div><div><i style="background:var(--bad)"></i>Failures<b class="num">${fmtN(t.bad)}</b></div><div><i style="background:var(--ink2)"></i>In progress<b class="num">${t.run}</b></div></div></div>
+   <div class="hbars" aria-hidden="true">${S.hh.map((b,i)=>`<span data-tip="${String(i).padStart(2,'0')}:00 · ${b.ok} successful, ${b.warn} warnings, ${b.bad} failures"><i style="height:${b.bad/mx*100}%;background:var(--bad)"></i><i style="height:${b.warn/mx*100}%;background:#D4A800"></i><i style="height:${b.ok/mx*100}%;background:var(--ok)"></i></span>`).join('')}</div></div></div>
+  <div class="panel"><div class="ph"><h3>Mapping exceptions</h3><span class="chip ${ex.length?'warn':'ok'}">${smExceptions().length} open</span></div><div class="tw"><table class="t static tight"><thead><tr><th>System</th><th>Issue</th><th>Severity</th><th>Status</th></tr></thead><tbody>${ex.map(e=>`<tr><td><b>${esc(e.src)}</b><div class="note">${esc(e.obj)}</div></td><td>${esc(e.issue)}</td><td><span class="chip ${sevc[e.sev]}">${e.sev}</span></td><td><span class="chip ${e.st==='Open'?'line':'y'}">${e.st}</span></td></tr>`).join('')||'<tr><td colspan="4"><div class="empty"><b>No exceptions</b>Every connected system is mapped and fresh.</div></td></tr>'}</tbody></table></div></div>
+  <div class="panel"><div class="ph"><h3>Recent integration events</h3><button class="lnk" data-act="intTab" data-arg="events">View all</button></div><div class="tw"><table class="t static tight"><thead><tr><th>Time</th><th>System</th><th>Event</th><th>Status</th></tr></thead><tbody>${ev.map(e=>`<tr data-act="evDetail" data-arg="${e.id}" style="cursor:pointer"><td class="num nowrap">${new Date(e.ts).toISOString().slice(11,19)}</td><td>${esc(e.dest)}</td><td class="mono">${esc(e.type)}</td><td><span class="chip ${ackKind(e.ack)}">${esc(e.ack.length>16?e.ack.slice(0,15)+'…':e.ack)}</span></td></tr>`).join('')}</tbody></table></div></div>`}
+function smSideRefresh(){const e=$('#smSide');e&&(e.innerHTML=smSideHTML());const k=$('#smKpi');k&&(k.innerHTML=smKpiHTML())}
+function smRefresh(){const g=$('#smGrid');if(g){g.innerHTML=smGridHTML();const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}smSideRefresh()}
 function smPatch(s){const el=$(`.tile[data-sid="${s.id}"]`);if(el&&!el.matches(':focus-within'))el.outerHTML=srcTile(s);else if(el){const f=document.activeElement&&document.activeElement.dataset;el.outerHTML=srcTile(s);const n=$(`.tile[data-sid="${s.id}"] [data-act="${f&&f.act}"]`);n&&n.focus()}const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}
-function smLogAdd(s,text,kind){S.smLog.unshift({ts:Date.now(),id:s.id,text,kind:kind||'ok'});S.smLog.length=Math.min(S.smLog.length,16);const el=$('#smLog');if(el)el.innerHTML=smLogHTML()}
+function smLogAdd(s,text,kind){S.smLog.unshift({ts:Date.now(),id:s.id,text,kind:kind||'ok'});S.smLog.length=Math.min(S.smLog.length,16);const el=$('#smLog');if(el)el.innerHTML=smLogHTML();smSideRefresh()}
 function srcEvent(s,type,ack,note){pushEvent({dir:'in',type,caseId:null,decisionId:null,approval:null,ver:null,dest:s.name+' · '+s.vendor,ack:ack||'acknowledged',key:'cfg-'+hashId(s.id+type+Date.now()).slice(0,6).toLowerCase(),note,ts:asOfNow()})}
 function startSync(s,auto){
   if(!s||s.syncing)return;
@@ -1744,17 +1801,18 @@ function startSync(s,auto){
     if(Date.now()-t0<dur)setTimeout(tick,150);else fin()};
   const fin=()=>{if(!SRC(s.id))return;s.syncing=false;const now=Date.now();
     if(s.status==='stale'){s.runs.unshift({id:'SYNC-'+hashId(s.id+now).slice(0,5).toUpperCase(),ts:now,trigger:auto?'Scheduled':'Manual',rows:0,dur:Math.round(dur/100)/10,result:'failed',note:'HTTP 401 · feed token expired'});s.runs.length=Math.min(s.runs.length,12);
-      smLogAdd(s,'Sync failed: feed token expired (HTTP 401). Last fresh data still in use.','bad');srcEvent(s,'sync.failed','failed','Sync rejected: token expired. Rotate credentials or refresh the token.');if(!auto)toast(s.name+': sync failed, the feed token has expired. Refresh the token to resume.',4200);smPatch(s);sdSyncUI(s);return}
+      hhBump('failed');smLogAdd(s,'Sync failed: feed token expired (HTTP 401). Last fresh data still in use.','bad');srcEvent(s,'sync.failed','failed','Sync rejected: token expired. Rotate credentials or refresh the token.');if(!auto)toast(s.name+': sync failed, the feed token has expired. Refresh the token to resume.',4200);smPatch(s);sdSyncUI(s);return}
     const n=rr(24,420);s.records+=n;s.lastSync=now;s.freshMin=0;s.fresh='just now';
     if(!s.compl){s.compl=rr(86,96);s.conf=rr(84,94);s.c0=s.compl;s.k0=s.conf}else{s.compl=clampN(s.c0+rr(-1,1),60,100);s.conf=clampN(s.k0+rr(-1,1),40,100)}
     s.runs.unshift({id:'SYNC-'+hashId(s.id+now).slice(0,5).toUpperCase(),ts:now,trigger:auto?'Scheduled':'Manual',rows:n,dur:Math.round(dur/100)/10,result:'success',note:''});s.runs.length=Math.min(s.runs.length,12);
-    smLogAdd(s,'Sync completed · '+fmtN(n)+' new or changed records');srcEvent(s,'sync.completed','acknowledged',fmtN(n)+' records pulled from '+s.vendor+' in '+(Math.round(dur/100)/10)+' s');
+    hhBump('success');smLogAdd(s,'Sync completed · '+fmtN(n)+' new or changed records');srcEvent(s,'sync.completed','acknowledged',fmtN(n)+' records pulled from '+s.vendor+' in '+(Math.round(dur/100)/10)+' s');
     if(!auto)toast(s.name+' synced: '+fmtN(n)+' records updated.');smPatch(s);sdSyncUI(s)};
   setTimeout(tick,160)}
 function smTick(){
   const now=Date.now();
   $$('.tile[data-sid]').forEach(t=>{const s=SRC(t.dataset.sid);if(!s||s.syncing)return;const a=t.querySelector('[data-age]');a&&(a.textContent=srcAgeText(s));
     if(s.lastSync!=null){const v=srcFresh(s),fi=t.querySelector('[data-fi]'),fv=t.querySelector('[data-fv]');if(fi){fi.style.width=v+'%';fi.style.background=v<70?'var(--bad)':v<85?'#D4A800':''}if(fv)fv.textContent=v+'%'}});
+  $$('[data-tgage]').forEach(el=>{const q=SRC(el.dataset.tgage);q&&(el.textContent=srcAgeText(q).replace(/^(Updated|Last import) /,''))});
   SOURCES.forEach(s=>{if(s.lastSync!=null){s.freshMin=(now-s.lastSync)/60000;s.fresh=srcAge(s.freshMin)}});
   if(now>=SM.next){SM.next=now+4500+Math.random()*7500;const pool=SOURCES.filter(s=>s.status==='live'&&!s.syncing&&s.lastSync!=null);if(pool.length)startSync(pool[Math.floor(Math.random()*pool.length)],true)}
   if(typeof wfTick==='function')wfTick(now);
@@ -2102,18 +2160,13 @@ const wfStat=w=>w.status==='published'&&w.last&&w.last.state==='failed'?'failing
 const wfStatChip=s=>({published:'<span class="chip ok">Published</span>',draft:'<span class="chip line">Draft</span>',paused:'<span class="chip warn">Paused</span>',failing:'<span class="chip bad">Failing</span>'})[s];
 function wfGraphOf(w){if(!w.graph){w.graph=wfBuild(w.tpl);w.saved=wfSnap(w)}return w.graph}
 const wfSnap=w=>JSON.stringify({g:w.graph,m:{name:w.name,owner:w.owner,trig:w.trig}});
-function wfSimOutcome(w){const g=wfGraphOf(w),v=wfValidate(g,w.kind),er=v.filter(x=>x.sev==='error');
- if(er.length)return{state:'failed',note:er[0].msg.length>96?er[0].msg.slice(0,94)+'…':er[0].msg};
- const ss=g.nodes.filter(n=>n.k==='conn'||n.k==='wconn').map(n=>srcOr(n.ref)),st=ss.find(s=>s.status==='stale');
- if(st)return{state:'warning',note:st.name+' feed is stale; last fresh data used'};
- const mn=ss.find(s=>s.status==='manual');return{state:'success',note:mn?mn.name+' is a controlled import':''}}
 function wfSeed(){const L=[];let n=100;const now=Date.now();
  const add=o=>{n++;L.push(Object.assign({id:'WF-'+n,status:'published',ver:'1.'+(n%7+1),graph:null,saved:null,dirty:false,running:false,updated:now-(n%9+1)*86400000},o))};
  SOURCES.forEach(s=>add({name:'Ingest · '+s.vendor,desc:s.name+' into the '+SRC_TYPES[s.type].target+' model through validation and field mapping.',cat:'Ingest',kind:'pipe',tpl:{k:'ingest',src:s.id},src:s.id,owner:s.owner,trig:s.status==='manual'?{t:'file'}:s.interval?{t:'schedule',min:s.interval}:{t:'event'},status:s.status==='unavailable'?'draft':'published'}));
  SOURCES.filter(s=>s.write.length).forEach(s=>{(s.type==='erp'?['api','file']:['api']).forEach(ch=>add({name:'Outbound · '+s.vendor+(ch==='file'?' (interface file)':''),desc:'Approved instruction to '+s.name+' by '+({api:'REST API call',file:'interface file with manifest and import log'})[ch]+'.',cat:'Outbound',kind:'pipe',tpl:{k:'out',src:s.id,ch},src:s.id,owner:s.owner,trig:{t:'approval'}}))});
  Object.keys(WF_DEC).forEach(k=>add({name:WF_DEC[k].name,desc:WF_DEC[k].desc,cat:'Decision',kind:'dec',tpl:{k:'dec',id:k},src:null,owner:'Decision Services',trig:{t:'case'}}));
- L.forEach(w=>{const o=wfSimOutcome(w),every=w.trig.t==='schedule'?w.trig.min:w.trig.t==='event'?10:60;w.runsN=w.status==='draft'?0:Math.min(288,Math.round(1440/every));w.okN=Math.round(w.runsN*(o.state==='failed'?.62:.985));
-  if(w.status!=='draft')w.last={ts:now-rr(20,every*50)*1000,state:o.state,dur:rr(8,60)/10,rows:rr(30,900),note:o.note}});
+ L.forEach(w=>{const inj=w.cat==='Ingest'&&w.src==='repair'?'v':null,o=wfSimOutcome(w,inj),every=w.trig.t==='schedule'?w.trig.min:w.trig.t==='event'?10:60;w.runsN=w.status==='draft'?0:Math.min(288,Math.round(1440/every));w.okN=Math.round(w.runsN*(o.state==='failed'?.62:.985));
+  if(w.status!=='draft'){const ts=now-rr(20,every*50)*1000,d=rr(8,60)/10;w.last={ts,state:o.state,dur:d,rows:rr(30,900),note:o.note};wfLastRun(w,o,w.trig.t==='schedule'?'Schedule':w.trig.t==='approval'?'Approval':'Event',ts,d)}});
  return L}
 function wfSeedRuns(){const r=[];S.wf.list.filter(w=>w.last).slice(0,9).forEach((w,i)=>r.push({id:'RUN-'+hashId(w.id+i).slice(0,5).toUpperCase(),wf:w.id,name:w.name,ts:w.last.ts,trig:w.trig.t==='schedule'?'Schedule':w.trig.t==='approval'?'Approval':'Event',dur:w.last.dur,rows:w.last.rows,state:w.last.state,note:w.last.note}));S.wf.runs=r.sort((a,b)=>b.ts-a.ts)}
 const WFN={next:Date.now()+7000};
@@ -2144,11 +2197,6 @@ function wfListHTML(){const f=S.wf.f;
  <div class="sect"><div class="sh"><h2>Recent runs</h2><span class="livedot"><i></i>Streaming</span></div><div class="panel"><div class="tw" id="wfRuns">${wfRunsHTML()}</div></div></div>`}
 function wfRowPatch(w){const r=$(`tr[data-wid="${w.id}"]`);if(r){const t=document.createElement('tbody');t.innerHTML=wfRowHTML(w);r.replaceWith(t.firstElementChild)}const c=$('#wfChips');c&&(c.innerHTML=wfChipsHTML())}
 function wfListRefresh(){const b=$('#wfBody');if(b){b.innerHTML=wfBodyHTML();const c=$('#wfChips');c&&(c.innerHTML=wfChipsHTML());const r=$('#wfRuns');r&&(r.innerHTML=wfRunsHTML())}}
-function wfStartRun(w,trig){if(w.running)return;w.running=true;wfRowPatch(w);const ing=w.cat==='Ingest'&&w.src&&SRC(w.src);if(ing&&ing.status==='live')startSync(ing,true);
- const dur=rr(10,45)/10;setTimeout(()=>{if(!S.wf||!S.wf.list.includes(w))return;const o=wfSimOutcome(w),rows=w.cat==='Outbound'?rr(1,6):w.cat==='Decision'?1:rr(30,900),now=Date.now();
-  w.running=false;w.last={ts:now,state:o.state,dur,rows,note:o.note};w.runsN++;if(o.state!=='failed')w.okN++;
-  S.wf.runs.unshift({id:'RUN-'+hashId(w.id+now).slice(0,5).toUpperCase(),wf:w.id,name:w.name,ts:now,trig,dur,rows,state:o.state,note:o.note});S.wf.runs.length=Math.min(S.wf.runs.length,40);
-  wfRowPatch(w);const r=$('#wfRuns');r&&(r.innerHTML=wfRunsHTML());if(trig==='Manual')toast(w.name+': '+(o.state==='failed'?'run failed. '+o.note:'run finished, '+fmtN(rows)+' records.'),4000)},dur*1000)}
 function wfTick(now){wfInit();$$('[data-wage]').forEach(el=>{const w=WFW(el.dataset.wage);w&&w.last&&(el.textContent=ageShort(now-w.last.ts))});
  if(now>=WFN.next){WFN.next=now+6000+Math.random()*9000;const p=S.wf.list.filter(w=>w.status==='published'&&!w.running&&w.cat!=='Decision'&&w.runsN>0);if(p.length){const w=p[Math.floor(Math.random()*p.length)];wfStartRun(w,w.trig.t==='schedule'?'Schedule':w.trig.t==='approval'?'Approval':'Event')}}}
 function wfPaletteRefresh(){const p=$('#wfPal');p&&S.wf&&S.wf.cur&&(p.innerHTML=wfPalHTML())}
@@ -2166,14 +2214,14 @@ function wfHTML(){wfInit();if(!S.wf.cur)return wfListHTML();const ih=wfInspHTML(
  <div class="wf ${ih.trim()?'':'noinsp'}"><aside class="wfpal" id="wfPal" aria-label="Movable steps. Drag one onto the canvas, or press Enter to add it.">${wfPalHTML()}</aside>
   <div class="wfcanvas"><div class="wfzoom" role="group" aria-label="Zoom"><button data-act="wfZoom" data-arg="-1" aria-label="Zoom out">−</button><span id="wfZ">${Math.round(w.z*100)}%</span><button data-act="wfZoom" data-arg="1" aria-label="Zoom in">+</button><button data-act="wfZoom" data-arg="0" aria-label="Fit to width">Fit</button></div>
    <div class="wfview" id="wfView" tabindex="0" role="group" aria-label="Workflow canvas. Select a step, then use arrow keys to move it or Delete to remove it."><div id="wfSizer" style="width:${wfWW()*w.z}px;height:${WF_WH*w.z}px"><div id="wfWorld" style="width:${wfWW()}px;height:${WF_WH}px;transform:scale(${w.z})">${wfWorldHTML()}</div></div></div>
-   <div class="wflegend"><span><i class="f"></i>Fixed · owned by Circularity</span><span><i class="m"></i>Movable · yours to arrange</span></div></div>
+   <div class="wfmini" id="wfMini">${wfMiniHTML()}</div><div class="wflegend"><span><i class="f"></i>Fixed · owned by Circularity</span><span><i class="m"></i>Movable · yours to arrange</span></div></div>
   <aside class="wfinsp" id="wfInsp">${ih}</aside></div>
- <div class="wfbot"><div class="panel"><div class="ph"><h3>Checks</h3><span id="wfSum"></span></div><div id="wfChecks"></div></div><div class="panel wfrun"><div class="ph"><h3>Simulated run</h3><span id="wfRunSum"></span></div><div id="wfRun"></div></div></div>`}
+ <div class="wfbot"><div class="panel"><div class="ph"><h3>Checks</h3><span id="wfSum"></span></div><div id="wfChecks"></div></div><div class="panel wfrun"><div class="ph"><h3>Task instances</h3><span id="wfRunSum"></span></div><div class="filters"><input type="search" placeholder="Search steps" data-in="wfRq" value="${esc((w.rf||{}).q||'')}" aria-label="Search steps"></div><div id="wfRun"></div></div></div>`}
 /* ---- workflow actions: open, save, publish, duplicate, delete, create ---- */
 ACT.wfQ=v=>{S.wf.f.q=v;const b=$('#wfBody');b&&(b.innerHTML=wfBodyHTML())};
 ACT.wfTypeF=v=>{S.wf.f.type=v;wfListRefresh()};
 ACT.wfSt=v=>{S.wf.f.st=S.wf.f.st===v?'':v;wfListRefresh()};
-ACT.wfOpen=id=>{const w=WFW(id);if(!w)return;wfRunClear();S.wf.cur=w;S.wf.kind=w.kind;S.wf.sel=null;S.wf.z=.75;w.warned=false;wfGraphOf(w);route(true)};
+ACT.wfOpen=id=>{const w=WFW(id);if(!w)return;wfRunClear();S.wf.cur=w;S.wf.kind=w.kind;S.wf.sel=null;S.wf.z=.75;w.warned=false;wfGraphOf(w);S.wf.run=wfRunFromLast(w);S.wf.rf={q:'',st:''};route(true)};
 ACT.wfBack=()=>{const c=S.wf.cur;if(c.dirty&&!c.warned){c.warned=true;toast('You have unsaved changes. Save or Discard them, or choose All workflows again to leave them unsaved.');return}wfRunClear();c.warned=false;S.wf.cur=null;S.wf.sel=null;route(true)};
 ACT.wfName=v=>{const c=S.wf.cur;c.name=v;wfDirty()};ACT.wfOwn=v=>{S.wf.cur.owner=v;wfDirty()};
 ACT.wfMin=v=>{const m=+v;if(m>=1&&m<=1440){S.wf.cur.trig.min=m;wfDirty()}};
@@ -2293,9 +2341,6 @@ function wfPathXY(sx,sy,tx,ty,ax,bx){
  const mid=Math.abs(sy-ty)<WF_H+10?Math.max(sy,ty)+WF_H/2+24:(sy+ty)/2,lx=Math.max(8,tx-22);
  return wfRound([[sx,sy],[sx+22,sy],[sx+22,mid],[lx,mid],[lx,ty],[tx,ty]],10)}
 const wfPath=(a,b)=>wfPathXY(a.x+WF_W+1,a.y+WF_H/2,b.x-9,b.y+WF_H/2);
-function wfEdgesInner(g){const by={};g.nodes.forEach(n=>by[n.id]=n);const run=S.wf.run,sel=S.wf.sel;
- return g.edges.map(e=>{const a=by[e.a],b=by[e.b];if(!a||!b)return'';const st=run&&run.states[e.a],c=st==='success'||st==='warning'?'ok':st==='failed'||st==='upstream_failed'?'bad':'',ty=b.y+WF_H/2,tx=b.x-1;
-  return`<g data-e="${e.id}" class="${e.locked?'lk':''} ${c} ${sel&&sel.t==='e'&&sel.id===e.id?'sel':''}"><path class="hit" d="${wfPath(a,b)}"/><path class="l" d="${wfPath(a,b)}"/><path class="ah" d="M${tx-1} ${ty}l-9 -5v10z"/></g>`}).join('')}
 function wfEdges(){const g=$('#wfEg');if(g)g.innerHTML=wfEdgesInner(wfGraph())}
 function wfPt(e){const v=$('#wfView'),r=v.getBoundingClientRect();return{x:(e.clientX-r.left+v.scrollLeft)/S.wf.z,y:(e.clientY-r.top+v.scrollTop)/S.wf.z}}
 /* ---- rendering ---- */
@@ -2334,16 +2379,52 @@ function wfChecksHTML(){const v=wfValidate(wfGraph());if(!v.length)return`<div c
  return v.map(x=>`<button class="wfchk" data-act="wfPick" data-arg="${x.id}"><span class="dotc ${x.sev==='error'?'bad':x.sev==='warn'?'warn':''}"></span><span class="m"><b>${esc(wfInfo(wfNode(x.id)).label)}</b> ${esc(x.msg)}</span></button>`).join('')}
 function wfSumHTML(){const v=wfValidate(wfGraph()),e=v.filter(x=>x.sev==='error').length,w=v.filter(x=>x.sev==='warn').length;return(e?`<span class="chip bad">${e} error${e>1?'s':''}</span>`:`<span class="chip ok">No errors</span>`)+(w?` <span class="chip warn">${w} warning${w>1?'s':''}</span>`:'')}
 function wfRunNote(n,st){const i=wfInfo(n);if(st==='failed')return n.fail?'Failure injected for this run':'No connected feed';if(st==='warning')return'Feed is stale; last fresh data used';if(st==='held')return'Needs a person with approval authority';if(st==='upstream_failed')return'An upstream step failed';if(st==='waiting')return'Waits for the approval';if(st==='skipped')return'Not wired in';return''}
-function wfRunHTML(){const r=S.wf.run;if(!r)return`<div class="empty"><b>No run yet</b>Run a simulation to see each step's state, step by step. A step that fails makes everything after it show upstream failed.</div>`;
- const g=wfGraph(),by={};g.nodes.forEach(n=>by[n.id]=n);
- return`<table class="t"><thead><tr><th>Step</th><th>State</th><th class="r">Time</th><th>Note</th></tr></thead><tbody>${r.order.map(id=>{const n=by[id],st=r.states[id];return`<tr data-act="wfPick" data-arg="${id}"><td><b>${esc(wfInfo(n).label)}</b></td><td><span class="chip ${WF_STC[st]}">${WF_STL[st]}</span></td><td class="r num">${['success','warning','failed'].includes(st)?r.dur[id]+' s':'—'}</td><td class="note">${esc(wfRunNote(n,st))}</td></tr>`}).join('')}</tbody></table>`}
-function wfRunSumHTML(){const r=S.wf.run;if(!r)return'';const m={running:['y','Running'],held:['y','Awaiting approval'],failed:['bad','Failed'],success:['ok','Success']}[r.status];
- return`<span class="chip ${m[0]}">${m[1]}</span>${r.status==='held'?` <button class="btn sm pri" data-act="wfApprove" ${can('approve')?'':'aria-disabled="true" data-why="Your role cannot approve. Switch to Approver to continue the run."'}>Approve and continue</button>`:''} <button class="btn sm ghost" data-act="wfRunClear">Clear run</button>`}
+function wfSimRun(w,inject){const g=wfGraphOf(w),A=wfAnalyze(g),order=wfOrder(g),run={states:{},approved:true},dur={};let bad=null;
+ order.forEach(id=>{const n=A.by[id],had=n.fail;if(id===inject)n.fail=true;const st=wfEval(run,A,n);n.fail=had;run.states[id]=st;dur[id]=+(.2+(hashId(id+w.id).charCodeAt(0)%20)/10).toFixed(2);if(st==='failed'&&!bad)bad=id});
+ const vs=Object.values(run.states),status=vs.includes('failed')?'failed':vs.includes('warning')?'warning':'success';let note='';
+ if(bad){const n=A.by[bad],i=wfInfo(n);note=bad===inject?i.label+': 3 retries exhausted ('+['connection reset','timeout after 30 s','schema drift'][hashId(bad+w.id).charCodeAt(1)%3]+')':i.label+(n.k==='conn'||n.k==='wconn'?' has no connected feed':' failed')}
+ else if(status==='warning'){const s=g.nodes.filter(n=>n.k==='conn'||n.k==='wconn').map(n=>srcOr(n.ref)).find(x=>x.status==='stale');note=s?s.name+' feed is stale; last fresh data used':''}
+ return{states:run.states,dur,order,status,note,bad}}
+function wfSimOutcome(w,inject){const g=wfGraphOf(w),sim=wfSimRun(w,inject),er=wfValidate(g,w.kind).filter(x=>x.sev==='error');let state=sim.status,note=sim.note;
+ if(state!=='failed'&&er.length){const A=wfAnalyze(g);sim.states[er[0].id]='failed';A.desc(er[0].id).forEach(d=>sim.states[d]='upstream_failed');sim.status='failed';state='failed';note=er[0].msg.length>96?er[0].msg.slice(0,94)+'…':er[0].msg}
+ if(state==='success'){const mn=g.nodes.filter(n=>n.k==='conn'||n.k==='wconn').map(n=>srcOr(n.ref)).find(s=>s.status==='manual');if(mn)note=mn.name+' is a controlled import'}
+ return{state,note,sim}}
+function wfLastRun(w,o,trig,now,dur){w.lastRun={id:'RUN-'+hashId(w.id+now).slice(0,5).toUpperCase(),ts:now,t0:now-dur*1000,trig,states:o.sim.states,dur:o.sim.dur,order:o.sim.order,status:o.sim.status,note:o.note};return w.lastRun}
+function wfRunFromLast(w){const l=w.lastRun;if(!l)return null;const ids=new Set(wfGraphOf(w).nodes.map(n=>n.id));return{status:l.status==='warning'?'success':l.status,warn:l.status==='warning',states:Object.assign({},l.states),dur:l.dur,order:l.order.filter(id=>ids.has(id)),i:l.order.length,approved:true,t0:l.t0,id:l.id,trig:l.trig}}
+function wfStartRun(w,trig){if(w.running)return;w.running=true;wfRowPatch(w);const ing=w.cat==='Ingest'&&w.src&&SRC(w.src);if(ing&&ing.status==='live')startSync(ing,true);
+ const cand=wfGraphOf(w).nodes.filter(n=>n.k!=='fixed'&&n.k!=='conn'),inj=trig!=='Manual'&&w.cat!=='Decision'&&cand.length&&Math.random()<.14?cand[rr(0,cand.length-1)].id:null;
+ const dur=rr(10,45)/10;setTimeout(()=>{if(!S.wf||!S.wf.list.includes(w))return;const o=wfSimOutcome(w,inj),rows=w.cat==='Outbound'?rr(1,6):w.cat==='Decision'?1:rr(30,900),now=Date.now();
+  w.running=false;w.last={ts:now,state:o.state,dur,rows,note:o.note};w.runsN++;if(o.state!=='failed')w.okN++;const lr=wfLastRun(w,o,trig,now,dur);
+  S.wf.runs.unshift({id:lr.id,wf:w.id,name:w.name,ts:now,trig,dur,rows,state:o.state,note:o.note});S.wf.runs.length=Math.min(S.wf.runs.length,40);
+  hhBump(o.state);smSideRefresh();wfRowPatch(w);const r=$('#wfRuns');r&&(r.innerHTML=wfRunsHTML());
+  if(S.wf.cur===w&&!S.wf.run&&$('#wfView')){S.wf.run=wfRunFromLast(w);wfPaint()}
+  if(trig==='Manual')toast(w.name+': '+(o.state==='failed'?'run failed. '+o.note:'run finished, '+fmtN(rows)+' records.'),4000)},dur*1000)}
+const WF_POOL=n=>n.k==='conn'||n.k==='wconn'?'source_pool':n.k==='xf'||n.k==='map'?'transform_pool':n.k==='tool'?'agent_pool':'platform_pool';
+const WF_ICO={success:'✓',warning:'✓',failed:'✕',upstream_failed:'!',running:'…',held:'⏸'};
+function wfRunTimes(r){let t=r.t0||Date.now();const o={};r.order.forEach(id=>{const st=r.states[id],ex=['success','warning','failed','running'].includes(st),d=ex?+r.dur[id]:0;o[id]={s:t,e:t+d*1000,d,ex};t+=d*1000+(ex?120:0)});return o}
+const hms=ms=>new Date(ms).toTimeString().slice(0,8);
+function wfRunHTML(){const r=S.wf.run;if(!r)return`<div class="empty"><b>No run yet</b>Run a simulation to see every step's state. A step that fails turns the steps after it orange (upstream failed).</div>`;
+ const g=wfGraph(),by={};g.nodes.forEach(n=>by[n.id]=n);const f=S.wf.rf||(S.wf.rf={q:'',st:''}),T=wfRunTimes(r),q=f.q.trim().toLowerCase(),cnt={};
+ r.order.forEach(id=>{if(by[id]){const s=r.states[id];cnt[s]=(cnt[s]||0)+1}});
+ const rows=r.order.filter(id=>by[id]&&(!f.st||r.states[id]===f.st)&&(!q||wfInfo(by[id]).label.toLowerCase().includes(q)));
+ return`<div class="runcnt">${Object.keys(cnt).map(k=>`<button class="chip ${WF_STC[k]} chipb" data-act="wfRst" data-arg="${k}" aria-pressed="${f.st===k}">${cnt[k]} ${WF_STL[k]}</button>`).join('')}</div>
+ <div class="tw" style="max-height:340px;overflow:auto"><table class="t tight"><thead><tr><th>Step</th><th>State</th><th>Start</th><th>End</th><th class="r">Duration</th><th class="r">Try</th><th>Pool</th></tr></thead><tbody>${rows.map(id=>{const n=by[id],st=r.states[id],t=T[id],ex=t.ex;return`<tr data-act="wfPick" data-arg="${id}"><td><b>${esc(wfInfo(n).label)}</b></td><td><span class="chip ${WF_STC[st]}">${WF_ICO[st]||''} ${WF_STL[st]}</span></td><td class="num nowrap">${ex?hms(t.s):'—'}</td><td class="num nowrap">${ex&&st!=='running'?hms(t.e):'—'}</td><td class="r num">${ex&&st!=='running'?t.d.toFixed(2)+' s':'—'}</td><td class="r num">${st==='failed'?3:ex?1:0}</td><td class="mono">${WF_POOL(n)}</td></tr>`}).join('')||'<tr><td colspan="7"><div class="empty"><b>No steps match</b></div></td></tr>'}</tbody></table></div>`}
+function wfRunSumHTML(){const r=S.wf.run;if(!r)return'';const m={running:['y','Running'],held:['y','Awaiting approval'],failed:['bad','Failed'],success:[r.warn?'warn':'ok',r.warn?'Success · stale':'Success']}[r.status];
+ const tot=r.order.filter(id=>['success','warning','failed'].includes(r.states[id])).reduce((a,id)=>a+ +r.dur[id],0);
+ return`<span class="chip ${m[0]}">${m[1]}</span> <span class="note num">${r.id||'Run'} · ${hms(r.t0||Date.now())} · ${tot.toFixed(1)} s · ${r.trig||'Manual'}</span>${r.status==='held'?` <button class="btn sm pri" data-act="wfApprove" ${can('approve')?'':'aria-disabled="true" data-why="Your role cannot approve. Switch to Approver to continue the run."'}>Approve and continue</button>`:''} <button class="btn sm ghost" data-act="wfRunClear">Clear run</button>`}
+ACT.wfRq=v=>{(S.wf.rf||(S.wf.rf={q:'',st:''})).q=v;const e=$('#wfRun');e&&(e.innerHTML=wfRunHTML())};
+ACT.wfRst=a=>{const f=S.wf.rf||(S.wf.rf={q:'',st:''});f.st=f.st===a?'':a;const e=$('#wfRun');e&&(e.innerHTML=wfRunHTML())};
+function wfMiniHTML(){const g=wfGraph(),r=S.wf.run,col=n=>{const st=r&&r.states[n.id];return st==='success'||st==='warning'?'var(--ok)':st==='failed'?'var(--bad)':st==='upstream_failed'?'#D9651E':st==='running'?'var(--yellow)':n.k==='fixed'?'var(--ink)':'var(--mv-line)'};
+ return`<svg viewBox="0 0 ${wfWW()} ${WF_WH}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${g.nodes.map(n=>`<rect x="${n.x}" y="${n.y}" width="${WF_W}" height="${WF_H}" rx="8" fill="${col(n)}"/>`).join('')}</svg>`}
+function wfEdgesInner(g){const by={};g.nodes.forEach(n=>by[n.id]=n);const run=S.wf.run,sel=S.wf.sel;
+ return g.edges.map(e=>{const a=by[e.a],b=by[e.b];if(!a||!b)return'';const sa=run&&run.states[e.a],sb=run&&run.states[e.b];
+  const c=sb==='failed'?'bad':sb==='upstream_failed'?'up':sb==='running'?'run':sa==='success'||sa==='warning'?'ok':sa==='failed'?'bad':sa==='upstream_failed'?'up':'',ty=b.y+WF_H/2,tx=b.x-1;
+  return`<g data-e="${e.id}" class="${e.locked?'lk':''} ${c} ${sel&&sel.t==='e'&&sel.id===e.id?'sel':''}"><path class="hit" d="${wfPath(a,b)}"/><path class="l" d="${wfPath(a,b)}"/><path class="ah" d="M${tx-1} ${ty}l-9 -5v10z"/></g>`}).join('')}
 function wfPaint(){const g=wfGraph(),v=wfValidate(g),run=S.wf.run,sel=S.wf.sel;
  g.nodes.forEach(n=>{const el=$(`.wfn[data-id="${n.id}"]`);if(!el)return;const sv=v.filter(x=>x.id===n.id&&x.sev!=='info');el.dataset.sev=sv.some(x=>x.sev==='error')?'error':sv.length?'warn':'';
   const st=run&&run.states[n.id],b=el.querySelector('.st');if(st){el.dataset.st=st;b.textContent=WF_STL[st]}else{delete el.dataset.st;b.textContent=''}
   el.classList.toggle('sel',!!sel&&sel.t==='n'&&sel.id===n.id);el.classList.toggle('inj',!!n.fail)});
- wfEdges();const c=$('#wfChecks');if(c){c.innerHTML=wfChecksHTML();$('#wfSum').innerHTML=wfSumHTML();$('#wfRun').innerHTML=wfRunHTML();$('#wfRunSum').innerHTML=wfRunSumHTML();const ii=$('#wfInsp'),ih=wfInspHTML();ii.innerHTML=ih;ii.closest('.wf').classList.toggle('noinsp',!ih.trim())}}
+ wfEdges();const mm=$('#wfMini');mm&&(mm.innerHTML=wfMiniHTML());const c=$('#wfChecks');if(c){c.innerHTML=wfChecksHTML();$('#wfSum').innerHTML=wfSumHTML();$('#wfRun').innerHTML=wfRunHTML();$('#wfRunSum').innerHTML=wfRunSumHTML();const ii=$('#wfInsp'),ih=wfInspHTML();ii.innerHTML=ih;ii.closest('.wf').classList.toggle('noinsp',!ih.trim())}}
 function wfRunClear(){clearTimeout(WF.t);S.wf.run=null}
 function wfChanged(){wfRunClear();wfDirty();wfPaint()}
 function wfSelect(s){S.wf.sel=s;wfPaint()}
@@ -2401,7 +2482,7 @@ function wfEval(run,A,n){const ps=A.pred[n.id].map(p=>run.states[p]);
 ACT.wfRun=()=>{const g=wfGraph(),v=wfValidate(g),e=v.filter(x=>x.sev==='error').length;
  if(e){toast(`Fix ${e} error${e>1?'s':''} before running. The checks below say what and why.`);const c=$('#wfChecks');c&&c.scrollIntoView({block:'nearest',behavior:'smooth'});return}
  wfRunClear();const order=wfOrder(g),dur={};order.forEach(id=>{dur[id]=(.2+(hashId(id+wfPid()).charCodeAt(0)%20)/10).toFixed(1)});
- S.wf.run={status:'running',states:{},dur,order,i:0,approved:false};order.forEach(id=>S.wf.run.states[id]='queued');wfPaint();wfStep()};
+ S.wf.run={status:'running',states:{},dur,order,i:0,approved:false,t0:Date.now(),id:'RUN-'+hashId(wfPid()+Date.now()).slice(0,5).toUpperCase(),trig:'Manual'};order.forEach(id=>S.wf.run.states[id]='queued');wfPaint();wfStep()};
 function wfStep(){const run=S.wf.run;if(!run||run.status!=='running')return;
  if(run.i>=run.order.length){const st=Object.values(run.states);run.status=st.some(s=>s==='failed')?'failed':'success';wfPaint();return}
  const g=wfGraph(),A=wfAnalyze(g),id=run.order[run.i],n=A.by[id],st=wfEval(run,A,n),quick=['upstream_failed','waiting','skipped'].includes(st);
@@ -2410,12 +2491,169 @@ function wfStep(){const run=S.wf.run;if(!run||run.status!=='running')return;
 ACT.wfApprove=()=>{const run=S.wf.run;if(!run||run.status!=='held')return;if(!can('approve')){toast('Your role cannot approve. Switch to Approver to continue the run.');return}
  run.approved=true;run.status='running';wfStep();toast('Approved in the simulation. No instruction is sent to any system.')};
 
+/* ===== Source tables: table graph with foreign keys, clusters and hover help ===== */
+const TB=(n,cl,desc,cols,rows)=>({n,cl,desc,cols:cols.map(c=>Array.isArray(c)?c:[c,'']),rows});
+const FKX=(a,b,why)=>[a,b,why];
+const TBL_MODELS={
+ erp:{cl:[['cur','Currency Conversion Tables'],['inv','Inventory Management Tables'],['sales','Sales Tables'],['prod','Production Tables'],['pur','Purchasing Tables']],
+  t:[TB('TCURF','cur','Conversion factors between currencies. Used to convert costs and prices to USD.',[['FCURR','From currency'],['TCURR','To currency'],['GDATU','Valid-from date'],['FFACT','Conversion factor']],'4.1K'),
+   TB('TCURR','cur','Dated exchange rates. Every USD figure in a decision traces back to the rate in this table.',[['KURST','Exchange rate type'],['FCURR','From currency'],['TCURR','To currency'],['UKURS','Exchange rate']],'1.2M'),
+   TB('TCURX','cur','Decimal places per currency. Keeps converted amounts correctly rounded.',[['CURRKEY','Currency key'],['CURRDEC','Number of decimals']],'182'),
+   TB('MARA','inv','General material data. Identifies each part and its class, so an asset is recognised across systems.',[['MATNR','Material number: the key that links every other table'],['MTART','Material type'],['MATKL','Material group'],['MEINS','Base unit of measure']],'2.4M'),
+   TB('MARC','inv','Plant data for a material. Shows where a part is planned and held.',[['MATNR','Material number'],['WERKS','Plant'],['DISMM','MRP type'],['EKGRP','Purchasing group']],'6.8M'),
+   TB('MARD','inv','Stock by storage location. Free stock is what a redeploy route can use.',[['MATNR','Material number'],['WERKS','Plant'],['LGORT','Storage location'],['LABST','Unrestricted stock']],'9.1M'),
+   TB('MBEW','inv','Material valuation. Gives the book value and cost basis behind avoided purchase.',[['MATNR','Material number'],['BWKEY','Valuation area'],['VERPR','Moving average price'],['STPRS','Standard price']],'3.3M'),
+   TB('MSEG','inv','Material document items: the physical movements. Used to confirm what really moved.',[['MBLNR','Material document'],['MATNR','Material number'],['WERKS','Plant'],['MENGE','Quantity']],'41M'),
+   TB('T001W','inv','Plants. Turns a plant code into a site name for demand matching.',[['WERKS','Plant'],['NAME1','Plant name'],['LAND1','Country']],'64'),
+   TB('VBAK','sales','Sales order header. Shows committed demand and who it is for.',[['VBELN','Sales document'],['KUNNR','Customer'],['AUDAT','Document date'],['NETWR','Net value']],'1.9M'),
+   TB('VBAP','sales','Sales order items. Gives quantity and material per demand line.',[['VBELN','Sales document'],['POSNR','Item'],['MATNR','Material number'],['KWMENG','Order quantity']],'7.2M'),
+   TB('KNA1','sales','Customer master. Resolves the owning customer tenant.',[['KUNNR','Customer number'],['NAME1','Name'],['LAND1','Country']],'38K'),
+   TB('VBRK','sales','Billing document header. Confirms a sale actually produced a receipt.',[['VBELN','Billing document'],['KUNRG','Payer'],['FKDAT','Billing date'],['NETWR','Net value']],'1.1M'),
+   TB('AFKO','prod','Production order header. Used for repair and refurbish orders.',[['AUFNR','Order number'],['GSTRP','Start date'],['GLTRP','Finish date'],['GAMNG','Order quantity']],'640K'),
+   TB('AFPO','prod','Production order item. Links the order to the material produced.',[['AUFNR','Order number'],['POSNR','Item'],['MATNR','Material number'],['PSMNG','Planned quantity']],'650K'),
+   TB('AUFK','prod','Order master data. Holds the cost and status of the repair order.',[['AUFNR','Order number'],['AUART','Order type'],['KOSTV','Cost centre'],['OBJNR','Object number']],'910K'),
+   TB('EKKO','pur','Purchase order header. The planned purchase that a reuse route avoids.',[['EBELN','Purchasing document'],['LIFNR','Vendor'],['BEDAT','Document date'],['WAERS','Currency']],'1.4M'),
+   TB('EKPO','pur','Purchase order items. Gives the baseline price per unit.',[['EBELN','Purchasing document'],['EBELP','Item'],['MATNR','Material number'],['NETPR','Net price']],'5.6M'),
+   TB('EKBE','pur','Purchase order history. Actual costs and receipts for outcome reconciliation.',[['EBELN','Purchasing document'],['EBELP','Item'],['BELNR','Document number'],['DMBTR','Amount']],'9.8M'),
+   TB('LFA1','pur','Vendor master. Identifies suppliers and recycler partners.',[['LIFNR','Vendor number'],['NAME1','Name'],['LAND1','Country']],'27K')],
+  fk:[FKX('MARC.MATNR','MARA.MATNR','Plant data belongs to one material'),FKX('MARD.MATNR','MARC.MATNR','Stock sits under a material at a plant'),FKX('MBEW.MATNR','MARA.MATNR','Valuation belongs to one material'),FKX('MSEG.MATNR','MARA.MATNR','A movement moves one material'),FKX('MARC.WERKS','T001W.WERKS','Plant code resolves to a plant'),
+   FKX('VBAP.VBELN','VBAK.VBELN','Order item belongs to its header'),FKX('VBAP.MATNR','MARA.MATNR','Demand line names a material'),FKX('VBAK.KUNNR','KNA1.KUNNR','Order belongs to a customer'),FKX('VBRK.KUNRG','KNA1.KUNNR','Bill goes to a customer'),
+   FKX('AFPO.AUFNR','AFKO.AUFNR','Order item belongs to its header'),FKX('AFKO.AUFNR','AUFK.AUFNR','Header extends the order master'),FKX('AFPO.MATNR','MARA.MATNR','The order produces a material'),
+   FKX('EKPO.EBELN','EKKO.EBELN','Item belongs to its purchase order'),FKX('EKPO.MATNR','MARA.MATNR','Purchase item names a material'),FKX('EKBE.EBELN','EKKO.EBELN','History belongs to its purchase order'),FKX('EKKO.LIFNR','LFA1.LIFNR','Order goes to a vendor'),FKX('TCURR.FCURR','TCURF.FCURR','Rates use the conversion factors')]},
+ eam:{cl:[['assets','Asset Tables'],['work','Work Management Tables'],['rel','Reliability Tables'],['loc','Location Tables']],
+  t:[TB('ASSET','assets','The asset register. Gives each asset its identity, class and status.',[['ASSETNUM','Asset number: the identity key'],['DESCRIPTION','Description'],['STATUS','Operating status'],['LOCATION','Where the asset sits']],'96K'),
+   TB('ASSETSPEC','assets','Technical specification values. Used to match an asset to demand by rating and class.',[['ASSETNUM','Asset number'],['ASSETATTRID','Attribute'],['NUMVALUE','Numeric value']],'1.2M'),
+   TB('ASSETMETER','assets','Meter readings such as running hours. Informs remaining life.',[['ASSETNUM','Asset number'],['METERNAME','Meter'],['LASTREADING','Last reading']],'410K'),
+   TB('WORKORDER','work','Work orders. Shows service history and where Circularity creates new work.',[['WONUM','Work order number'],['ASSETNUM','Asset number'],['WORKTYPE','Work type'],['STATUS','Status']],'2.8M'),
+   TB('WOSTATUS','work','Work order status history. Used to confirm acknowledgement and completion.',[['WONUM','Work order number'],['STATUS','Status'],['CHANGEDATE','Changed on']],'9.4M'),
+   TB('WPLABOR','work','Planned labour on a work order. Feeds repair cost and duration.',[['WONUM','Work order number'],['LABORCODE','Labour'],['LABORHRS','Hours']],'3.1M'),
+   TB('FAILUREREPORT','rel','Failure events per asset. Drives service-exposure risk.',[['ASSETNUM','Asset number'],['FAILURECODE','Failure code'],['REPORTDATE','Reported on']],'380K'),
+   TB('FAILURECODE','rel','Failure code catalogue. Normalises failure causes across sites.',[['FAILURECODE','Failure code'],['DESCRIPTION','Description']],'1.1K'),
+   TB('PM','rel','Preventive maintenance plans. Shows how well an asset was maintained.',[['PMNUM','PM number'],['ASSETNUM','Asset number'],['FREQUENCY','Frequency']],'120K'),
+   TB('LOCATIONS','loc','Locations. Resolves where an asset physically is.',[['LOCATION','Location'],['DESCRIPTION','Description'],['TYPE','Type']],'4.8K'),
+   TB('LOCHIERARCHY','loc','Location hierarchy. Rolls a bay up to a site for demand matching.',[['LOCATION','Location'],['PARENT','Parent location']],'6.2K')],
+  fk:[FKX('ASSETSPEC.ASSETNUM','ASSET.ASSETNUM','Spec values belong to one asset'),FKX('ASSETMETER.ASSETNUM','ASSET.ASSETNUM','Readings belong to one asset'),FKX('WORKORDER.ASSETNUM','ASSET.ASSETNUM','Work is done on an asset'),FKX('WOSTATUS.WONUM','WORKORDER.WONUM','Status history of a work order'),FKX('WPLABOR.WONUM','WORKORDER.WONUM','Labour planned on a work order'),FKX('FAILUREREPORT.ASSETNUM','ASSET.ASSETNUM','A failure belongs to an asset'),FKX('FAILUREREPORT.FAILURECODE','FAILURECODE.FAILURECODE','Failure is classified by a code'),FKX('PM.ASSETNUM','ASSET.ASSETNUM','Maintenance plan for an asset'),FKX('ASSET.LOCATION','LOCATIONS.LOCATION','Asset sits at a location'),FKX('LOCHIERARCHY.LOCATION','LOCATIONS.LOCATION','Hierarchy links locations')]},
+ fsm:{cl:[['orders','Work Order Tables'],['assets','Asset Tables'],['people','People and Places']],
+  t:[TB('wm_order','orders','Field service work orders. Shows service demand and dispatch status.',[['sys_id','Record key'],['number','Order number'],['asset','Asset'],['location','Location']],'58K'),
+   TB('wm_task','orders','Technician tasks on an order. Confirms visits and outcomes.',[['sys_id','Record key'],['parent','Parent order'],['assigned_to','Technician'],['state','State']],'210K'),
+   TB('alm_asset','assets','Asset records. Links field service to the asset register.',[['sys_id','Record key'],['serial_number','Serial number'],['location','Location'],['owned_by','Owner']],'96K'),
+   TB('alm_hardware','assets','Hardware detail for an asset. Adds model and configuration.',[['sys_id','Record key'],['model_id','Model'],['install_date','Installed on']],'88K'),
+   TB('sys_user','people','Users and technicians. Resolves who did the work.',[['sys_id','Record key'],['name','Name'],['department','Department']],'4.2K'),
+   TB('cmn_location','people','Locations. Used to match field demand to where assets are.',[['sys_id','Record key'],['name','Name'],['company','Company']],'1.9K'),
+   TB('core_company','people','Companies. Maps a site to the customer that owns it.',[['sys_id','Record key'],['name','Name']],'640')],
+  fk:[FKX('wm_task.parent','wm_order.sys_id','A task belongs to an order'),FKX('wm_order.asset','alm_asset.sys_id','An order is for an asset'),FKX('wm_order.location','cmn_location.sys_id','An order happens at a location'),FKX('wm_task.assigned_to','sys_user.sys_id','A task is done by a technician'),FKX('alm_hardware.sys_id','alm_asset.sys_id','Hardware detail extends the asset'),FKX('alm_asset.location','cmn_location.sys_id','Asset sits at a location'),FKX('alm_asset.owned_by','sys_user.sys_id','Asset has an owner'),FKX('cmn_location.company','core_company.sys_id','A location belongs to a company')]},
+ wms:{cl:[['stock','Inventory Tables'],['loc','Location Tables'],['moves','Movement Tables']],
+  t:[TB('INVENTORY','stock','Stock on hand. Tells Circularity what is physically available.',[['INVENTORY_ID','Inventory key'],['ITEM_ID','Item'],['LOCATION_ID','Location'],['QTY','Quantity']],'341K'),
+   TB('ITEM_MASTER','stock','Item master. Identifies each part and unit of measure.',[['ITEM_ID','Item key'],['DESCRIPTION','Description'],['UOM','Unit of measure']],'88K'),
+   TB('LOCATION','loc','Storage locations. Resolves where stock is.',[['LOCATION_ID','Location key'],['ZONE_ID','Zone'],['FACILITY','Facility']],'12K'),
+   TB('ZONE','loc','Warehouse zones. Rolled up to facility for matching.',[['ZONE_ID','Zone key'],['NAME','Name']],'320'),
+   TB('MOVEMENT','moves','Physical movements. Late and out-of-order events are reconciled from here.',[['MOVEMENT_ID','Movement key'],['ITEM_ID','Item'],['TO_LOCATION','Destination'],['MOVED_AT','Moved at']],'4.6M'),
+   TB('RESERVATION','moves','Stock reservations. Prevents the same stock being promised twice.',[['RESERVATION_ID','Reservation key'],['ITEM_ID','Item'],['QTY','Quantity']],'210K'),
+   TB('RECEIPT','moves','Receipts into the warehouse. Starts the case for a returned asset.',[['RECEIPT_ID','Receipt key'],['ITEM_ID','Item'],['RECEIVED_AT','Received at']],'96K')],
+  fk:[FKX('INVENTORY.ITEM_ID','ITEM_MASTER.ITEM_ID','Stock is of one item'),FKX('INVENTORY.LOCATION_ID','LOCATION.LOCATION_ID','Stock sits in a location'),FKX('LOCATION.ZONE_ID','ZONE.ZONE_ID','A location is in a zone'),FKX('MOVEMENT.ITEM_ID','ITEM_MASTER.ITEM_ID','A movement moves one item'),FKX('MOVEMENT.TO_LOCATION','LOCATION.LOCATION_ID','A movement ends at a location'),FKX('RESERVATION.ITEM_ID','ITEM_MASTER.ITEM_ID','Reservation is for one item'),FKX('RECEIPT.ITEM_ID','ITEM_MASTER.ITEM_ID','A receipt is of one item')]},
+ crm:{cl:[['acc','Account Tables'],['pipe','Pipeline Tables'],['con','Contract Tables']],
+  t:[TB('Account','acc','Customer accounts. Resolves the owning customer tenant.',[['Id','Record key'],['Name','Account name'],['Type','Account type']],'48K'),
+   TB('Contact','acc','People at an account. Identifies who approves or buys.',[['Id','Record key'],['AccountId','Account'],['Email','Email']],'160K'),
+   TB('Opportunity','pipe','Sales opportunities. Shows forecast demand and its stage.',[['Id','Record key'],['AccountId','Account'],['StageName','Stage'],['CloseDate','Expected close']],'72K'),
+   TB('OpportunityLineItem','pipe','Products on an opportunity. Gives quantity and rate.',[['Id','Record key'],['OpportunityId','Opportunity'],['Quantity','Quantity'],['UnitPrice','Unit price']],'210K'),
+   TB('Quote','pipe','Quotes sent to customers. Evidence of quoted rates.',[['Id','Record key'],['OpportunityId','Opportunity'],['TotalPrice','Total']],'64K'),
+   TB('Contract','con','Customer contracts. Gives contract end dates that create demand.',[['Id','Record key'],['AccountId','Account'],['EndDate','End date']],'31K'),
+   TB('Task','con','Tasks and follow-ups. Where Circularity creates sale tasks.',[['Id','Record key'],['WhatId','Related record'],['Status','Status']],'540K')],
+  fk:[FKX('Contact.AccountId','Account.Id','A contact works at an account'),FKX('Opportunity.AccountId','Account.Id','An opportunity is for an account'),FKX('OpportunityLineItem.OpportunityId','Opportunity.Id','Line items belong to an opportunity'),FKX('Quote.OpportunityId','Opportunity.Id','A quote supports an opportunity'),FKX('Contract.AccountId','Account.Id','A contract is with an account'),FKX('Task.WhatId','Opportunity.Id','A task follows up an opportunity')]},
+ plm:{cl:[['item','Item Tables'],['struct','Structure Tables'],['compat','Compatibility Tables']],
+  t:[TB('PITEM','item','Items (parts and assemblies). The identity of a configuration.',[['PUID','Record key'],['ITEM_ID','Item ID'],['NAME','Name']],'22K'),
+   TB('PITEMREVISION','item','Item revisions. Shows which revision an asset was built to.',[['PUID','Record key'],['ITEM','Item'],['REV_ID','Revision'],['RELEASED','Released on']],'61K'),
+   TB('PSBOMVIEWREVISION','struct','Bill of materials views. The structure behind a configuration.',[['PUID','Record key'],['ITEMREV','Item revision'],['VIEW_TYPE','View type']],'34K'),
+   TB('PSOCCURRENCE','struct','Components in a structure. Lets Circularity reason about parts and sub-assemblies.',[['PUID','Record key'],['PARENT','Parent BOM view'],['CHILD','Child item'],['QTY','Quantity']],'1.4M'),
+   TB('PALTERNATE','compat','Approved alternates. Allows a different but compatible part to be reused.',[['PUID','Record key'],['ITEM','Item'],['ALT_ITEM','Alternate item']],'48K'),
+   TB('PCOMPAT','compat','Compatibility rules. Decides whether a reused asset fits the demand.',[['PUID','Record key'],['ITEM','Item'],['RULE','Rule']],'19K')],
+  fk:[FKX('PITEMREVISION.ITEM','PITEM.PUID','A revision belongs to an item'),FKX('PSBOMVIEWREVISION.ITEMREV','PITEMREVISION.PUID','A BOM view belongs to a revision'),FKX('PSOCCURRENCE.PARENT','PSBOMVIEWREVISION.PUID','A component sits in a BOM view'),FKX('PSOCCURRENCE.CHILD','PITEM.PUID','A component is an item'),FKX('PALTERNATE.ITEM','PITEM.PUID','Alternate approved for an item'),FKX('PCOMPAT.ITEM','PITEM.PUID','Compatibility rule for an item')]}
+};
+const TBL_AVAIL={erp:[{n:'T001L',cl:'inv',desc:'Storage locations per plant. Resolves where stock sits inside a plant.',cols:['LGORT','WERKS','LGOBE']},{n:'MKPF',cl:'inv',desc:'Material document header. Date and user of each movement.',cols:['MBLNR','BUDAT','USNAM']},{n:'EKES',cl:'pur',desc:'Vendor confirmations. Supplier lead times for purchase alternatives.',cols:['EBELN','EBELP','EINDT']}],
+ eam:[{n:'WORKLOG',cl:'work',desc:'Work log notes. Free-text context behind a repair.',cols:['WONUM','LOGTYPE','DESCRIPTION']},{n:'MATUSETRANS',cl:'work',desc:'Material used on work. Actual parts cost.',cols:['WONUM','ITEMNUM','QUANTITY']}]};
+S.tg={src:'erp',view:'graph',z:.85,m:{},drag:null};
+const tgH=t=>34+Math.min(t.cols.length,4)*19+(t.cols.length>4?18:0)+38;
+function tgLayout(m){const W=190,G=16,P=44;let cx=24,cy=24,rowH=0,col=0;
+ m.cl.forEach(([id])=>{const ts=m.t.filter(t=>t.cl===id);if(!ts.length)return;const per=ts.length>2?2:ts.length,rows=Math.ceil(ts.length/per),hs=[];let bh=0;
+  for(let r=0;r<rows;r++){const h=Math.max(...ts.slice(r*per,r*per+per).map(tgH));hs.push(h);bh+=h+G}
+  const bw=per*W+(per-1)*G;if(col===3){cx=24;cy+=rowH+P+10;rowH=0;col=0}
+  ts.forEach((t,i)=>{const r=Math.floor(i/per),c=i%per;t.x=cx+c*(W+G);t.y=cy+34+hs.slice(0,r).reduce((a,b)=>a+b+G,0)});
+  cx+=bw+P+14;rowH=Math.max(rowH,bh+30);col++});
+ m.t.filter(t=>t.x==null).forEach((t,i)=>{t.x=24+i*210;t.y=cy+rowH+40})}
+function tgModel(id){const g=S.tg;if(!g.m[id]){const b=TBL_MODELS[id];if(!b)return null;const m={cl:b.cl.map(c=>c.slice()),t:b.t.map(t=>Object.assign({},t,{cols:t.cols.map(c=>c.slice())})),fk:b.fk.map(f=>f.slice())};tgLayout(m);g.m[id]=m}return g.m[id]}
+const tgSrcOk=()=>{const g=S.tg;if(!SRC(g.src)||!TBL_MODELS[g.src]){const n=Object.keys(TBL_MODELS).find(k=>SRC(k));g.src=n||null}return g.src};
+function tgSize(m){let w=900,h=500;m.t.forEach(t=>{w=Math.max(w,t.x+190+80);h=Math.max(h,t.y+tgH(t)+80)});m.ww=w;m.wh=h}
+function tgCardHTML(t){const cols=t.cols.slice(0,4);
+ return `<div class="tgc" data-t="${esc(t.n)}" style="left:${t.x}px;top:${t.y}px;width:190px"><div class="tgh" data-tip="${esc(t.n+' · '+t.desc)}"><b>${esc(t.n)}</b><button class="tgm" data-act="tgEdit" data-arg="${esc(t.n)}" aria-label="Edit table ${esc(t.n)}">⋮</button></div><div class="tgcols">${cols.map(c=>`<div class="tgcol" data-tip="${esc(t.n+'.'+c[0]+' · '+(c[1]||'Field read by the extractor'))}"><span>${esc(c[0])}</span><i></i></div>`).join('')}${t.cols.length>4?`<div class="tgmore">+${t.cols.length-4} more</div>`:''}</div><button class="tgfk" data-act="tgFkNew" data-arg="${esc(t.n)}">New Foreign Key</button></div>`}
+function tgAnchor(a,b){const aw=190,ah=tgH(a),bh=tgH(b);if(a.x+aw+20<=b.x)return[[a.x+aw,a.y+ah/2],[b.x,b.y+bh/2]];if(b.x+aw+20<=a.x)return[[a.x,a.y+ah/2],[b.x+aw,b.y+bh/2]];return a.y<b.y?[[a.x+aw/2,a.y+ah],[b.x+aw/2,b.y]]:[[a.x+aw/2,a.y],[b.x+aw/2,b.y+bh]]}
+function tgLinesHTML(m){const by={};m.t.forEach(t=>by[t.n]=t);
+ return m.fk.map(f=>{const a=by[f[0].split('.')[0]],b=by[f[1].split('.')[0]];if(!a||!b)return'';const [p,q]=tgAnchor(a,b),hz=Math.abs(q[0]-p[0])>=Math.abs(q[1]-p[1]),mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2,
+  d=hz?`M${p[0]} ${p[1]}C${mx} ${p[1]} ${mx} ${q[1]} ${q[0]} ${q[1]}`:`M${p[0]} ${p[1]}C${p[0]} ${my} ${q[0]} ${my} ${q[0]} ${q[1]}`;
+  return `<g class="tgl"><path class="hit" d="${d}" data-tip="${esc(f[0]+' → '+f[1]+' · '+(f[2]||'Foreign key link'))}"/><path class="l" d="${d}"/><circle cx="${p[0]}" cy="${p[1]}" r="3.5"/><circle cx="${q[0]}" cy="${q[1]}" r="3.5"/></g>`}).join('')}
+function tgWorldHTML(m){tgSize(m);
+ const rects=m.cl.map(([id,name])=>{const ts=m.t.filter(t=>t.cl===id);if(!ts.length)return'';const x1=Math.min(...ts.map(t=>t.x))-14,y1=Math.min(...ts.map(t=>t.y))-34,x2=Math.max(...ts.map(t=>t.x+190))+14,y2=Math.max(...ts.map(t=>t.y+tgH(t)))+14;
+  return `<div class="tgcl" style="left:${x1}px;top:${y1}px;width:${x2-x1}px;height:${y2-y1}px"><span class="tgcn">${esc(name)}</span></div>`}).join('');
+ return `${rects}<svg class="tgsv" width="${m.ww}" height="${m.wh}" aria-hidden="true">${tgLinesHTML(m)}</svg>${m.t.map(tgCardHTML).join('')}`}
+function tgRedraw(){const g=S.tg,m=tgModel(g.src),w=$('#tgWorld');if(!w||!m)return;w.innerHTML=tgWorldHTML(m);w.style.width=m.ww+'px';w.style.height=m.wh+'px';const z=$('#tgSizer');z.style.width=m.ww*g.z+'px';z.style.height=m.wh*g.z+'px'}
+function tgGraphHTML(m){const g=S.tg;tgSize(m);
+ return `<div class="tgwrap"><div class="tgview" id="tgView" role="group" aria-label="Table graph. Drag a table by its header to move it."><div id="tgSizer" style="width:${m.ww*g.z}px;height:${m.wh*g.z}px"><div id="tgWorld" style="width:${m.ww}px;height:${m.wh}px;transform:scale(${g.z})">${tgWorldHTML(m)}</div></div></div>
+ <div class="tgctl"><button class="btn sm" data-act="tgAlign">Auto Align</button><button class="btn sm" data-act="tgZoom" data-arg="-1" aria-label="Zoom out">−</button><span id="tgZ" class="note num" style="width:40px;text-align:center">${Math.round(g.z*100)}%</span><button class="btn sm" data-act="tgZoom" data-arg="1" aria-label="Zoom in">+</button></div></div>`}
+function tgListHTML(m){const s=SRC(S.tg.src),fkc=n=>m.fk.filter(f=>f[0].split('.')[0]===n||f[1].split('.')[0]===n).length;
+ return `<div class="panel"><div class="tw"><table class="t"><thead><tr><th>Table</th><th>Cluster</th><th>What it is and why it is used</th><th class="r">Columns</th><th class="r">Foreign keys</th><th class="r">Rows</th><th>Last extracted</th><th>Actions</th></tr></thead><tbody>${m.t.map(t=>`<tr><td class="mono"><b>${esc(t.n)}</b></td><td><span class="chip line">${esc((m.cl.find(c=>c[0]===t.cl)||['',t.cl])[1].replace(/ Tables$/,''))}</span></td><td style="max-width:420px">${esc(t.desc)}</td><td class="r num">${t.cols.length}</td><td class="r num">${fkc(t.n)}</td><td class="r num">${esc(t.rows||'—')}</td><td class="nowrap note"><span data-tgage="${s.id}">${esc(srcAgeText(s).replace(/^(Updated|Last import) /,''))}</span></td><td class="nowrap"><span class="tacts" style="display:inline-flex"><button class="tbtn" data-act="tgEdit" data-arg="${esc(t.n)}">Edit</button><button class="tbtn" data-act="tgFkNew" data-arg="${esc(t.n)}">Link</button><button class="tbtn dng" data-act="tgDel" data-arg="${esc(t.n)}">Delete</button></span></td></tr>`).join('')}</tbody></table></div></div>
+ <div class="sect"><div class="sh"><h2>Foreign keys</h2></div><div class="panel"><div class="tw"><table class="t static"><thead><tr><th>From</th><th>To</th><th>Why the link matters</th><th>Actions</th></tr></thead><tbody>${m.fk.map((f,i)=>`<tr><td class="mono">${esc(f[0])}</td><td class="mono">${esc(f[1])}</td><td>${esc(f[2]||'Foreign key link')}</td><td><button class="tbtn dng" data-act="tgFkDel" data-arg="${i}">Delete</button></td></tr>`).join('')||'<tr><td colspan="4"><div class="empty"><b>No foreign keys</b>Use New Foreign Key to link two tables.</div></td></tr>'}</tbody></table></div></div></div>`}
+function tgHTML(){const g=S.tg;if(!tgSrcOk())return `<div class="empty"><b>No table models</b>Connect a source that publishes tables first.</div>`;const m=tgModel(g.src);
+ const opts=Object.keys(TBL_MODELS).map(id=>{const s=SRC(id);return s?`<option value="${id}" ${g.src===id?'selected':''}>${esc(s.name)} · ${esc(s.vendor)}</option>`:''}).join('');
+ return `<div class="smbar"><label class="sr" for="tgSrc">System</label><select class="sel" id="tgSrc" style="max-width:320px" data-ch="tgSrc">${opts}</select><span class="chip line">${m.t.length} tables</span><span class="chip line">${m.fk.length} foreign keys</span><span class="grow"></span>
+  <div class="seg" role="group" aria-label="View"><button aria-pressed="${g.view==='graph'}" data-act="tgView" data-arg="graph">Graph</button><button aria-pressed="${g.view==='list'}" data-act="tgView" data-arg="list">List</button></div><button class="btn" data-act="tgAdd">Add Tables</button><button class="btn pri" data-act="tgFkNew" data-arg="">New Foreign Key</button></div>
+  <p class="note" style="margin:0 0 10px">The tables Circularity reads from this system and how they link. Hover a table, a field or a link to see what it is and why it is used. Drag a table by its header to rearrange.</p>${g.view==='graph'?tgGraphHTML(m):tgListHTML(m)}`}
+ACT.tgSrc=v=>{S.tg.src=v;route(true)};ACT.tgView=v=>{S.tg.view=v;route(true)};
+ACT.tgAlign=()=>{const m=tgModel(S.tg.src);m.t.forEach(t=>{t.x=null});tgLayout(m);tgRedraw();toast('Tables aligned by cluster.')};
+ACT.tgZoom=a=>{const g=S.tg;g.z=clampN(Math.round((g.z+(+a)*.1)*10)/10,.3,1.4);const m=tgModel(g.src);$('#tgWorld').style.transform=`scale(${g.z})`;const z=$('#tgSizer');z.style.width=m.ww*g.z+'px';z.style.height=m.wh*g.z+'px';$('#tgZ').textContent=Math.round(g.z*100)+'%'};
+document.addEventListener('pointerdown',e=>{const h=e.target.closest&&e.target.closest('.tgh');if(!h||e.target.closest('button')||!$('#tgView'))return;const m=tgModel(S.tg.src),t=m.t.find(x=>x.n===h.closest('.tgc').dataset.t);if(!t)return;S.tg.drag={t,sx:e.clientX,sy:e.clientY,ox:t.x,oy:t.y};e.preventDefault()});
+document.addEventListener('pointermove',e=>{const d=S.tg&&S.tg.drag;if(!d)return;const z=S.tg.z;d.t.x=Math.max(0,Math.round((d.ox+(e.clientX-d.sx)/z)/8)*8);d.t.y=Math.max(30,Math.round((d.oy+(e.clientY-d.sy)/z)/8)*8);tgRedraw()});
+document.addEventListener('pointerup',()=>{if(S.tg&&S.tg.drag)S.tg.drag=null});
+/* ---- edit / add / delete tables, foreign keys ---- */
+const tgCls=m=>m.cl.map(c=>`<option value="${c[0]}">${esc(c[1])}</option>`).join('');
+ACT.tgEdit=n=>{const m=tgModel(S.tg.src),t=m.t.find(x=>x.n===n);if(!t)return;
+ openModal('Edit table '+esc(n),`<div class="fld"><label for="teDesc">What it is and why it is used</label><textarea id="teDesc" maxlength="220">${esc(t.desc)}</textarea><div class="hint">Shown when someone hovers the table. Keep it to a line or two.</div></div>
+ <div class="fld"><label for="teCl">Cluster</label><select id="teCl">${m.cl.map(c=>`<option value="${c[0]}" ${c[0]===t.cl?'selected':''}>${esc(c[1])}</option>`).join('')}</select></div>
+ <div class="fld"><label for="teCols">Columns (one per line, key first)</label><textarea id="teCols" class="mono" style="min-height:120px" spellcheck="false">${esc(t.cols.map(c=>c[0]).join('\n'))}</textarea><div class="err" id="teErr"></div></div>`,
+ `<button class="btn danger" style="margin-right:auto" data-act="tgDel" data-arg="${esc(n)}">Delete table</button><button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="tgEditOk" data-arg="${esc(n)}">Save table</button>`)};
+ACT.tgEditOk=n=>{if(!canMgr())return toast(NOMGR);const m=tgModel(S.tg.src),t=m.t.find(x=>x.n===n),cols=$('#teCols').value.split('\n').map(x=>x.trim()).filter(Boolean),desc=$('#teDesc').value.trim();
+ if(!cols.length){$('#teErr').textContent='Add at least one column.';return}if(new Set(cols.map(c=>c.toLowerCase())).size!==cols.length){$('#teErr').textContent='Column names must be unique.';return}if(cols.some(c=>!/^[A-Za-z_][\w$]*$/.test(c))){$('#teErr').textContent='Use letters, numbers and underscores only.';return}
+ const old={};t.cols.forEach(c=>old[c[0]]=c[1]);t.cols=cols.map(c=>[c,old[c]||'']);t.desc=desc||t.desc;t.cl=$('#teCl').value;
+ m.fk=m.fk.filter(f=>[f[0],f[1]].every(r=>{const [tn,cn]=r.split('.');return tn!==n||cols.includes(cn)}));
+ closeModal();route(true);toast(n+' saved.')};
+ACT.tgDel=n=>{if(!canMgr())return toast(NOMGR);const m=tgModel(S.tg.src),i=m.t.findIndex(x=>x.n===n);if(i<0)return;const t=m.t[i],gone=m.fk.filter(f=>f[0].split('.')[0]===n||f[1].split('.')[0]===n);
+ m.t.splice(i,1);m.fk=m.fk.filter(f=>!gone.includes(f));closeModal();route(true);
+ toastAct(n+' deleted'+(gone.length?' with '+gone.length+' foreign key'+(gone.length>1?'s':''):'')+'.','Undo',()=>{if(m.t.some(x=>x.n===n))return;m.t.splice(Math.min(i,m.t.length),0,t);m.fk.push(...gone);route(true);toast(n+' restored.')})};
+ACT.tgAdd=()=>{if(!canMgr())return toast(NOMGR);const m=tgModel(S.tg.src),av=(TBL_AVAIL[S.tg.src]||[]).filter(a=>!m.t.some(t=>t.n===a.n));
+ openModal('Add table',`<div class="fld"><label for="taN">Table name</label><input id="taN" list="taL" autocomplete="off" data-in="taN" spellcheck="false"><datalist id="taL">${av.map(a=>`<option value="${esc(a.n)}">`).join('')}</datalist><div class="hint">${av.length?'Suggestions appear as you type. ':''}Any table the extractor can read can be added.</div></div>
+ <div class="fld"><label for="taC">Cluster</label><select id="taC">${tgCls(m)}</select></div>
+ <div class="fld"><label for="taD">What it is and why it is used</label><textarea id="taD" maxlength="220"></textarea></div>
+ <div class="fld"><label for="taK">Columns (one per line, key first)</label><textarea id="taK" class="mono" style="min-height:90px" spellcheck="false">ID</textarea><div class="err" id="taErr"></div></div>`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="tgAddOk">Add table</button>`)};
+ACT.taN=v=>{const a=(TBL_AVAIL[S.tg.src]||[]).find(x=>x.n.toLowerCase()===v.trim().toLowerCase());if(a){$('#taD').value=a.desc;$('#taC').value=a.cl;$('#taK').value=a.cols.join('\n')}};
+ACT.tgAddOk=()=>{const m=tgModel(S.tg.src),n=$('#taN').value.trim(),cols=$('#taK').value.split('\n').map(x=>x.trim()).filter(Boolean);
+ if(!/^[A-Za-z][\w$]{1,40}$/.test(n)){$('#taErr').textContent='Enter a table name: letters, numbers and underscores.';return}if(m.t.some(t=>t.n.toLowerCase()===n.toLowerCase())){$('#taErr').textContent=n+' is already in this model.';return}
+ if(!cols.length||cols.some(c=>!/^[A-Za-z_][\w$]*$/.test(c))){$('#taErr').textContent='Add at least one valid column name.';return}
+ const cl=$('#taC').value,mem=m.t.filter(t=>t.cl===cl),x=mem.length?Math.max(...mem.map(t=>t.x)):24,y=mem.length?Math.max(...mem.map(t=>t.y+tgH(t)))+30:(m.t.length?Math.max(...m.t.map(t=>t.y+tgH(t)))+60:60);
+ m.t.push({n,cl,desc:$('#taD').value.trim()||'Table extracted for evidence.',cols:cols.map(c=>[c,'']),rows:'—',x:mem.length?x:24,y});closeModal();route(true);toast(n+' added. Use New Foreign Key to link it to other tables.')};
+function tgFkRender(){const m=tgModel(S.tg.src),f=S.tgF,cols=n=>(m.t.find(t=>t.n===n)||{cols:[]}).cols.map(c=>c[0]);
+ if(!m.t.some(t=>t.n===f.a))f.a=m.t[0].n;if(!f.b||f.b===f.a||!m.t.some(t=>t.n===f.b))f.b=(m.t.find(t=>t.n!==f.a)||{}).n;if(!cols(f.a).includes(f.ac))f.ac=cols(f.a)[0];if(!cols(f.b).includes(f.bc))f.bc=cols(f.b)[0];
+ const sl=(k,l,opts,cur)=>`<div class="fld"><label for="fk_${k}">${l}</label><select id="fk_${k}" data-ch="tgFkF" data-k="${k}">${opts.map(o=>`<option ${o===cur?'selected':''}>${esc(o)}</option>`).join('')}</select></div>`;
+ openModal('New Foreign Key',`<p class="note" style="margin-top:0">A foreign key links a column in one table to the key of another, so records can be joined.</p><div class="grid g2" style="gap:0 14px">${sl('a','From table',m.t.map(t=>t.n),f.a)}${sl('ac','From column',cols(f.a),f.ac)}${sl('b','To table',m.t.filter(t=>t.n!==f.a).map(t=>t.n),f.b)}${sl('bc','To column',cols(f.b),f.bc)}</div>
+ <div class="fld"><label for="fk_why">Why the link matters</label><input id="fk_why" value="${esc(f.why||'')}" data-in="tgFkWhy" maxlength="120" placeholder="e.g. An order item belongs to its header"></div><div class="err" id="fkErr"></div>`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="tgFkOk">Create foreign key</button>`)}
+ACT.tgFkNew=a=>{if(!canMgr())return toast(NOMGR);const m=tgModel(S.tg.src);if(m.t.length<2){toast('Add a second table before linking.');return}S.tgF={a:a||m.t[0].n,ac:'',b:'',bc:'',why:''};tgFkRender()};
+ACT.tgFkF=(v,el)=>{const f=S.tgF,k=el.dataset.k;f[k]=v;if(k==='a'){f.ac='';f.b=''}if(k==='b')f.bc='';tgFkRender()};ACT.tgFkWhy=v=>{S.tgF.why=v};
+ACT.tgFkOk=()=>{const m=tgModel(S.tg.src),f=S.tgF,a=f.a+'.'+f.ac,b=f.b+'.'+f.bc;if(f.a===f.b){$('#fkErr').textContent='Choose two different tables.';return}
+ if(m.fk.some(x=>x[0]===a&&x[1]===b)){$('#fkErr').textContent='That foreign key already exists.';return}m.fk.push([a,b,f.why.trim()||'Foreign key link']);closeModal();route(true);toast(a+' now links to '+b+'.')};
+ACT.tgFkDel=i=>{if(!canMgr())return toast(NOMGR);const m=tgModel(S.tg.src),f=m.fk.splice(+i,1)[0];route(true);toastAct(f[0]+' → '+f[1]+' removed.','Undo',()=>{m.fk.splice(Math.min(+i,m.fk.length),0,f);route(true)})};
 function renderIntegration(){
   const tab=S.intTab,open=CONFLICTS.filter(c=>c.status==='open').length;
-  const T=[['studio','Workflow studio'],['map','Source map'],['models','Canonical models'],['events','Event stream'],['conflicts','Conflict queue ('+open+')'],['import','Manual import']];
+  const T=[['studio','Workflow studio'],['map','Source map'],['tables','Source tables'],['models','Canonical models'],['events','Event stream'],['conflicts','Conflict queue ('+open+')'],['import','Manual import']];
   return `<div class="phead"><div><h1>Connection Fabric</h1><p>Existing lease, ERP, asset, repair, warehouse and service systems keep owning their transactions. Circularity assembles their evidence, sends approved instructions back, and reconciles what returns.</p></div></div>
   <div class="tabs" role="tablist">${T.map(t=>`<button role="tab" aria-selected="${tab===t[0]}" data-act="intTab" data-arg="${t[0]}">${t[1]}</button>`).join('')}</div>
-  ${tab==='studio'?wfHTML():tab==='map'?intMap():tab==='models'?intModels():tab==='events'?evTable():tab==='conflicts'?intConflicts():intImport()}`;
+  ${tab==='studio'?wfHTML():tab==='map'?intMap():tab==='tables'?tgHTML():tab==='models'?intModels():tab==='events'?evTable():tab==='conflicts'?intConflicts():intImport()}`;
 }
 ACT.intTab=a=>{S.intTab=a;route(true)};
 
