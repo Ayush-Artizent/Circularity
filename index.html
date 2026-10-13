@@ -363,6 +363,46 @@ details.prov{border-bottom:1px solid var(--line2)}details.prov>summary{padding:1
 .zloop .lab{align-self:center;padding-right:12px;font-weight:700;font-size:12.5px;color:var(--ink2)}
 @media (max-width:1100px){.zf{grid-template-columns:1fr}.zarr{flex-direction:row;padding:8px}.zarr svg{transform:rotate(90deg)}.zloop{grid-template-columns:1fr}.zloop .lab{padding:0 0 6px}.zloop .zarrl{padding:4px}.zloop .zarrl svg{transform:rotate(-90deg)}}
 .wf.noinsp{grid-template-columns:212px minmax(0,1fr)}.wfinsp:empty{display:none}@media (max-width:820px){.wf.noinsp{grid-template-columns:minmax(0,1fr)}}
+
+/* ===== Source map + workflow list (live CRUD) ===== */
+.smbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.smq{height:34px;min-width:240px;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:0 10px}
+.chipb{border:0;cursor:pointer}.chipb[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:1px}
+.vlogo{flex:none;width:26px;height:26px;border-radius:6px;display:inline-grid;place-items:center;font:800 11px var(--f-display);background:var(--ink);color:var(--bg)}
+.tname{font-family:var(--f-display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile{cursor:pointer}.tile:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.tile .tfoot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:9px;border-top:1px solid var(--line2)}
+.tacts{display:flex;gap:4px}
+.tile .tfoot .note{white-space:nowrap;font-size:12px}.tile .tfoot{flex-wrap:wrap}
+.tbtn{border:1px solid var(--line);background:var(--panel);border-radius:5px;height:24px;padding:0 9px;font-weight:600;font-size:12px;color:var(--ink)}
+.tbtn:hover{background:var(--panel2)}.tbtn[disabled]{opacity:.4;cursor:not-allowed}.tbtn.dng{color:var(--bad);border-color:var(--bad)}
+.tile .unm{color:var(--bad)}
+.tile.addt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:150px;border-style:dashed;color:var(--ink2);text-align:center}
+.tile.addt .plus{font:600 28px/1 var(--f-display)}.tile.addt:hover{background:var(--panel2)}
+.sprog{height:4px;border-radius:2px;background:var(--panel3);overflow:hidden;margin-top:8px}.sprog i{display:block;height:100%;background:var(--yellow);transition:width .15s linear}
+.livedot{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ok)}
+.livedot i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+@media (prefers-reduced-motion:no-preference){.livedot i{animation:lvp 1.6s ease-in-out infinite}@keyframes lvp{50%{opacity:.3}}.spin{animation:spn .8s linear infinite}@keyframes spn{to{transform:rotate(360deg)}}}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-1px}
+#smLog .lg{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--line2);font-size:13px}
+#smLog .lg:last-child{border-bottom:0}#smLog .lt{color:var(--muted);font-size:12px;width:62px;flex:none}
+#smLog .lg.bad .lm{color:var(--bad)}#smLog .lg.warn .lm{color:var(--warn)}
+#smLog .vlogo{width:20px;height:20px;font-size:9px}
+.lnk{border:0;background:none;padding:0;color:var(--ink);text-decoration:underline;text-underline-offset:2px;font-weight:600;text-align:left}.lnk.b{font-family:var(--f-display)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}.btn.danger:hover{background:var(--bad-soft)}
+.toast.act{pointer-events:auto}.toastbtn{margin-left:10px;border:0;background:none;color:var(--yellow);font-weight:700;text-decoration:underline}
+.sdtabs{margin:-4px 0 14px}
+.sdlive{margin-bottom:14px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel2)}
+.credrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:14px}
+.oprow{display:flex;gap:6px;margin-bottom:6px}.oprow input{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:7px 10px}
+.iconbtn.sm{width:30px;height:30px}
+.maptbl input{width:100%;min-width:90px;border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:5px 7px;font-size:12px}
+.maptbl input.bad{border-color:var(--bad);background:var(--bad-soft)}.maptbl th,.maptbl td{padding:5px 4px}
+.fld .err,.err{color:var(--bad);font-size:12px}
+ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margin-bottom:4px}
+.wfname input{height:34px;min-width:260px;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:0 10px;font:700 14px var(--f-display)}
+.wfset{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}.wfset .fld{margin-bottom:0}.wfset .fld input,.wfset .fld select{height:34px;padding:0 10px}
+.wftbl td{vertical-align:top}.wftbl .tacts{flex-wrap:nowrap}
 </style>
 </head>
 <body>
@@ -439,15 +479,15 @@ const SPEC_GEN={
 function evidenceFor(c){
   const base=[
    ['ret','Return record available','WMS · reverse logistics'],
-   ['id','Identity and configuration verified','PLM / BOM'],
-   ['insp','Inspection report available','Inspection & repair'],
-   ['svc','Service history retrieved','EAM / FSM'],
-   ['eng','Engineering assessment available','QMS & engineering'],
-   ['photo','Photos available','Inspection & repair'],
-   ['dem','Demand evidence linked','Lease/CRM · ERP'],
-   ['mkt','Market comparables current','Markets & dealers'],
+   ['id','Identity and configuration verified','PLM'],
+   ['insp','Inspection report available','Inspection'],
+   ['svc','Service history retrieved','EAM'],
+   ['eng','Engineering assessment available','Engineering'],
+   ['photo','Photos available','Inspection'],
+   ['dem','Demand evidence linked','CRM'],
+   ['mkt','Market comparables current','Market pricing'],
    ['cost','Cost and stock data available','ERP finance'],
-   ['pol','Policy & certification checked','QMS & engineering']
+   ['pol','Policy & certification checked','Engineering']
   ];
   return base.map(([k,label,source])=>({k,label,source,state:'ready',fresh:pick(['12 min ago','41 min ago','2 h ago','5 h ago','yesterday']),note:''}));
 }
@@ -584,7 +624,7 @@ const G_STD=['Inspection passed; 36 months engineering life','Prep scope approve
   const c=baseCase({id:'RT-1050',assetId:'CTL-0318',cls:'control',owner:'Customer B',grade:null,condition:'Test required',assessment:'Review',readiness:'need',age:5.6,received:new Date('2026-10-04'),location:'Warehouse 2',stage:'none',
     spec:{'Family':'Series 7 PLC','I/O points':96,'Firmware':'v4.2.1','Supply':'24 V DC','Safety rating':'None'},mfr:'Orbis Control',engLife:'Not assessed',nextInspection:'—',hero:true,demand:{internal:true,confirmed:true,site:'Site 4',lease:null,parts:true}});
   setEv(c,'insp','partial','Visual inspection only; functional and I/O self-test not run');setEv(c,'eng','missing','Engineering assessment not requested');
-  c.blocked={gate:0,gateName:'Condition & life',reason:'Functional test required before any reuse route can be assessed. Value ranking is withheld rather than guessed.',action:'Request functional test',owner:'QMS & engineering'};
+  c.blocked={gate:0,gateName:'Condition & life',reason:'Functional test required before any reuse route can be assessed. Value ranking is withheld rather than guessed.',action:'Request functional test',owner:'Engineering'};
   const mk=(id,plan,demand)=>fail(mkRoute({id,plan,demandLabel:demand,terms:[T('Not evaluated',0,'na')],unc:'—',why:''}),0,'Gate failed: functional test result missing — evidence insufficient for the intended use');
   c.routes=[mk('redeploy','Redeploy to Site 4','Site 4 · confirmed internal need'),mk('resale','Sell whole asset','Dealer network'),mk('relase','Re-lease','No prospect'),mk('intparts','Recover parts for internal use','Service stock')];
   c.routes.push(mkRoute({id:'material',plan:'Recover material',demandLabel:'Certified recycler',terms:[T('Metals recovered',46,'material'),T('Processing and logistics',-22,'fees')],unc:'Yield',why:'Available, but not comparable until higher-value routes can be assessed'}));
@@ -598,7 +638,7 @@ const G_STD=['Inspection passed; 36 months engineering life','Prep scope approve
     spec:{'Flow':'96 m³/h','Head':'62 m','Pressure':'250 bar','Drive':'Axial piston','Port':'SAE 16'},mfr:'Halden Hydraulics',engLife:'Not assessed',nextInspection:'—',hero:true,demand:{internal:false,confirmed:false,site:null,lease:null,parts:true}});
   ['insp','eng','photo'].forEach(k=>setEv(c,k,'missing',k==='insp'?'Inspection not yet performed':''));
   setEv(c,'svc','stale','Last service record 14 months old');setEv(c,'dem','missing','Demand cannot be linked until condition is known');
-  c.blocked={gate:0,gateName:'Condition & life',reason:'Pump has not been inspected. No route can be evaluated without condition and remaining-life evidence.',action:'Request inspection',owner:'Inspection & repair'};
+  c.blocked={gate:0,gateName:'Condition & life',reason:'Pump has not been inspected. No route can be evaluated without condition and remaining-life evidence.',action:'Request inspection',owner:'Inspection'};
   c.routes=[];c.facts=['Indicative class range (not decision-grade): $1,100–$3,800'];addCase(c);
 })();
 /* ---- RT-1044 · pool partner batch ---- */
@@ -673,7 +713,7 @@ const G_STD=['Inspection passed; 36 months engineering life','Prep scope approve
 const STEP_TPL={
  redeploy:[['Reserve','WMS · stock reservation'],['Prepare','EAM · repair work order'],['Transfer','WMS · movement'],['Confirm outcome','EAM · ERP']],
  resale:[['Reserve','WMS · stock reservation'],['List for sale','CRM · sale task'],['Ship','WMS · movement'],['Confirm receipts','ERP · finance']],
- relase:[['Reserve','WMS · stock reservation'],['Prepare','EAM · work order'],['Contract','Lease/CRM · order'],['Confirm outcome','ERP · finance']],
+ relase:[['Reserve','WMS · stock reservation'],['Prepare','EAM · work order'],['Contract','CRM · order'],['Confirm outcome','ERP · finance']],
  intparts:[['Reserve','WMS · stock reservation'],['Teardown','EAM · work order'],['Allocate parts','ERP · stock transfer'],['Confirm outcome','EAM · ERP']],
  extparts:[['Reserve','WMS · stock reservation'],['Teardown','EAM · work order'],['List parts','CRM · sale task'],['Confirm receipts','ERP · finance']],
  material:[['Reserve','WMS · stock reservation'],['Collection','Recycler partner'],['Processing','Recycler partner'],['Confirm yield','Recycler · certificate']],
@@ -712,15 +752,15 @@ function genCase(n,readiness){
   }else if(readiness==='awaiting'){
     c.grade=null;c.condition='Not inspected';c.engLife='Not assessed';c.stage='none';
     ['insp','eng','photo'].forEach(k=>setEv(c,k,'missing'));setEv(c,'dem','missing','Demand cannot be linked until condition is known');
-    c.blocked={gate:0,gateName:'Condition & life',reason:'Awaiting inspection. No route can be evaluated without condition evidence.',action:'Request inspection',owner:'Inspection & repair'};c.routes=[];
+    c.blocked={gate:0,gateName:'Condition & life',reason:'Awaiting inspection. No route can be evaluated without condition evidence.',action:'Request inspection',owner:'Inspection'};c.routes=[];
   }else{
     c.grade=null;c.stage='none';c.engLife='Not assessed';
     const kind=wpick([['test',34],['photos',20],['id',16],['eng',30]]);
     c.condition=c.assessment==='Partial'?'Mixed':'Test required';
-    if(kind==='test'){setEv(c,'insp','partial','Functional test not run');c.blocked={gate:0,gateName:'Condition & life',reason:'Functional test required before reuse routes can be assessed.',action:'Request functional test',owner:'QMS & engineering'}}
-    else if(kind==='photos'){setEv(c,'photo','missing','No photos attached to the return');setEv(c,'insp','partial','Grade given without photo evidence');c.blocked={gate:0,gateName:'Condition & life',reason:'Condition grade cannot be validated without photos.',action:'Request photos',owner:'Inspection & repair'}}
+    if(kind==='test'){setEv(c,'insp','partial','Functional test not run');c.blocked={gate:0,gateName:'Condition & life',reason:'Functional test required before reuse routes can be assessed.',action:'Request functional test',owner:'Engineering'}}
+    else if(kind==='photos'){setEv(c,'photo','missing','No photos attached to the return');setEv(c,'insp','partial','Grade given without photo evidence');c.blocked={gate:0,gateName:'Condition & life',reason:'Condition grade cannot be validated without photos.',action:'Request photos',owner:'Inspection'}}
     else if(kind==='id'){setEv(c,'id','conflict','Serial on label differs from EAM record');c.blocked={gate:2,gateName:'Policy & certification',reason:'Identity conflict: ownership and configuration cannot be confirmed.',action:'Resolve identity',owner:'EAM / PLM'}}
-    else{setEv(c,'eng','missing','Engineering assessment of remaining life not available');c.blocked={gate:0,gateName:'Condition & life',reason:'Approved engineering assessment required for the intended use.',action:'Request assessment',owner:'QMS & engineering'}}
+    else{setEv(c,'eng','missing','Engineering assessment of remaining life not available');c.blocked={gate:0,gateName:'Condition & life',reason:'Approved engineering assessment required for the intended use.',action:'Request assessment',owner:'Engineering'}}
     c.routes=[];
   }
   return c;
@@ -915,19 +955,58 @@ function runInvariants(){
 }
 
 /* ===== Integration + MCP data (references real case IDs) ===== */
+const rr=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const SRC_CATS={internal:'Internal systems',streaming:'Streaming and telemetry',external:'External sources'};
+const SRC_CAT_NOTE={internal:'Batch, API and file feeds from systems you own',streaming:'Device and operational events',external:'Partner and market data'};
+/* one entry per system TYPE: the production products a customer would actually connect */
+const SRC_TYPES={
+ crm:{label:'CRM',short:'CRM',cat:'internal',target:'Demand opportunity',vendors:['Salesforce Sales Cloud','Microsoft Dynamics 365 Sales','HubSpot CRM','SAP Sales Cloud']},
+ lease:{label:'Lease management',short:'Lease',cat:'internal',target:'Demand opportunity',vendors:['Oracle Lease and Finance Management','Odessa LeaseWave','SAP Contract and Lease Management','NetSuite Lease Accounting']},
+ erp:{label:'ERP',short:'ERP',cat:'internal',target:'Demand opportunity',vendors:['SAP S/4HANA','Oracle Fusion Cloud ERP','Oracle NetSuite','Microsoft Dynamics 365 Finance','Infor CloudSuite']},
+ proc:{label:'Procurement',short:'Procurement',cat:'internal',target:'Demand opportunity',vendors:['SAP Ariba','Coupa','Jaggaer','Oracle Procurement Cloud']},
+ eam:{label:'EAM',short:'EAM',cat:'internal',target:'Asset & component',vendors:['IBM Maximo','SAP Plant Maintenance','Infor EAM','IFS Cloud EAM','Oracle EAM Cloud']},
+ fsm:{label:'FSM',short:'FSM',cat:'internal',target:'Asset & component',vendors:['ServiceNow Field Service Management','Salesforce Field Service','Microsoft Dynamics 365 Field Service','IFS Field Service Management','ServiceMax']},
+ plm:{label:'PLM',short:'PLM',cat:'internal',target:'Asset & component',vendors:['Siemens Teamcenter','PTC Windchill','Dassault ENOVIA','Arena PLM']},
+ bom:{label:'BOM management',short:'BOM',cat:'internal',target:'Asset & component',vendors:['Aras Innovator','OpenBOM','SAP Engineering Control Center','Autodesk Fusion Manage']},
+ qms:{label:'QMS',short:'QMS',cat:'internal',target:'Condition & eligibility',vendors:['MasterControl','ETQ Reliance','Veeva Vault QMS','Intelex']},
+ eng:{label:'Engineering',short:'Engineering',cat:'internal',target:'Condition & eligibility',vendors:['Bentley AssetWise','Hexagon HxGN EAM Engineering','Ansys Minerva','Dassault 3DEXPERIENCE']},
+ wms:{label:'WMS',short:'WMS',cat:'internal',target:'Asset & component',vendors:['Manhattan Active Warehouse Management','SAP Extended Warehouse Management','Blue Yonder WMS','Oracle Warehouse Management Cloud','Körber WMS']},
+ rl:{label:'Reverse logistics',short:'Returns',cat:'internal',target:'Asset & component',vendors:['Optoro','Happy Returns','Narvar Returns','Blue Yonder Returns']},
+ insp:{label:'Inspection',short:'Inspection',cat:'internal',target:'Condition & eligibility',vendors:['SafetyCulture','Fluke Connect','GoCanvas','Intelex Inspections']},
+ repair:{label:'Repair management',short:'Repair',cat:'internal',target:'Condition & eligibility',vendors:['Fixably','RepairShopr','ServiceMax Repair','Oracle Depot Repair']},
+ iot:{label:'Device telemetry',short:'Telemetry',cat:'streaming',target:'Outcome',vendors:['AWS IoT Core','Azure IoT Hub','PTC ThingWorx','Siemens Insights Hub']},
+ mkt:{label:'Market pricing',short:'Market',cat:'external',target:'Demand opportunity',vendors:['Ritchie Bros. Market Data','Machinery Trader Values','EquipmentWatch','IronPlanet Insights']},
+ dlr:{label:'Dealer network',short:'Dealers',cat:'external',target:'Demand opportunity',vendors:['Machinio','Dealer Spike','TractorHouse Dealer Feed']},
+ rcy:{label:'Recycler partner',short:'Recycler',cat:'external',target:'Outcome',vendors:['Sims Lifecycle Services','ERI Electronics Recycling','Cascade Asset Management','Li-Cycle']},
+ esg:{label:'ESG & carbon',short:'ESG',cat:'external',target:'Outcome',vendors:['Persefoni','Watershed','Sphera','Microsoft Sustainability Manager']}
+};
+const AUTH_OPTS=['OAuth 2.0 client credentials','OAuth 2.0 JWT bearer','OAuth 2.0 · mTLS','API key','API key + IP allow-list','Service principal · scoped role','Basic auth over TLS','SFTP drop · signed manifest'];
+const MODE_OPTS=['API + events','API + webhook','Polling','Events','Controlled CSV import'];
+const _now0=Date.now();
 const SOURCES=[
- {id:'crm',name:'Lease / CRM',vendor:'LeaseDesk',status:'live',mode:'API + events',fresh:'4 min',freshMin:4,compl:97,conf:94,rw:'Read',inputs:'Contract end dates, renewal pipeline, opportunities, rates',auth:'OAuth 2.0 client credentials',read:['GET /contracts','GET /opportunities','GET /lessees'],write:['POST /sale-tasks (via Sales)'],step:[1,6],authority:['Ownership','Lessee']},
- {id:'erp',name:'ERP & procurement',vendor:'LedgerOne',status:'live',mode:'API + events',fresh:'2 min',freshMin:2,compl:99,conf:97,rw:'Read / write',inputs:'Inventory, purchase alternatives, actual costs, orders, supplier lead times',auth:'Service principal · scoped role',read:['GET /inventory','GET /purchase-plans','GET /costs','GET /orders'],write:['POST /stock-reservations','POST /stock-transfers'],step:[1,6,9],authority:['Cost','Purchase baseline']},
- {id:'eam',name:'EAM / FSM',vendor:'AssetCore',status:'live',mode:'API + events',fresh:'6 min',freshMin:6,compl:93,conf:91,rw:'Read / write',inputs:'Installed base, work orders, failures, service demand, criticality',auth:'OAuth 2.0 · mTLS',read:['GET /assets','GET /work-orders','GET /failures'],write:['POST /work-orders','PATCH /work-orders/{id}'],step:[1,6,7,8,9],authority:['Asset identity','Work status']},
- {id:'plm',name:'PLM / BOM',vendor:'BOMGraph',status:'live',mode:'Polling · 15 min',fresh:'11 min',freshMin:11,compl:88,conf:90,rw:'Read',inputs:'Configuration, compatibility, approved alternates, part structures',auth:'API key + IP allow-list',read:['GET /boms','GET /alternates','GET /compatibility'],write:[],step:[1],authority:['Configuration','Compatibility']},
- {id:'qms',name:'QMS & engineering',vendor:'QualiGate',status:'live',mode:'Polling · 30 min',fresh:'26 min',freshMin:26,compl:90,conf:93,rw:'Read',inputs:'Reuse policies, test criteria, certifications, requalification standards',auth:'OAuth 2.0',read:['GET /policies','GET /certificates','GET /test-criteria'],write:[],step:[1,8],authority:['Qualification','Policy']},
- {id:'wms',name:'WMS & reverse logistics',vendor:'StockPilot',status:'live',mode:'Events (late arrivals seen)',fresh:'1 min',freshMin:1,compl:96,conf:88,rw:'Read / write',inputs:'Location, quantity, stock age, reservations, physical movements',auth:'OAuth 2.0 · mTLS',read:['GET /stock','GET /locations','GET /movements'],write:['POST /reservations','POST /transfers'],step:[1,6,7,9],authority:['Location','Availability']},
- {id:'insp',name:'Inspection & repair',vendor:'InspectX',status:'live',mode:'API + webhook',fresh:'9 min',freshMin:9,compl:84,conf:86,rw:'Read / write',inputs:'Condition, test results, repair scope, cost, resulting state',auth:'OAuth 2.0',read:['GET /inspections','GET /repairs'],write:['POST /inspection-requests','POST /test-requests'],step:[1,8],authority:['Condition']},
- {id:'mkt',name:'Markets & dealers',vendor:'DealerBridge',status:'stale',mode:'Polling · 60 min',fresh:'19 h',freshMin:1140,compl:71,conf:58,rw:'Read',inputs:'Comparable transactions, buyer demand, fees, offers, time-to-sale',auth:'API key',read:['GET /comparables','GET /offers'],write:[],step:[1],authority:['Market price'],note:'Last successful pull 18 Oct… feed token expired; predictions fall back to last fresh comparables and say so.'},
- {id:'rcy',name:'Recycler & exit partners',vendor:'CycleLink',status:'manual',mode:'Controlled CSV import',fresh:'2 days',freshMin:2880,compl:78,conf:82,rw:'Read (import)',inputs:'Approvals, material yields, rebates, fees, custody certificates',auth:'SFTP drop · signed manifest',read:['IMPORT partner-rates.csv'],write:[],step:[1,9],authority:['Vendor certification'],note:'No supported partner API. Manual import supports evaluation, not live automation.'},
- {id:'esg',name:'ESG & telemetry',vendor:'EcoMeter',status:'unavailable',mode:'Not connected',fresh:'—',freshMin:null,compl:0,conf:0,rw:'—',inputs:'Environmental factors, usage, duty, operating hours, condition events',auth:'Pending security review',read:[],write:[],step:[1,9],authority:['Duty','Emissions'],note:'Integration dependency. Sustainability uses estimated factors and says so; no measured telemetry is inferred.'}
+ {id:'crm',type:'crm',vendor:'Salesforce Sales Cloud',ver:'API v59.0',url:'https://northfield.my.salesforce.com',status:'live',mode:'API + events',interval:0,auth:'OAuth 2.0 JWT bearer',freshMin:4,compl:94,conf:94,rw:'Read / write',inputs:'Opportunities, accounts, renewal pipeline, quoted rates',read:['GET /services/data/v59.0/query?q=Opportunity','GET /services/data/v59.0/sobjects/Account','GET /services/data/v59.0/sobjects/Contract'],write:['POST /services/data/v59.0/sobjects/Task'],step:[1,6],authority:['Opportunity stage','Lessee contact'],owner:'Sales Operations',records:48212},
+ {id:'lease',type:'lease',vendor:'Oracle Lease and Finance Management',ver:'Fusion 24B',url:'https://lease.northfield.example/fscmRestApi',status:'live',mode:'Polling · 15 min',interval:15,auth:'OAuth 2.0 client credentials',freshMin:7,compl:97,conf:95,rw:'Read',inputs:'Contract end dates, lease rates, lessee and asset ownership, renewal options',read:['GET /leaseContracts','GET /leaseAssets','GET /leaseRenewals'],write:[],step:[1],authority:['Ownership','Lessee','Contract term'],owner:'Lease Administration',records:12840},
+ {id:'erp',type:'erp',vendor:'SAP S/4HANA',ver:'2023 FPS02',url:'https://s4.northfield.example/sap/opu/odata/sap',status:'live',mode:'API + events',interval:0,auth:'OAuth 2.0 · mTLS',freshMin:2,compl:99,conf:97,rw:'Read / write',inputs:'Inventory valuation, actual costs, purchase orders, stock reservations',read:['GET /API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod','GET /API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder','GET /API_PRODUCT_SRV/A_Product'],write:['POST /API_RESERVATION_DOCUMENT_SRV/A_ReservationDocumentHeader','POST /API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader'],step:[1,6,9],authority:['Cost','Purchase baseline','Valuation'],owner:'Finance Systems',records:214903},
+ {id:'proc',type:'proc',vendor:'SAP Ariba',ver:'Procurement APIs v2',url:'https://openapi.ariba.com/api',status:'live',mode:'Polling · 30 min',interval:30,auth:'OAuth 2.0 client credentials',freshMin:12,compl:92,conf:90,rw:'Read',inputs:'Purchase alternatives, supplier quotes, lead times, sourcing events',read:['GET /procurement-reporting-details/v2/prod/views/PurchaseOrders','GET /sourcing-event/v2/prod/events','GET /supplier-data/v4/prod/suppliers'],write:[],step:[1],authority:['Supplier lead time','Quoted price'],owner:'Procurement',records:31778},
+ {id:'eam',type:'eam',vendor:'IBM Maximo',ver:'Manage 8.11',url:'https://maximo.northfield.example/maximo/api',status:'live',mode:'API + events',interval:0,auth:'API key · mTLS',freshMin:6,compl:93,conf:91,rw:'Read / write',inputs:'Installed base, asset registry, work orders, failure history, criticality',read:['GET /os/mxasset','GET /os/mxwo','GET /os/mxfailurereport'],write:['POST /os/mxwo','PATCH /os/mxwo/{workorderid}'],step:[1,6,7,8,9],authority:['Asset identity','Work order status'],owner:'Reliability Engineering',records:96430},
+ {id:'fsm',type:'fsm',vendor:'ServiceNow Field Service Management',ver:'Xanadu',url:'https://northfield.service-now.com/api/now',status:'live',mode:'API + webhook',interval:0,auth:'OAuth 2.0 client credentials',freshMin:3,compl:95,conf:92,rw:'Read / write',inputs:'Field service demand, technician dispatch, visit outcomes, parts consumed',read:['GET /table/wm_order','GET /table/wm_task','GET /table/alm_asset'],write:['POST /table/wm_order','PATCH /table/wm_task/{sys_id}'],step:[1,6,7,9],authority:['Service demand','Dispatch status'],owner:'Field Operations',records:58116},
+ {id:'plm',type:'plm',vendor:'Siemens Teamcenter',ver:'Teamcenter 14.3',url:'https://plm.northfield.example/tc/rest',status:'live',mode:'Polling · 15 min',interval:15,auth:'API key + IP allow-list',freshMin:11,compl:88,conf:90,rw:'Read',inputs:'Product configuration, compatibility rules, approved alternates, revisions',read:['GET /v1/items','GET /v1/alternates','GET /v1/compatibility'],write:[],step:[1],authority:['Configuration','Compatibility'],owner:'Product Engineering',records:22650},
+ {id:'bom',type:'bom',vendor:'Aras Innovator',ver:'Innovator 14',url:'https://bom.northfield.example/InnovatorServer/odata',status:'live',mode:'Polling · 15 min',interval:15,auth:'OAuth 2.0 client credentials',freshMin:9,compl:90,conf:89,rw:'Read',inputs:'Multi-level bill of materials, part structures, manufacturer parts',read:['GET /Part','GET /Part BOM','GET /Manufacturer Part'],write:[],step:[1],authority:['Part structure','BOM revision'],owner:'Product Engineering',records:187402},
+ {id:'qms',type:'qms',vendor:'MasterControl',ver:'Quality Excellence 2024',url:'https://qms.northfield.example/mc/api',status:'live',mode:'Polling · 30 min',interval:30,auth:'OAuth 2.0 client credentials',freshMin:26,compl:90,conf:93,rw:'Read',inputs:'Reuse policies, certifications, test criteria, deviations',read:['GET /v2/controlled-documents','GET /v2/certificates','GET /v2/test-criteria'],write:[],step:[1,8],authority:['Policy','Certification'],owner:'Quality Assurance',records:9421},
+ {id:'eng',type:'eng',vendor:'Bentley AssetWise',ver:'CONNECT Edition',url:'https://eng.northfield.example/assetwise/api',status:'live',mode:'Polling · 60 min',interval:60,auth:'OAuth 2.0 client credentials',freshMin:33,compl:89,conf:92,rw:'Read',inputs:'Life assessments, requalification standards, engineering limits',read:['GET /v1/assessments','GET /v1/standards','GET /v1/limits'],write:[],step:[1,8],authority:['Life assessment','Requalification'],owner:'Engineering Standards',records:6118},
+ {id:'wms',type:'wms',vendor:'Manhattan Active Warehouse Management',ver:'Active WM 2024',url:'https://wms.northfield.example/wms/api',status:'live',mode:'Events (late arrivals seen)',interval:0,auth:'OAuth 2.0 · mTLS',freshMin:1,compl:96,conf:88,rw:'Read / write',inputs:'Stock location, quantity, stock age, reservations, physical movements',read:['GET /inventory','GET /locations','GET /movements'],write:['POST /reservations','POST /transfers'],step:[1,6,7,9],authority:['Location','Availability'],owner:'Warehouse Operations',records:341877},
+ {id:'rl',type:'rl',vendor:'Optoro',ver:'Returns API v1',url:'https://api.optoro.com/v1',status:'live',mode:'API + webhook',interval:0,auth:'API key',freshMin:5,compl:91,conf:87,rw:'Read / write',inputs:'Return receipts, disposition decisions, inbound shipments, carrier status',read:['GET /returns','GET /dispositions','GET /shipments'],write:['POST /return-authorizations'],step:[1,6,9],authority:['Return receipt','Disposition'],owner:'Reverse Logistics',records:17934},
+ {id:'insp',type:'insp',vendor:'SafetyCulture',ver:'iAuditor API',url:'https://api.safetyculture.io',status:'live',mode:'API + webhook',interval:0,auth:'OAuth 2.0 client credentials',freshMin:9,compl:91,conf:90,rw:'Read / write',inputs:'Inspection reports, condition grades, photos, checklist results',read:['GET /audits/search','GET /audits/{audit_id}','GET /media/{media_id}'],write:['POST /inspections/start','POST /actions'],step:[1,8],authority:['Condition','Inspection result'],owner:'Quality Assurance',records:73025},
+ {id:'repair',type:'repair',vendor:'Fixably',ver:'API v3',url:'https://api.fixably.com/v3',status:'live',mode:'API + webhook',interval:0,auth:'API key',freshMin:14,compl:84,conf:86,rw:'Read / write',inputs:'Repair scope, parts used, repair cost, resulting state, test results',read:['GET /repairs','GET /repairs/{id}/parts'],write:['POST /repairs'],step:[1,8],authority:['Repair cost','Resulting state'],owner:'Repair Centre',records:20411},
+ {id:'iot',type:'iot',vendor:'AWS IoT Core',ver:'Not provisioned',url:'',status:'unavailable',mode:'Not connected',interval:0,auth:'Pending security review',freshMin:null,compl:0,conf:0,rw:'—',inputs:'Operating hours, duty cycle, vibration and temperature events',read:[],write:[],step:[1,9],authority:['Duty','Operating hours'],owner:'IoT Platform',records:0,note:'Integration dependency. Sustainability uses estimated factors and says so; no measured telemetry is inferred.'},
+ {id:'mkt',type:'mkt',vendor:'Ritchie Bros. Market Data',ver:'Comparables API v2',url:'https://api.rbauction.example/v2',status:'stale',mode:'Polling · 60 min',interval:60,auth:'API key',freshMin:1140,compl:71,conf:58,rw:'Read',inputs:'Comparable transactions, realised prices, time-to-sale, buyer demand',read:['GET /comparables','GET /price-index'],write:[],step:[1],authority:['Market price'],owner:'Remarketing',records:402118,note:'Feed token expired 6 Oct; pricing falls back to the last fresh comparables and says so on every prediction.'},
+ {id:'dlr',type:'dlr',vendor:'Machinio',ver:'Dealer API v1',url:'https://api.machinio.com/v1',status:'live',mode:'API + events',interval:0,auth:'API key',freshMin:18,compl:82,conf:78,rw:'Read',inputs:'Dealer offers, listing demand, fees, time-to-sale',read:['GET /listings','GET /offers'],write:[],step:[1],authority:['Dealer offer'],owner:'Remarketing',records:56780},
+ {id:'rcy',type:'rcy',vendor:'Sims Lifecycle Services',ver:'Partner SFTP',url:'sftp://partner.sims.example/outbound',status:'manual',mode:'Controlled CSV import',interval:0,auth:'SFTP drop · signed manifest',freshMin:2880,compl:78,conf:82,rw:'Read (import)',inputs:'Approvals, material yields, rebates, fees, custody certificates',read:['IMPORT partner-rates.csv'],write:[],step:[1,9],authority:['Vendor certification'],owner:'Sustainability',records:1204,note:'No supported partner API. Manual import supports evaluation, not live automation.'},
+ {id:'esg',type:'esg',vendor:'Persefoni',ver:'API v1',url:'https://api.persefoni.com/v1',status:'live',mode:'Polling · 60 min',interval:60,auth:'OAuth 2.0 client credentials',freshMin:38,compl:86,conf:81,rw:'Read',inputs:'Embodied-carbon factors, emissions factors, footprint methodology',read:['GET /emission-factors','GET /footprints'],write:[],step:[1,9],authority:['Emissions factor'],owner:'Sustainability',records:8830}
 ];
-SOURCES[7].note='Feed token expired 6 Oct; pricing falls back to the last fresh comparables and says so on every prediction.';
+SOURCES.forEach(s=>{const t=SRC_TYPES[s.type];s.cat=t.cat;s.name=t.label;s.short=t.short;s.env='Production';s.cfgVer='1.'+(2+s.id.length%5);s.lastSync=s.freshMin==null?null:_now0-s.freshMin*60000;s.updatedBy='Platform Admin';s.updatedAt=_now0-(2+s.id.length)*86400000;s.fresh=s.freshMin==null?'—':srcAge(s.freshMin);s.runs=[]});
+function srcAge(m){return m<1?'just now':m<60?Math.round(m)+' min':m<2880?Math.round(m/60)+' h':Math.round(m/1440)+' days'}
+const SRC=id=>SOURCES.find(x=>x.id===id);
 const CANON=[
  {n:'Asset & component',v:'2.3',fields:['asset_id','source_refs[]','owner_tenant','parent_asset','configuration','bom_ref','location','availability'],purpose:'Stable identity across applications, source-system connections, ownership, parent asset, BOM, location and availability.',sources:['EAM','PLM','WMS','CRM']},
  {n:'Condition & eligibility',v:'2.1',fields:['inspection_ref','grade','life_assessment','duty_assumptions','qualification','certificates[]','policy_version'],purpose:'Inspection evidence, grade, approved life assessment, qualification, compatibility, certificates and the policy version applied.',sources:['Inspection','QMS','EAM']},
@@ -938,16 +1017,25 @@ const CANON=[
  {n:'Outcome',v:'1.6',fields:['decision_id','action_taken','execution_ref','receipts','costs','avoided_spend','service_results','environmental_evidence'],purpose:'Action actually taken, execution reference, actual receipts and costs, confirmed avoided expenditure, service results and environmental evidence.',sources:['ERP','EAM','WMS','Partners']}
 ];
 const MAPPINGS={
- eam:[['AST_NO','MTR-2041','asset.asset_id','MTR-2041','Pass-through; identity key'],['COND_GRD','B+','condition.grade','B','Grade table v3 (B+ → B); source value kept'],['RATED_PWR','55000 W','asset.config.rated_power','55 kW','Unit normalised W → kW'],['LAST_SVC','2026-03-14T08:20:00+05:30','condition.service_date','2026-03-14T02:50:00Z','Timestamp to UTC']],
- erp:[['PLAN_PO_AMT','₹10,02,000.00 INR','demand.purchase_baseline','$12,000.00 USD','Currency at 83.5 (rate dated 2026-10-06)'],['ORD_QTY','1.000','demand.qty','1','Integer'],['STS','REL','demand.status','confirmed','Status map: REL → confirmed'],['SITE_CD','S3','demand.location','Site 3','Location code lookup']],
+ crm:[['Opportunity.StageName','Proposal','demand.status','forecast','Stage map: Proposal → forecast'],['Opportunity.Amount','2400','demand.lease_rate','$2,400 / month','Currency + period normalised'],['Account.Id','001Hs00003AbCdE','asset.owner_tenant','Customer A','Tenant key lookup'],['Opportunity.CloseDate','31/12/2026','demand.need_by','2026-12-31','Date format']],
+ lease:[['LEASE_CONTRACT_ID','LC-004417','asset.lease_ref','LC-004417','Pass-through'],['CONTRACT_END_DATE','2026-12-31','demand.need_by','2026-12-31','ISO date'],['LESSEE_NAME','CUSTOMER_A','asset.owner_tenant','Customer A','Tenant key'],['MONTHLY_RENTAL','2400.00 USD','demand.lease_rate','$2,400 / month','Currency + period normalised']],
+ erp:[['EKPO-NETPR','₹10,02,000.00 INR','demand.purchase_baseline','$12,000.00 USD','Currency at 83.5 (rate dated 2026-10-06)'],['EKPO-MENGE','1.000','demand.qty','1','Integer'],['EKKO-BSTYP','F','demand.status','confirmed','Status map: F → confirmed'],['EKPO-WERKS','1030','demand.location','Site 3','Plant code lookup']],
+ proc:[['SupplierLeadTime','21 days','demand.supplier_lead_time','21 days','Integer days'],['QuotedUnitPrice','€10,400.00','demand.purchase_alternative','$11,300','Currency at dated rate'],['SupplierId','SUP-88120','demand.supplier_ref','SUP-88120','Pass-through']],
+ eam:[['ASSETNUM','MTR-2041','asset.asset_id','MTR-2041','Pass-through; identity key'],['CONDITIONCODE','B+','condition.grade','B','Grade table v3 (B+ → B); source value kept'],['RATED_PWR','55000 W','asset.config.rated_power','55 kW','Unit normalised W → kW'],['LASTSERVICEDATE','2026-03-14T08:20:00+05:30','condition.service_date','2026-03-14T02:50:00Z','Timestamp to UTC']],
+ fsm:[['wm_order.number','WO0010382','asset.work_order_ref','WO0010382','Pass-through'],['alm_asset.serial_number','SN-77120-A','asset.source_refs[]','FSM:SN-77120-A','Prefixed with system'],['wm_task.state','3','asset.availability','in_service','State map: 3 → in_service'],['wm_task.closed_at','2026-09-30 14:05:11','condition.service_date','2026-09-30T14:05:11Z','Local time → UTC']],
+ plm:[['ITEM_ID','MTR-55-IE3-250M','asset.configuration','55 kW · IE3 · 250M','Config decoded'],['ALT_APPROVED','Y','route.compatibility','compatible','Boolean'],['REV','C','asset.bom_ref','BOM-55-C','Revision prefix']],
+ bom:[['Part.item_number','P-55-ROT-01','asset.components[0]','Rotor assembly','Part name lookup'],['Part BOM.quantity','1','asset.components[0].qty','1','Integer'],['Part.state','Released','asset.bom_ref.state','released','State map']],
+ qms:[['CERT_EXPIRY','2027-03-01','condition.certificates[0].expires','2027-03-01','ISO date'],['REUSE_CLASS','ALLOWED_CAT2','condition.policy','reuse_permitted','Policy map v3.2'],['TEST_RESULT','PASS','condition.qualification','passed','Result map']],
+ eng:[['RUL_MONTHS','36','condition.life_assessment','36 months','Months; source & confidence retained'],['STANDARD_REF','IEC 60034-1','condition.standard','IEC 60034-1','Pass-through'],['REQUAL_STATUS','APPROVED','condition.qualification','approved','Status map']],
  wms:[['LOC','WH1-A-04','asset.location','Warehouse 1','Zone collapsed to facility'],['MV_TS','06.10.2026 14:12','movement.ts','2026-10-06T08:42:00Z','Local time → UTC'],['QTY_UOM','20 EA','asset.qty','20','UoM normalised'],['RSV_ID','R-77102','asset.reservation_ref','R-77102','Pass-through']],
- crm:[['CUST','CUSTOMER_A','asset.owner_tenant','Customer A','Tenant key'],['OPP_STG','Proposal','demand.status','forecast','Stage map: Proposal → forecast'],['MON_RATE','2400','demand.lease_rate','$2,400 / month','Currency + period normalised'],['END_DT','31/12/2026','demand.need_by','2026-12-31','Date format']],
- plm:[['CFG_ID','MTR-55-IE3-250M','asset.configuration','55 kW · IE3 · 250M','Config decoded'],['ALT_OK','Y','route.compatibility','compatible','Boolean'],['BOM_REV','C','asset.bom_ref','BOM-55-C','Revision prefix']],
- qms:[['CERT_EXP','2027-03-01','condition.certificates[0].expires','2027-03-01','ISO date'],['REUSE','ALLOWED_CAT2','condition.policy','reuse_permitted','Policy map v3.2'],['TEST_RES','PASS','condition.qualification','passed','Result map']],
- insp:[['GRADE_TXT','Grade B','condition.grade','B','Grade table v3'],['PHOTOS','12','condition.photo_count','12','Integer'],['RUL_MO','36','condition.life_assessment','36 months','Months; source & confidence retained']],
- mkt:[['SOLD_PRC','8.1 L INR','market.sale_price','$9,700','Currency + Lakh unit expanded'],['DAYS_LIST','17','market.time_to_sell','17 days','Integer'],['CND','VG','market.grade','B','Dealer grade map']],
+ rl:[['RMA_ID','RMA-55820','asset.return_ref','RMA-55820','Pass-through'],['DISPOSITION','REFURB','asset.disposition','refurbish','Disposition map'],['RECEIVED_AT','2026-10-05T10:11:00-04:00','asset.received_at','2026-10-05T14:11:00Z','Timestamp to UTC']],
+ insp:[['grade_text','Grade B','condition.grade','B','Grade table v3'],['media_count','12','condition.photo_count','12','Integer'],['audit_id','audit_a1b2c3','condition.inspection_ref','INS-20441','Reference prefix']],
+ repair:[['repair_cost','1,800.00 USD','intervention.cost','$1,800','Currency kept in USD'],['scope','Light repair + test','intervention.process','light repair + test','Process map'],['result_state','B','intervention.predicted_condition','B','Grade table v3']],
+ iot:[],
+ mkt:[['SOLD_PRC','8.1 L INR','market.sale_price','$9,700','Currency + Lakh unit expanded'],['DAYS_LISTED','17','market.time_to_sell','17 days','Integer'],['CONDITION','VG','market.grade','B','Dealer grade map']],
+ dlr:[['offer_amount','9,400','market.dealer_offer','$9,400','Currency'],['listing_age_days','12','market.time_to_sell','12 days','Integer']],
  rcy:[['VND_CERT','ISO14001-VA','vendor.certification','certified','Certificate table'],['RATE_TNE','Cu 7.8k','vendor.material_rate','Cu $7,800 / t','Unit + currency']],
- esg:[]
+ esg:[['factor_kgco2e','312.4','sustainability.embodied_carbon','312.4 kgCO2e','Unit kept'],['scope','Cradle-to-gate','sustainability.boundary','cradle-to-gate','Boundary map']]
 };
 /* events: tie to real cases */
 const EVENTS=[];let EV_SEQ=9000;
@@ -966,12 +1054,12 @@ function pushEvent(e){e.id='EV-'+(++EV_SEQ);e.ts=e.ts||new Date(AS_OF.getTime())
   const retryCases=evs.filter(e=>e.dir==='out').slice(2,5);retryCases.forEach((e,i)=>{e.ack=i===0?'retry 2 of 3 · acknowledged':i===1?'retry 1 of 3 · acknowledged':'acknowledged';e.retries=i===2?0:2-i});
   const late=evs.filter(e=>e.dir==='in'&&e.type==='workorder.created').slice(0,3);late.forEach(e=>{e.ack='late · reconciled';e.note='Arrived '+rint(3,9)+' h after the transfer event; case timeline reordered';});
   const oo=evs.filter(e=>e.dir==='in'&&e.type==='movement.confirmed')[0];if(oo){oo.ack='out of order · reordered';oo.note='Received before work order acknowledgement; held, then applied in sequence'}
-  evs.push({dir:'in',type:'feed.stale',caseId:null,decisionId:null,approval:null,ver:null,dest:'Markets & dealers',ack:'stale feed · fallback used',key:'—',ts:addDays(AS_OF,-.8),note:'DealerBridge token expired; 14 predictions flagged "market evidence stale"'});
-  evs.push({dir:'in',type:'ownership.conflict',caseId:null,decisionId:null,approval:null,ver:null,dest:'Lease/CRM vs ERP',ack:'conflict · queued',key:'—',ts:addDays(AS_OF,-.3),note:'MTR-2077 ownership differs between Lease/CRM and ERP'});
+  evs.push({dir:'in',type:'feed.stale',caseId:null,decisionId:null,approval:null,ver:null,dest:'Market pricing',ack:'stale feed · fallback used',key:'—',ts:addDays(AS_OF,-.8),note:'DealerBridge token expired; 14 predictions flagged "market evidence stale"'});
+  evs.push({dir:'in',type:'ownership.conflict',caseId:null,decisionId:null,approval:null,ver:null,dest:'Lease management vs ERP',ack:'conflict · queued',key:'—',ts:addDays(AS_OF,-.3),note:'MTR-2077 ownership differs between Lease management and ERP'});
   evs.sort((a,b)=>b.ts-a.ts).slice(0,90).reverse().forEach(e=>pushEvent(e));
 })();
 const CONFLICTS=[
- {id:'CF-31',kind:'Ownership',asset:'MTR-2077',a:{src:'Lease/CRM',val:'Customer A'},b:{src:'ERP',val:'Customer B'},authority:'Lease/CRM',impact:'Allocation held; cross-client consent rules apply',status:'open',since:'7 h'},
+ {id:'CF-31',kind:'Ownership',asset:'MTR-2077',a:{src:'Lease management',val:'Customer A'},b:{src:'ERP',val:'Customer B'},authority:'Lease management',impact:'Allocation held; cross-client consent rules apply',status:'open',since:'7 h'},
  {id:'CF-32',kind:'Qualification',asset:'CTL-0122',a:{src:'QMS',val:'Requalified 12 Sep'},b:{src:'EAM',val:'Status: not qualified'},authority:'QMS',impact:'Redeploy route excluded at policy gate until resolved',status:'open',since:'1 d'},
  {id:'CF-33',kind:'Availability',asset:'BAT-0119',a:{src:'WMS',val:'8 units reserved (D-302)'},b:{src:'ERP',val:'8 units free to sell'},authority:'WMS',impact:'Duplicate allocation blocked; ERP view stale',status:'open',since:'3 h'}
 ];
@@ -1061,7 +1149,7 @@ const visRows=()=>ROWS.filter(r=>S.tenant==='All'||r.tenant===S.tenant);
 /* toasts, drawer, modal */
 function toast(msg,ms=3200){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>t.remove(),ms)}
 function openDrawer(html,title,sub,foot){$('#drawer').innerHTML=`<div class="dh"><div style="flex:1;min-width:0"><h2>${title}</h2><div class="note">${sub||''}</div></div><button class="iconbtn" data-act="closeDrawer" aria-label="Close panel">${ICON.close}</button></div><div class="db">${html}</div>${foot?`<div class="df">${foot}</div>`:''}`;$('#scrim').classList.add('on');$('#drawer').classList.add('on');$('#drawer').setAttribute('aria-hidden','false');setTimeout(()=>$('#drawer .iconbtn')&&$('#drawer .iconbtn').focus(),50)}
-function closeDrawer(){$('#drawer').classList.remove('wide');$('#scrim').classList.remove('on');$('#drawer').classList.remove('on');$('#drawer').setAttribute('aria-hidden','true')}
+function closeDrawer(force){if(!force&&S.sd&&S.sd.dirty&&!S.sd.warned){S.sd.warned=true;toast('You have unsaved changes. Save or Revert them, or close again to discard.');return}S.sd=null;$('#drawer').classList.remove('wide');$('#scrim').classList.remove('on');$('#drawer').classList.remove('on');$('#drawer').setAttribute('aria-hidden','true')}
 function openModal(title,body,foot,wide){const m=$('#modal');m.innerHTML=`<div class="box ${wide?'wide':''}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="mh"><h2>${title}</h2><button class="iconbtn" data-act="closeModal" aria-label="Close">${ICON.close}</button></div><div class="mb">${body}</div>${foot?`<div class="mf">${foot}</div>`:''}</div>`;m.classList.add('on');setTimeout(()=>{const f=$('#modal input,#modal textarea,#modal select,#modal .btn');f&&f.focus()},40)}
 function closeModal(){$('#modal').classList.remove('on')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('#modal').classList.contains('on'))closeModal();else if($('#drawer').classList.contains('on'))closeDrawer();hideResults()}});
@@ -1246,7 +1334,7 @@ function predictBlock(c){
     const r=c.recommendation,sale=c.routes.find(x=>x.id==='resale'&&!x.excluded),pr=r.terms.find(t=>t.kind==='prep'),sv=r.terms.find(t=>t.kind==='service');
     c.predictions=[{src:'EAM + workshop + logistics',inputs:'Condition, prior repairs, queue and transfer quote',model:'prep-cost-time',ver:'v1.3',result:pr?money(-pr.amt)+' cost · ready Day '+rint(3,9):'No intervention needed',range:pr?'range Day 3–'+rint(9,14):'',conf:'Medium'},
       {src:'EAM + PLM + receiving duty',inputs:'Failure history, compatible specification and duty',model:'service-exposure',ver:'v1.2',result:sv?money(-sv.amt)+' expected service cost':'No service exposure modelled',range:'over 30 months',conf:'Medium'},
-      {src:'Sales records + market demand',inputs:rint(14,52)+' comparable sales, grade '+(c.grade||'—')+', age '+c.age+' years',model:'resale-price',ver:'v1.3',result:sale?money(sale.net)+' expected net sale recovery':'No eligible sale route',range:sale?'P10–P90 '+money(sale.p10)+'–'+money(sale.p90):'',conf:SOURCES[7].status==='stale'?'Reduced · market feed stale':'High'}];
+      {src:'Sales records + market demand',inputs:rint(14,52)+' comparable sales, grade '+(c.grade||'—')+', age '+c.age+' years',model:'resale-price',ver:'v1.3',result:sale?money(sale.net)+' expected net sale recovery':'No eligible sale route',range:sale?'P10–P90 '+money(sale.p10)+'–'+money(sale.p90):'',conf:(SRC('mkt')||{}).status==='stale'?'Reduced · market feed stale':'High'}];
   }
   if(!c.predictions)return `<section class="blk" id="b-predict"><div class="bh"><span class="bn">2</span><h2>How outcomes were predicted</h2>${stp(3)}</div><div class="empty"><b>No predictions yet</b>Predictions need condition and remaining-life evidence. ${c.indicative?'':'Use the request on the right to get inspection started.'}</div></section>`;
   return `<section class="blk" id="b-predict"><div class="bh"><span class="bn">2</span><h2>How outcomes were predicted</h2>${stp(3)}<span class="sp"></span><span class="note">Every prediction carries model version, evidence date and uncertainty</span></div>
@@ -1307,7 +1395,7 @@ function poolsPage(){
 function explainBlock(c,sr){
   if(!c.recommendation)return '';
   const t=S.xtab,r=c.recommendation;
-  const srcMap={purchase:'ERP planned purchase',prep:'EAM + workshop + logistics',service:'EAM + PLM duty profile',residual:'Valuation model v1.3',sale:'Sales records + market',parts:'Parts demand + BOM',lease:'Lease/CRM pipeline',material:'Recycler rates',fees:'ERP cost basis',risk:'Calibrated risk allowance',credit:'Vendor rate card',avoid:'Disposal cost table'};
+  const srcMap={purchase:'ERP planned purchase',prep:'EAM + workshop + logistics',service:'EAM + PLM duty profile',residual:'Valuation model v1.3',sale:'Sales records + market',parts:'Parts demand + BOM',lease:'CRM pipeline',material:'Recycler rates',fees:'ERP cost basis',risk:'Calibrated risk allowance',credit:'Vendor rate card',avoid:'Disposal cost table'};
   const tot=sum(r.terms.map(x=>Math.abs(x.amt)))||1;
   let body='';
   if(t==='why'){body=`<p class="ink2" style="margin:0 0 10px">What influenced the ${money(r.net)} for <b>${esc(r.plan)}</b>. Bar length is each input's share of the total movement.</p>${r.terms.map(x=>`<div class="sl" style="grid-template-columns:minmax(160px,1.2fr) 2fr 90px"><span>${esc(x.label)}<div class="note">${esc(srcMap[x.kind]||'')}</div></span><div class="bar"><i style="width:${Math.max(3,Math.abs(x.amt)/tot*100)}%;${x.amt<0?'background:var(--bad)':''}"></i></div><b class="num right ${x.amt<0?'neg':''}">${x.amt<0?'−':'+'}${money(Math.abs(x.amt)).replace('−','')}</b></div>`).join('')}`}
@@ -1419,7 +1507,7 @@ ACT.simResult=id=>{const c=CASE_BY_ID[id];c.grade=c.hero?'B':wpick([['A',22],['B
   c.evidence.forEach(e=>{e.state='ready';e.note='';e.fresh='just now'});if(c.hero)c.demand={internal:true,confirmed:true,site:'Site 4',lease:null,parts:true};
   c.routes=buildRoutes(c);rankRoutes(c);c.requested=null;c.predictions=null;
   if(c.recommendation){c.stage='awaiting_approval';c.snapshot={id:'EVS-'+hashId(c.id+'new'),takenAt:new Date(),items:c.evidence.length}}else c.stage='none';
-  pushEvent({dir:'in',type:'inspection.result',caseId:c.id,decisionId:null,approval:null,ver:null,dest:'Inspection & repair',ack:'acknowledged',key:'idem-'+hashId(c.id+'res').slice(0,6),retries:0,note:'Grade '+c.grade});
+  pushEvent({dir:'in',type:'inspection.result',caseId:c.id,decisionId:null,approval:null,ver:null,dest:'Inspection',ack:'acknowledged',key:'idem-'+hashId(c.id+'res').slice(0,6),retries:0,note:'Grade '+c.grade});
   toast(c.recommendation?`${c.id} is ready. Recommendation: ${c.recommendation.plan} at ${money(c.recommendation.net)}.`:`${c.id} assessed, but no route passes every gate.`,4200);route(true)};
 ACT.reeval=id=>{const c=CASE_BY_ID[id];const was=c.recommendation&&c.recommendation.plan;if(!c.hero){c.routes=buildRoutes(c);rankRoutes(c)}else{rankRoutes(c)}c.stage='awaiting_approval';c.reevalReason=null;c.snapshot={id:'EVS-'+hashId(c.id+'re'+Date.now()),takenAt:new Date(),items:c.evidence.length};toast(`Re-evaluated. New recommendation: ${c.recommendation.plan} at ${money(c.recommendation.net)}${was&&was!==c.recommendation.plan?` (was ${was})`:''}.`,4200);route(true)};
 /* drawers */
@@ -1525,7 +1613,7 @@ function sustain(rows){
   return `<div class="grid g3" style="margin-bottom:14px"><div><div class="num" style="font:800 28px var(--f-display)">${(est/1000).toFixed(0)} t</div><div class="note">CO₂e avoided, <b>estimated</b>, all reconciled cases</div></div><div><div class="num" style="font:800 28px var(--f-display)">${(mMeas/1000).toFixed(0)} t</div><div class="note"><b>Measured</b> on ${me.length} cases (${pct(me.length/Math.max(1,rc.length))} of reconciled)</div></div><div><div class="num" style="font:800 28px var(--f-display)">${mEst?((mMeas/mEst-1)*100).toFixed(1):0}%</div><div class="note">Measured vs estimated on the same cases</div></div></div>
   ${per.map(p=>`<div class="sl" style="grid-template-columns:110px 1fr 120px"><span>${p.l}</span><div><div class="bar" style="margin-bottom:3px"><i style="width:${p.e/mx*100}%;background:var(--chart5)"></i></div><div class="bar"><i style="width:${p.m/mx*100}%"></i></div></div><span class="note num">${(p.e/1000).toFixed(1)} → ${(p.m/1000).toFixed(1)} t</span></div>`).join('')}
   <div class="legend"><span><i style="background:var(--chart5)"></i>Estimated</span><span><i style="background:var(--ink)"></i>Measured</span></div>
-  <div class="callout info" style="margin-top:10px"><b>Baseline:</b> sell-or-scrap by separate teams, then buy new. <b>Method:</b> embodied-carbon factor by asset class × share avoided by route; measured values come from partner certificates and ERP movements. Estimates and measurements are never mixed in one total. ${SOURCES[9].status==='unavailable'?'ESG telemetry is not connected, so duty-based figures are not inferred.':''}</div>`;
+  <div class="callout info" style="margin-top:10px"><b>Baseline:</b> sell-or-scrap by separate teams, then buy new. <b>Method:</b> embodied-carbon factor by asset class × share avoided by route; measured values come from partner certificates and ERP movements. Estimates and measurements are never mixed in one total. ${(SRC('iot')||{status:'unavailable'}).status==='unavailable'?'ESG telemetry is not connected, so duty-based figures are not inferred.':''}</div>`;
 }
 function modelTable(rows){const ms=MODELS.map(m=>({m,s:modelStats(m.v)}));
   return `<table class="t static"><thead><tr><th>Version</th><th class="r">Closed</th><th class="r">Error</th><th class="r">Bias</th><th class="r">Coverage</th><th></th></tr></thead><tbody>${ms.map(({m,s})=>`<tr style="cursor:pointer" data-act="fModel" data-arg="${m.v}"><td><b>${m.v}</b>${S.fA.model===m.v?' <span class="chip y">filtered</span>':''}</td><td class="r num">${s.n}</td><td class="r num">${pct(s.mape,1)}</td><td class="r num ${s.bias<0?'neg':''}">${(s.bias*100).toFixed(1)}%</td><td class="r num">${pct(s.cov)}</td><td style="width:90px"><div class="bar"><i style="width:${Math.min(100,s.cov*100)}%"></i></div></td></tr>`).join('')}</tbody></table><div class="note" style="margin-top:6px">Target coverage for P10–P90 is 80%. Early versions were optimistic (negative bias) and too narrow.</div>`}
@@ -1563,19 +1651,67 @@ ACT.drillAvoid=()=>setDrill('Confirmed avoided spend',r=>r.avoided>0);ACT.drillP
 /* ===== Integration · Connection Fabric ===== */
 const stChip=s=>({live:'<span class="chip ok">Live</span>',manual:'<span class="chip dk">Manual import</span>',unavailable:'<span class="chip bad">Unavailable</span>',stale:'<span class="chip warn">Stale</span>'})[s];
 const ackKind=a=>/^acknowledged$/.test(a)?'ok':/conflict|stale|failed/.test(a)?'bad':/sent/.test(a)?'line':'warn';
+const canMgr=()=>can('approve')||can('assess');
+const NOMGR='Your role cannot change integrations. Switch to Approver or Engineer.';
+const fmtN=n=>Number(n).toLocaleString('en-US');
+const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
+const asOfNow=()=>new Date(AS_OF.getTime()+Date.now()-_now0);
+const SRC_SEED={};SOURCES.forEach(s=>{if(!SRC_SEED[s.type])SRC_SEED[s.type]={inputs:s.inputs,authority:s.authority.slice(),step:s.step.slice()}});
+SOURCES.forEach(s=>{s.c0=s.compl;s.k0=s.conf;s.credAt=_now0-((s.id.length*7)%70+3)*86400000;s.credDays=180;s.audit=[{ver:s.cfgVer,who:'Platform Admin',ts:s.updatedAt,change:'Initial configuration imported'}]});
+const vInit=v=>v.replace(/[^A-Za-z0-9 ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+const vHue=v=>{let h=7;for(const c of v)h=(h*31+c.charCodeAt(0))%360;return h};
+const vlogo=s=>`<span class="vlogo" style="--h:${vHue(s.vendor)}" aria-hidden="true">${esc(vInit(s.vendor))}</span>`;
+const SM_S=()=>S.sm||(S.sm={q:'',cat:'',st:''});
+const SM={next:Date.now()+6000};
+S.smLog=SOURCES.filter(s=>s.lastSync!=null&&s.status!=='manual').sort((a,b)=>b.lastSync-a.lastSync).slice(0,6).map(s=>({ts:s.lastSync,id:s.id,kind:s.status==='stale'?'warn':'ok',text:s.status==='stale'?'Last successful pull. Feed token has since expired':'Sync completed · '+fmtN(rr(18,380))+' records'}));
+function srcAgeText(s){if(s.lastSync==null)return s.status==='unavailable'?'Not connected':'Never synced';
+  const sec=Math.max(0,Math.floor((Date.now()-s.lastSync)/1000)),p=s.status==='manual'?'Last import ':'Updated ';
+  return p+(sec<60?sec+' s':sec<3600?Math.floor(sec/60)+' min '+(sec%60)+' s':sec<172800?Math.floor(sec/3600)+' h '+Math.floor(sec%3600/60)+' min':Math.floor(sec/86400)+' days')+' ago'}
+function srcFresh(s){if(s.lastSync==null)return 0;if(s.status==='manual')return 45;const w=s.interval?s.interval*2:30,a=(Date.now()-s.lastSync)/60000;return Math.max(4,Math.round(100-Math.min(96,a/w*100)))}
+const barBg=v=>v<70?'background:var(--bad)':v<85?'background:#D4A800':'';
 function srcTile(s){
-  const meter=(l,v)=>`<div class="meter"><span style="width:78px">${l}</span><div class="bar"><i style="width:${v}%;${v<70?'background:var(--bad)':v<85?'background:#D4A800':''}"></i></div><b class="num" style="width:34px;text-align:right">${s.status==='unavailable'?'—':v+'%'}</b></div>`;
-  return `<button class="tile ${s.status}" data-act="adapter" data-arg="${s.id}"><div class="row between" style="margin-bottom:6px"><b>${s.name}</b>${stChip(s.status)}</div><div class="note" style="margin-bottom:8px">${esc(s.vendor)} · ${esc(s.mode)}</div>${meter('Freshness',s.freshMin==null?0:s.status==='manual'?45:Math.max(5,Math.round(100-Math.min(95,s.freshMin/(s.status==='stale'?12:30)))))}${meter('Complete',s.compl)}${meter('Confidence',s.conf)}<div class="row between note" style="margin-top:8px"><span>${s.freshMin==null?'Not connected':s.status==='manual'?'Last import '+s.fresh+' ago':'Updated '+s.fresh+' ago'}</span><span>${s.step.map(n=>'S'+n).join(' ')}</span></div></button>`;
+  const unav=s.status==='unavailable',pend=!unav&&s.lastSync==null,fr=srcFresh(s);
+  const meter=(l,v,k)=>`<div class="meter"><span style="width:78px">${l}</span><div class="bar"><i ${k?'data-fi':''} style="width:${unav||pend?0:v}%;${barBg(v)}"></i></div><b class="num" ${k?'data-fv':''} style="width:34px;text-align:right">${unav||pend?'—':v+'%'}</b></div>`;
+  const unm=!unav&&!(MAPPINGS[s.id]||[]).length;
+  return `<div class="tile ${s.status} ${s.syncing?'syncing':''}" data-sid="${s.id}" data-act="adapter" data-arg="${s.id}" tabindex="0" role="button" aria-label="${esc(s.name)}, ${esc(s.vendor)}. Open configuration.">
+  <div class="row between" style="margin-bottom:6px;flex-wrap:nowrap"><span class="row" style="gap:9px;flex-wrap:nowrap;min-width:0">${vlogo(s)}<b class="tname">${esc(s.name)}</b></span>${s.syncing?'<span class="chip y">Syncing</span>':stChip(s.status)}</div>
+  <div class="note" style="margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(s.vendor)} · ${esc(s.mode)}</div>
+  ${meter('Freshness',fr,1)}${meter('Complete',s.compl)}${meter('Confidence',s.conf)}
+  ${s.syncing?`<div class="sprog" aria-hidden="true"><i data-sp style="width:${s.syncPct||0}%"></i></div>`:''}
+  <div class="row between note" style="margin-top:8px;flex-wrap:nowrap"><span data-age="${s.id}">${s.syncing?'Syncing… '+(s.syncPct||0)+'%':srcAgeText(s)}</span><span>${s.step.map(n=>'S'+n).join(' ')}</span></div>
+  <div class="tfoot"><span class="note">${fmtN(s.records)} records${unm?' · <b class="unm">No field mapping</b>':''}</span><span class="tacts"><button class="tbtn" data-act="srcEdit" data-arg="${s.id}" aria-label="Edit ${esc(s.name)}">Edit</button><button class="tbtn" data-act="srcSync" data-arg="${s.id}" ${s.syncing||unav||s.status==='manual'?'disabled':''} aria-label="Sync ${esc(s.name)} now">Sync</button><button class="tbtn dng" data-act="srcDel" data-arg="${s.id}" aria-label="Delete ${esc(s.name)}">Delete</button></span></div></div>`;
 }
+const addTile=c=>`<button class="tile addt" data-act="srcAdd" data-arg="${c}"><span class="plus">+</span><b>Add source</b><span class="note">${SRC_CATS[c]}</span></button>`;
+function smFilter(){const f=SM_S(),q=f.q.trim().toLowerCase();return SOURCES.filter(s=>(!f.cat||s.cat===f.cat)&&(!f.st||s.status===f.st)&&(!q||(s.name+' '+s.vendor+' '+s.owner+' '+s.mode+' '+s.id).toLowerCase().includes(q)))}
+function smGridHTML(){const f=SM_S(),list=smFilter(),filt=!!(f.q||f.st);
+  if(!list.length&&filt)return `<div class="empty"><b>No sources match</b>Clear the search or status filter, or add a new source.<div style="margin-top:10px"><button class="btn sm" data-act="smClear">Clear filters</button></div></div>`;
+  return Object.keys(SRC_CATS).filter(c=>!f.cat||f.cat===c).map(c=>{const it=list.filter(x=>x.cat===c);if(!it.length&&filt)return'';
+    return `<h3 class="catH">${SRC_CATS[c]}<span class="note">${SRC_CAT_NOTE[c]} · ${it.length} connected</span></h3><div class="tiles">${it.map(srcTile).join('')}${filt?'':addTile(c)}</div>`}).join('')}
+function smChipsHTML(){const c={live:0,stale:0,manual:0,unavailable:0};SOURCES.forEach(s=>c[s.status]++);
+  const b=(k,cls,t)=>c[k]?`<button class="chip ${cls} chipb" data-act="smSt" data-arg="${k}" aria-pressed="${SM_S().st===k}">${c[k]} ${t}</button>`:'';
+  return `<span class="chip line">${SOURCES.length} sources</span>${b('live','ok','live')}${b('stale','warn','stale')}${b('manual','dk','manual')}${b('unavailable','bad','unavailable')}`}
+function smLogHTML(){return S.smLog.length?S.smLog.map(l=>{const s=SRC(l.id)||{vendor:'—',name:'Removed'};return `<div class="lg ${l.kind}"><span class="num lt">${new Date(l.ts).toTimeString().slice(0,8)}</span>${s.vendor!=='—'?vlogo(s):''}<span class="lm"><b>${esc(s.name)}</b> <span class="note">${esc(s.vendor)}</span> · ${esc(l.text)}</span></div>`}).join(''):'<div class="empty"><b>No activity yet</b>Syncs, edits and credential changes appear here as they happen.</div>'}
+function intMap(){
+  const f=SM_S();
+  const dep=SOURCES.filter(s=>s.status==='unavailable'||s.status==='stale'||s.status==='manual');
+  return `<div class="smbar"><div class="row smchips" id="smChips">${smChipsHTML()}</div><span class="grow"></span>
+   <input type="search" id="smQ" class="smq" placeholder="Search system, vendor or owner" value="${esc(f.q)}" data-in="smQ" aria-label="Search sources">
+   <label class="sr" for="smCat">Category</label><select class="sel" id="smCat" data-ch="smCat"><option value="">All categories</option>${Object.keys(SRC_CATS).map(c=>`<option value="${c}" ${f.cat===c?'selected':''}>${SRC_CATS[c]}</option>`).join('')}</select>
+   <button class="btn" data-act="srcSyncAll">Sync all</button><button class="btn pri" data-act="srcAdd" data-arg="">+ Add source</button></div>
+  <p class="note" style="margin:0 0 4px">Each system is configured on its own. Select a source to edit its connection, operations, field mapping and sync history. <span class="livedot"><i></i>Live</span></p>
+  <div id="smGrid">${smGridHTML()}</div>
+  ${dep.length?`<div class="callout bad" style="margin-top:14px"><b>Integration dependencies.</b> ${dep.map(s=>`<button class="lnk" data-act="adapter" data-arg="${s.id}">${esc(s.name)} (${esc(s.vendor)})</button> is ${s.status==='unavailable'?'not connected':s.status==='stale'?'stale':'a manual import'}`).join('; ')}. Circularity names these as dependencies rather than inventing data.</div>`:''}
+  <div class="sect"><div class="sh"><h2>Live sync activity</h2><span class="livedot"><i></i>Streaming</span></div><div class="panel" id="smLog" aria-live="off">${smLogHTML()}</div></div>
+  <div class="sect"><div class="sh"><h2>How data flows</h2></div>${flowDiagram()}</div>`}
 function flowDiagram(){
   const dot=x=>({live:'ok',stale:'warn',manual:'',unavailable:'bad'})[x.status];
-  const grp=(c,t)=>`<div class="zg"><h5>${SRC_CATS[c]}<span class="note">${t}</span></h5>${SOURCES.filter(x=>x.cat===c).map(x=>`<div class="fnode"><span class="dotc ${dot(x)}"></span>${esc(x.name)}</div>`).join('')}</div>`;
+  const grp=(c,t)=>`<div class="zg"><h5>${SRC_CATS[c]}<span class="note">${t}</span></h5>${SOURCES.filter(x=>x.cat===c).map(x=>`<div class="fnode"><span class="dotc ${dot(x)}"></span>${esc(x.name)}<span class="note" style="margin-left:auto">${esc(x.vendor)}</span></div>`).join('')}</div>`;
   const n=ch=>SOURCES.filter(x=>srcCh(x).includes(ch)).length,box=(t,d,x)=>`<div class="zbox"><b>${t}</b><span class="note">${d}</span>${x?`<div class="row">${x}</div>`:''}</div>`;
   const arr=l=>`<div class="zarr">${ICON.arrow}<span>${l}</span></div>`;
   const out=SOURCES.filter(x=>x.write.length),open=CONFLICTS.filter(c=>c.status==='open').length;
   return `<div class="zf">
   <section class="zone" aria-label="Enterprise data sources"><header>Enterprise data sources</header><div class="zb">${grp('internal','Batch, API and file feeds')}${grp('streaming','Device and operational events')}${grp('external','Partner and market data')}</div></section>${arr('Batch files, events and API calls')}
-  <section class="zone" aria-label="Integration layer"><header>Integration layer</header><div class="zb">${box('API gateway','REST and SOAP · '+n('api')+' sources')}${box('Event ingestion','Webhooks and queues · '+n('event')+' sources')}${box('File ingestion','SFTP and CSV · '+n('file')+' source')}${box('Connectors',SOURCES.length+' adapters, one per system')}${box('Validation &amp; enrichment','Schema, completeness and reference data. Failed rows are rejected with a reason.')}</div></section>${arr('Validated data and events')}
+  <section class="zone" aria-label="Integration layer"><header>Integration layer</header><div class="zb">${box('API gateway','REST and SOAP · '+n('api')+' sources')}${box('Event ingestion','Webhooks and queues · '+n('event')+' sources')}${box('File ingestion','SFTP and CSV · '+n('file')+' source'+(n('file')===1?'':'s'))}${box('Connectors',SOURCES.length+' adapters, one per system')}${box('Validation &amp; enrichment','Schema, completeness and reference data. Failed rows are rejected with a reason.')}</div></section>${arr('Validated data and events')}
   <section class="zone plat" aria-label="Circularity platform"><header>Circularity platform</header><div class="zb">
    ${box('Context assembly','Seven versioned canonical models, identity resolved inside each tenant, and a conflict queue ('+open+' open).',stp(2))}
    ${box('Decision services','Evaluate routes against demand, predict outcomes with ranges, apply the six eligibility gates, recommend, and stop at human approval.',stp(3)+stp(4)+stp(5))}
@@ -1588,23 +1724,171 @@ function flowDiagram(){
    <div class="zbox"><b>Feedback events</b><span class="note">Outcome capture: actual receipts, costs and avoided spend, linked to the decision.</span><div class="row">${stp(9)}</div></div><span class="zarrl">${ICON.arrow}</span>
    <div class="zbox"><b>Execution status</b><span class="note">Acknowledgement or error from the owning system, with retries and duplicates handled.</span><div class="row">${stp(9)}</div></div></div>`;
 }
-function intMap(){
-  const c={live:0,stale:0,manual:0,unavailable:0};SOURCES.forEach(s=>c[s.status]++);
-  return `<div class="row" style="margin-bottom:12px"><span class="chip ok">${c.live} live</span><span class="chip warn">${c.stale} stale</span><span class="chip dk">${c.manual} manual</span><span class="chip bad">${c.unavailable} unavailable</span><span class="note">Select a source for its adapter: access, operations, update method and field mapping.</span></div>
-  ${Object.keys(SRC_CATS).map(c=>`<h3 class="catH">${SRC_CATS[c]}<span class="note">${SRC_CAT_NOTE[c]}</span></h3><div class="tiles">${SOURCES.filter(x=>x.cat===c).map(srcTile).join('')}</div>`).join('')}
-  <div class="callout bad" style="margin-top:14px"><b>Integration dependencies.</b> ESG &amp; telemetry has no connected feed, and recycler partners have no supported API. Circularity names them as dependencies rather than inventing data. Markets &amp; dealers needs a token refresh. <button class="btn sm" data-act="adapter" data-arg="mkt" style="margin-left:8px">Open Markets adapter</button></div>
-  <div class="sect"><div class="sh"><h2>How data flows</h2></div>${flowDiagram()}</div>`;
-}
-ACT.adapter=id=>{const s=SOURCES.find(x=>x.id===id);const mp=MAPPINGS[id]||[];
-  const sampleJson=mp.length?mp.reduce((o,m)=>{o[m[0]]=m[1];return o},{}):null;
-  const body=`<div class="row" style="margin-bottom:12px">${stChip(s.status)}<span class="chip line">${esc(s.mode)}</span>${s.step.map(n=>stp(n)).join('')}</div>${s.note?`<div class="callout ${s.status==='unavailable'?'bad':''}" style="margin-bottom:14px">${esc(s.note)}</div>`:''}
-  <dl class="kv" style="margin-bottom:14px"><dt>Vendor (fictional)</dt><dd>${esc(s.vendor)}</dd><dt>Inputs used</dt><dd>${esc(s.inputs)}</dd><dt>Authorised access</dt><dd>${esc(s.auth)}</dd><dt>Update method</dt><dd>${esc(s.mode)}</dd><dt>Source authority for</dt><dd>${s.authority.join(', ')}</dd><dt>Freshness · completeness · confidence</dt><dd>${s.fresh} · ${s.compl}% · ${s.conf}%</dd></dl>
-  <div class="grid g2"><div><h4 style="margin-bottom:6px">Read operations</h4>${s.read.length?s.read.map(x=>`<div class="mono" style="padding:3px 0">${esc(x)}</div>`).join(''):'<span class="note">None available</span>'}</div><div><h4 style="margin-bottom:6px">Write operations</h4>${s.write.length?s.write.map(x=>`<div class="mono" style="padding:3px 0">${esc(x)}</div>`).join(''):'<span class="note">Read only. Circularity cannot write here.</span>'}</div></div>
-  <h4 style="margin:18px 0 6px">Source to canonical mapping</h4>${mp.length?`<div class="tw"><table class="t static"><thead><tr><th>Source field</th><th>Source value (kept)</th><th>Canonical field</th><th>Normalised</th></tr></thead><tbody>${mp.map(m=>`<tr><td class="mono">${esc(m[0])}</td><td class="mono">${esc(m[1])}</td><td class="mono">${esc(m[2])}</td><td><b>${esc(m[3])}</b><div class="note">${esc(m[4])}</div></td></tr>`).join('')}</tbody></table></div><div class="note" style="margin-top:6px">Units, currency, timestamps, grades and status codes are normalised; source values and provenance are retained.</div>`:'<div class="empty"><b>No mapping yet</b>The adapter cannot map a feed that is not connected.</div>'}`;
-  const foot=s.status==='unavailable'?`<button class="btn" disabled>Not connected</button>`:s.status==='stale'?`<button class="btn pri" data-act="reconnect" data-arg="${id}">Refresh token and re-sync</button>`:`<button class="btn" data-act="testConn" data-arg="${id}">Test connection</button>`;
-  openDrawer(body,s.name,esc(s.vendor)+' adapter',foot)};
-ACT.testConn=id=>{const s=SOURCES.find(x=>x.id===id);toast(`${s.name}: authenticated, ${s.read.length} read and ${s.write.length} write operations reachable.`)};
-ACT.reconnect=id=>{const s=SOURCES.find(x=>x.id===id);s.status='live';s.fresh='1 min';s.freshMin=1;s.compl=93;s.conf=90;pushEvent({dir:'in',type:'feed.restored',caseId:null,decisionId:null,approval:null,ver:null,dest:s.name,ack:'acknowledged',key:'—',note:'Token refreshed; comparables re-pulled'});closeDrawer();toast('Markets & dealers is live again. Predictions no longer carry the stale-market warning.');route(true)};
+/* ---- live engine: ticking ages, scheduled syncs, DOM patches ---- */
+function smRefresh(){const g=$('#smGrid');if(g){g.innerHTML=smGridHTML();const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}}
+function smPatch(s){const el=$(`.tile[data-sid="${s.id}"]`);if(el&&!el.matches(':focus-within'))el.outerHTML=srcTile(s);else if(el){const f=document.activeElement&&document.activeElement.dataset;el.outerHTML=srcTile(s);const n=$(`.tile[data-sid="${s.id}"] [data-act="${f&&f.act}"]`);n&&n.focus()}const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}
+function smLogAdd(s,text,kind){S.smLog.unshift({ts:Date.now(),id:s.id,text,kind:kind||'ok'});S.smLog.length=Math.min(S.smLog.length,16);const el=$('#smLog');if(el)el.innerHTML=smLogHTML()}
+function srcEvent(s,type,ack,note){pushEvent({dir:'in',type,caseId:null,decisionId:null,approval:null,ver:null,dest:s.name+' · '+s.vendor,ack:ack||'acknowledged',key:'cfg-'+hashId(s.id+type+Date.now()).slice(0,6).toLowerCase(),note,ts:asOfNow()})}
+function startSync(s,auto){
+  if(!s||s.syncing)return;
+  if(s.status==='unavailable'){if(!auto)toast(s.name+' is not connected. Open it and complete the connection first.');return}
+  if(s.status==='manual'){if(!auto)toast(s.name+' is a manual import. Use the Manual import tab to load a file.');return}
+  s.syncing=true;s.syncPct=0;smPatch(s);sdSyncUI(s);
+  const t0=Date.now(),dur=1500+Math.random()*1700;
+  const tick=()=>{if(!SRC(s.id)||!s.syncing)return;s.syncPct=Math.min(99,Math.round((Date.now()-t0)/dur*100));
+    const t=$(`.tile[data-sid="${s.id}"]`);if(t){const i=t.querySelector('[data-sp]'),a=t.querySelector('[data-age]');i&&(i.style.width=s.syncPct+'%');a&&(a.textContent='Syncing… '+s.syncPct+'%')}
+    if(Date.now()-t0<dur)setTimeout(tick,150);else fin()};
+  const fin=()=>{if(!SRC(s.id))return;s.syncing=false;const now=Date.now();
+    if(s.status==='stale'){s.runs.unshift({id:'SYNC-'+hashId(s.id+now).slice(0,5).toUpperCase(),ts:now,trigger:auto?'Scheduled':'Manual',rows:0,dur:Math.round(dur/100)/10,result:'failed',note:'HTTP 401 · feed token expired'});s.runs.length=Math.min(s.runs.length,12);
+      smLogAdd(s,'Sync failed: feed token expired (HTTP 401). Last fresh data still in use.','bad');srcEvent(s,'sync.failed','failed','Sync rejected: token expired. Rotate credentials or refresh the token.');if(!auto)toast(s.name+': sync failed, the feed token has expired. Refresh the token to resume.',4200);smPatch(s);sdSyncUI(s);return}
+    const n=rr(24,420);s.records+=n;s.lastSync=now;s.freshMin=0;s.fresh='just now';
+    if(!s.compl){s.compl=rr(86,96);s.conf=rr(84,94);s.c0=s.compl;s.k0=s.conf}else{s.compl=clampN(s.c0+rr(-1,1),60,100);s.conf=clampN(s.k0+rr(-1,1),40,100)}
+    s.runs.unshift({id:'SYNC-'+hashId(s.id+now).slice(0,5).toUpperCase(),ts:now,trigger:auto?'Scheduled':'Manual',rows:n,dur:Math.round(dur/100)/10,result:'success',note:''});s.runs.length=Math.min(s.runs.length,12);
+    smLogAdd(s,'Sync completed · '+fmtN(n)+' new or changed records');srcEvent(s,'sync.completed','acknowledged',fmtN(n)+' records pulled from '+s.vendor+' in '+(Math.round(dur/100)/10)+' s');
+    if(!auto)toast(s.name+' synced: '+fmtN(n)+' records updated.');smPatch(s);sdSyncUI(s)};
+  setTimeout(tick,160)}
+function smTick(){
+  const now=Date.now();
+  $$('.tile[data-sid]').forEach(t=>{const s=SRC(t.dataset.sid);if(!s||s.syncing)return;const a=t.querySelector('[data-age]');a&&(a.textContent=srcAgeText(s));
+    if(s.lastSync!=null){const v=srcFresh(s),fi=t.querySelector('[data-fi]'),fv=t.querySelector('[data-fv]');if(fi){fi.style.width=v+'%';fi.style.background=v<70?'var(--bad)':v<85?'#D4A800':''}if(fv)fv.textContent=v+'%'}});
+  SOURCES.forEach(s=>{if(s.lastSync!=null){s.freshMin=(now-s.lastSync)/60000;s.fresh=srcAge(s.freshMin)}});
+  if(now>=SM.next){SM.next=now+4500+Math.random()*7500;const pool=SOURCES.filter(s=>s.status==='live'&&!s.syncing&&s.lastSync!=null);if(pool.length)startSync(pool[Math.floor(Math.random()*pool.length)],true)}
+  if(typeof wfTick==='function')wfTick(now);
+  const sd=S.sd;if(sd&&sd.mode==='edit'){const el=$('#sdLive');const s=SRC(sd.id);if(el&&s)el.innerHTML=sdLiveHTML(s)}}
+ACT.smQ=v=>{SM_S().q=v;const g=$('#smGrid');g&&(g.innerHTML=smGridHTML())};
+ACT.smCat=v=>{SM_S().cat=v;smRefresh()};
+ACT.smSt=v=>{const f=SM_S();f.st=f.st===v?'':v;smRefresh()};
+ACT.smClear=()=>{S.sm={q:'',cat:'',st:''};route(true)};
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.tile[data-act]')){e.preventDefault();e.target.click()}});
+ACT.srcSync=id=>{if(!canMgr())return toast(NOMGR);startSync(SRC(id),false)};
+ACT.srcSyncAll=()=>{if(!canMgr())return toast(NOMGR);const l=SOURCES.filter(s=>s.status==='live'&&!s.syncing);l.forEach((s,i)=>setTimeout(()=>startSync(s,false),i*120));toast('Sync started for '+l.length+' live sources.')};
+/* ---- source drawer: create, edit, save, delete (draft model) ---- */
+const sdModeSel=m=>/^Polling/.test(m)?'Polling':/^Events/.test(m)?'Events':m;
+const CANON_PFX={'Asset & component':'asset','Condition & eligibility':'condition','Demand opportunity':'demand','Intervention':'intervention','Route candidate':'route','Decision':'decision','Outcome':'outcome'};
+function sdOpen(id,tab){const s=SRC(id);if(!s)return;
+  S.sd={mode:'edit',id,tab:tab||'conn',dirty:false,test:null,errs:{},d:{type:s.type,name:s.name,vendor:s.vendor,ver:s.ver,env:s.env,url:s.url,mode:s.mode,interval:s.interval||15,auth:s.auth,owner:s.owner},maps:(MAPPINGS[id]||[]).map(r=>r.slice()),ops:{read:s.read.slice(),write:s.write.slice()}};sdRender(true)}
+function sdTitle(){const sd=S.sd;if(sd.mode==='new')return 'Add source';const s=SRC(sd.id);return `<span class="row" style="gap:10px;flex-wrap:nowrap">${vlogo(s)}<span>${esc(s.name)}</span>${s.syncing?'<span class="chip y">Syncing</span>':stChip(s.status)}</span>`}
+function sdSub(){const sd=S.sd;if(sd.mode==='new')return 'Connect a system. Each system is its own connector.';const s=SRC(sd.id);return esc(s.vendor)+' adapter · config v'+s.cfgVer}
+function sdLiveHTML(s){return `<dl class="kv sdlive"><dt>Status</dt><dd>${s.syncing?'<span class="chip y">Syncing '+(s.syncPct||0)+'%</span>':stChip(s.status)}</dd><dt>Last sync</dt><dd><span class="num">${s.lastSync==null?(s.status==='unavailable'?'Not connected':'Never'):esc(srcAgeText(s).replace(/^(Updated|Last import) /,''))}</span></dd><dt>Freshness · completeness · confidence</dt><dd class="num">${s.lastSync==null?'—':srcFresh(s)+'% · '+s.compl+'% · '+s.conf+'%'}</dd><dt>Records</dt><dd class="num">${fmtN(s.records)}</dd><dt>Source authority for</dt><dd>${s.authority.length?esc(s.authority.join(', ')):'—'}</dd></dl>`}
+function sdSyncUI(s){const sd=S.sd;if(!sd||sd.mode!=='edit'||sd.id!==s.id||!$('#drawer.on'))return;const h=$('#drawer .dh h2');h&&(h.innerHTML=sdTitle());sdFoot()}
+function sdTabBody(){const sd=S.sd,d=sd.d,e=sd.errs;
+  const tx=(k,l,o)=>`<div class="fld"><label for="sd_${k}">${l}</label><input id="sd_${k}" value="${esc(d[k]==null?'':d[k])}" data-in="sdF" data-k="${k}" autocomplete="off" ${o||''}>${e[k]?`<div class="err">${esc(e[k])}</div>`:''}</div>`;
+  const sl=(k,l,opts,cur,o)=>`<div class="fld"><label for="sd_${k}">${l}</label><select id="sd_${k}" data-ch="sdF" data-k="${k}" ${o||''}>${opts.map(x=>`<option value="${esc(x)}" ${x===cur?'selected':''}>${esc(x)}</option>`).join('')}</select>${e[k]?`<div class="err">${esc(e[k])}</div>`:''}</div>`;
+  if(sd.tab==='conn'){const s=sd.mode==='edit'?SRC(sd.id):null,t=SRC_TYPES[d.type],vs=t.vendors.includes(d.vendor)?t.vendors:[d.vendor].concat(t.vendors);
+    const msel=sdModeSel(d.mode),mo=MODE_OPTS.includes(msel)?MODE_OPTS:[msel].concat(MODE_OPTS),au=AUTH_OPTS.includes(d.auth)?AUTH_OPTS:[d.auth].concat(AUTH_OPTS);
+    const age=s?Math.floor((Date.now()-s.credAt)/86400000):0,left=s?s.credDays-age:0;
+    return `${s&&s.note?`<div class="callout ${s.status==='unavailable'?'bad':''}" style="margin-bottom:14px">${esc(s.note)}</div>`:''}
+    ${s?`<div id="sdLive">${sdLiveHTML(s)}</div>`:''}
+    <div class="grid g2" style="gap:0 14px">${tx('name','Display name','maxlength="60"')}${sl('type','System type',Object.keys(SRC_TYPES).map(k=>SRC_TYPES[k].label),SRC_TYPES[d.type].label,sd.mode==='edit'?'disabled':'')}
+    ${sl('vendor','Vendor product',vs,d.vendor)}${tx('ver','Product version','placeholder="e.g. 2023 FPS02"')}${sl('env','Environment',['Production','Staging','Sandbox'],d.env)}${tx('owner','Owner team','placeholder="e.g. Finance Systems"')}</div>
+    ${tx('url','Base URL or endpoint','placeholder="https://system.example.com/api" spellcheck="false"')}
+    <div class="grid g2" style="gap:0 14px">${sl('auth','Authentication',au,d.auth)}${sl('mode','Update method',mo,msel)}</div>
+    ${msel==='Polling'?`<div class="fld" style="max-width:220px"><label for="sd_interval">Poll interval (minutes)</label><input id="sd_interval" type="number" min="1" max="1440" value="${esc(d.interval)}" data-in="sdF" data-k="interval">${e.interval?`<div class="err">${esc(e.interval)}</div>`:''}</div>`:''}
+    <div class="credrow"><div><b>Credentials</b><div class="note">${s?(left<0?'Secret expired '+(-left)+' days ago.':'Secret rotated '+age+' days ago · expires in '+left+' days.'):'Stored in the secrets vault after you save.'}</div></div>${s?'<button class="btn sm" data-act="sdRotate">Rotate credentials</button>':''}</div>
+    <div id="sdTest">${sdTestHTML()}</div>`}
+  if(sd.tab==='ops'){const blk=(w,t,ph)=>`<h4 style="margin:0 0 6px">${t}</h4>${sd.ops[w].map((o,i)=>`<div class="oprow"><input class="mono" value="${esc(o)}" placeholder="${ph}" data-in="sdOp" data-w="${w}" data-i="${i}" aria-label="${t} ${i+1}" spellcheck="false"><button class="iconbtn sm" data-act="sdOpDel" data-arg="${w}:${i}" aria-label="Remove operation">${ICON.close}</button></div>`).join('')||'<div class="note" style="margin-bottom:6px">None configured.'+(w==='write'?' Circularity cannot write to this system.':'')+'</div>'}<button class="btn sm" data-act="sdOpAdd" data-arg="${w}" style="margin:6px 0 18px">+ Add ${w} operation</button>`;
+    return `<p class="note" style="margin-top:0">Operations Circularity may call on this system. Write operations only run after Human approval.</p>${blk('read','Read operations','GET /resource')}${blk('write','Write operations','POST /resource')}${e.ops?`<div class="err">${esc(e.ops)}</div>`:''}`}
+  if(sd.tab==='map'){const pf=Object.values(CANON_PFX);
+    return `<p class="note" style="margin-top:0">Source field → canonical field. Units, currency, timestamps and status codes are normalised; source values and provenance are retained. Target model: <b>${esc(SRC_TYPES[d.type].target)}</b>.</p>
+    <datalist id="canonFields">${CANON.flatMap(m=>m.fields.map(f=>`<option value="${CANON_PFX[m.n]}.${f.replace(/\[\]$/,'')}">`)).join('')}</datalist>
+    ${sd.maps.length?`<div class="tw"><table class="t static maptbl"><thead><tr><th>Source field</th><th>Sample value</th><th>Canonical field</th><th>Normalised</th><th>Rule</th><th></th></tr></thead><tbody>${sd.maps.map((m,i)=>`<tr>${[0,1,2,3,4].map(c=>`<td><input class="mono ${e['m'+i+'_'+c]?'bad':''}" value="${esc(m[c]||'')}" data-in="sdMap" data-r="${i}" data-c="${c}" ${c===2?'list="canonFields"':''} aria-label="${['Source field','Sample value','Canonical field','Normalised','Rule'][c]} row ${i+1}" spellcheck="false"></td>`).join('')}<td><button class="iconbtn sm" data-act="sdMapDel" data-arg="${i}" aria-label="Remove mapping row">${ICON.close}</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty"><b>No field mapping yet</b>Add at least one mapping before this source can feed a canonical model in a workflow.</div>'}
+    <div class="row" style="margin-top:10px"><button class="btn sm" data-act="sdMapAdd">+ Add field mapping</button>${e.maps?`<span class="err">${esc(e.maps)}</span>`:''}</div>`}
+  const s=SRC(sd.id);
+  return `<h4 style="margin:0 0 6px">Sync runs</h4>${s.runs.length?`<div class="tw"><table class="t static tight"><thead><tr><th>Run</th><th>Time</th><th>Trigger</th><th class="r">Records</th><th class="r">Duration</th><th>Result</th></tr></thead><tbody>${s.runs.map(r=>`<tr><td class="mono">${r.id}</td><td class="num nowrap">${new Date(r.ts).toTimeString().slice(0,8)}</td><td>${r.trigger}</td><td class="r num">${fmtN(r.rows)}</td><td class="r num">${r.dur} s</td><td><span class="chip ${r.result==='success'?'ok':'bad'}">${r.result==='success'?'Success':'Failed'}</span>${r.note?`<div class="note">${esc(r.note)}</div>`:''}</td></tr>`).join('')}</tbody></table></div>`:'<div class="note">No sync runs recorded in this session yet. Use Sync now.</div>'}
+  <h4 style="margin:18px 0 6px">Change history</h4><div class="tw"><table class="t static tight"><thead><tr><th>Version</th><th>When</th><th>By</th><th>Change</th></tr></thead><tbody>${s.audit.map(a=>`<tr><td class="mono">v${a.ver}</td><td class="num nowrap">${new Date(a.ts).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</td><td>${esc(a.who)}</td><td>${esc(a.change)}</td></tr>`).join('')}</tbody></table></div>`}
+function sdTestHTML(){const t=S.sd.test;if(!t)return'';
+  return t.state==='running'?`<div class="callout info"><span class="spin"></span> Testing connection to ${esc(S.sd.d.url||'the endpoint')}…</div>`:`<div class="callout ${t.ok?'ok':'bad'}"><b>${t.ok?'Connection OK':'Connection failed'}.</b> ${esc(t.msg)}</div>`}
+function sdFoot(){const sd=S.sd,f=$('#drawer .df');if(!f)return;const s=sd.mode==='edit'?SRC(sd.id):null,dirty=sd.dirty;
+  f.innerHTML=sd.mode==='new'?`<button class="btn pri" data-act="sdSave">Create connection</button><button class="btn" data-act="sdTest">Test connection</button><button class="btn ghost" data-act="closeDrawer">Cancel</button>`
+  :`<button class="btn pri" data-act="sdSave" ${dirty?'':'disabled'}>Save changes</button><button class="btn" data-act="sdRevert" ${dirty?'':'disabled'}>Revert</button><button class="btn" data-act="sdTest">Test connection</button>${s.status==='stale'?`<button class="btn dark" data-act="reconnect" data-arg="${s.id}">Refresh token and re-sync</button>`:s.status==='manual'?`<button class="btn" data-act="gotoImport">Open Manual import</button>`:`<button class="btn" data-act="srcSync" data-arg="${s.id}" ${s.syncing||s.status==='unavailable'?'disabled':''}>${s.syncing?'Syncing…':'Sync now'}</button>`}<span class="grow"></span>${dirty?'<span class="chip y">Unsaved changes</span>':''}<button class="btn danger" data-act="srcDel" data-arg="${s.id}">Delete</button>`}
+function sdRender(first){const sd=S.sd;if(!sd)return;
+  const tabs=[['conn','Connection'],['ops','Operations'],['map','Field mapping ('+sd.maps.length+')']].concat(sd.mode==='edit'?[['hist','History']]:[]);
+  const body=`<div class="tabs sdtabs" role="tablist">${tabs.map(t=>`<button role="tab" aria-selected="${sd.tab===t[0]}" data-act="sdTab" data-arg="${t[0]}">${t[1]}</button>`).join('')}</div>${sdTabBody()}`;
+  if(first||!$('#drawer.on')){openDrawer(body,sdTitle(),sdSub(),'x');$('#drawer').classList.add('wide');$('#drawer .iconbtn')&&0}
+  else{const db=$('#drawer .db'),y=db.scrollTop;db.innerHTML=body;db.scrollTop=y;const h=$('#drawer .dh h2');h&&(h.innerHTML=sdTitle());$('#drawer .dh .note').innerHTML=sdSub()}
+  sdFoot()}
+ACT.adapter=id=>sdOpen(id);ACT.srcEdit=id=>sdOpen(id);
+ACT.sdTab=t=>{S.sd.tab=t;sdRender()};
+ACT.srcAdd=cat=>{if(!canMgr())return toast(NOMGR);
+  const type=Object.keys(SRC_TYPES).find(k=>SRC_TYPES[k].cat===(cat||'internal'))||'crm',t=SRC_TYPES[type];
+  S.sd={mode:'new',id:null,tab:'conn',dirty:true,test:null,errs:{},d:{type,name:t.label,vendor:t.vendors[0],ver:'',env:'Production',url:'',mode:'API + events',interval:15,auth:AUTH_OPTS[0],owner:''},maps:[],ops:{read:[],write:[]}};sdRender(true)};
+function sdDirty(){S.sd.dirty=true;S.sd.warned=false;sdFoot()}
+ACT.sdF=(v,el)=>{const sd=S.sd,k=el.dataset.k,d=sd.d;
+  if(k==='type'){const nk=Object.keys(SRC_TYPES).find(x=>SRC_TYPES[x].label===v),pt=SRC_TYPES[d.type];if(d.name===pt.label)d.name=SRC_TYPES[nk].label;d.type=nk;d.vendor=SRC_TYPES[nk].vendors[0];sdDirty();sdRender();return}
+  if(k==='mode'){d.mode=v==='Polling'?'Polling · '+(d.interval||15)+' min':v;sdDirty();sdRender();return}
+  if(k==='interval'){d.interval=v===''?'':+v;if(/^Polling/.test(d.mode))d.mode='Polling · '+d.interval+' min'}else d[k]=v;
+  delete sd.errs[k];sdDirty()};
+ACT.sdOp=(v,el)=>{S.sd.ops[el.dataset.w][+el.dataset.i]=v;delete S.sd.errs.ops;sdDirty()};
+ACT.sdOpDel=a=>{const [w,i]=a.split(':');S.sd.ops[w].splice(+i,1);sdDirty();sdRender()};
+ACT.sdOpAdd=w=>{S.sd.ops[w].push('');sdDirty();sdRender();const l=$$(`#drawer input[data-w="${w}"]`).pop();l&&l.focus()};
+ACT.sdMap=(v,el)=>{const sd=S.sd;sd.maps[+el.dataset.r][+el.dataset.c]=v;delete sd.errs['m'+el.dataset.r+'_'+el.dataset.c];delete sd.errs.maps;sdDirty()};
+ACT.sdMapDel=i=>{S.sd.maps.splice(+i,1);sdDirty();sdRender()};
+ACT.sdMapAdd=()=>{S.sd.maps.push(['','','','','']);sdDirty();sdRender();const l=$$('#drawer .maptbl tbody tr:last-child input')[0];l&&l.focus()};
+ACT.sdRevert=()=>{const id=S.sd.id,tab=S.sd.tab;sdOpen(id,tab);toast('Changes reverted to the saved configuration.')};
+ACT.gotoImport=()=>{closeDrawer(true);S.intTab='import';route(true)};
+function sdValidate(){const sd=S.sd,d=sd.d,e={},s=sd.mode==='edit'?SRC(sd.id):null,off=d.mode==='Not connected';
+  if(!d.name.trim())e.name='Enter a display name.';else if(SOURCES.some(x=>x.id!==sd.id&&x.name.toLowerCase()===d.name.trim().toLowerCase()&&x.vendor===d.vendor))e.name='A source with this name and vendor already exists.';
+  if(!off){if(!/^(https?|sftp):\/\/[^\s/]+(\/\S*)?$/i.test((d.url||'').trim()))e.url='Enter a full URL starting with https:// or sftp://.';
+    if(/^Pending/.test(d.auth))e.auth='Choose an authentication method.';
+    if(/^Polling/.test(d.mode)&&!(d.interval>=1&&d.interval<=1440))e.interval='Enter 1 to 1440 minutes.'}
+  const rd=sd.ops.read.map(x=>x.trim()).filter(Boolean);if(!off&&!rd.length)e.ops='Add at least one read operation.';
+  if(sd.ops.read.concat(sd.ops.write).some(x=>x.trim()&&!/^(GET|POST|PUT|PATCH|DELETE|IMPORT)\s+\S+/i.test(x.trim())))e.ops='Each operation starts with a method, for example GET /assets.';
+  const seen=new Set();sd.maps.forEach((m,i)=>{if(!m[0].trim())e['m'+i+'_0']='x';if(!m[2].trim())e['m'+i+'_2']='x';if(m[2].trim()&&seen.has(m[2].trim()+'|'+m[0].trim()))e['m'+i+'_2']='x';seen.add(m[2].trim()+'|'+m[0].trim())});
+  if(Object.keys(e).some(k=>/^m\d/.test(k)))e.maps='Every mapping row needs a source field and a canonical field, and rows cannot repeat.';
+  return e}
+ACT.sdSave=()=>{if(!canMgr())return toast(NOMGR);const sd=S.sd,d=sd.d,errs=sdValidate();
+  if(Object.keys(errs).length){sd.errs=errs;sdRender();const n=Object.keys(errs).filter(k=>k!=='maps'&&k!=='ops').length+(errs.maps?1:0)+(errs.ops?1:0);toast('Fix '+n+' item'+(n>1?'s':'')+' before saving. Errors are marked in the form.');
+    const tab=['name','url','auth','interval'].some(k=>errs[k])?'conn':errs.ops?'ops':'map';if(sd.tab!==tab){sd.tab=tab;sdRender()}return}
+  const read=sd.ops.read.map(x=>x.trim()).filter(Boolean),write=sd.ops.write.map(x=>x.trim()).filter(Boolean),csv=d.mode==='Controlled CSV import',off=d.mode==='Not connected';
+  const rw=csv?'Read (import)':off?'—':write.length?(read.length?'Read / write':'Write'):'Read',maps=sd.maps.map(m=>m.map(x=>x.trim()));
+  const base={name:d.name.trim(),vendor:d.vendor,ver:d.ver.trim(),env:d.env,url:d.url.trim(),mode:d.mode,interval:/^Polling/.test(d.mode)?+d.interval:0,auth:d.auth,owner:d.owner.trim()||'Unassigned',read,write,rw};
+  if(sd.mode==='new'){const t=SRC_TYPES[d.type],sd0=SRC_SEED[d.type];let id=d.type,n=2;while(SRC(id))id=d.type+'_'+n++;
+    const s=Object.assign({id,type:d.type,cat:t.cat,short:t.short,status:csv?'manual':'live',freshMin:null,compl:0,conf:0,c0:0,k0:0,inputs:sd0.inputs,authority:sd0.authority.slice(),step:sd0.step.slice(),records:0,cfgVer:'1.0',lastSync:csv?Date.now():null,fresh:csv?'just now':'—',updatedBy:S.role,updatedAt:Date.now(),credAt:Date.now(),credDays:180,runs:[],audit:[{ver:'1.0',who:S.role,ts:Date.now(),change:'Connection created'}]},base);
+    SOURCES.push(s);MAPPINGS[id]=maps;rebuildLookups();wfAddForSource(s);srcEvent(s,'connector.created','acknowledged',s.vendor+' connected as '+s.name+' ('+s.env+')');smLogAdd(s,'Connection created. Initial sync starting.');smRefresh();
+    toast(s.name+' ('+s.vendor+') connected. Initial sync started.');S.sd={mode:'edit',id,tab:'ops',dirty:false,test:null,errs:{},d:{type:s.type,name:s.name,vendor:s.vendor,ver:s.ver,env:s.env,url:s.url,mode:s.mode,interval:s.interval||15,auth:s.auth,owner:s.owner},maps:maps.map(r=>r.slice()),ops:{read:read.slice(),write:write.slice()}};sdRender();
+    if(!csv)setTimeout(()=>startSync(s,false),400);wfPaletteRefresh();return}
+  const s=SRC(sd.id),ch=[],cmp=(k,l)=>{if(String(s[k])!==String(base[k]))ch.push(l)};
+  cmp('name','display name');cmp('vendor','vendor product');cmp('ver','version');cmp('env','environment');cmp('url','endpoint');cmp('auth','authentication');cmp('mode','update method');cmp('owner','owner');
+  if(read.join('|')!==s.read.join('|')||write.join('|')!==s.write.join('|'))ch.push('operations');
+  if(JSON.stringify(maps)!==JSON.stringify(MAPPINGS[s.id]||[]))ch.push('field mapping ('+maps.length+' rows)');
+  const wasOff=s.status==='unavailable'&&!off&&!csv;
+  Object.assign(s,base);MAPPINGS[s.id]=maps;
+  if(wasOff){s.status='live';ch.push('connected')}else if(csv&&s.status!=='manual'){s.status='manual';ch.push('switched to manual import')}else if(!csv&&s.status==='manual'){s.status='live';ch.push('switched to live feed')}
+  if(!ch.length){toast('No changes to save.');sd.dirty=false;sdFoot();return}
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.updatedAt=Date.now();s.updatedBy=S.role;s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Updated '+ch.join(', ')});
+  rebuildLookups();srcEvent(s,'connector.updated','acknowledged','Config v'+s.cfgVer+': '+ch.join(', '));smLogAdd(s,'Configuration saved · v'+s.cfgVer+' ('+ch.join(', ')+')');
+  sd.dirty=false;sd.errs={};sd.test=null;sdRender();smPatch(s);wfPaletteRefresh();wfPaint2();toast(s.name+' saved. Configuration is now v'+s.cfgVer+'.');
+  if(wasOff)setTimeout(()=>startSync(s,false),400)};
+ACT.sdTest=()=>{const sd=S.sd,d=sd.d;sd.test={state:'running'};const el=$('#sdTest');if(sd.tab!=='conn'){sd.tab='conn';sdRender()}else if(el)el.innerHTML=sdTestHTML();$('#sdTest')&&$('#sdTest').scrollIntoView({block:'nearest'});
+  setTimeout(()=>{if(!S.sd||S.sd!==sd)return;const s=sd.mode==='edit'?SRC(sd.id):null,ms=rr(70,320);
+    const urlOk=/^(https?|sftp):\/\/[^\s/]+(\/\S*)?$/i.test((d.url||'').trim());
+    if(!urlOk)sd.test={ok:false,msg:'The endpoint is not a valid URL. Use https:// or sftp://.'};
+    else if(/^Pending/.test(d.auth))sd.test={ok:false,msg:'No authentication method is configured yet.'};
+    else if(s&&s.status==='stale'&&s.url===d.url)sd.test={ok:false,msg:'HTTP 401 Unauthorized. The feed token expired; use Refresh token and re-sync or rotate credentials.'};
+    else if(s&&s.status==='unavailable'&&s.mode==='Not connected'&&d.mode==='Not connected')sd.test={ok:false,msg:'No connection configured. Choose an update method and enter the endpoint.'};
+    else sd.test={ok:true,msg:'Authenticated in '+ms+' ms. '+sd.ops.read.filter(x=>x.trim()).length+' read and '+sd.ops.write.filter(x=>x.trim()).length+' write operations reachable.'};
+    const e2=$('#sdTest');e2&&(e2.innerHTML=sdTestHTML())},rr(700,1300))};
+ACT.testConn=id=>{const s=SRC(id);toast(`${s.name}: authenticated, ${s.read.length} read and ${s.write.length} write operations reachable.`)};
+ACT.reconnect=id=>{if(!canMgr())return toast(NOMGR);const s=SRC(id);s.status='live';s.credAt=Date.now();s.lastSync=Date.now()-60000;s.freshMin=1;s.fresh='1 min';s.compl=Math.max(s.compl,93);s.conf=Math.max(s.conf,90);s.c0=s.compl;s.k0=s.conf;if(s.note)s.note='';
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Token refreshed and feed re-synced'});
+  srcEvent(s,'feed.restored','acknowledged','Token refreshed; latest records re-pulled');smLogAdd(s,'Token refreshed. Feed restored.');
+  if(S.sd&&S.sd.id===id){S.sd.test=null;sdRender()}smPatch(s);toast(s.name+' is live again. Predictions no longer carry a stale-feed warning.');wfPaint2();setTimeout(()=>startSync(s,false),300)};
+ACT.sdRotate=()=>{if(!canMgr())return toast(NOMGR);const s=SRC(S.sd.id);
+  openModal('Rotate credentials for '+esc(s.name),`<p class="note" style="margin-top:0">${esc(s.vendor)} · ${esc(s.auth)}. The new secret is written to the vault. It is never shown again.</p><div class="fld"><label for="rotSecret">New client secret or API key</label><input id="rotSecret" type="password" autocomplete="new-password" placeholder="Paste the new secret"><div class="err" id="rotErr"></div></div><div class="fld"><label for="rotDays">Expires after</label><select id="rotDays"><option value="90">90 days</option><option value="180" selected>180 days</option><option value="365">365 days</option></select></div>`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="sdRotateOk" data-arg="${s.id}">Save credentials</button>`)};
+ACT.sdRotateOk=id=>{const v=$('#rotSecret').value;if(v.length<8){$('#rotErr').textContent='Enter at least 8 characters.';return}const s=SRC(id);s.credAt=Date.now();s.credDays=+$('#rotDays').value;
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Credentials rotated'});srcEvent(s,'credential.rotated','acknowledged','Secret rotated; old secret revoked');smLogAdd(s,'Credentials rotated');closeModal();
+  if(s.status==='stale'){ACT.reconnect(id);return}if(S.sd&&S.sd.id===id)sdRender();toast('Credentials updated for '+s.name+'.')};
+ACT.srcDel=id=>{if(!canMgr())return toast(NOMGR);const s=SRC(id),use=wfUsing(id),mp=(MAPPINGS[id]||[]).length;
+  openModal('Delete '+esc(s.name)+'?',`<p style="margin-top:0">This disconnects <b>${esc(s.vendor)}</b> from Circularity. Events already received stay in the stream and the audit trail.</p>
+  <ul class="impact"><li>${mp} field mapping${mp===1?'':'s'} will be removed.</li><li>${use.length?`<b>${use.length} workflow${use.length>1?'s':''} use this source</b> and will fail validation: ${esc(use.slice(0,4).join(', '))}${use.length>4?' and '+(use.length-4)+' more':''}.`:'No workflow uses this source.'}</li>${s.write.length?`<li>Approved instructions can no longer be sent to ${esc(s.name)}.</li>`:''}</ul>
+  <div class="fld"><label for="delType">Type <b>${esc(s.name)}</b> to confirm</label><input id="delType" autocomplete="off" data-in="srcDelType" data-arg="${id}"></div>`,
+  `<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn danger" id="delBtn" data-act="srcDelOk" data-arg="${id}" disabled>Delete source</button>`)};
+ACT.srcDelType=(v,el)=>{const s=SRC(el.dataset.arg),b=$('#delBtn');b&&(b.disabled=!s||v.trim().toLowerCase()!==s.name.toLowerCase())};
+ACT.srcDelOk=id=>{const i=SOURCES.findIndex(x=>x.id===id);if(i<0)return;const s=SOURCES[i],mp=MAPPINGS[id];SOURCES.splice(i,1);delete MAPPINGS[id];
+  srcEvent(s,'connector.deleted','acknowledged',s.vendor+' disconnected and removed from the Source map');S.smLog.unshift({ts:Date.now(),id:s.id,text:'Connection deleted',kind:'bad'});
+  closeModal();if(S.sd&&S.sd.id===id){closeDrawer(true)}smRefresh();const el=$('#smLog');el&&(el.innerHTML=smLogHTML());wfPaletteRefresh();wfPaint2();
+  toastAct(s.name+' ('+s.vendor+') deleted.','Undo',()=>{if(SRC(id))return;SOURCES.splice(Math.min(i,SOURCES.length),0,s);MAPPINGS[id]=mp;rebuildLookups();srcEvent(s,'connector.restored','acknowledged','Deletion undone');smRefresh();wfPaletteRefresh();wfPaint2();toast(s.name+' restored.')})};
+function toastAct(msg,label,fn,ms=8000){const t=document.createElement('div');t.className='toast act';t.setAttribute('role','status');const sp=document.createElement('span');sp.textContent=msg+' ';t.appendChild(sp);const b=document.createElement('button');b.className='toastbtn';b.textContent=label;b.onclick=()=>{fn();t.remove()};t.appendChild(b);$('#toasts').appendChild(t);setTimeout(()=>t.remove(),ms)}
 /* models */
 const CANON_EX={'Asset & component':{asset_id:'MTR-2041',source_refs:['EAM:AST-77120','ERP:INV-5521','WMS:R-77102'],owner_tenant:'Customer A',configuration:'55 kW · IE3 · 250M',location:'Warehouse 1',availability:'available'},
  'Condition & eligibility':{inspection_ref:'INS-20441',grade:'B',life_assessment:{months:36,source:'Engineering',confidence:.9},certificates:['CERT-0381'],policy_version:'POL-3.2'},
@@ -1655,15 +1939,15 @@ ACT.csvCommit=()=>{const st=S.csv;st.committed=true;pushEvent({dir:'in',type:'im
 const WF_W=176,WF_H=62,WF_WH=640;const wfWW=()=>S.wf&&S.wf.kind==='pipe'?1680:1240;
 const WF_LOCK='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 const WF_GRIP='<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg>';
-const SH={crm:'CRM',erp:'ERP',eam:'EAM',plm:'PLM',qms:'QMS',wms:'WMS',insp:'Inspection',mkt:'Markets',rcy:'Recycler',esg:'ESG'};
-const MAP_TARGET={crm:'Demand opportunity',erp:'Demand opportunity',eam:'Asset & component',plm:'Asset & component',qms:'Condition & eligibility',wms:'Asset & component',insp:'Condition & eligibility',mkt:'Demand opportunity',rcy:'Outcome',esg:'Outcome'};
-const SRC_CATS={internal:'Internal systems',streaming:'Streaming and telemetry',external:'External sources'};
-const SRC_CAT_NOTE={internal:'Batch, API and file feeds from systems you own',streaming:'Device and operational events',external:'Partner and market data'};
-const SRC_CAT_OF={crm:'internal',erp:'internal',eam:'internal',plm:'internal',qms:'internal',wms:'internal',insp:'internal',mkt:'external',rcy:'external',esg:'streaming'};
-SOURCES.forEach(x=>x.cat=SRC_CAT_OF[x.id]);
+/* ===== Lookups derived from the Source map, so every system stays separate ===== */
+const SH={},MAP_TARGET={},DELIVER={};
+const DELIVER_X={crm:['proc'],erp:['file','event'],eam:['event','proc'],fsm:['event','proc'],wms:['event','file'],rl:['event'],insp:['event'],repair:['event']};
+const srcLabel=s=>SOURCES.some(o=>o!==s&&o.name===s.name)?s.name+' · '+s.vendor:s.name;
+function rebuildLookups(){SOURCES.forEach(s=>{SH[s.id]=srcLabel(s);MAP_TARGET[s.id]=SRC_TYPES[s.type].target;if(s.write.length)DELIVER[s.id]=['api'].concat(DELIVER_X[s.type]||[]).filter(c=>c!=='event'||/event|webhook/i.test(s.mode));else delete DELIVER[s.id]})}
+rebuildLookups();
+const srcOr=id=>SRC(id)||{id,name:SH[id]||'Deleted source',vendor:'Deleted',status:'unavailable',mode:'—',auth:'—',read:[],write:[],cat:'internal',fresh:'—',deleted:true,authority:[]};
 function srcCh(x){const m=(x.mode+' '+x.auth).toLowerCase(),c=[];if(/api|poll/.test(m))c.push('api');if(/event|webhook/.test(m))c.push('event');if(/csv|sftp/.test(m))c.push('file');return c}
 const CH_ARR={api:'API calls',event:'events',file:'files'},CH_ING={api:'API gateway',event:'Event ingestion',file:'File ingestion'},CH_DEL={api:'REST API calls',event:'events',file:'files',proc:'process orchestration'};
-const DELIVER={crm:['api','proc'],erp:['api','file','event'],eam:['api','event','proc'],wms:['api','event','file'],insp:['api','event']};
 const ACT_TYPES=[
  {id:'a_api',ch:'api',label:'Outbound API call',sub:'REST / SOAP request',desc:'Sends the approved instruction as an API request to the system that owns the work.'},
  {id:'a_evt',ch:'event',label:'Event trigger',sub:'Webhook or queue message',desc:'Publishes the approved instruction as an event that the owning system subscribes to.'},
@@ -1714,51 +1998,163 @@ const WF_TR={
 const WF_NM={evid:'Case evidence',gates:'Six eligibility gates',appr:'Human approval',c_dec:'Decision',c_out:'Outcome'};
 const _n=(id,k,ref,x,y)=>({id,k,ref,x,y}),_e=(a,b,locked)=>({a,b,locked:!!locked});
 const _tail=(N,E,reqFrom)=>{N.push(_n('appr','fixed','appr',24,400),_n('c_dec','fixed','c_dec',262,400),_n('tl_send_instruction','tool','send_instruction',500,400),_n('c_out','fixed','c_out',738,400),_n('tl_reconcile_outcome','tool','reconcile_outcome',976,400));E.push(_e(reqFrom,'appr'),_e('appr','c_dec',1),_e('c_dec','tl_send_instruction'),_e('tl_send_instruction','c_out'),_e('c_out','tl_reconcile_outcome'))};
-const WF_PRE={
- intake:{kind:'pipe',name:'Core evidence intake',desc:'Six systems arrive through the API gateway or event ingestion, are validated and enriched, then mapped into three canonical models and one frozen evidence snapshot.',build(){
-  const N=[],E=[],X=[24,230,436,642,848,1054,1260];
-  N.push(_n('ig_evt','xf','x_evt',X[1],180),_n('ig_api','xf','x_gw',X[1],360),_n('v','xf','x_val',X[2],270));E.push(_e('ig_api','v'),_e('ig_evt','v'));
-  [['eam',90,'x_units','c_asset'],['wms',180,null,'c_asset'],['insp',270,'x_lookup','c_cond'],['qms',360,null,'c_cond'],['erp',450,'x_fx','c_dem'],['crm',540,'x_utc','c_dem']].forEach(([q,y,x,c])=>{
-   N.push(_n('r_'+q,'conn',q,X[0],y));E.push(_e('r_'+q,q==='wms'?'ig_evt':'ig_api'));let prev='v';
-   if(x){N.push(_n('t_'+q,'xf',x,X[3],y));E.push(_e(prev,'t_'+q));prev='t_'+q}
-   N.push(_n('m_'+q,'map',q,X[4],y));E.push(_e(prev,'m_'+q),_e('m_'+q,c))});
-  N.push(_n('c_asset','fixed','c_asset',X[5],135),_n('c_cond','fixed','c_cond',X[5],315),_n('c_dem','fixed','c_dem',X[5],495),_n('snap','fixed','snap',X[6],315));
-  E.push(_e('c_asset','snap',1),_e('c_cond','snap',1),_e('c_dem','snap',1));return{nodes:N,edges:E}}},
- roundtrip:{kind:'pipe',name:'Approved instruction round trip',desc:'An approved decision leaves through one envelope and a delivery method each system accepts: API, event or file. The ERP import log is fetched and the team notified.',build(){
-  const X=[24,230,436,642,848,1054,1260];
-  const N=[_n('c_dec','fixed','c_dec',X[0],250),_n('appr','fixed','appr',X[1],250),_n('t_env','xf','x_env',X[2],250),_n('a_api','act','a_api',X[3],90),_n('a_file','act','a_file',X[3],250),_n('a_evt','act','a_evt',X[3],410),
-   _n('w_eam','wconn','eam',X[4],90),_n('w_erp','wconn','erp',X[4],250),_n('w_wms','wconn','wms',X[4],410),_n('c_out','fixed','c_out',X[5],250),_n('f_cb','xf','x_cb',X[5],520),_n('f_note','xf','x_notify',X[6],520)];
-  const E=[_e('c_dec','appr',1),_e('appr','t_env'),_e('t_env','a_api'),_e('t_env','a_file'),_e('t_env','a_evt'),_e('a_api','w_eam'),_e('a_file','w_erp'),_e('a_evt','w_wms'),_e('w_eam','c_out'),_e('w_erp','c_out'),_e('w_wms','c_out'),_e('w_erp','f_cb'),_e('f_cb','f_note')];return{nodes:N,edges:E}}},
- filebased:{kind:'pipe',name:'File exchange with trigger and callback',desc:'The file-based pattern end to end: poll a trigger file, unzip, chunk and validate a partner file. Then send an approved interface file with a manifest, fetch the import log and notify.',build(){
-  const X=[24,230,436,642,848,1054,1260,1466];
-  const N=[_n('r_rcy','conn','rcy',X[0],80),_n('f_trig','xf','x_trig',X[1],80),_n('f_unzip','xf','x_unzip',X[2],80),_n('f_chunk','xf','x_chunk',X[3],80),_n('v','xf','x_val',X[4],80),_n('m_rcy','map','rcy',X[5],80),_n('c_out','fixed','c_out',X[6],205),
-   _n('c_dec','fixed','c_dec',X[0],330),_n('appr','fixed','appr',X[1],330),_n('t_env','xf','x_env',X[2],330),_n('a_file','act','a_file',X[3],330),_n('f_man','xf','x_man',X[4],330),_n('w_erp','wconn','erp',X[5],330),_n('f_cb','xf','x_cb',X[6],330),_n('f_note','xf','x_notify',X[7],330)];
-  const E=[_e('r_rcy','f_trig'),_e('f_trig','f_unzip'),_e('f_unzip','f_chunk'),_e('f_chunk','v'),_e('v','m_rcy'),_e('m_rcy','c_out'),
-   _e('c_dec','appr',1),_e('appr','t_env'),_e('t_env','a_file'),_e('a_file','f_man'),_e('f_man','w_erp'),_e('w_erp','f_cb'),_e('f_cb','f_note'),_e('w_erp','c_out')];return{nodes:N,edges:E}}},
- partners:{kind:'pipe',name:'Market and partner feeds',desc:'Market comparables arrive through the API gateway and recycler rates through file ingestion, with the stale feed and manual import you would see in practice.',build(){
-  const X=[24,230,436,642,848,1054];
-  const N=[_n('r_mkt','conn','mkt',X[0],110),_n('g_mkt','xf','x_gw',X[1],110),_n('v_mkt','xf','x_val',X[2],110),_n('t_mkt','xf','x_fx',X[3],110),_n('m_mkt','map','mkt',X[4],110),_n('c_dem','fixed','c_dem',X[5],110),
-   _n('r_rcy','conn','rcy',X[0],330),_n('g_rcy','xf','x_file',X[1],330),_n('v_rcy','xf','x_val',X[2],330),_n('t_rcy','xf','x_lookup',X[3],330),_n('m_rcy','map','rcy',X[4],330),_n('c_out','fixed','c_out',X[5],330)];
-  const E=[_e('r_mkt','g_mkt'),_e('g_mkt','v_mkt'),_e('v_mkt','t_mkt'),_e('t_mkt','m_mkt'),_e('m_mkt','c_dem'),_e('r_rcy','g_rcy'),_e('g_rcy','v_rcy'),_e('v_rcy','t_rcy'),_e('t_rcy','m_rcy'),_e('m_rcy','c_out')];return{nodes:N,edges:E}}},
- standard:{kind:'dec',name:'Standard six-gate decision',desc:'Evidence, gates, routes and predictions, a recommendation to a person, then the approved instruction and the returned outcome.',build(){
+/* ===== Workflow templates: one workflow per system, nothing combined ===== */
+const XFORM={eam:'x_units',eng:'x_units',esg:'x_units',erp:'x_fx',proc:'x_fx',mkt:'x_fx',dlr:'x_fx',repair:'x_fx',crm:'x_utc',lease:'x_utc',fsm:'x_utc',rl:'x_utc',wms:'x_utc',insp:'x_lookup',qms:'x_lookup',rcy:'x_lookup'};
+const CANON_FIX={'Asset & component':'c_asset','Condition & eligibility':'c_cond','Demand opportunity':'c_dem','Outcome':'c_out'};
+function bIngest(id){const s=srcOr(id),ch=srcCh(s),N=[],E=[],Y=170;let x=24;const col=()=>{const c=x;x+=206;return c};
+ N.push(_n('r','conn',id,col(),Y));let prev=['r'];
+ const fileOnly=ch.includes('file')&&!ch.includes('api')&&!ch.includes('event');
+ if(fileOnly){['x_trig','x_unzip','x_chunk'].forEach((r,i)=>{N.push(_n('f'+i,'xf',r,col(),Y));E.push(_e(prev[0],'f'+i));prev=['f'+i]})}
+ else{const rs=(ch.includes('api')?['x_gw']:[]).concat(ch.includes('event')?['x_evt']:[]),cx=col(),ids=[];(rs.length?rs:['x_gw']).forEach((r,i,a)=>{const nid='ig'+i;N.push(_n(nid,'xf',r,cx,a.length>1?Y-80+i*160:Y));E.push(_e('r',nid));ids.push(nid)});prev=ids}
+ N.push(_n('v','xf','x_val',col(),Y));prev.forEach(p=>E.push(_e(p,'v')));prev=['v'];
+ const xf=!fileOnly&&XFORM[s.type];if(xf){N.push(_n('t','xf',xf,col(),Y));E.push(_e('v','t'));prev=['t']}
+ N.push(_n('m','map',id,col(),Y));E.push(_e(prev[0],'m'));
+ const c=CANON_FIX[MAP_TARGET[id]||'Outcome'];N.push(_n(c,'fixed',c,col(),Y));E.push(_e('m',c));
+ if(c!=='c_out'&&!fileOnly){N.push(_n('snap','fixed','snap',col(),Y));E.push(_e(c,'snap',1))}
+ return{nodes:N,edges:E}}
+function bOut(id,ch){const N=[],E=[],X=[24,230,436,642,848,1054,1260,1466],Y=200,rec={api:'a_api',event:'a_evt',file:'a_file',proc:'a_proc'}[ch]||'a_api';
+ N.push(_n('c_dec','fixed','c_dec',X[0],Y),_n('appr','fixed','appr',X[1],Y),_n('t_env','xf','x_env',X[2],Y),_n('a','act',rec,X[3],Y));E.push(_e('c_dec','appr',1),_e('appr','t_env'),_e('t_env','a'));
+ let prev='a',i=4;if(ch==='file'){N.push(_n('f_man','xf','x_man',X[i++],Y));E.push(_e(prev,'f_man'));prev='f_man'}
+ N.push(_n('w','wconn',id,X[i++],Y));E.push(_e(prev,'w'));N.push(_n('c_out','fixed','c_out',X[i],Y));E.push(_e('w','c_out'));
+ if(ch==='file'){N.push(_n('f_cb','xf','x_cb',X[i],Y+170),_n('f_note','xf','x_notify',X[i+1],Y+170));E.push(_e('w','f_cb'),_e('f_cb','f_note'))}
+ return{nodes:N,edges:E}}
+const WF_DEC={
+ standard:{name:'Standard six-gate decision',desc:'Evidence, gates, routes and predictions, a recommendation to a person, then the approved instruction and the returned outcome.',build(){
   const N=[_n('evid','fixed','evid',24,130),_n('gates','fixed','gates',262,130),_n('tl_list_eligible_routes','tool','list_eligible_routes',500,130),_n('tl_predict_outcomes','tool','predict_outcomes',738,130),_n('tl_request_approval','tool','request_approval',976,130)];
   const E=[_e('evid','gates',1),_e('gates','tl_list_eligible_routes'),_e('tl_list_eligible_routes','tl_predict_outcomes'),_e('tl_predict_outcomes','tl_request_approval')];_tail(N,E,'tl_request_approval');return{nodes:N,edges:E}}},
- pool:{kind:'dec',name:'Pool allocation to approval',desc:'Scarce assets are allocated across demand after the gates, then sent for approval and out to the owning systems.',build(){
+ pool:{name:'Pool allocation to approval',desc:'Scarce assets are allocated across demand after the gates, then sent for approval and out to the owning systems.',build(){
   const N=[_n('evid','fixed','evid',24,130),_n('gates','fixed','gates',262,130),_n('tl_predict_outcomes','tool','predict_outcomes',500,130),_n('tl_optimize_pool','tool','optimize_pool',738,130),_n('tl_request_approval','tool','request_approval',976,130)];
   const E=[_e('evid','gates',1),_e('gates','tl_predict_outcomes'),_e('tl_predict_outcomes','tl_optimize_pool'),_e('tl_optimize_pool','tl_request_approval')];_tail(N,E,'tl_request_approval');return{nodes:N,edges:E}}},
- gap:{kind:'dec',name:'Evidence gaps and demand first',desc:'Missing evidence is requested and demand is found before the gates run, so fewer routes are withheld.',build(){
+ gap:{name:'Evidence gaps and demand first',desc:'Missing evidence is requested and demand is found before the gates run, so fewer routes are withheld.',build(){
   const N=[_n('evid','fixed','evid',24,130),_n('tl_request_missing_evidence','tool','request_missing_evidence',262,20),_n('tl_find_demand','tool','find_demand',262,250),_n('gates','fixed','gates',500,130),_n('tl_list_eligible_routes','tool','list_eligible_routes',738,130),_n('tl_request_approval','tool','request_approval',976,130)];
   const E=[_e('evid','gates',1),_e('evid','tl_request_missing_evidence'),_e('tl_request_missing_evidence','gates'),_e('evid','tl_find_demand'),_e('tl_find_demand','gates'),_e('gates','tl_list_eligible_routes'),_e('tl_list_eligible_routes','tl_request_approval')];_tail(N,E,'tl_request_approval');return{nodes:N,edges:E}}}
 };
+function wfBuild(t){const g=t.k==='ingest'?bIngest(t.src):t.k==='out'?bOut(t.src,t.ch):t.k==='dec'?WF_DEC[t.id].build():{nodes:[],edges:[]};g.edges.forEach((e,i)=>e.id='e'+i);return g}
+const TRIG_L={schedule:w=>'Every '+w.min+' min',event:()=>'On event',approval:()=>'On approval',manual:()=>'Manual',case:()=>'On case request',file:()=>'On file arrival'};
+const trigText=t=>(TRIG_L[t.t]||TRIG_L.manual)(t);
+const ageShort=ms=>{const s=Math.max(0,Math.floor(ms/1000));return s<60?s+' s':s<3600?Math.floor(s/60)+' min '+(s%60)+' s':s<172800?Math.floor(s/3600)+' h '+Math.floor(s%3600/60)+' min':Math.floor(s/86400)+' days'};
+const wfStat=w=>w.status==='published'&&w.last&&w.last.state==='failed'?'failing':w.status;
+const wfStatChip=s=>({published:'<span class="chip ok">Published</span>',draft:'<span class="chip line">Draft</span>',paused:'<span class="chip warn">Paused</span>',failing:'<span class="chip bad">Failing</span>'})[s];
+function wfGraphOf(w){if(!w.graph){w.graph=wfBuild(w.tpl);w.saved=wfSnap(w)}return w.graph}
+const wfSnap=w=>JSON.stringify({g:w.graph,m:{name:w.name,owner:w.owner,trig:w.trig}});
+function wfSimOutcome(w){const g=wfGraphOf(w),v=wfValidate(g,w.kind),er=v.filter(x=>x.sev==='error');
+ if(er.length)return{state:'failed',note:er[0].msg.length>96?er[0].msg.slice(0,94)+'…':er[0].msg};
+ const ss=g.nodes.filter(n=>n.k==='conn'||n.k==='wconn').map(n=>srcOr(n.ref)),st=ss.find(s=>s.status==='stale');
+ if(st)return{state:'warning',note:st.name+' feed is stale; last fresh data used'};
+ const mn=ss.find(s=>s.status==='manual');return{state:'success',note:mn?mn.name+' is a controlled import':''}}
+function wfSeed(){const L=[];let n=100;const now=Date.now();
+ const add=o=>{n++;L.push(Object.assign({id:'WF-'+n,status:'published',ver:'1.'+(n%7+1),graph:null,saved:null,dirty:false,running:false,updated:now-(n%9+1)*86400000},o))};
+ SOURCES.forEach(s=>add({name:'Ingest · '+s.vendor,desc:s.name+' into the '+SRC_TYPES[s.type].target+' model through validation and field mapping.',cat:'Ingest',kind:'pipe',tpl:{k:'ingest',src:s.id},src:s.id,owner:s.owner,trig:s.status==='manual'?{t:'file'}:s.interval?{t:'schedule',min:s.interval}:{t:'event'},status:s.status==='unavailable'?'draft':'published'}));
+ SOURCES.filter(s=>s.write.length).forEach(s=>{(s.type==='erp'?['api','file']:['api']).forEach(ch=>add({name:'Outbound · '+s.vendor+(ch==='file'?' (interface file)':''),desc:'Approved instruction to '+s.name+' by '+({api:'REST API call',file:'interface file with manifest and import log'})[ch]+'.',cat:'Outbound',kind:'pipe',tpl:{k:'out',src:s.id,ch},src:s.id,owner:s.owner,trig:{t:'approval'}}))});
+ Object.keys(WF_DEC).forEach(k=>add({name:WF_DEC[k].name,desc:WF_DEC[k].desc,cat:'Decision',kind:'dec',tpl:{k:'dec',id:k},src:null,owner:'Decision Services',trig:{t:'case'}}));
+ L.forEach(w=>{const o=wfSimOutcome(w),every=w.trig.t==='schedule'?w.trig.min:w.trig.t==='event'?10:60;w.runsN=w.status==='draft'?0:Math.min(288,Math.round(1440/every));w.okN=Math.round(w.runsN*(o.state==='failed'?.62:.985));
+  if(w.status!=='draft')w.last={ts:now-rr(20,every*50)*1000,state:o.state,dur:rr(8,60)/10,rows:rr(30,900),note:o.note}});
+ return L}
+function wfSeedRuns(){const r=[];S.wf.list.filter(w=>w.last).slice(0,9).forEach((w,i)=>r.push({id:'RUN-'+hashId(w.id+i).slice(0,5).toUpperCase(),wf:w.id,name:w.name,ts:w.last.ts,trig:w.trig.t==='schedule'?'Schedule':w.trig.t==='approval'?'Approval':'Event',dur:w.last.dur,rows:w.last.rows,state:w.last.state,note:w.last.note}));S.wf.runs=r.sort((a,b)=>b.ts-a.ts)}
+const WFN={next:Date.now()+7000};
+function wfInit(){if(S.wf)return;S.wf={kind:'pipe',cur:null,list:[],sel:null,z:.75,run:null,seq:100,pal:{},f:{q:'',type:'',st:''},runs:[]};S.wf.list=wfSeed();wfSeedRuns()}
+const wfPid=()=>S.wf.cur.id;
+const wfGraph=()=>wfGraphOf(S.wf.cur);
+const WFW=id=>S.wf.list.find(x=>x.id===id);
+function wfUsing(id){return S.wf?S.wf.list.filter(w=>w.graph?w.graph.nodes.some(n=>n.ref===id&&(n.k==='conn'||n.k==='wconn'||n.k==='map')):w.src===id).map(w=>w.name):[]}
+function wfAddForSource(s){wfInit();let n=100;while(S.wf.list.some(w=>w.id==='WF-'+n))n++;n++;while(S.wf.list.some(w=>w.id==='WF-'+n))n++;
+ S.wf.list.push({id:'WF-'+n,status:'draft',ver:'0.1',graph:null,saved:null,dirty:false,running:false,updated:Date.now(),name:'Ingest · '+s.vendor,desc:s.name+' into the '+SRC_TYPES[s.type].target+' model through validation and field mapping.',cat:'Ingest',kind:'pipe',tpl:{k:'ingest',src:s.id},src:s.id,owner:s.owner,trig:s.status==='manual'?{t:'file'}:s.interval?{t:'schedule',min:s.interval}:{t:'event'},runsN:0,okN:0,last:null})}
+/* ---- list view ---- */
+function wfFilter(){const f=S.wf.f,q=f.q.trim().toLowerCase();return S.wf.list.filter(w=>(!f.type||w.cat===f.type)&&(!f.st||wfStat(w)===f.st)&&(!q||(w.name+' '+w.id+' '+w.owner+' '+(w.src?srcOr(w.src).vendor:'')).toLowerCase().includes(q)))}
+function wfRowHTML(w){const s=w.src?srcOr(w.src):null,st=wfStat(w),l=w.last,ok=w.runsN?Math.round(w.okN/w.runsN*100):null;
+ return `<tr data-wid="${w.id}"><td><button class="lnk b" data-act="wfOpen" data-arg="${w.id}">${esc(w.name)}</button><div class="note">${w.id} · v${w.ver}${w.dirty?' · unsaved changes':''}</div></td><td><span class="chip line">${w.cat}</span></td>
+ <td>${s?`<span class="row" style="gap:8px;flex-wrap:nowrap">${vlogo(s)}<span><b>${esc(s.deleted?'Deleted source':srcLabel(s))}</b><div class="note">${esc(s.vendor)}</div></span></span>`:'<span class="note">Circularity</span>'}</td>
+ <td class="nowrap">${esc(trigText(w.trig))}</td><td>${w.running?'<span class="chip y"><span class="spin"></span>Running</span>':wfStatChip(st)}</td>
+ <td>${l?`<span class="chip ${WF_STC[l.state]}">${WF_STL[l.state]}</span><div class="note"><span class="num" data-wage="${w.id}">${ageShort(Date.now()-l.ts)}</span> ago${l.note?' · '+esc(l.note):''}</div>`:'<span class="note">Never run</span>'}</td>
+ <td class="r num">${ok==null?'—':ok+'%'}</td><td>${esc(w.owner)}</td>
+ <td class="nowrap"><span class="tacts" style="display:inline-flex"><button class="tbtn" data-act="wfOpen" data-arg="${w.id}">Edit</button><button class="tbtn" data-act="wfRunNow" data-arg="${w.id}" ${w.running?'disabled':''}>Run</button>${w.status==='draft'?`<button class="tbtn" data-act="wfToggle" data-arg="${w.id}">Publish</button>`:`<button class="tbtn" data-act="wfToggle" data-arg="${w.id}">${w.status==='paused'?'Resume':'Pause'}</button>`}<button class="tbtn" data-act="wfDup" data-arg="${w.id}">Copy</button><button class="tbtn dng" data-act="wfDelAsk" data-arg="${w.id}">Delete</button></span></td></tr>`}
+function wfChipsHTML(){const c={published:0,draft:0,paused:0,failing:0};S.wf.list.forEach(w=>c[wfStat(w)]++);const b=(k,cls,t)=>c[k]?`<button class="chip ${cls} chipb" data-act="wfSt" data-arg="${k}" aria-pressed="${S.wf.f.st===k}">${c[k]} ${t}</button>`:'';
+ return `<span class="chip line">${S.wf.list.length} workflows</span>${b('published','ok','published')}${b('failing','bad','failing')}${b('paused','warn','paused')}${b('draft','line','draft')}`}
+function wfBodyHTML(){const l=wfFilter();return l.map(wfRowHTML).join('')||`<tr><td colspan="9"><div class="empty"><b>No workflows match</b>Clear the filters or create a new workflow.</div></td></tr>`}
+function wfRunsHTML(){const r=S.wf.runs.slice(0,12);return r.length?`<table class="t static tight"><thead><tr><th>Run</th><th>Workflow</th><th>Trigger</th><th>Started</th><th class="r">Duration</th><th class="r">Records</th><th>Result</th></tr></thead><tbody>${r.map(x=>`<tr><td class="mono">${x.id}</td><td>${esc(x.name)}</td><td>${x.trig}</td><td class="num nowrap">${new Date(x.ts).toTimeString().slice(0,8)}</td><td class="r num">${x.dur} s</td><td class="r num">${fmtN(x.rows)}</td><td><span class="chip ${WF_STC[x.state]}">${WF_STL[x.state]}</span>${x.note?`<div class="note">${esc(x.note)}</div>`:''}</td></tr>`).join('')}</tbody></table>`:'<div class="empty"><b>No runs yet</b>Runs appear here as workflows fire on their triggers.</div>'}
+function wfListHTML(){const f=S.wf.f;
+ return `<div class="smbar"><div class="row smchips" id="wfChips">${wfChipsHTML()}</div><span class="grow"></span><input type="search" class="smq" placeholder="Search workflow, owner or system" value="${esc(f.q)}" data-in="wfQ" aria-label="Search workflows"><label class="sr" for="wfTypeF">Type</label><select class="sel" id="wfTypeF" data-ch="wfTypeF"><option value="">All types</option>${['Ingest','Outbound','Decision'].map(t=>`<option ${f.type===t?'selected':''}>${t}</option>`).join('')}</select><button class="btn pri" data-act="wfNew">+ New workflow</button></div>
+ <p class="note" style="margin:0 0 10px">Each workflow stands alone: one source system in and one canonical model out, or one target system per outbound instruction. Open one to edit it on the canvas. <span class="livedot"><i></i>Live</span></p>
+ <div class="panel"><div class="tw"><table class="t wftbl"><thead><tr><th>Workflow</th><th>Type</th><th>System</th><th>Trigger</th><th>Status</th><th>Last run</th><th class="r">24 h success</th><th>Owner</th><th>Actions</th></tr></thead><tbody id="wfBody">${wfBodyHTML()}</tbody></table></div></div>
+ <div class="sect"><div class="sh"><h2>Recent runs</h2><span class="livedot"><i></i>Streaming</span></div><div class="panel"><div class="tw" id="wfRuns">${wfRunsHTML()}</div></div></div>`}
+function wfRowPatch(w){const r=$(`tr[data-wid="${w.id}"]`);if(r){const t=document.createElement('tbody');t.innerHTML=wfRowHTML(w);r.replaceWith(t.firstElementChild)}const c=$('#wfChips');c&&(c.innerHTML=wfChipsHTML())}
+function wfListRefresh(){const b=$('#wfBody');if(b){b.innerHTML=wfBodyHTML();const c=$('#wfChips');c&&(c.innerHTML=wfChipsHTML());const r=$('#wfRuns');r&&(r.innerHTML=wfRunsHTML())}}
+function wfStartRun(w,trig){if(w.running)return;w.running=true;wfRowPatch(w);const ing=w.cat==='Ingest'&&w.src&&SRC(w.src);if(ing&&ing.status==='live')startSync(ing,true);
+ const dur=rr(10,45)/10;setTimeout(()=>{if(!S.wf||!S.wf.list.includes(w))return;const o=wfSimOutcome(w),rows=w.cat==='Outbound'?rr(1,6):w.cat==='Decision'?1:rr(30,900),now=Date.now();
+  w.running=false;w.last={ts:now,state:o.state,dur,rows,note:o.note};w.runsN++;if(o.state!=='failed')w.okN++;
+  S.wf.runs.unshift({id:'RUN-'+hashId(w.id+now).slice(0,5).toUpperCase(),wf:w.id,name:w.name,ts:now,trig,dur,rows,state:o.state,note:o.note});S.wf.runs.length=Math.min(S.wf.runs.length,40);
+  wfRowPatch(w);const r=$('#wfRuns');r&&(r.innerHTML=wfRunsHTML());if(trig==='Manual')toast(w.name+': '+(o.state==='failed'?'run failed. '+o.note:'run finished, '+fmtN(rows)+' records.'),4000)},dur*1000)}
+function wfTick(now){wfInit();$$('[data-wage]').forEach(el=>{const w=WFW(el.dataset.wage);w&&w.last&&(el.textContent=ageShort(now-w.last.ts))});
+ if(now>=WFN.next){WFN.next=now+6000+Math.random()*9000;const p=S.wf.list.filter(w=>w.status==='published'&&!w.running&&w.cat!=='Decision'&&w.runsN>0);if(p.length){const w=p[Math.floor(Math.random()*p.length)];wfStartRun(w,w.trig.t==='schedule'?'Schedule':w.trig.t==='approval'?'Approval':'Event')}}}
+function wfPaletteRefresh(){const p=$('#wfPal');p&&S.wf&&S.wf.cur&&(p.innerHTML=wfPalHTML())}
+function wfPaint2(){if(!S.wf)return;if(S.wf.cur&&$('#wfView')){$('#wfWorld').innerHTML=wfWorldHTML();wfPaint()}else wfListRefresh()}
+function wfDirty(){const c=S.wf&&S.wf.cur;if(!c||c.dirty)return;c.dirty=true;wfDirtyUI()}
+function wfDirtyUI(){const c=S.wf.cur,d=$('#wfDirty');if(!c||!d)return;d.innerHTML=c.dirty?'<span class="chip y">Unsaved changes</span>':'';[$('#wfSaveB'),$('#wfDiscB')].forEach(b=>b&&(b.disabled=!c.dirty))}
+/* ---- editor header ---- */
+function wfEditorHead(){const c=S.wf.cur,t=c.trig;
+ return `<div class="wfbar"><button class="btn sm" data-act="wfBack">← All workflows</button><div class="wfname"><label class="sr" for="wfName">Workflow name</label><input id="wfName" value="${esc(c.name)}" data-in="wfName" maxlength="80"></div><span id="wfStat">${wfStatChip(wfStat(c))}</span><span class="note num">${c.id} · v${c.ver}</span><span id="wfDirty">${c.dirty?'<span class="chip y">Unsaved changes</span>':''}</span><span class="grow"></span>
+ <button class="btn sm" id="wfDiscB" data-act="wfDiscard" ${c.dirty?'':'disabled'}>Discard</button><button class="btn sm" data-act="wfReset">Reset to template</button><button class="btn sm" data-act="wfValidate">Validate</button><button class="btn sm" data-act="wfRun">${ICON.play}Run simulation</button><button class="btn sm" id="wfSaveB" data-act="wfSave" ${c.dirty?'':'disabled'}>Save</button><button class="btn sm pri" data-act="wfPublish">${c.status==='published'?'Unpublish':'Publish'}</button></div>
+ <div class="wfset"><div class="fld"><label for="wfTrig">Trigger</label><select id="wfTrig" data-ch="wfTrig">${[['schedule','On a schedule'],['event','On event'],['approval','On approval'],['file','On file arrival'],['case','On case request'],['manual','Manual only']].map(o=>`<option value="${o[0]}" ${t.t===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></div>${t.t==='schedule'?`<div class="fld" style="width:120px"><label for="wfMin">Every (min)</label><input id="wfMin" type="number" min="1" max="1440" value="${t.min}" data-in="wfMin"></div>`:''}<div class="fld"><label for="wfOwn">Owner</label><input id="wfOwn" value="${esc(c.owner)}" data-in="wfOwn" maxlength="60"></div><span class="grow"></span><button class="btn sm" data-act="wfDup" data-arg="${c.id}">Duplicate</button><button class="btn sm danger" data-act="wfDelAsk" data-arg="${c.id}">Delete workflow</button></div>`}
+function wfHTML(){wfInit();if(!S.wf.cur)return wfListHTML();const ih=wfInspHTML(),w=S.wf,c=w.cur;
+ return`${wfEditorHead()}
+ <p class="note" style="margin:-4px 0 12px;max-width:90ch">${esc(c.desc)}</p>
+ <div class="wf ${ih.trim()?'':'noinsp'}"><aside class="wfpal" id="wfPal" aria-label="Movable steps. Drag one onto the canvas, or press Enter to add it.">${wfPalHTML()}</aside>
+  <div class="wfcanvas"><div class="wfzoom" role="group" aria-label="Zoom"><button data-act="wfZoom" data-arg="-1" aria-label="Zoom out">−</button><span id="wfZ">${Math.round(w.z*100)}%</span><button data-act="wfZoom" data-arg="1" aria-label="Zoom in">+</button><button data-act="wfZoom" data-arg="0" aria-label="Fit to width">Fit</button></div>
+   <div class="wfview" id="wfView" tabindex="0" role="group" aria-label="Workflow canvas. Select a step, then use arrow keys to move it or Delete to remove it."><div id="wfSizer" style="width:${wfWW()*w.z}px;height:${WF_WH*w.z}px"><div id="wfWorld" style="width:${wfWW()}px;height:${WF_WH}px;transform:scale(${w.z})">${wfWorldHTML()}</div></div></div>
+   <div class="wflegend"><span><i class="f"></i>Fixed · owned by Circularity</span><span><i class="m"></i>Movable · yours to arrange</span></div></div>
+  <aside class="wfinsp" id="wfInsp">${ih}</aside></div>
+ <div class="wfbot"><div class="panel"><div class="ph"><h3>Checks</h3><span id="wfSum"></span></div><div id="wfChecks"></div></div><div class="panel wfrun"><div class="ph"><h3>Simulated run</h3><span id="wfRunSum"></span></div><div id="wfRun"></div></div></div>`}
+/* ---- workflow actions: open, save, publish, duplicate, delete, create ---- */
+ACT.wfQ=v=>{S.wf.f.q=v;const b=$('#wfBody');b&&(b.innerHTML=wfBodyHTML())};
+ACT.wfTypeF=v=>{S.wf.f.type=v;wfListRefresh()};
+ACT.wfSt=v=>{S.wf.f.st=S.wf.f.st===v?'':v;wfListRefresh()};
+ACT.wfOpen=id=>{const w=WFW(id);if(!w)return;wfRunClear();S.wf.cur=w;S.wf.kind=w.kind;S.wf.sel=null;S.wf.z=.75;w.warned=false;wfGraphOf(w);route(true)};
+ACT.wfBack=()=>{const c=S.wf.cur;if(c.dirty&&!c.warned){c.warned=true;toast('You have unsaved changes. Save or Discard them, or choose All workflows again to leave them unsaved.');return}wfRunClear();c.warned=false;S.wf.cur=null;S.wf.sel=null;route(true)};
+ACT.wfName=v=>{const c=S.wf.cur;c.name=v;wfDirty()};ACT.wfOwn=v=>{S.wf.cur.owner=v;wfDirty()};
+ACT.wfMin=v=>{const m=+v;if(m>=1&&m<=1440){S.wf.cur.trig.min=m;wfDirty()}};
+ACT.wfTrig=v=>{const c=S.wf.cur;c.trig=v==='schedule'?{t:'schedule',min:15}:{t:v};wfDirty();route(true)};
+ACT.wfSave=()=>{if(!canMgr())return toast(NOMGR);const c=S.wf.cur;if(!c.name.trim()){toast('Enter a workflow name before saving.');return}
+ c.name=c.name.trim();const [a,b]=c.ver.split('.');c.ver=a+'.'+(+b+1);c.updated=Date.now();c.dirty=false;c.warned=false;c.saved=wfSnap(c);toast(c.name+' saved as v'+c.ver+'.');route(true)};
+ACT.wfDiscard=()=>{const c=S.wf.cur;if(!c.saved)return;const o=JSON.parse(c.saved);c.graph=o.g;c.name=o.m.name;c.owner=o.m.owner;c.trig=o.m.trig;c.dirty=false;c.warned=false;wfRunClear();S.wf.sel=null;route(true);toast('Changes discarded. Back to v'+c.ver+'.')};
+ACT.wfReset=()=>{const c=S.wf.cur;wfRunClear();c.graph=wfBuild(c.tpl);S.wf.sel=null;c.dirty=true;route(true);toast('Workflow reset to its template. Save to keep it.')};
+ACT.wfPublish=()=>{if(!canMgr())return toast(NOMGR);const c=S.wf.cur;
+ if(c.status==='published'){c.status='draft';toast(c.name+' unpublished. It will no longer run on its trigger.');route(true);return}
+ const er=wfValidate(wfGraph(),c.kind).filter(x=>x.sev==='error');if(er.length){toast('Cannot publish: '+er.length+' error'+(er.length>1?'s':'')+' in the checks. Fix them first.');const k=$('#wfChecks');k&&k.scrollIntoView({block:'nearest',behavior:'smooth'});return}
+ if(c.dirty){c.saved=wfSnap(c);const [a,b]=c.ver.split('.');c.ver=a+'.'+(+b+1);c.dirty=false}
+ c.status='published';c.updated=Date.now();toast(c.name+' published as v'+c.ver+'. It runs on its trigger: '+trigText(c.trig)+'.');route(true)};
+ACT.wfToggle=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);
+ if(w.status==='draft'){const er=wfValidate(wfGraphOf(w),w.kind).filter(x=>x.sev==='error');if(er.length){toast('Cannot publish '+w.name+': '+er[0].msg);return}w.status='published';toast(w.name+' published.')}
+ else if(w.status==='published'){w.status='paused';toast(w.name+' paused. Scheduled runs stop until you resume it.')}else{w.status='published';toast(w.name+' resumed.')}
+ wfRowPatch(w)};
+ACT.wfRunNow=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);if(w.status==='draft'){const o=wfSimOutcome(w);if(o.state==='failed'){toast(w.name+' is a draft with errors: '+o.note);return}}wfStartRun(w,'Manual')};
+ACT.wfDup=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);let n=100;while(S.wf.list.some(x=>x.id==='WF-'+n))n++;
+ const c=Object.assign({},w,{id:'WF-'+n,name:w.name+' (copy)',status:'draft',ver:'0.1',graph:JSON.parse(JSON.stringify(wfGraphOf(w))),dirty:false,running:false,last:null,runsN:0,okN:0,trig:Object.assign({},w.trig),updated:Date.now(),warned:false});c.saved=wfSnap(c);S.wf.list.push(c);toast('Copy created as a draft: '+c.name+'.');if(S.wf.cur){S.wf.cur=c;S.wf.sel=null;route(true)}else wfListRefresh()};
+ACT.wfDelAsk=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);openModal('Delete '+esc(w.name)+'?',`<p style="margin-top:0">This removes <b>${esc(w.name)}</b> (${w.id}, v${w.ver}) and stops its trigger. Source systems and run history are not affected.</p>${w.status==='published'?'<div class="callout">This workflow is published. Anything that depends on its trigger will stop running.</div>':''}`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn danger" data-act="wfDelOk" data-arg="${id}">Delete workflow</button>`)};
+ACT.wfDelOk=id=>{const i=S.wf.list.findIndex(x=>x.id===id);if(i<0)return;const w=S.wf.list[i];S.wf.list.splice(i,1);closeModal();if(S.wf.cur===w){S.wf.cur=null;S.wf.sel=null;wfRunClear()}route(true);
+ toastAct(w.name+' deleted.','Undo',()=>{if(S.wf.list.includes(w))return;S.wf.list.splice(Math.min(i,S.wf.list.length),0,w);route(true);toast(w.name+' restored.')})};
+function wfNewRender(){const n=S.wfn,rd=SOURCES.filter(s=>s.read.length||s.status==='unavailable'),wr=SOURCES.filter(s=>s.write.length),auto=n.type==='ingest'?'Ingest · '+(SRC(n.src)||{vendor:''}).vendor:n.type==='out'?'Outbound · '+(SRC(n.src)||{vendor:''}).vendor:n.type==='dec'?'Decision workflow':'New pipeline';
+ const list=n.type==='ingest'?rd:wr,chs=(DELIVER[n.src]||['api']);
+ openModal('New workflow',`<div class="fld"><label for="nwType">Workflow type</label><select id="nwType" data-ch="nwF" data-k="type">${[['ingest','Ingest pipeline · one source system into a canonical model'],['out','Outbound instruction · one target system'],['dec','Decision workflow · six gates to approval'],['blank','Blank pipeline']].map(o=>`<option value="${o[0]}" ${n.type===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></div>
+  ${n.type==='ingest'||n.type==='out'?`<div class="fld"><label for="nwSrc">${n.type==='ingest'?'Source system':'Target system'}</label><select id="nwSrc" data-ch="nwF" data-k="src">${list.map(s=>`<option value="${s.id}" ${n.src===s.id?'selected':''}>${esc(srcLabel(s))} · ${esc(s.vendor)}</option>`).join('')}</select></div>`:''}
+  ${n.type==='out'?`<div class="fld"><label for="nwCh">Delivery method</label><select id="nwCh" data-ch="nwF" data-k="ch">${chs.map(c=>`<option value="${c}" ${n.ch===c?'selected':''}>${({api:'Outbound API call',event:'Event trigger',file:'Interface file',proc:'Process orchestration'})[c]}</option>`).join('')}</select></div>`:''}
+  <div class="fld"><label for="nwName">Name</label><input id="nwName" value="${esc(n.name)}" placeholder="${esc(auto)}" data-in="nwName" maxlength="80"></div>`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="wfNewOk">Create workflow</button>`)}
+ACT.wfNew=()=>{if(!canMgr())return toast(NOMGR);const f=SOURCES.find(s=>s.read.length)||SOURCES[0];S.wfn={type:'ingest',src:f?f.id:'',ch:'api',name:''};wfNewRender()};
+ACT.nwF=(v,el)=>{const n=S.wfn,k=el.dataset.k;n[k]=v;if(k==='type'){const l=v==='ingest'?SOURCES.filter(s=>s.read.length||s.status==='unavailable'):SOURCES.filter(s=>s.write.length);if(!l.some(s=>s.id===n.src))n.src=l[0]?l[0].id:''}if(k==='type'||k==='src')n.ch=(DELIVER[n.src]||['api'])[0];wfNewRender()};
+ACT.nwName=v=>{S.wfn.name=v};
+ACT.wfNewOk=()=>{wfInit();const n=S.wfn,s=SRC(n.src);if((n.type==='ingest'||n.type==='out')&&!s){toast('Choose a system first.');return}
+ let k=100;while(S.wf.list.some(x=>x.id==='WF-'+k))k++;k=Math.max(k,100+S.wf.list.length);while(S.wf.list.some(x=>x.id==='WF-'+k))k++;
+ const nm=n.name.trim()||(n.type==='ingest'?'Ingest · '+s.vendor:n.type==='out'?'Outbound · '+s.vendor:n.type==='dec'?'Decision workflow':'New pipeline');
+ const base=n.type==='ingest'?{cat:'Ingest',kind:'pipe',tpl:{k:'ingest',src:s.id},src:s.id,owner:s.owner,trig:s.interval?{t:'schedule',min:s.interval}:{t:'event'},desc:s.name+' into the '+SRC_TYPES[s.type].target+' model through validation and field mapping.'}
+  :n.type==='out'?{cat:'Outbound',kind:'pipe',tpl:{k:'out',src:s.id,ch:n.ch},src:s.id,owner:s.owner,trig:{t:'approval'},desc:'Approved instruction to '+s.name+'.'}
+  :n.type==='dec'?{cat:'Decision',kind:'dec',tpl:{k:'dec',id:'standard'},src:null,owner:'Decision Services',trig:{t:'case'},desc:WF_DEC.standard.desc}
+  :{cat:'Ingest',kind:'pipe',tpl:{k:'blank'},src:null,owner:'Unassigned',trig:{t:'manual'},desc:'Blank pipeline. Drag steps from the left and connect them.'};
+ const w=Object.assign({id:'WF-'+k,name:nm,status:'draft',ver:'0.1',graph:null,saved:null,dirty:false,running:false,updated:Date.now(),runsN:0,okN:0,last:null},base);S.wf.list.push(w);closeModal();toast(nm+' created as a draft. Arrange it, then Save and Publish.');ACT.wfOpen(w.id)};
 const WF={t:null,drag:null,link:null,pal:null};
 const wfClamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function wfInit(){if(S.wf)return;S.wf={kind:'pipe',pre:{pipe:'intake',dec:'standard'},g:{},sel:null,z:.75,run:null,seq:100,pal:{}}}
-function wfPid(){return S.wf.pre[S.wf.kind]}
-function wfGraph(){const id=wfPid();if(!S.wf.g[id]){const g=WF_PRE[id].build();g.edges.forEach((e,i)=>e.id='e'+i);S.wf.g[id]=g}return S.wf.g[id]}
 const wfNode=id=>wfGraph().nodes.find(n=>n.id===id);
 function wfInfo(n){
  if(n.k==='fixed'){const f=FXD[n.ref];return{label:f.label,sub:f.sub,tag:f.canon?'Fixed · canonical model':'Fixed · platform',in:f.in,out:f.out,desc:f.desc}}
- if(n.k==='conn'||n.k==='wconn'){const s=SOURCES.find(x=>x.id===n.ref),w=n.k==='wconn';return{label:s.name,sub:w?(s.write[0]||'No write operations'):s.vendor+' · '+s.mode,tag:w?'Connector · write':'Connector · read',in:w,out:true,desc:w?'Sends approved instructions to the system that owns the work, and reports its acknowledgement back.':'Reads evidence from the system that owns it. The source system keeps owning its transactions.'}}
+ if(n.k==='conn'||n.k==='wconn'){const s=srcOr(n.ref),w=n.k==='wconn';return{label:s.deleted?'Deleted source':srcLabel(s),sub:s.deleted?'Reconnect or remove this step':w?(s.write[0]||'No write operations'):s.vendor+' · '+s.mode,tag:w?'Connector · write':'Connector · read',in:w,out:true,desc:w?'Sends approved instructions to the system that owns the work, and reports its acknowledgement back.':'Reads evidence from the system that owns it. The source system keeps owning its transactions.'}}
  if(n.k==='act'){const a=ACT_TYPES.find(t=>t.id===n.ref);return{label:a.label,sub:a.sub,tag:'Delivery method',in:true,out:true,desc:a.desc}}
  if(n.k==='xf'){const x=XF.find(t=>t.id===n.ref);return{label:x.label,sub:x.sub,tag:x.group==='ingest'?'Integration layer':x.group==='file'?'File exchange':'Transform',in:true,out:true,desc:x.desc}}
  if(n.k==='map'){const m=(MAPPINGS[n.ref]||[]).length;return{label:SH[n.ref]+' fields',sub:'→ '+MAP_TARGET[n.ref]+' · '+m+' mapped',tag:'Field mapping',in:true,out:true,desc:'Maps '+SH[n.ref]+' field names and values into the '+MAP_TARGET[n.ref]+' canonical model.'}}
@@ -1768,11 +2164,12 @@ function wfInfo(n){
 function wfAnalyze(g){const by={},succ={},pred={};g.nodes.forEach(n=>{by[n.id]=n;succ[n.id]=[];pred[n.id]=[]});g.edges.forEach(e=>{if(by[e.a]&&by[e.b]){succ[e.a].push(e.b);pred[e.b].push(e.a)}});
  const reach=(id,adj)=>{const seen=new Set(),st=[id];while(st.length){const x=st.pop();adj[x].forEach(y=>{if(!seen.has(y)){seen.add(y);st.push(y)}})}return seen};
  return{by,succ,pred,anc:id=>reach(id,pred),desc:id=>reach(id,succ)}}
-function wfValidate(g){
- const A=wfAnalyze(g),out=[],add=(sev,id,msg)=>out.push({sev,id,msg}),kind=S.wf.kind;
+function wfValidate(g,kind0){
+ const A=wfAnalyze(g),out=[],add=(sev,id,msg)=>out.push({sev,id,msg}),kind=kind0||S.wf.kind;
  g.nodes.forEach(n=>{
   const lb=wfInfo(n).label,np=A.pred[n.id].length,ns=A.succ[n.id].length;
-  if(n.k==='conn'){const s=SOURCES.find(x=>x.id===n.ref);
+  if((n.k==='conn'||n.k==='wconn'||n.k==='map')&&!SRC(n.ref)){add('error',n.id,(SH[n.ref]||'This source')+' was deleted from the Source map. Reconnect it or remove this step.');return}
+  if(n.k==='conn'){const s=srcOr(n.ref);
    if(s.status==='unavailable')add('error',n.id,`${s.name} has no connected feed. Circularity will not infer data, so this evidence would be missing.`);
    else if(s.status==='stale')add('warn',n.id,`${s.name} is ${s.fresh} old. Predictions fall back to the last fresh data and say so.`);
    else if(s.status==='manual')add('info',n.id,`${s.name} is a manual import. It supports evaluation, not live automation.`);
@@ -1791,8 +2188,8 @@ function wfValidate(g){
   if(n.k==='xf'){const x=XF.find(t=>t.id===n.ref),anc=A.anc(n.id),conns=[...anc].map(i=>A.by[i]).filter(m=>m.k==='conn'),names=l=>[...new Set(l.map(c=>SH[c.ref]))].join(', ');
    if(!np||(!ns&&n.ref!=='x_notify'))add('warn',n.id,`${lb} is not wired between a source and a target.`);
    else{
-    if(x.ingest){const bad=conns.filter(c=>{const q=SOURCES.find(z=>z.id===c.ref);return q.status!=='unavailable'&&!srcCh(q).includes(x.ingest)});if(bad.length)add('error',n.id,`${lb} receives ${names(bad)}, which does not arrive as ${CH_ARR[x.ingest]}.`)}
-    if(x.fileIn&&conns.length&&!conns.some(c=>srcCh(SOURCES.find(z=>z.id===c.ref)).includes('file')))add('error',n.id,`${lb} needs a file to work on, but ${names(conns)} does not deliver files.`);
+    if(x.ingest){const bad=conns.filter(c=>{const q=srcOr(c.ref);return q.status!=='unavailable'&&!srcCh(q).includes(x.ingest)});if(bad.length)add('error',n.id,`${lb} receives ${names(bad)}, which does not arrive as ${CH_ARR[x.ingest]}.`)}
+    if(x.fileIn&&conns.length&&!conns.some(c=>srcCh(srcOr(c.ref)).includes('file')))add('error',n.id,`${lb} needs a file to work on, but ${names(conns)} does not deliver files.`);
     if(n.ref==='x_man'&&![...anc].some(i=>A.by[i].k==='act'&&A.by[i].ref==='a_file'))add('error',n.id,'Create manifest follows File generation. The manifest lists the files the target will import.');
     if(n.ref==='x_cb'&&![...anc].some(i=>A.by[i].k==='wconn'))add('error',n.id,'Fetch import log runs after a target system has imported, so it follows a write connector.');
     if(n.ref==='x_notify'&&![...anc].some(i=>A.by[i].k==='xf'&&A.by[i].ref==='x_cb'))add('error',n.id,'The notification carries log links, so it follows Fetch import log.')}}
@@ -1801,8 +2198,8 @@ function wfValidate(g){
    else if(!anc.has('appr')||wfBypass(A,n.id,m=>m.id==='appr'))add('error',n.id,`${lb} bypasses Human approval. Anything that commits stock, spend or price always stops at a person.`);
    else if(![...anc].some(i=>A.by[i].k==='xf'&&A.by[i].ref==='x_env')||wfBypass(A,n.id,m=>m.k==='xf'&&m.ref==='x_env'))add('error',n.id,`${lb} needs an Instruction envelope upstream, so the receiving system can trace and de-duplicate it.`);
    if(np){if(!dsc.length)add('warn',n.id,`${lb} does not lead to a system that receives it.`);
-    dsc.forEach(w=>{if(!DELIVER[w.ref].includes(a.ch))add('error',n.id,`${SH[w.ref]} does not accept ${CH_DEL[a.ch]}. It accepts ${DELIVER[w.ref].map(c=>CH_DEL[c]).join(', ')}.`)})}}
-  if(n.k==='wconn'){const s=SOURCES.find(x=>x.id===n.ref),anc=A.anc(n.id);
+    dsc.forEach(w=>{if(!(DELIVER[w.ref]||[]).includes(a.ch))add('error',n.id,`${SH[w.ref]} does not accept ${CH_DEL[a.ch]}. It accepts ${(DELIVER[w.ref]||[]).map(c=>CH_DEL[c]).join(', ')}.`)})}}
+  if(n.k==='wconn'){const s=srcOr(n.ref),anc=A.anc(n.id);
    if(s.status==='unavailable')add('error',n.id,`${s.name} has no connected system to write to.`);
    else if(s.status==='stale')add('warn',n.id,`${s.name} has an expired token. Instructions would queue until it is refreshed.`);
    if(!np)add('warn',n.id,`${s.name} is not wired to receive an instruction.`);
@@ -1845,32 +2242,20 @@ const wfSecOpen=k=>S.wf.pal[k]===undefined?!!WF_PALDEF[k]:S.wf.pal[k];
 function wfPalHTML(){const it=(key,label,sub,dot)=>`<button class="wfp" data-pal="${key}" aria-label="Add ${esc(label)}"><span class="grip">${WF_GRIP}</span><span class="tx"><span class="lb">${esc(label)}</span><span class="sb">${esc(sub)}</span></span>${dot!=null?`<span class="dotc ${dot}"></span>`:''}</button>`;
  const dot=x=>({live:'ok',stale:'warn',manual:'',unavailable:'bad'})[x.status];
  const sec=(k,h,items)=>{const o=wfSecOpen(k);return`<div class="sec"><button class="wfh" data-act="wfSec" data-arg="${k}" aria-expanded="${o}"><span>${h}</span><span class="note">${items.length}</span></button>${o?items.join(''):''}</div>`};
- const src=c=>SOURCES.filter(x=>x.cat===c).map(x=>it('conn:'+x.id,x.name,x.vendor,dot(x)));
+ const src=c=>SOURCES.filter(x=>x.cat===c).map(x=>it('conn:'+x.id,srcLabel(x),x.vendor,dot(x)));
  if(S.wf.kind==='pipe')return sec('s_int',SRC_CATS.internal,src('internal'))+sec('s_str',SRC_CATS.streaming,src('streaming'))+sec('s_ext',SRC_CATS.external,src('external'))
   +sec('ing','Integration layer',XF.filter(x=>x.group==='ingest').map(x=>it('xf:'+x.id,x.label,x.sub)))
   +sec('file','File exchange steps',XF.filter(x=>x.group==='file').map(x=>it('xf:'+x.id,x.label,x.sub)))
   +sec('xf','Transforms',XF.filter(x=>!x.group).map(x=>it('xf:'+x.id,x.label,x.sub)))
   +sec('act','Delivery methods',ACT_TYPES.map(x=>it('act:'+x.id,x.label,x.sub)))
-  +sec('wr','Write to a system',SOURCES.filter(x=>x.write.length).map(x=>it('wconn:'+x.id,x.name,x.write[0],dot(x))))
+  +sec('wr','Write to a system',SOURCES.filter(x=>x.write.length).map(x=>it('wconn:'+x.id,srcLabel(x),x.write[0],dot(x))))
   +sec('map','Field mappings',SOURCES.map(x=>it('map:'+x.id,SH[x.id]+' fields','→ '+MAP_TARGET[x.id])));
  return sec('t_r','Agent tools · read',TOOLS.filter(t=>t.rw==='read').map(t=>it('tool:'+t.id,t.id,'Read')))+sec('t_w','Agent tools · write',TOOLS.filter(t=>t.rw==='write').map(t=>it('tool:'+t.id,t.id,t.approval==='human approval required'?'Needs approval':'Within agent scope')))}
 ACT.wfSec=k=>{S.wf.pal[k]=!wfSecOpen(k);const p=$('#wfPal');if(p)p.innerHTML=wfPalHTML()};
-function wfHTML(){wfInit();const ih=wfInspHTML();const w=S.wf,pre=Object.entries(WF_PRE).filter(([k,p])=>p.kind===w.kind),cur=WF_PRE[wfPid()];
- return`<div class="wfbar"><div class="seg" role="group" aria-label="Workflow type"><button aria-pressed="${w.kind==='pipe'}" data-act="wfKind" data-arg="pipe">Integration pipeline</button><button aria-pressed="${w.kind==='dec'}" data-act="wfKind" data-arg="dec">Decision workflow</button></div>
- <label class="sr" for="wfPre">Start from a prewritten workflow</label><select class="sel" id="wfPre" style="max-width:260px" data-ch="wfPreset">${pre.map(([k,p])=>`<option value="${k}" ${k===wfPid()?'selected':''}>${esc(p.name)}</option>`).join('')}</select>
- <span class="grow"></span>
- <button class="btn sm" data-act="wfReset">Reset to template</button><button class="btn sm" data-act="wfValidate">Validate</button><button class="btn sm pri" data-act="wfRun">${ICON.play}Run simulation</button></div>
- <p class="note" style="margin:-4px 0 12px;max-width:90ch">${esc(cur.desc)}</p>
- <div class="wf ${ih.trim()?'':'noinsp'}"><aside class="wfpal" id="wfPal" aria-label="Movable steps. Drag one onto the canvas, or press Enter to add it.">${wfPalHTML()}</aside>
-  <div class="wfcanvas"><div class="wfzoom" role="group" aria-label="Zoom"><button data-act="wfZoom" data-arg="-1" aria-label="Zoom out">−</button><span id="wfZ">${Math.round(w.z*100)}%</span><button data-act="wfZoom" data-arg="1" aria-label="Zoom in">+</button><button data-act="wfZoom" data-arg="0" aria-label="Fit to width">Fit</button></div>
-   <div class="wfview" id="wfView" tabindex="0" role="group" aria-label="Workflow canvas. Select a step, then use arrow keys to move it or Delete to remove it."><div id="wfSizer" style="width:${wfWW()*w.z}px;height:${WF_WH*w.z}px"><div id="wfWorld" style="width:${wfWW()}px;height:${WF_WH}px;transform:scale(${w.z})">${wfWorldHTML()}</div></div></div>
-   <div class="wflegend"><span><i class="f"></i>Fixed · owned by Circularity</span><span><i class="m"></i>Movable · yours to arrange</span></div></div>
-  <aside class="wfinsp" id="wfInsp">${ih}</aside></div>
- <div class="wfbot"><div class="panel"><div class="ph"><h3>Checks</h3><span id="wfSum"></span></div><div id="wfChecks"></div></div><div class="panel wfrun"><div class="ph"><h3>Simulated run</h3><span id="wfRunSum"></span></div><div id="wfRun"></div></div></div>`}
 function wfInspHTML(){const w=S.wf,g=wfGraph(),sel=w.sel,v=wfValidate(g);
  if(sel&&sel.t==='e'){const e=g.edges.find(x=>x.id===sel.id);if(e){const a=wfInfo(wfNode(e.a)),b=wfInfo(wfNode(e.b));return`<div class="pb"><h3>Connection</h3><p><b>${esc(a.label)}</b> → <b>${esc(b.label)}</b></p>${e.locked?`<div class="callout">This connection belongs to the fixed structure of the workflow and cannot be removed.</div>`:`<div class="acts"><button class="btn sm" data-act="wfDelEdge" data-arg="${e.id}">Remove connection</button></div>`}</div>`}}
  if(sel&&sel.t==='n'){const n=wfNode(sel.id);if(n){const i=wfInfo(n),fx=n.k==='fixed',mine=v.filter(x=>x.id===n.id);let det='';
-  if(n.k==='conn'||n.k==='wconn'){const s=SOURCES.find(x=>x.id===n.ref);det=`<dl class="kv"><dt>Status</dt><dd>${stChip(s.status)}</dd><dt>Mode</dt><dd>${esc(s.mode)}</dd><dt>Access</dt><dd>${esc(s.auth)}</dd><dt>${n.k==='wconn'?'Writes':'Reads'}</dt><dd>${esc((n.k==='wconn'?s.write:s.read).join(', ')||'—')}</dd><dt>${n.k==='wconn'?'Accepts':'Arrives as'}</dt><dd>${esc((n.k==='wconn'?(DELIVER[n.ref]||[]).map(c=>CH_DEL[c]):srcCh(s).map(c=>CH_ARR[c])).join(', ')||'No supported channel')}</dd></dl>`}
+  if(n.k==='conn'||n.k==='wconn'){const s=srcOr(n.ref);det=`<dl class="kv"><dt>Status</dt><dd>${stChip(s.status)}</dd><dt>Mode</dt><dd>${esc(s.mode)}</dd><dt>Access</dt><dd>${esc(s.auth)}</dd><dt>${n.k==='wconn'?'Writes':'Reads'}</dt><dd>${esc((n.k==='wconn'?s.write:s.read).join(', ')||'—')}</dd><dt>${n.k==='wconn'?'Accepts':'Arrives as'}</dt><dd>${esc((n.k==='wconn'?(DELIVER[n.ref]||[]).map(c=>CH_DEL[c]):srcCh(s).map(c=>CH_ARR[c])).join(', ')||'No supported channel')}</dd></dl>`}
   if(n.k==='xf'){const x=XF.find(t=>t.id===n.ref);if(x.ingest)det=`<dl class="kv"><dt>Channel</dt><dd>${esc(CH_ING[x.ingest])}</dd><dt>Sources that fit</dt><dd>${esc(SOURCES.filter(q=>srcCh(q).includes(x.ingest)).map(q=>SH[q.id]).join(', '))}</dd></dl>`}
   if(n.k==='act'){const a=ACT_TYPES.find(t=>t.id===n.ref);det=`<dl class="kv"><dt>Accepted by</dt><dd>${esc(Object.keys(DELIVER).filter(k=>DELIVER[k].includes(a.ch)).map(k=>SH[k]).join(', '))}</dd></dl>`}
   if(n.k==='map'){const m=(MAPPINGS[n.ref]||[]).slice(0,5);det=m.length?`<table class="t static"><thead><tr><th>Source</th><th>Canonical</th></tr></thead><tbody>${m.map(r=>`<tr><td class="mono">${esc(r[0])}</td><td class="mono">${esc(r[2])}</td></tr>`).join('')}</tbody></table><div class="note" style="margin-top:4px">${(MAPPINGS[n.ref]||[]).length} fields mapped. Rules are listed on the source adapter.</div>`:`<div class="callout bad">No field mapping exists for ${SH[n.ref]} yet.</div>`}
@@ -1895,12 +2280,12 @@ function wfPaint(){const g=wfGraph(),v=wfValidate(g),run=S.wf.run,sel=S.wf.sel;
   el.classList.toggle('sel',!!sel&&sel.t==='n'&&sel.id===n.id);el.classList.toggle('inj',!!n.fail)});
  wfEdges();const c=$('#wfChecks');if(c){c.innerHTML=wfChecksHTML();$('#wfSum').innerHTML=wfSumHTML();$('#wfRun').innerHTML=wfRunHTML();$('#wfRunSum').innerHTML=wfRunSumHTML();const ii=$('#wfInsp'),ih=wfInspHTML();ii.innerHTML=ih;ii.closest('.wf').classList.toggle('noinsp',!ih.trim())}}
 function wfRunClear(){clearTimeout(WF.t);S.wf.run=null}
-function wfChanged(){wfRunClear();wfPaint()}
+function wfChanged(){wfRunClear();wfDirty();wfPaint()}
 function wfSelect(s){S.wf.sel=s;wfPaint()}
 function wfFree(){const g=wfGraph();for(let x=24;x<=wfWW()-WF_W-24;x+=200)for(let y=24;y<=WF_WH-WF_H-24;y+=80){if(!g.nodes.some(n=>Math.abs(n.x-x)<WF_W+16&&Math.abs(n.y-y)<WF_H+16))return{x,y}}return{x:24,y:24}}
 function wfAdd(key,x,y){const g=wfGraph(),[k,ref]=key.split(':');if(x==null){const f=wfFree();x=f.x;y=f.y}
- const n=_n('n'+(++S.wf.seq),k,ref,wfClamp(Math.round(x/8)*8,0,wfWW()-WF_W),wfClamp(Math.round(y/8)*8,0,WF_WH-WF_H));g.nodes.push(n);$('#wfWorld').innerHTML=wfWorldHTML();wfRunClear();S.wf.sel={t:'n',id:n.id};wfPaint();toast(wfInfo(n).label+' added. Drag from its right dot to connect it.')}
-function wfLink(a,b){const g=wfGraph(),why=wfCanLink(g,a,b);if(why){toast(why);return false}g.edges.push({id:'e'+(++S.wf.seq),a,b,locked:false});wfRunClear();S.wf.sel={t:'n',id:b};wfPaint();return true}
+ const n=_n('n'+(++S.wf.seq),k,ref,wfClamp(Math.round(x/8)*8,0,wfWW()-WF_W),wfClamp(Math.round(y/8)*8,0,WF_WH-WF_H));g.nodes.push(n);wfDirty();$('#wfWorld').innerHTML=wfWorldHTML();wfRunClear();S.wf.sel={t:'n',id:n.id};wfPaint();toast(wfInfo(n).label+' added. Drag from its right dot to connect it.')}
+function wfLink(a,b){const g=wfGraph(),why=wfCanLink(g,a,b);if(why){toast(why);return false}g.edges.push({id:'e'+(++S.wf.seq),a,b,locked:false});wfDirty();wfRunClear();S.wf.sel={t:'n',id:b};wfPaint();return true}
 /* ---- pointer interaction ---- */
 const WF_FIXMSG='Fixed steps belong to Circularity and cannot be moved or removed.';
 document.addEventListener('pointerdown',e=>{const v=$('#wfView');if(!v||(e.pointerType==='mouse'&&e.button!==0))return;
@@ -1927,17 +2312,14 @@ document.addEventListener('click',e=>{const p=e.target.closest('.wfp');if(p&&e.d
 document.addEventListener('keydown',e=>{if(!$('#wfView')||!S.wf||!S.wf.sel||e.target.closest('input,select,textarea'))return;
  if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();ACT.wfDel();return}
  const sel=S.wf.sel,m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
- if(m&&sel.t==='n'){const n=wfNode(sel.id);e.preventDefault();if(n.k==='fixed'){toast(WF_FIXMSG);return}const s=e.shiftKey?40:8;n.x=wfClamp(n.x+m[0]*s,0,wfWW()-WF_W);n.y=wfClamp(n.y+m[1]*s,0,WF_WH-WF_H);const el=$(`.wfn[data-id="${n.id}"]`);el.style.left=n.x+'px';el.style.top=n.y+'px';wfEdges()}});
+ if(m&&sel.t==='n'){const n=wfNode(sel.id);e.preventDefault();if(n.k==='fixed'){toast(WF_FIXMSG);return}const s=e.shiftKey?40:8;n.x=wfClamp(n.x+m[0]*s,0,wfWW()-WF_W);n.y=wfClamp(n.y+m[1]*s,0,WF_WH-WF_H);const el=$(`.wfn[data-id="${n.id}"]`);el.style.left=n.x+'px';el.style.top=n.y+'px';wfEdges();wfDirty()}});
 /* ---- actions ---- */
-ACT.wfKind=k=>{if(S.wf.kind===k)return;wfRunClear();S.wf.kind=k;S.wf.sel=null;route(true)};
-ACT.wfPreset=v=>{wfRunClear();S.wf.pre[S.wf.kind]=v;S.wf.sel=null;route(true)};
-ACT.wfReset=()=>{wfRunClear();delete S.wf.g[wfPid()];S.wf.sel=null;route(true);toast('Workflow reset to “'+WF_PRE[wfPid()].name+'”.')};
 ACT.wfZoom=a=>{const w=S.wf,v=$('#wfView');w.z=a==='0'?wfClamp(Math.floor((v.clientWidth-8)/wfWW()*100)/100,.5,1.2):wfClamp(Math.round((w.z+(+a)*.1)*10)/10,.5,1.4);$('#wfWorld').style.transform=`scale(${w.z})`;const s=$('#wfSizer');s.style.width=wfWW()*w.z+'px';s.style.height=WF_WH*w.z+'px';$('#wfZ').textContent=Math.round(w.z*100)+'%'};
 ACT.wfDel=()=>{const w=S.wf,sel=w.sel;if(!sel)return;const g=wfGraph();
  if(sel.t==='e')return ACT.wfDelEdge(sel.id);const n=wfNode(sel.id);if(!n)return;if(n.k==='fixed'){toast(WF_FIXMSG);return}
  g.nodes=g.nodes.filter(x=>x.id!==n.id);g.edges=g.edges.filter(x=>x.a!==n.id&&x.b!==n.id);w.sel=null;$('#wfWorld').innerHTML=wfWorldHTML();wfChanged()};
 ACT.wfDelEdge=id=>{const g=wfGraph(),e=g.edges.find(x=>x.id===id);if(!e)return;if(e.locked){toast('That connection is part of the fixed structure.');return}g.edges=g.edges.filter(x=>x.id!==id);S.wf.sel=null;wfChanged()};
-ACT.wfFail=id=>{const n=wfNode(id);n.fail=!n.fail;wfChanged()};
+ACT.wfFail=id=>{const n=wfNode(id);n.fail=!n.fail;wfRunClear();wfPaint()};
 ACT.wfConnTo=(v,el)=>{if(v)wfLink(el.dataset.arg,v)};
 ACT.wfPick=id=>{if(!wfNode(id))return;wfSelect({t:'n',id});const n=wfNode(id),v=$('#wfView');if(v){v.scrollTo({left:Math.max(0,n.x*S.wf.z-80),top:Math.max(0,n.y*S.wf.z-120),behavior:'smooth'});v.scrollIntoView({block:'nearest'})}};
 ACT.wfValidate=()=>{const v=wfValidate(wfGraph()),e=v.filter(x=>x.sev==='error').length,w=v.filter(x=>x.sev==='warn').length;toast(e?`${e} error${e>1?'s':''} to fix before this can run.`:w?`No errors. ${w} warning${w>1?'s':''} to review.`:'No errors or warnings. This workflow is ready to run.');const c=$('#wfChecks');c&&c.scrollIntoView({block:'nearest',behavior:'smooth'})};
@@ -1949,7 +2331,7 @@ function wfEval(run,A,n){const ps=A.pred[n.id].map(p=>run.states[p]);
  const f=n.k==='fixed'?FXD[n.ref]:null,needs=n.k==='fixed'?(f.in&&!f.start):n.k!=='conn';
  if(needs&&(!ps.length||ps.every(s=>s==='skipped')))return'skipped';
  if(n.fail)return'failed';
- if(n.k==='conn'||n.k==='wconn'){const s=SOURCES.find(x=>x.id===n.ref);if(s.status==='unavailable')return'failed';if(s.status==='stale')return'warning'}
+ if(n.k==='conn'||n.k==='wconn'){const s=srcOr(n.ref);if(s.status==='unavailable')return'failed';if(s.status==='stale')return'warning'}
  if(n.k==='fixed'&&n.ref==='appr'&&!run.approved)return'held';return'success'}
 ACT.wfRun=()=>{const g=wfGraph(),v=wfValidate(g),e=v.filter(x=>x.sev==='error').length;
  if(e){toast(`Fix ${e} error${e>1?'s':''} before running. The checks below say what and why.`);const c=$('#wfChecks');c&&c.scrollIntoView({block:'nearest',behavior:'smooth'});return}
@@ -2006,7 +2388,7 @@ function runTool(toolId,agentId,tenant,raw){
    case 'optimize_pool':{const p=POOLS[args.pool_id];if(!p)return(tr.push({n:'Run tool',ok:false,detail:'No pool',ms:5}),fail('pool_not_found','No pool for '+args.pool_id+'. Try RT-1048 or RT-1052.'));result={pool:args.pool_id,per_asset_greedy_usd:p.greedy.total,pool_optimized_usd:p.optimal.total,uplift_usd:p.uplift,allocation:p.optimal.alloc,duplicate_allocation:false,checked:'every unit and demand line allocated once'};break}
    case 'find_demand':result={case_id:c.id,demand:c.routes.filter(r=>r.demandLabel&&!/^—|No /.test(r.demandLabel)).map(r=>({route:r.id,demand:r.demandLabel,status:r.demandStatus,eligible:!r.excluded}))};break;
    case 'get_model_validation':{const s=modelStats(args.version);if(!s)return(tr.push({n:'Run tool',ok:false,detail:'Unknown version',ms:4}),fail('unknown_version','Unknown model version. Try v1.0 to v1.3.'));result={version:s.v,closed_cases:s.n,mape:+s.mape.toFixed(3),bias:+s.bias.toFixed(3),p10_p90_coverage:+s.cov.toFixed(3)};break}
-   case 'request_missing_evidence':{if(!c.blocked&&c.evidence.every(e=>e.state==='ready'))return(tr.push({n:'Run tool',ok:false,detail:'Nothing missing',ms:5}),fail('nothing_to_request',c.id+' has no missing evidence.'));const ref='WO-'+(S.seq.wo++);c.requested={ref,at:new Date()};pushEvent({dir:'out',type:'evidence.requested',caseId:c.id,decisionId:null,approval:null,ver:1,dest:c.blocked?c.blocked.owner:'Inspection & repair',ack:'sent · awaiting ack',key:'idem-'+hashId(c.id+ref).slice(0,6),retries:0,note:'Requested by agent '+ag.name});result={case_id:c.id,request_ref:ref,kind:args.kind,sent_to:c.blocked?c.blocked.owner:'Inspection & repair',status:'sent'};break}
+   case 'request_missing_evidence':{if(!c.blocked&&c.evidence.every(e=>e.state==='ready'))return(tr.push({n:'Run tool',ok:false,detail:'Nothing missing',ms:5}),fail('nothing_to_request',c.id+' has no missing evidence.'));const ref='WO-'+(S.seq.wo++);c.requested={ref,at:new Date()};pushEvent({dir:'out',type:'evidence.requested',caseId:c.id,decisionId:null,approval:null,ver:1,dest:c.blocked?c.blocked.owner:'Inspection',ack:'sent · awaiting ack',key:'idem-'+hashId(c.id+ref).slice(0,6),retries:0,note:'Requested by agent '+ag.name});result={case_id:c.id,request_ref:ref,kind:args.kind,sent_to:c.blocked?c.blocked.owner:'Inspection',status:'sent'};break}
    case 'request_approval':{step('Hold for human approval',false,'Write tool: a person must approve',9);return Object.assign(fail('held','Held for human approval. Nothing is committed until an Approver accepts it in Product.',{approval_request:'AQ-'+hashId(c.id+args.rationale).slice(0,6),case_url:'#/product/'+c.id}),{outcome:'held for approval'})}
    case 'send_instruction':{if(!c.approval||c.approval.ref!==args.approval_ref){step('Verify approval reference',false,'No approval '+args.approval_ref+' on record for '+c.id);return fail('approval_required',`No human approval ${args.approval_ref} is recorded for ${c.id}. Instructions cannot be sent without one.`,{hint:c.approval?'Recorded reference is '+c.approval.ref:'Approve the case in Product first.'})}step('Verify approval reference',true,c.approval.ref);result={case_id:c.id,decision_id:c.exec.decisionId,approval_ref:c.approval.ref,instruction_version:c.exec.instruction,destination:c.exec.steps[0].sys,idempotency_key:'idem-'+hashId(c.id+c.exec.ref).slice(0,6).toLowerCase(),deduplicated:true,note:'Instruction already delivered; repeated call created nothing new'};break}
    case 'reconcile_outcome':{const r=ROWS.find(x=>x.id===args.case_id);if(!r)return(tr.push({n:'Run tool',ok:false,detail:'Unknown closed case',ms:5}),fail('case_not_found','No closed case '+args.case_id+'. Try CS-2041.'));result=r.status==='pending'?{case_id:r.id,status:'pending',note:'Evidence incomplete. Pending cases are not treated as failures.'}:{case_id:r.id,status:r.status,route:r.route,predicted_p50:r.p50,actual:r.actual,variance:r.actual==null?null:r.actual-r.p50,model_version:r.model,evidence_snapshot:r.snapshot,linked:true};break}
@@ -2061,7 +2443,7 @@ const PMAP={
  id:{s:'plm',t:'BOM_HEADER',col:'CFG_ID',pre:'CFG',q:c=>`poll boms.csv · filter CFG_ID for ${c.assetId}`,val:c=>Object.entries(c.spec).slice(0,3).map(x=>x[1]).join(' · '),use:['Gate 3 Policy & certification (compatibility)','Demand matching (specification)'],proc:['Decoded configuration code','Matched to approved alternates','Linked to asset identity']},
  insp:{s:'insp',t:'inspections',col:'GRADE_TXT',pre:'INS',q:c=>`GET /inspections?asset_id=${c.assetId}&latest=true`,val:c=>c.grade?`Grade ${c.grade}`:c.condition,use:['Gate 1 Condition & life','Prediction: prep-cost-time v1.3','Prediction: resale-price v1.3'],proc:['Mapped grade text through grade table v3','Validated against condition schema v2.1']},
  svc:{s:'eam',t:'work_orders',col:'LAST_SVC',pre:'WO',q:c=>`GET /work-orders?asset_id=${c.assetId}&since=2023-01-01`,val:c=>`Last service ${fmtDY(addDays(c.received,-(30+parseInt(hashId(c.id),16)%200)))}`,use:['Prediction: service-exposure v1.2','Gate 2 Post-intervention'],proc:['Converted to UTC','Aggregated failure history']},
- eng:{s:'qms',t:'assessments',col:'RUL_MO',pre:'ENG',q:c=>`GET /certificates?asset_id=${c.assetId}&type=life-assessment`,val:c=>`Engineering life: ${c.engLife}`,use:['Gate 1 Condition & life','Economics: service exposure horizon'],proc:['Kept source assumptions and confidence','Validated against policy POL-3.2']},
+ eng:{s:'eng',t:'assessments',col:'RUL_MO',pre:'ENG',q:c=>`GET /certificates?asset_id=${c.assetId}&type=life-assessment`,val:c=>`Engineering life: ${c.engLife}`,use:['Gate 1 Condition & life','Economics: service exposure horizon'],proc:['Kept source assumptions and confidence','Validated against policy POL-3.2']},
  photo:{s:'insp',t:'attachments',col:'PHOTOS',pre:'IMG',q:c=>`GET /inspections/attachments?asset_id=${c.assetId}`,val:c=>`${6+parseInt(hashId(c.id+'p'),16)%10} images`,use:['Condition validation'],proc:['Counted attachments','Checksums recorded']},
  dem:{s:'crm',t:'opportunities',col:'OPP_STG',pre:'OPP',q:c=>`GET /opportunities?site=${(c.demand&&c.demand.site)||'any'}&spec_match=${c.assetId}`,val:c=>c.demand&&c.demand.internal?`${c.demand.site} requirement · qty ${c.qty} · ${c.demand.confirmed?'confirmed':'forecast'}`:'No open internal requirement matched',use:['Gate 4 Demand fit','Route candidates (redeploy, re-lease)'],proc:['Stage mapped to confirmed or forecast','Specification matched via PLM']},
  mkt:{s:'mkt',t:'comparables',col:'SOLD_PRC',pre:'CMP',q:c=>`GET /comparables?class=${c.cls}&grade=${c.grade||'any'}&age=${Math.round(c.age)}y`,val:c=>{const r=c.routes.find(x=>x.id==='resale'&&x.terms[0]);return r?`${14+parseInt(hashId(c.id+'m'),16)%40} comparable sales · expected ${money(r.terms[0].amt)}`:'Comparable set retrieved'},use:['Prediction: resale-price v1.3','Economics: sale routes'],proc:['Currency and unit normalised','Dealer grade mapped to grade table v3']},
@@ -2069,7 +2451,7 @@ const PMAP={
  pol:{s:'qms',t:'policies',col:'REUSE',pre:'POL',q:c=>`GET /policies?class=${c.cls}&owner=${encodeURIComponent(c.owner)}`,val:c=>'Reuse permitted · policy POL-3.2',use:['Gate 3 Policy & certification'],proc:['Policy map v3.2 applied']}
 };
 function fetchTimeOf(c,e){const h=parseInt(hashId(c.id+e.k),16),f=e.fresh||'';
-  if(e.k==='mkt'){const s=SOURCES.find(x=>x.id==='mkt');return new Date(AS_OF.getTime()-(s.freshMin||1)*60000-(h%50)*1000)}
+  if(e.k==='mkt'){const s=SRC('mkt')||{};return new Date(AS_OF.getTime()-(s.freshMin||1)*60000-(h%50)*1000)}
   if(/just now/.test(f))return new Date(AS_OF.getTime()-(h%40)*1000);
   let m=f.match(/(\d+) min/);if(m)return new Date(AS_OF.getTime()-(+m[1]*60+h%50)*1000);
   m=f.match(/(\d+) h/);if(m)return new Date(AS_OF.getTime()-(+m[1]*3600+h%1700)*1000);
@@ -2164,6 +2546,7 @@ ACT.auEntry=id=>{const x=auditEntries().find(e=>e.id===id);if(!x){toast('Entry n
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-act][tabindex]')){e.preventDefault();e.target.click()}});
 shell();route();
 
+setInterval(()=>{try{smTick()}catch(e){console.error(e)}},1000);
 </script>
 </body>
 </html>
