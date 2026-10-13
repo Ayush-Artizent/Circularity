@@ -2,7 +2,73 @@
 
 Open `index.html`. The app now opens on the **Command Center** (Update 3). Updates 1 and 2 live under **Integration** in the left menu, on the tabs along the top.
 
-**Quick links:** [Update 3: Command Center](#update-3-command-center-new-home-page) · [Update 1](#update-1-separate-systems-and-crud) · [Update 2](#update-2-live-connections-workflow-states-tables-and-health) · [Demo script](#two-minute-demo-script) · [Good to know](#good-to-know)
+**Quick links:** [Update 5: Asset intelligence](#update-5-asset--product-intelligence) · [Update 4: Sidebar sections](#update-4-sidebar-with-sections) · [Update 3: Command Center](#update-3-command-center-new-home-page) · [Update 1](#update-1-separate-systems-and-crud) · [Update 2](#update-2-live-connections-workflow-states-tables-and-health) · [Demo script](#two-minute-demo-script) · [Good to know](#good-to-know)
+
+---
+
+## Update 5: Asset & Product Intelligence
+
+**Where:** Product → **Asset intelligence** in the left menu, or click any **asset ID** in the Returned assets table, or the **Asset intelligence** button on a decision page. Every asset has its own link, such as `#/product/asset/RT-1048`.
+
+**Screenshots**
+
+| Overview (desktop) | Economic Analysis tab | Data & Evidence tab | Phone |
+|---|---|---|---|
+| [![Overview](docs/screenshots/asset-overview.webp)](docs/screenshots/asset-overview.webp) | [![Economic](docs/screenshots/asset-economic-tab.webp)](docs/screenshots/asset-economic-tab.webp) | [![Data](docs/screenshots/asset-data-tab.webp)](docs/screenshots/asset-data-tab.webp) | [![Phone](docs/screenshots/asset-phone.webp)](docs/screenshots/asset-phone.webp) |
+
+Command Center, for reference: [docs/screenshots/command-center.webp](docs/screenshots/command-center.webp)
+
+**Top of the page**
+- Breadcrumb, a **switch asset** dropdown, **Open in new tab**, and an **Actions** menu (open the decision analysis, evidence snapshot, copy link, print or save as PDF).
+- The product **photo**, the title, twelve key facts (asset ID, serial, manufacturer, revision, ownership, location, site demand, received, age, engineering life, next inspection), and an **overall health score** ring.
+- Two buttons: **Compare similar assets** (side-by-side table of up to four) and **Evaluate treatments →** (opens the decision page).
+
+**Eight tabs** (each tab is a focused view of one area)
+
+| Tab | What you see |
+|---|---|
+| **Overview** | All seven panels at once: lifecycle timeline, condition, product, economics, eligibility, data quality, related assets |
+| **Lifecycle** | The seven-step evidence timeline with source and notes, plus the service history (work orders) |
+| **Condition** | Condition summary, per-component condition bars, inspection evidence table, photo close-ups |
+| **Product & Components** | Specifications, component health, parts availability, and a bill of materials with lead times and approved alternates |
+| **Economic Analysis** | Recovery value, treatment cost, predicted net with its range, USD or local currency, historical cost, market demand, resale price trend, every route compared, and how the recommended net is built |
+| **Eligibility & Compliance** | Ownership, contract, warranty, safety and environmental checks, the six gates with the reason for each, and any routes withheld |
+| **Data & Evidence** | Data confidence score, key sources and freshness, and a table of every evidence item with links to the audit log, evidence snapshot and Source map |
+| **Related Assets** | The closest assets of the same class, with health, net and status, plus **Open** and **Compare** buttons |
+
+**Same numbers as the rest of the app:** the predicted net on this page is the same figure as on the Returned assets table and the decision page (for example, $9,600 for RT-1048). Evidence, gates and conditions come from the same data, and the market figures come from the 1,400 closed decisions.
+
+**Product photos:** five real-looking, unbranded photos (motor, pump, control unit, power tool, laptop). Tool-fleet batches use the power-tool photo with a "×quantity" badge. If an image file is missing, a labelled tile appears instead, so nothing breaks.
+
+**Honest labels:** component health, part numbers, stock levels and historical costs are modelled from grade, age and class for this demo, and the page says so where it matters.
+
+**Works on phone, tablet and desktop:** the timeline turns into a vertical list on narrow screens, panels stack, and tables scroll.
+
+---
+
+## Update 4: Sidebar with sections
+
+The left menu now has a dropdown under every page, listing the sections that actually exist on it.
+
+| Page | Sections in its dropdown |
+|---|---|
+| **Command Center** | Key figures, Portfolio charts, Actions to prioritise, Signals and capacity, Value realisation |
+| **Product** | Returned assets, Expected returns, Pool optimizer, Asset intelligence |
+| **Analytics** | Recovery waterfall, Pipeline, Route mix, Predicted vs actual, Model versions, Pool efficiency, Overrides, Engineering economics, Sustainability |
+| **Integration** | Workflow studio, Source map, Source tables, Canonical models, Event stream, Conflict queue (with its live count), Manual import |
+| **MCP & Tools** | Tool catalog, Agent registry, Playground, Permission matrix, Call log and gate, As MCP client |
+| **Audit & provenance** | Fetch log, Evidence gaps |
+
+**How to use it**
+- **Click the arrow** on a page to open or close its list. Click the page name to go to it. The list for the page you are on opens by itself, and your choices are remembered.
+- **Hover** a page whose list is closed to see its sections in a small flyout, each with a one-line description.
+- **Click a section** to jump straight to it. On Analytics, MCP, Audit and Command Center the page scrolls to that section. On Product and Integration it switches the tab or view.
+- **Badges** show live counts: open conflicts on Integration and Conflict queue, systems needing attention on Source map, and failing workflows on Workflow studio.
+- **Collapse button** at the bottom (the « arrows) shrinks the menu to icons. Hover an icon to see its sections.
+- **Every section has its own link**, such as `#/integration/map`, so you can share it and the browser back button works.
+- **Phone:** the menu stays as a scrolling bar at the top, and a second row of buttons shows the sections of the page you are on.
+
+**Product images:** five unbranded studio photos (motor, pump, control unit, power tool, laptop) are in `assets/products/` as optimized WebP, ready for the upcoming asset pages. `IMAGE_PROMPTS.md` records the prompt and file name for each, in case they need regenerating.
 
 ---
 
@@ -169,6 +235,7 @@ A table graph for a system's data, with clusters and foreign keys.
 
 ## Two-minute demo script
 
+0a. **Product → Asset intelligence** (or click an asset ID in Returned assets). Walk the eight tabs, then press **Compare similar assets**.
 0. **Command Center** (opens first). Click the **Awaiting approval** slice, then a **Value at risk** reason, then a table row. Resize the window to show the phone layout.
 1. **Integration → Source map.** Point at the KPI strip and the live "Updated … ago" counters.
 2. Click the **API / JDBC / Native** badges, or use the **All methods** filter.

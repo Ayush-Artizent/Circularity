@@ -503,6 +503,118 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 }
 @media (max-width:860px){.top{flex-wrap:wrap}.search{flex:1 1 100%;max-width:none;order:-1}.tools{width:100%;justify-content:flex-start}}
 @media (max-width:640px){.top .pill:not(.demo){display:none}.tools .sel{max-width:130px}}
+
+/* ===== Sidebar sections ===== */
+.ng{display:block}.ngr{display:flex;align-items:center}.ngr .ngh{flex:1;min-width:0}
+.chev{width:30px;height:30px;border:0;background:none;color:var(--side-mut);border-radius:6px;display:grid;place-items:center;flex:none;margin-left:2px}
+.chev:hover{background:rgba(255,255,255,.08);color:#fff}
+.chev::before{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);margin-left:-2px;transition:transform .15s}
+.chev[aria-expanded=true]::before{transform:rotate(45deg);margin-top:-3px}
+.nsub{position:relative;margin:2px 0 8px 28px;padding-left:12px;border-left:1px solid rgba(255,255,255,.12);display:grid;gap:1px}.nsub[hidden]{display:none}
+.nav .nsub a.nsl{padding:6px 10px;font-size:13px;color:var(--side-mut);font-weight:500;border-radius:6px;gap:8px}
+.nav .nsub a.nsl:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav .nsub a.nsl[aria-current=true]{color:#fff;background:rgba(255,255,255,.1)}
+.nav .nsub a.nsl[aria-current=true]::before{content:"";position:absolute;left:-13px;top:7px;bottom:7px;width:2px;background:var(--yellow);border-radius:2px}
+.nav .cnt2{margin-left:auto;background:rgba(255,255,255,.16);color:#fff;font-size:10.5px;font-weight:700;border-radius:9px;padding:0 6px;line-height:16px}.nav .cnt2.bad{background:var(--yellow);color:#141414}.nav .cnt2[hidden]{display:none}
+.railbtn{margin:6px 10px;align-self:flex-start;width:34px;height:34px;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:none;color:var(--side-ink);display:grid;place-items:center}.railbtn:hover{background:rgba(255,255,255,.08)}
+.railbtn svg{width:18px;height:18px;transition:transform .2s}.railbtn[aria-pressed=true] svg{transform:rotate(180deg)}
+.app{transition:grid-template-columns .2s}
+.side .nav{overflow-y:auto;min-height:0;flex:0 1 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.22) transparent}.app.rail{grid-template-columns:68px minmax(0,1fr)}
+.rail .brand{padding:0 0 14px 17px}.rail .brand img{width:34px;height:34px;object-fit:cover;object-position:left center}.rail .brand small{display:none}
+.rail .ngl,.rail .chev,.rail .nsub,.rail .side-foot,.rail .nav .cnt{display:none}
+.rail .nav{padding:8px}.rail .nav a.ngh{justify-content:center;padding:11px 0}.rail .ngr{display:block}.rail .railbtn{align-self:center;margin:6px 0}
+.nfly{position:fixed;z-index:80;width:290px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:6px;opacity:0;pointer-events:none;transform:translateX(-6px);transition:opacity .14s,transform .14s}
+.nfly.on{opacity:1;pointer-events:auto;transform:none}
+.nfh{display:grid;padding:8px 10px 6px;border-bottom:1px solid var(--line2);margin-bottom:4px}.nfh b{font:700 14px var(--f-display)}
+.nfi{display:grid;gap:1px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--ink)}.nfi:hover{background:var(--panel2)}.nfi[aria-current=true]{background:var(--yellow-soft);box-shadow:inset 3px 0 var(--yellow)}
+.nft{font-weight:600;font-size:13px;display:flex;align-items:center;gap:8px}.nfi .cnt2{background:var(--yellow);color:#141414;margin-left:auto;font-size:10.5px;font-weight:700;border-radius:9px;padding:0 6px;line-height:16px}
+.subnav{display:none}[data-anchor]{scroll-margin-top:90px}
+@media (max-width:860px){
+ .app.rail{grid-template-columns:1fr}.ngr{display:contents}.ng{display:flex}.chev,.nsub,.railbtn{display:none!important}
+ .rail .brand{padding:0 8px 0 0}.rail .brand img{width:96px;height:auto;object-fit:initial}.rail .ngl{display:block}.rail .nav .cnt{display:inline}.rail .nav a.ngh{justify-content:flex-start;padding:8px 10px}
+ .nfly{display:none}
+ .subnav{display:flex;gap:6px;overflow-x:auto;padding:8px 14px;border-bottom:1px solid var(--line);background:var(--bg);align-items:center}.subnav:empty{display:none}
+ .snt{font:700 12px var(--f-display);color:var(--ink2);white-space:nowrap;margin-right:4px}
+ .snl{white-space:nowrap;border:1px solid var(--line);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:500;text-decoration:none;background:var(--panel)}.snl[aria-current=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+}
+
+/* ===== Asset & Product Intelligence ===== */
+.as{container-type:inline-size;container-name:as}
+.ascr{margin-bottom:8px;font-size:13px;color:var(--ink2)}.ascr span{color:var(--muted);margin:0 3px}.ascr a{text-decoration:none}.ascr a:hover{text-decoration:underline}
+.asph2{align-items:flex-start;margin-bottom:12px}.asico{width:42px;height:42px;border-radius:10px;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center;flex:none}.asico svg{width:22px;height:22px}
+.asact{gap:8px}.asw{max-width:240px}
+.asmenu{position:relative}.asmenu summary{list-style:none;cursor:pointer}.asmenu summary::-webkit-details-marker{display:none}
+.asmenu-list{position:absolute;right:0;top:40px;min-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:6px;z-index:20;display:grid}.asmenu-list button{text-align:left;border:0;background:none;padding:8px 10px;border-radius:6px;font-size:13px}.asmenu-list button:hover{background:var(--panel2)}
+.aship{display:grid;grid-template-columns:240px minmax(0,1fr) 250px;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px;align-items:start}
+.asimg{position:relative;border-radius:8px;background:var(--panel2);aspect-ratio:4/3;overflow:hidden;display:grid;place-items:center}.asimg img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+:root[data-theme="dark"] .asimg img{mix-blend-mode:normal;opacity:.95}
+.asph{display:grid;place-items:center;gap:6px;color:var(--ink2);font-weight:600}.asph .thumb{width:64px;height:64px}
+.asqty{position:absolute;right:8px;top:8px;background:var(--ink);color:var(--bg);font-weight:700;font-size:12px;border-radius:10px;padding:1px 8px}
+.asttl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}.asttl h2{font:800 22px var(--f-display)}
+.asfacts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 16px;margin:0}.asfacts dt{font-size:11.5px;color:var(--muted)}.asfacts dd{margin:1px 0 0;font-weight:600;font-size:13px}
+.ashealth{border-left:1px solid var(--line2);padding-left:16px}.ashealth h3{font-size:14px;margin-bottom:6px}
+.asring{display:flex;align-items:center;gap:12px}.asring svg{width:112px;flex:none}.asleg{display:grid;gap:5px;font-size:12.5px;flex:1}.asleg div{display:flex;align-items:center;gap:7px}.asleg i{width:9px;height:9px;border-radius:50%}.asleg b{margin-left:auto}
+.astabbar{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:14px}.astabbar .tabs{border-bottom:0;margin:0}.asbtns{padding-bottom:6px}
+@container as (max-width:1100px){.aship{grid-template-columns:200px minmax(0,1fr)}.ashealth{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line2);padding-top:12px}.asfacts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@container as (max-width:640px){.aship{grid-template-columns:1fr}.asfacts{grid-template-columns:repeat(2,minmax(0,1fr))}.asw{max-width:none;width:100%}.asact{width:100%}}
+@media print{.asact,.asbtns,.astabbar .tabs{display:none!important}}
+
+.asg{display:grid;gap:14px}.asg2{display:grid;gap:14px;align-items:start}
+.asg2.r1{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.astl{list-style:none;margin:0;padding:6px 0 0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;position:relative}
+.astl li{display:grid;justify-items:center;text-align:center;gap:2px;position:relative;font-size:12px;padding:0 2px;align-content:start}
+.astl li::before{content:'';position:absolute;top:19px;left:-50%;right:50%;height:2px;background:var(--ok)}.astl li:first-child::before{display:none}
+.astl li.warn::before,.astl li.pending::before{background:var(--line)}.astl li.cur::before{background:var(--ok)}
+.astl .dot{position:relative;z-index:1;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--ok);color:#fff;border:2px solid var(--panel)}
+.astl li.warn .dot{background:var(--yellow);color:#141414}.astl li.pending .dot{background:var(--panel3);color:var(--muted)}
+.astl b{font-size:12.5px;margin-top:4px;line-height:1.2}.astl .d{font-weight:600;font-size:12px}.astl .nt{display:none}
+.astl.full{grid-template-columns:1fr;gap:0}.astl.full li{grid-template-columns:30px 170px 170px 1fr 1fr;justify-items:start;text-align:left;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2)}
+.astl.full li::before{display:none}.astl.full .nt{display:block;color:var(--ink2)}.astl.full b{margin-top:0}
+.ascond{display:grid;gap:12px}.ascl{display:flex;gap:14px;align-items:center}.asclose{width:130px;flex:none}
+.asimg.zoom{aspect-ratio:1}.asimg.zoom img{object-fit:cover;transform:scale(1.9);transform-origin:36% 60%}
+.asrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line2);font-size:13px}.asrow:last-child{border-bottom:0}
+.tx-ok{color:var(--ok)}.tx-warn{color:var(--warn)}.tx-bad{color:var(--bad)}
+@container as (max-width:1000px){.asg2.r1{grid-template-columns:1fr}}
+@container as (max-width:720px){.astl{grid-template-columns:1fr;gap:0}.astl li{grid-template-columns:30px 1fr auto;justify-items:start;text-align:left;align-items:center;padding:8px 0;border-bottom:1px solid var(--line2)}.astl li::before{display:none}.astl .dot{grid-row:span 2}.astl li>.note{grid-column:2/-1}.astl.full li{grid-template-columns:30px 1fr}}
+
+.asbtns{margin-left:auto}
+.asg2.r2{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.aspi{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:18px}
+.aspi h4,.asec3 h4{font-size:12.5px;margin:0 0 6px;color:var(--ink2)}
+.asimg.sm{width:92px;aspect-ratio:4/3;flex:none}
+.asdl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;margin:0 0 12px}.asdl dt{font-size:11.5px;color:var(--muted)}.asdl dd{margin:0;font-weight:600;font-size:13px}
+.asspec{display:grid;border:1px solid var(--line2);border-radius:8px;overflow:hidden}.asspec div{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;font-size:12.5px;border-bottom:1px solid var(--line2)}.asspec div:last-child{border-bottom:0}.asspec span{color:var(--ink2)}
+.asecs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.asec{display:flex;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:8px;padding:10px}.asec .kic{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--info-soft);color:var(--info)}.asec .kic svg{width:18px;height:18px}
+.asec.ok .kic{background:var(--ok-soft);color:var(--ok)}.asec.bad .kic{background:var(--bad-soft);color:var(--bad)}.asec.y .kic{background:var(--yellow-soft);color:var(--ink)}
+.asec div{display:grid;min-width:0}.asec b{font:800 18px var(--f-display)}
+.asec3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.asbars{display:flex;align-items:flex-end;gap:5px;height:84px;margin-top:8px}.asbars span{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:3px}.asbars i{display:block;width:100%;background:var(--chart1);border-radius:3px 3px 0 0}.asbars em{font-style:normal;font-size:10px;color:var(--muted)}
+@container as (max-width:1250px){.asg2.r2{grid-template-columns:1fr}}
+@container as (max-width:820px){.aspi{grid-template-columns:1fr}.asec3{grid-template-columns:1fr}.asecs{grid-template-columns:1fr}}
+
+.asg2.r3{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)}
+.aselig .asrow{align-items:flex-start}
+.asgates{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:10px}.asgl{display:flex;gap:4px}.asgate{width:16px;height:16px;border-radius:4px;background:var(--ok);cursor:help}.asgate.fail{background:var(--bad)}.asgate.skip{background:var(--panel3)}.asgate.warn{background:#D4A800}
+.asq h4{font-size:12.5px;margin:12px 0 4px;color:var(--ink2)}
+.asqr{display:flex;align-items:center;gap:14px}.asqr svg{width:104px;flex:none}.asqr .asleg{min-width:150px}
+.asimg.xs{width:62px;aspect-ratio:4/3;flex:none;border-radius:6px}.asimg.xs .asqty{display:none}.asimg.xs .asph .thumb{width:28px;height:28px}.asimg.xs .asph span:last-child{display:none}
+.asrels{display:grid;gap:8px}
+.asrel{display:flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:8px;padding:8px;text-decoration:none;color:var(--ink)}.asrel:hover{background:var(--panel2);border-color:var(--line)}
+.asrt{display:grid;min-width:0;flex:1}.asrt .note{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@container as (max-width:1180px){.asg2.r3{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.asg2.r3>section:last-child{grid-column:1/-1}}
+@container as (max-width:720px){.asg2.r3{grid-template-columns:1fr}}
+
+.as .aspn+.aspn{margin-top:14px}.as #asBody>.aspn{margin-bottom:14px}.as #asBody>.aspn+.aspn{margin-top:0}
+.asg2 .aspn+.aspn{margin-top:0!important}
+.asg2.r1b{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-bottom:14px}.asg2.r1c{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-bottom:14px}
+.asmeter{flex:1;height:8px;border-radius:5px;background:var(--panel3);overflow:hidden;min-width:60px}.asmeter i{display:block;height:100%;border-radius:5px}
+.asrow .asmeter+b{width:28px;text-align:right}
+.asgal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.asimg.zoomg{aspect-ratio:4/3}.asimg.zoomg img{object-fit:cover;transform:scale(2.2);transform-origin:var(--op)}
+.ascmp th{vertical-align:bottom}.ascmp td{min-width:120px}.ascmp .asimg.xs{margin-bottom:4px}
+.as .tw table.t.tight td{vertical-align:middle}
+@container as (max-width:900px){.asg2.r1b,.asg2.r1c{grid-template-columns:1fr}.asgal{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.as .aspn{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -1267,10 +1379,66 @@ function parse(){const h=location.hash.replace(/^#\/?/,'').split('?')[0].split('
 function go(path){if(location.hash==='#/'+path)route();else location.hash='#/'+path}
 ACT.go=a=>{closeDrawer();closeModal();go(a)};
 const PAGES={command:{t:'Command Center',sub:'Overview and priorities',icon:'command',j:[2,3,4,5,10]},product:{t:'Product',sub:'Decision Workbench',icon:'product',j:[2,3,4,5]},analytics:{t:'Analytics',sub:'Reconcile & learn',icon:'analytics',j:[10]},integration:{t:'Integration',sub:'Connection Fabric',icon:'integration',j:[1,6,7,8,9]},mcp:{t:'MCP & Tools',sub:'Agents within permissions',icon:'mcp',j:[2,3,4,5,6,10]},audit:{t:'Audit & provenance',sub:'What was fetched, from where',icon:'audit',j:[1,2,3,6,9,10]}};
+/* ===== Sidebar with sections: dropdowns, hover flyout, collapsible rail, deep links ===== */
+const NAV=[
+ {id:'command',label:'Command Center',sub:'Overview and priorities',icon:'command',kids:[['kpis','Key figures','Five headline numbers'],['charts','Portfolio charts','Lifecycle, treatments, risk, time to action'],['actions','Actions to prioritise','Ranked opportunities to act on'],['signals','Signals and capacity','What needs attention'],['value','Value realisation','Predicted vs actual recovery']]},
+ {id:'product',label:'Product',sub:'Decision Workbench',icon:'product',mode:1,kids:[['received','Returned assets','Inspect inventory and evaluate use'],['expected','Expected returns','Planning signals, not yet received'],['pools','Pool optimizer','Allocate scarce assets across demand'],['asset','Asset intelligence','Lifecycle, condition and economics of one asset']]},
+ {id:'analytics',label:'Analytics',sub:'Reconcile & learn',icon:'analytics',kids:[['waterfall','Recovery waterfall','Baseline to Circularity uplift'],['pipeline','Pipeline','Case to reconciled'],['mix','Route mix','How routes change over time'],['predicted','Predicted vs actual','Forecast against outcome'],['models','Model versions','The learning loop'],['pool','Pool efficiency','Allocation results'],['overrides','Overrides','When people changed the plan'],['eng','Engineering economics','Parts and economics'],['sustain','Sustainability','Estimated vs measured CO₂e']]},
+ {id:'integration',label:'Integration',sub:'Connection Fabric',icon:'integration',mode:1,kids:[['studio','Workflow studio','Build pipelines and workflows','wffail'],['map','Source map','Connect and monitor systems','srcissue'],['tables','Source tables','Tables and how they link'],['models','Canonical models','Versioned shared models'],['events','Event stream','Live message stream'],['conflicts','Conflict queue','Systems that disagree','conf'],['import','Manual import','Controlled CSV import']]},
+ {id:'mcp',label:'MCP & Tools',sub:'Agents within permissions',icon:'mcp',kids:[['catalog','Tool catalog','Governed tools'],['agents','Agent registry','Who can call what'],['playground','Playground','Try a tool call'],['perms','Permission matrix','Agent permissions by tenant'],['calls','Call log and gate','Every call, and the write gate'],['client','As MCP client','Consume enterprise MCP servers']]},
+ {id:'audit',label:'Audit & provenance',sub:'What was fetched, from where',icon:'audit',kids:[['log','Fetch log','Every fetch with its source'],['gaps','Evidence gaps','Evidence with no provenance']]}
+];
+const INT_TABS=['studio','map','tables','models','events','conflicts','import'];
+const byHead=t=>()=>{const h=$$('#view h2,#view h3').find(x=>x.textContent.toLowerCase().includes(t.toLowerCase()));return h?(h.closest('.panel,.sect,section')||h):null};
+const ANCH={
+ command:{kpis:()=>$('#ccKpis'),charts:()=>$('.ccgrid4'),actions:()=>$('#ccTab')&&$('#ccTab').closest('section'),signals:()=>$('#ccSig')&&$('#ccSig').closest('section'),value:byHead('Value realisation')},
+ analytics:{waterfall:byHead('Recovery waterfall'),pipeline:byHead('Pipeline'),mix:byHead('Route mix'),predicted:byHead('Predicted vs actual'),models:byHead('Model versions'),pool:byHead('Pool efficiency'),overrides:byHead('Overrides'),eng:byHead('Engineering economic'),sustain:byHead('Sustainability')},
+ mcp:{catalog:byHead('Tool catalog'),agents:byHead('Agent registry'),playground:byHead('Playground'),perms:byHead('Permission matrix'),calls:byHead('Call log')},
+ audit:{log:()=>$('#view .panel'),gaps:byHead('Evidence gaps')}
+};
+S.navOpen={};S.navRail=false;
+try{const n=JSON.parse(localStorage.getItem('circ-nav')||'{}');if(n.open)S.navOpen=n.open;S.navRail=!!n.rail}catch(e){}
+const navSave=()=>{try{localStorage.setItem('circ-nav',JSON.stringify({open:S.navOpen,rail:S.navRail}))}catch(e){}};
+const navIsOpen=g=>!!S.navOpen[g];
+const navHref=(g,k)=>'#/'+g.id+(g.id==='product'&&k==='asset'?'/asset/'+(S.lastAsset||'RT-1048'):k?'/'+k:'');
+function navHTML(){
+  return `<nav class="nav" aria-label="Pages">${NAV.map(g=>{const open=navIsOpen(g.id);
+   return `<div class="ng" data-g="${g.id}"><div class="ngr"><a class="ngh" href="${navHref(g,g.mode?g.kids[0][0]:'')}" data-nav="${g.id}" aria-label="${g.label}">${ICON[g.icon]}<span class="ngl">${g.label}<span class="sub">${g.sub}</span></span>${g.id==='product'?'<span class="cnt" id="navcnt"></span>':''}${g.id==='integration'?'<span class="cnt" id="navint"></span>':''}</a><button class="chev" data-act="navToggle" data-arg="${g.id}" aria-expanded="${open}" aria-controls="ns-${g.id}" aria-label="${g.label}: show sections"></button></div>
+   <div class="nsub" id="ns-${g.id}" role="group" aria-label="${g.label} sections" ${open?'':'hidden'}>${g.kids.map(k=>`<a class="nsl" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}">${k[1]}${k[3]?`<span class="cnt2" data-nb="${k[3]}"></span>`:''}</a>`).join('')}</div></div>`}).join('')}</nav>`}
+function navActiveKey(r){const g=NAV.find(x=>x.id===r.page);if(!g)return'';if(r.page==='product'){return 'product/'+((r.a==='expected'||r.a==='pools'||r.a==='asset')?r.a:'received')}
+  if(r.page==='integration')return 'integration/'+(r.a&&INT_TABS.includes(r.a)?r.a:S.intTab);if(r.page==='mcp')return 'mcp/'+(r.a||'');return r.a?r.page+'/'+r.a:''}
+function navSync(r){const key=navActiveKey(r);
+  if(S.navOpen[r.page]===undefined&&NAV.some(g=>g.id===r.page)){S.navOpen[r.page]=true;navSave()}
+  $$('.ngh').forEach(a=>a.setAttribute('aria-current',a.dataset.nav===r.page?'page':'false'));
+  $$('.ng').forEach(g=>{const on=g.dataset.g===r.page;g.classList.toggle('active',on);const o=navIsOpen(g.dataset.g),s=$('#ns-'+g.dataset.g),c=g.querySelector('.chev');s&&(s.hidden=!o);c&&c.setAttribute('aria-expanded',o)});
+  $$('.nsl,.nfi').forEach(a=>a.setAttribute('aria-current',a.dataset.nk===key?'true':'false'));
+  const sn=$('#subnav'),g=NAV.find(x=>x.id===r.page);if(sn)sn.innerHTML=g?`<span class="snt">${g.label}</span>${g.kids.map(k=>`<a class="snl" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}" aria-current="${g.id+'/'+k[0]===key}">${k[1]}</a>`).join('')}`:'';
+  $$('[data-nk="product/asset"]').forEach(a=>a.setAttribute('href',navHref(NAV[1],'asset')));
+  navBadges()}
+function navBadges(){const conf=CONFLICTS.filter(c=>c.status==='open').length,iss=SOURCES.filter(s=>s.status==='stale'||s.status==='unavailable').length,wf=S.wf?S.wf.list.filter(w=>w.status==='published'&&w.last&&w.last.state==='failed').length:0,v={conf,srcissue:iss,wffail:wf};
+  $$('[data-nb]').forEach(el=>{const n=v[el.dataset.nb]||0;el.textContent=n||'';el.hidden=!n;el.classList.toggle('bad',el.dataset.nb!=='conf'||n>0)});
+  const ni=$('#navint');if(ni){ni.textContent=conf||'';ni.hidden=!conf}}
+function anchorScroll(r){const f=ANCH[r.page]&&ANCH[r.page][r.a];if(!r.a){window.scrollTo({top:0,behavior:'smooth'});return}const el=f&&f();if(el){$$('[data-anchor]').forEach(x=>x.removeAttribute('data-anchor'));el.setAttribute('data-anchor','1');el.scrollIntoView({behavior:'smooth',block:'start'})}}
+ACT.navToggle=g=>{S.navOpen[g]=!navIsOpen(g);navSave();const s=$('#ns-'+g),c=$(`.ng[data-g="${g}"] .chev`);s&&(s.hidden=!S.navOpen[g]);c&&c.setAttribute('aria-expanded',S.navOpen[g])};
+ACT.navRail=()=>{S.navRail=!S.navRail;navSave();$('.app').classList.toggle('rail',S.navRail);const b=$('.railbtn');b&&(b.setAttribute('aria-pressed',S.navRail),b.setAttribute('aria-label',S.navRail?'Expand sidebar':'Collapse sidebar'));navFlyHide(true)};
+/* hover flyout: shows a group's sections without leaving the page */
+const NF={t:null,s:null};
+function navFlyHide(now){clearTimeout(NF.t);clearTimeout(NF.s);const f=$('#nfly');if(!f)return;if(now){f.classList.remove('on');return}NF.t=setTimeout(()=>f.classList.remove('on'),180)}
+function navFlyShow(gid,el){const g=NAV.find(x=>x.id===gid);if(!g||innerWidth<=860)return;const rail=$('.app').classList.contains('rail');if(!rail&&navIsOpen(gid))return;
+  let f=$('#nfly');if(!f){f=document.createElement('div');f.id='nfly';f.className='nfly';f.setAttribute('role','menu');document.body.appendChild(f);f.addEventListener('mouseenter',()=>clearTimeout(NF.t));f.addEventListener('mouseleave',()=>navFlyHide())}
+  const key=navActiveKey(parse()),v={conf:CONFLICTS.filter(c=>c.status==='open').length,srcissue:SOURCES.filter(s=>s.status==='stale'||s.status==='unavailable').length,wffail:S.wf?S.wf.list.filter(w=>w.status==='published'&&w.last&&w.last.state==='failed').length:0};
+  f.innerHTML=`<div class="nfh"><b>${g.label}</b><span class="note">${g.sub}</span></div>${g.kids.map(k=>`<a class="nfi" role="menuitem" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}" aria-current="${g.id+'/'+k[0]===key}"><span class="nft">${k[1]}${k[3]&&v[k[3]]?`<span class="cnt2">${v[k[3]]}</span>`:''}</span><span class="note">${k[2]||''}</span></a>`).join('')}`;
+  const r=el.getBoundingClientRect(),sb=$('.side').getBoundingClientRect();f.style.left=(sb.right+6)+'px';f.classList.add('on');f.style.top=Math.max(8,Math.min(r.top-4,innerHeight-f.offsetHeight-8))+'px'}
+document.addEventListener('mouseover',e=>{const g=e.target.closest&&e.target.closest('.ng');if(!g||!$('.side')||!$('.side').contains(g))return;clearTimeout(NF.t);clearTimeout(NF.s);NF.s=setTimeout(()=>navFlyShow(g.dataset.g,g.querySelector('.ngr')),110)});
+document.addEventListener('mouseout',e=>{const side=$('.side');if(!side||!e.target.closest||!e.target.closest('.side'))return;if(!e.relatedTarget||!(e.relatedTarget.closest&&(e.relatedTarget.closest('.ng')||e.relatedTarget.closest('#nfly'))))navFlyHide()});
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('.nsl,.nfi,.snl');if(!a)return;navFlyHide(true);const h=a.getAttribute('href');if(h===location.hash){e.preventDefault();route()}});
+document.addEventListener('keydown',e=>{const g=e.target.closest&&e.target.closest('.ngr');if(g&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){const id=g.parentNode.dataset.g;if(e.key==='ArrowRight'){if(!navIsOpen(id))ACT.navToggle(id);const f=$('#ns-'+id+' a');f&&f.focus()}else if(navIsOpen(id))ACT.navToggle(id);e.preventDefault()}
+  if(e.key==='Escape')navFlyHide(true)});
+ICON.railc=IC('<path d="M11 7l-5 5 5 5M18 7l-5 5 5 5"/>');
 function shell(){
   $('#app').innerHTML=`<aside class="side"><div class="brand"><img src="${LOGO}" alt="Artizent"><small>Decision Intelligence Framework<br>Circularity</small></div>
-  <nav class="nav" aria-label="Pages">${Object.entries(PAGES).map(([k,p])=>`<a href="#/${k}" data-nav="${k}">${ICON[p.icon]}<span>${p.t}<span class="sub">${p.sub}</span></span>${k==='product'?`<span class="cnt" id="navcnt"></span>`:''}</a>`).join('')}</nav>
-  <div class="side-foot"><b>Northfield Industrial Leasing</b><br>3 customer tenants · 8 sites<br><span class="note" style="color:var(--side-mut)">Synthetic data, seed 20261007</span></div></aside>
+  ${navHTML()}
+  <button class="railbtn" data-act="navRail" aria-pressed="false" aria-label="Collapse sidebar">${ICON.railc}</button><div class="side-foot"><b>Northfield Industrial Leasing</b><br>3 customer tenants · 8 sites<br><span class="note" style="color:var(--side-mut)">Synthetic data, seed 20261007</span></div></aside>
   <div class="main"><header class="top" role="banner">
    <div class="search"><label class="sr" for="gs">Search cases</label>${ICON.search}<input id="gs" type="search" placeholder="Search return, asset, or closed case ID" autocomplete="off" data-in="gsearch"><div class="results" id="results" hidden></div></div>
    <div class="tools"><label class="sr" for="tsel">Tenant</label><select class="sel" id="tsel" data-ch="tenant"><option>All</option>${TENANTS.map(t=>`<option>${t}</option>`).join('')}</select>
@@ -1278,8 +1446,9 @@ function shell(){
    <button class="pill demo" data-act="dataChecks" data-tip="Open the data integrity checks"><span class="dot"></span>Demo data</button>
    <label class="sr" for="rsel">Role</label><select class="sel" id="rsel" data-ch="role" data-tip="Role changes what you can do">${Object.keys(ROLES).map(r=>`<option ${r===S.role?'selected':''}>${r}</option>`).join('')}</select>
    <button class="iconbtn" data-act="theme" aria-label="Toggle theme" id="thm"></button></div></header>
-   <div id="jmount"></div><main class="page" id="view" tabindex="-1"></main></div>`;
+   <div class="subnav" id="subnav"></div><div id="jmount"></div><main class="page" id="view" tabindex="-1"></main></div>`;
   $('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;
+  $('#app').classList.toggle('rail',S.navRail);const rb=$('.railbtn');rb&&(rb.setAttribute('aria-pressed',S.navRail),rb.setAttribute('aria-label',S.navRail?'Expand sidebar':'Collapse sidebar'));
 }
 ACT.theme=()=>{S.theme=S.theme==='dark'?'light':'dark';applyTheme();$('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;route(true)};
 ACT.tenant=v=>{S.tenant=v;const t=$('#tsel');t&&(t.value=v);route(true)};
@@ -1293,7 +1462,11 @@ document.addEventListener('click',e=>{if(!e.target.closest('.search'))hideResult
 function route(keep){
   const r=parse();if(!PAGES[r.page]){go('command');return}
   const y=keep?scrollY:0;
-  $$('.nav a').forEach(a=>a.setAttribute('aria-current',a.dataset.nav===r.page?'page':'false'));
+  if(r.page==='integration'&&INT_TABS.includes(r.a))S.intTab=r.a;
+  if(r.page==='mcp')S.mcpDir=r.a==='client'?'client':'server';
+  const L=S.lastR;S.lastR=r;
+  if(!keep&&ANCH[r.page]&&L&&L.page===r.page&&!(r.page==='mcp'&&(r.a==='client')!==(L.a==='client'))){navSync(r);anchorScroll(r);return}
+  navSync(r);
   if((r.page==='product'?r.a:null)!==S.lastCase){S.lastCase=r.page==='product'?r.a:null;S.scenOpen=false;S.scen={purchase:1,cost:1,service:1,market:1,demandOff:false};S.xtab='why'}
   const isCase=r.page==='product'&&r.a&&/^RT-/.test(r.a)&&CASE_BY_ID[r.a];
   const j=r.page==='product'&&isCase?[2,3,4,5,6]:PAGES[r.page].j;
@@ -1303,7 +1476,7 @@ function route(keep){
   try{v.innerHTML=({command:renderCommand,product:renderProduct,analytics:renderAnalytics,integration:renderIntegration,mcp:renderMcp,audit:renderAudit})[r.page](r)}catch(err){console.error(err);v.innerHTML=`<div class="empty"><b>This view could not be drawn</b>${esc(err.message)}. Reload the page; your data is synthetic and regenerates identically.</div>`}
   document.title=PAGES[r.page].t+' · Circularity Decision Workbench';
   if(!keep){window.scrollTo(0,0)}else window.scrollTo(0,y);
-  if(typeof afterRender==='function')afterRender(r);
+  if(typeof afterRender==='function')afterRender(r,keep);
 }
 window.addEventListener('hashchange',()=>route());
 /* shared helpers used by pages */
@@ -1354,7 +1527,7 @@ function queueTable(){
    <select class="sel" data-ch="qassess" aria-label="Assessment"><option value="">Assessment</option>${opts(['Ready','Review','Pending','Partial'],f.assess)}</select>
    <button class="btn ghost sm" data-act="clearQ">Clear filters</button></div>
   <div class="tw"><table class="t"><thead><tr>${th(f.sortK==='priority'?'priority':'id','Return')}${th('product','Product')}${th('assetId','Asset ID')}${th('owner','Owner')}${th('received','Received')}${th('location','Location')}${th('condition','Condition')}${th('assessment','Assessment')}<th>Status</th>${th('net','Best next action','r')}</tr></thead><tbody>
-  ${shown.map(c=>`<tr class="${S.sel===c.id?'sel':''}" tabindex="0" data-act="selectCase" data-arg="${c.id}"><td><b>${c.id}</b></td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(c.cls)}<span>${esc(c.product)}${c.qty>1?` <span class="note">×${c.qty}</span>`:''}</span></div></td><td class="num nowrap">${c.assetId}</td><td class="nowrap">${c.owner}</td><td class="num nowrap">${fmtD(c.received)}</td><td class="nowrap">${c.location}</td><td>${condChip(c)}</td><td>${assessChip(c)}</td><td>${stageChip(c)}</td><td class="r num nowrap">${c.recommendation?`<b>${money(c.recommendation.net)}</b> <span class="note">${esc(rid(c.recommendation.id).short)}</span>`:'<span class="muted">—</span>'}</td></tr>`).join('')||`<tr><td colspan="11"><div class="empty"><b>No returns match these filters</b>Clear filters to see all ${visCases().length} returns.</div></td></tr>`}
+  ${shown.map(c=>`<tr class="${S.sel===c.id?'sel':''}" tabindex="0" data-act="selectCase" data-arg="${c.id}"><td><b>${c.id}</b></td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(c.cls)}<span>${esc(c.product)}${c.qty>1?` <span class="note">×${c.qty}</span>`:''}</span></div></td><td class="num nowrap"><a class="lnk" href="#/product/asset/${c.id}" data-act="go" data-arg="product/asset/${c.id}" data-tip="Open asset intelligence">${c.assetId}</a></td><td class="nowrap">${c.owner}</td><td class="num nowrap">${fmtD(c.received)}</td><td class="nowrap">${c.location}</td><td>${condChip(c)}</td><td>${assessChip(c)}</td><td>${stageChip(c)}</td><td class="r num nowrap">${c.recommendation?`<b>${money(c.recommendation.net)}</b> <span class="note">${esc(rid(c.recommendation.id).short)}</span>`:'<span class="muted">—</span>'}</td></tr>`).join('')||`<tr><td colspan="11"><div class="empty"><b>No returns match these filters</b>Clear filters to see all ${visCases().length} returns.</div></td></tr>`}
   </tbody></table></div>
   <div class="filters" style="border-top:1px solid var(--line2);border-bottom:0;justify-content:space-between"><span class="note">Showing ${shown.length} of ${rows.length}. Physical inventory remains controlled by the source system.</span>${rows.length>shown.length?`<button class="btn sm" data-act="more">Show 25 more</button>`:''}</div></div>`;
 }
@@ -1364,6 +1537,8 @@ function expectedTable(){
   ${EXPECTED.filter(e=>S.tenant==='All'||e.owner===S.tenant).map(e=>`<tr data-act="expDetail" data-arg="${e.id}"><td><b>${e.id}</b></td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(e.cls)}${e.product}</div></td><td>${e.owner}</td><td>${e.date} Oct</td><td>${e.signal}</td><td class="num">${e.range}</td><td><span class="chip line">Conditional</span></td></tr>`).join('')}</tbody></table></div></div>`;
 }
 function renderProduct(r){
+  if(r.a==='expected')S.q.view='expected';else if(r.a==='received')S.q.view='received';
+  if(r.a==='asset')return assetPage(r);
   if(r.a==='pools')return poolsPage();
   if(r.a&&CASE_BY_ID[r.a])return caseView(CASE_BY_ID[r.a]);
   const v=S.q.view;
@@ -1378,7 +1553,7 @@ ACT.qtext=v=>{S.q.text=v;S.q.limit=25;const el=$('#view .panel');const sel=docum
 function refreshQueue(){const p=$('#view .panel');if(p)p.outerHTML=queueTable();}
 ACT.qcond=v=>{S.q.cond=v;route(true)};ACT.qloc=v=>{S.q.loc=v;route(true)};ACT.qowner=v=>{S.q.owner=v;route(true)};ACT.qassess=v=>{S.q.assess=v;route(true)};
 ACT.clearQ=()=>{Object.assign(S.q,{kpi:'all',text:'',cond:'',loc:'',owner:'',assess:'',limit:25});route(true)};
-ACT.more=()=>{S.q.limit+=25;route(true)};ACT.qview=a=>{S.q.view=a;route(true)};
+ACT.more=()=>{S.q.limit+=25;route(true)};ACT.qview=a=>{go('product/'+a)};
 ACT.selectCase=a=>{S.sel=a;openCase(a)};
 ACT.openCase=a=>{closeDrawer();hideResults();openCase(a)};
 function openCase(id){const c=CASE_BY_ID[id];if(!c)return;
@@ -1414,7 +1589,7 @@ function flips(c){
 function caseView(c){
   const sr=scenRoutes(c);
   return `<div class="casehead"><div><div class="crumbs"><a href="#/product">Returned assets</a> / ${c.id}</div><h1>${c.id} · Decision analysis</h1><div class="ink2" style="margin-top:4px">${esc(c.product)} · ${c.assetId} · ${c.location}${c.qty>1?' · '+c.qty+' units':''} · ${c.owner}</div></div>
-   <div class="row"><button class="btn" data-act="scenToggle" aria-expanded="${S.scenOpen}">Scenario preview${scenActive()?' · active':''}</button><button class="btn" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button></div></div>
+   <div class="row"><a class="btn" href="#/product/asset/${c.id}" data-act="go" data-arg="product/asset/${c.id}">Asset intelligence</a><button class="btn" data-act="scenToggle" aria-expanded="${S.scenOpen}">Scenario preview${scenActive()?' · active':''}</button><button class="btn" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button></div></div>
   <div class="assetstrip"><div><div class="k">Engineering life</div><div class="v">${esc(c.engLife)}</div></div><div><div class="k">Condition</div><div class="v">${condChip(c)}</div></div><div><div class="k">Next inspection</div><div class="v">${esc(c.nextInspection)}</div></div><div><div class="k">Owner</div><div class="v">${c.owner}</div></div><div><div class="k">Received</div><div class="v">${fmtD(c.received)}${c.hero?'':''}</div></div>${c.qty>1?`<div><div class="k">Quantity</div><div class="v">${c.qty} units</div></div>`:''}<div><div class="k">Model</div><div class="v">${c.model}${c.snapshot?` · ${c.snapshot.id}`:''}</div></div></div>
   ${c.stage==='reeval'?`<div class="callout bad" style="margin-bottom:14px"><b>Review triggered: ${esc(c.reevalReason)}.</b> The earlier recommendation is on hold until it is re-evaluated. <button class="btn sm" data-act="reeval" data-arg="${c.id}" style="margin-left:8px">Run re-evaluation</button></div>`:''}
   ${S.scenOpen?scenPanel(c):''}
@@ -1619,7 +1794,7 @@ ACT.models=()=>{const rows=MODELS.map(m=>({m,s:modelStats(m.v)}));
   openDrawer(`<p class="ink2" style="margin-top:0">Each prediction names its model version. Error shrinks as outcomes feed back; early versions were optimistic.</p><table class="t static"><thead><tr><th>Version</th><th class="r">Closed</th><th class="r">Error (MAPE)</th><th class="r">Bias</th><th class="r">P10–P90 coverage</th></tr></thead><tbody>${rows.map(({m,s})=>`<tr><td><b>${m.v}</b><div class="note">${fmtDY(m.released)}</div></td><td class="r num">${s.n}</td><td class="r num">${pct(s.mape,1)}</td><td class="r num ${s.bias<0?'neg':''}">${(s.bias*100).toFixed(1)}%</td><td class="r num">${pct(s.cov)}</td></tr>`).join('')}</tbody></table><div class="note" style="margin:10px 0">Negative bias: the model over-predicted. Overrides and pending cases are excluded.</div>`,'Model versions and validation','Compared with actual outcomes','<a class="btn pri" href="#/analytics" data-act="go" data-arg="analytics">Open Analytics</a>')};
 ACT.dataChecks=()=>{const res=runInvariants(),ok=res.filter(r=>r.ok).length;
   openModal('Data integrity checks',`<p class="ink2" style="margin-top:0">One seeded generator feeds all four pages, so numbers reconcile everywhere. These checks run on every load.</p><div class="callout ${ok===res.length?'ok':'bad'}" style="margin-bottom:12px"><b>${ok} of ${res.length} checks pass.</b> Seed 20261007 · mulberry32</div>${res.map(r=>`<div class="ev ${r.ok?'':'missing'}"><span class="ic">${r.ok?'✓':'!'}</span><div><b>${esc(r.name)}</b><small>${esc(r.detail)}</small></div></div>`).join('')}`,`<button class="btn" data-act="closeModal">Close</button>`,true)};
-function afterRender(){if(typeof wfPaint==='function'&&S.wf&&$('#wfView'))wfPaint()}
+function afterRender(r,keep){if(typeof wfPaint==='function'&&S.wf&&$('#wfView'))wfPaint();$$('[data-nk="product/asset"]').forEach(a=>a.setAttribute('href',navHref(NAV[1],'asset')));if(r&&!keep&&ANCH[r.page]&&r.a)setTimeout(()=>anchorScroll(r),30)}
 
 /* ===== Analytics · reconcile & learn ===== */
 const kfmt=n=>{const a=Math.abs(n),s=n<0?'−':'';return a>=1e6?s+'$'+(a/1e6).toFixed(2)+'M':a>=1e3?s+'$'+Math.round(a/1e3)+'k':s+'$'+Math.round(a)};
@@ -1773,8 +1948,166 @@ ACT.ccScroll=id=>{const e=document.getElementById(id);e&&e.scrollIntoView({behav
 ACT.ccRefresh=()=>{route(true);toast('Refreshed. All figures recomputed from the latest data.')};
 ACT.ccShare=()=>{const u=location.href;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>toast('Link copied. It opens this Command Center.'),()=>toast('Copy this link to share: '+u,6000))};
 ACT.ccExport=()=>{toast('Opening the print dialog. Choose Save as PDF for a one-page summary.');setTimeout(()=>window.print(),400)};
-ACT.ccGoMap=()=>{S.intTab='map';go('integration')};
+ACT.ccGoMap=()=>{go('integration/map')};
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();const g=$('#gs');g&&g.focus()}});
+/*ASSET-START*/
+/* ===== Asset & Product Intelligence: everything about one asset, from the same seeded world ===== */
+const AS_IMG={motor:'motor',pump:'pump',control:'control',drill:'powertool',batch:'powertool',it:'it'};
+const AS_TABS=[['overview','Overview'],['lifecycle','Lifecycle'],['condition','Condition'],['product','Product & Components'],['economic','Economic Analysis'],['eligibility','Eligibility & Compliance'],['data','Data & Evidence'],['related','Related Assets']];
+const AS_COMPS={motor:['Stator winding','Rotor and shaft','Bearings','Housing and frame','Terminal box'],pump:['Pistons and barrel','Shaft seal','Bearings','Housing','Ports and fittings'],control:['Processor module','I/O modules','Power supply','Connectors','Firmware'],drill:['Motor','Gearbox','Chuck','Housing','Battery'],batch:['Drivers','Battery packs','Chucks','Housings','Chargers'],it:['Battery','Display','Keyboard','Storage','Chassis']};
+S.at={tab:'overview'};
+const asHex=(c,k)=>parseInt(hashId(c.id+k),16)||0;
+const asSerial=c=>'SN'+String(asHex(c,'sn')).slice(0,7).padStart(7,'0');
+const asRev=c=>'Rev '+'ABCDE'[asHex(c,'rv')%5];
+const asClamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const asTitle=c=>{const m=asModel(c);return m.toLowerCase().includes(String(c.mfr).split(' ')[0].toLowerCase())?m:c.mfr+' '+m};
+const asModel=c=>{const e=EQUIP.find(x=>x.cls===c.cls);return e?e.m.replace(/s$/,''):c.product};
+function assetHealth(c){const K=CLASSES[c.cls],g=GRADE_F[c.grade||'C']*(c.grade?1:.92),life=Math.exp(-c.age/K.tau),score=asClamp(Math.round(100*(.62*g+.38*life)),24,97);
+  const comps=AS_COMPS[c.cls].map(n=>{const h=asClamp(g+((asHex(c,n)%40)-18)/100,.22,1);return{n,h,st:h>=.85?'Good':h>=.65?'Moderate wear':'Replace soon',cls:h>=.85?'ok':h>=.65?'warn':'bad'}});
+  const band=comps.reduce((o,x)=>{const k=x.h>=.9?'Excellent':x.h>=.75?'Good':x.h>=.55?'Fair':'Poor';o[k]=(o[k]||0)+1;return o},{});
+  return{score,comps,band,est:!c.grade}}
+function asRing(h){const cols={Excellent:'var(--ok)',Good:'#5FAE7B',Fair:'#D4A800',Poor:'var(--bad)'},tot=Object.values(h.band).reduce((a,b)=>a+b,0)||1,r=48,cc=2*Math.PI*r;let off=0;
+  const seg=Object.keys(cols).filter(k=>h.band[k]).map(k=>{const l=h.band[k]/tot*cc,d=Math.max(0,l-2),e=`<circle cx="60" cy="60" r="${r}" fill="none" stroke="${cols[k]}" stroke-width="14" stroke-dasharray="${d} ${cc-d}" stroke-dashoffset="${-off}" transform="rotate(-90 60 60)"/>`;off+=l;return e}).join('');
+  return `<div class="asring"><svg viewBox="0 0 120 120" role="img" aria-label="Overall asset health ${h.score} out of 100"><circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--panel3)" stroke-width="14"/>${seg}<text x="60" y="60" text-anchor="middle" font-size="26" font-weight="800" fill="var(--ink)" style="font-family:var(--f-display)">${h.score}</text><text x="60" y="76" text-anchor="middle" font-size="10.5" fill="var(--ink2)">/100</text></svg>
+  <div class="asleg">${Object.keys(cols).map(k=>`<div><i style="background:${cols[k]}"></i><span>${k}</span><b class="num">${Math.round((h.band[k]||0)/tot*100)}%</b></div>`).join('')}</div></div>`}
+function asPhoto(c,cls){const f=AS_IMG[c.cls];return `<div class="asimg ${cls||''}"><img src="assets/products/${f}.webp" alt="${esc(c.product)}, ${esc(c.mfr)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><span class="asph" hidden>${thumb(c.cls)}<span>${esc(CLASSES[c.cls].label)}</span></span>${c.qty>1?`<span class="asqty">×${c.qty}</span>`:''}</div>`}
+function assetFacts(c){const d=c.demand||{};return [['Asset ID',c.assetId],['Serial number',asSerial(c)],['Product',asModel(c)],['Manufacturer',c.mfr],['Revision',asRev(c)],['Ownership',c.owner+(d.lease?' · lease '+d.lease:'')],
+   ['Location',c.location],['Site demand',d.site?d.site+(d.confirmed?' · confirmed':' · forecast'):'None matched'],['Received',fmtDY(c.received)],['Age',c.age+' years'],['Engineering life',c.engLife],['Next inspection',c.nextInspection]]}
+function assetSelect(c){return `<label class="sr" for="asSw">Switch asset</label><select class="sel asw" id="asSw" data-ch="asSwitch" aria-label="Switch asset">${CASES.map(x=>`<option value="${x.id}" ${x.id===c.id?'selected':''}>${x.id} · ${esc(x.product)} · ${x.assetId}</option>`).join('')}</select>`}
+function assetHead(c,h){
+  const base=location.href.split('#')[0],link=base+'#/product/asset/'+c.id;
+  return `<nav class="crumbs ascr" aria-label="Breadcrumb"><a href="#/product/received" data-act="go" data-arg="product/received">Assets</a> <span>›</span> <span>${esc(CLASSES[c.cls].plural)}</span> <span>›</span> <span>${esc(asModel(c))}</span> <span>›</span> <b>${c.assetId}</b></nav>
+  <div class="phead asph2"><div class="row" style="gap:14px;flex-wrap:nowrap;align-items:flex-start"><span class="asico">${ICON.product}</span><div><h1>Asset &amp; Product Intelligence</h1><p>Unified lifecycle view with evidence from enterprise systems to support circularity decisions.</p></div></div>
+   <div class="row asact">${assetSelect(c)}<a class="btn" href="${link}" target="_blank" rel="noopener">Open in new tab</a>
+    <details class="asmenu"><summary class="btn pri">Actions <span aria-hidden="true">▾</span></summary><div class="asmenu-list" role="menu"><button role="menuitem" data-act="go" data-arg="product/${c.id}">Open decision analysis</button><button role="menuitem" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button><button role="menuitem" data-act="asCopy">Copy link</button><button role="menuitem" data-act="asPrint">Print or save as PDF</button></div></details></div></div>
+  <section class="aship"><div class="asphoto">${asPhoto(c)}</div>
+   <div class="asmain"><div class="asttl"><h2>${esc(asTitle(c))}</h2><span class="note">${esc(Object.values(c.spec||{}).slice(0,3).join(' · '))}</span><span class="chip line">${esc(CLASSES[c.cls].label)}</span>${stageChip(c)}</div>
+    <dl class="asfacts">${assetFacts(c).map(f=>`<div><dt>${f[0]}</dt><dd>${esc(f[1])}</dd></div>`).join('')}</dl></div>
+   <div class="ashealth"><h3>Overall asset health</h3>${asRing(h)}<div class="note" style="margin-top:6px">${h.est?'Estimated: no inspection grade yet.':'Grade '+c.grade+' · modelled from grade, age and class life.'}</div></div></section>`}
+function assetTabs(c){const rel=assetRelated(c);return `<div class="astabbar"><div class="tabs" role="tablist" aria-label="Asset sections">${AS_TABS.map(t=>`<button role="tab" aria-selected="${S.at.tab===t[0]}" data-act="asTab" data-arg="${t[0]}">${t[1]}${t[0]==='related'?' ('+rel.length+')':''}</button>`).join('')}</div>
+   <div class="row asbtns"><button class="btn" data-act="asCompare">Compare similar assets</button><a class="btn pri" href="#/product/${c.id}" data-act="go" data-arg="product/${c.id}">Evaluate treatments →</a></div></div>`}
+function assetRelated(c){return CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).sort((a,b)=>(b.owner===c.owner)-(a.owner===c.owner)||(a.location===c.location?-1:1)-(b.location===c.location?-1:1)||(a.id<b.id?-1:1)).slice(0,3)}
+
+/* ---- shared panel + timeline + condition ---- */
+const asPanel=(t,b,tab,cls)=>`<section class="panel aspn ${cls||''}"><div class="ph"><h3>${t}</h3>${tab?`<button class="lnk" data-act="asTab" data-arg="${tab}">View details</button>`:''}</div><div class="pb">${b}</div></section>`;
+const asMon=d=>new Date(d).toLocaleDateString('en-GB',{month:'short',year:'numeric',timeZone:'UTC'});
+function asEvents(c){const rec=new Date(c.received),mfg=addDays(rec,-Math.round(c.age*365)),com=addDays(mfg,45+asHex(c,'cm')%76),dep=addDays(com,20+asHex(c,'dp')%40),svcEnd=addDays(rec,-20-asHex(c,'se')%40),n=Math.max(1,Math.round(c.age*1.4)+asHex(c,'wo')%3);
+  const ins=c.assessment==='Pending'?null:addDays(rec,1+asHex(c,'ins')%3),st=c.stage,decDone=['executing','approved'].includes(st);
+  return [
+   {k:'mfg',t:'Manufactured',d:fmtDY(mfg),src:'PLM · ERP',s:'done',note:'Built to '+asRev(c)+' by '+c.mfr},
+   {k:'com',t:'Commissioned',d:fmtDY(com),src:'EAM',s:'done',note:'Asset registered in the maintenance system'},
+   {k:'dep',t:'Deployed',d:fmtDY(dep),src:'ERP · contract',s:'done',note:'In service for '+c.owner+(c.demand&&c.demand.lease?' under lease '+c.demand.lease:'')},
+   {k:'svc',t:'Service',d:n+' work order'+(n>1?'s':''),sub:asMon(addDays(dep,60))+' – '+asMon(svcEnd),src:'EAM · FSM',s:'done',note:n+' maintenance events recorded'},
+   {k:'ret',t:'Returned',d:fmtDY(rec),src:'WMS',s:'done',note:'Received at '+c.location},
+   {k:'ass',t:'Condition assessment',d:ins?fmtDY(ins):'Pending',src:'Inspection',s:ins&&c.assessment==='Ready'?'done':ins?'warn':'pending',note:ins?(c.assessment==='Ready'?'Inspection complete, grade '+(c.grade||'—'):'Evidence still incomplete'):'No inspection recorded yet'},
+   {k:'dec',t:'Treatment decision',d:decDone?'Executing':st==='awaiting_approval'?'Awaiting approval':st==='reeval'?'Re-evaluate':'Pending',src:'Circularity',s:decDone?'done':st==='awaiting_approval'||st==='reeval'?'warn':'pending',note:c.recommendation?'Recommended: '+(c.recommendation.plan||rid(c.recommendation.id).name):'No route recommended yet'}]}
+function asTimelineHTML(c,full){const ev=asEvents(c);let cur=ev.findIndex(e=>e.s!=='done');if(cur<0)cur=ev.length-1;
+  return `<ol class="astl ${full?'full':''}">${ev.map((e,i)=>`<li class="${e.s} ${i===cur?'cur':''}" data-tip="${esc(e.t+' · '+e.note)}"><span class="dot">${e.s==='done'?'✓':e.s==='warn'?'●':''}</span><b>${esc(e.t)}</b><span class="d num">${esc(e.d)}</span>${e.sub?`<span class="note">${esc(e.sub)}</span>`:''}<span class="note">${esc(e.src)}</span>${full?`<span class="nt">${esc(e.note)}</span>`:''}</li>`).join('')}</ol>`}
+function asCond(c){const insEv=(c.evidence||[]).find(e=>e.k==='insp')||{state:'missing'},g=c.grade,K=c.cls,spec=c.spec||{};
+  const lbl=g?({A:'Excellent condition',B:'Good condition',C:'Fair condition',D:'Poor condition'})[g]:(c.assessment==='Pending'?'Not inspected':'Assessment incomplete'),tone=g?({A:'ok',B:'ok',C:'warn',D:'bad'})[g]:'line';
+  const test=insEv.state==='ready'?['Pass','ok']:insEv.state==='partial'?['Not run','warn']:['Not available','line'];
+  const wear=g?({A:'Minimal',B:'Light',C:'Moderate',D:'Heavy'})[g]:'—',wearT=g?({A:'ok',B:'ok',C:'warn',D:'bad'})[g]:'line';
+  const cos=g?(g==='A'?['None','ok']:g==='B'?['Minor scratches','ok']:g==='C'?['Dents and scuffs','warn']:['Visible damage','bad']):['—','line'];
+  const key={motor:['Insulation resistance',g?'Within limits':'Not tested'],pump:['Pressure test',g?'Holds rated pressure':'Not tested'],control:['Self-diagnostic',g?'No faults logged':'Not run'],drill:['Battery cycles',String(spec['Battery cycles']||'—')],batch:['Calibration',spec['Calibration']||'—'],it:['Battery health',spec['Battery health']||'—']}[K]||['Key test','—'];
+  const m=/^(\d+)\s*months/.exec(c.engLife||''),life=m?(+m[1]/12).toFixed(1)+' years (± '+({A:.3,B:.5,C:.8,D:1.2}[g]||.8)+')':(c.engLife||'—');
+  const insD=c.assessment==='Pending'?'Not yet inspected':fmtDY(addDays(c.received,1+asHex(c,'ins')%3));
+  const row=(l,v,t)=>`<div class="asrow"><span>${l}</span><b class="${t==='line'?'':'tx-'+t}">${esc(v)}</b></div>`;
+  return `<div class="ascond"><div class="ascl"><div class="asclose">${asPhoto(c,'zoom')}</div><div class="ascs"><div class="note">Latest inspection</div><b class="num">${insD}</b><div class="note">Site: ${esc(c.location)}</div><span class="chip ${tone}" style="margin-top:6px">${esc(lbl)}</span></div></div>
+   <div class="asrows">${row('Functional test',test[0],test[1])}${row('Wear level',wear,wearT)}${row('Cosmetic damage',cos[0],cos[1])}${row(key[0],key[1],'ok')}${row('Predicted remaining life',life,'ok')}</div></div>`}
+/* ---- product intelligence + economic intelligence ---- */
+S.at.cur='usd';
+const AS_FX=83.5;
+const asMoney=v=>S.at.cur==='local'?(v<0?'−':'')+'₹'+Math.abs(Math.round(v*AS_FX)).toLocaleString('en-IN'):money(v);
+function asParts(c,h){return h.comps.map(x=>{const v=(asHex(c,'pt'+x.n)%100)/100,q=asHex(c,'q'+x.n);return v>=.6?{n:x.n,st:'In stock',cls:'ok',q:q%24+3}:v>=.3?{n:x.n,st:'Limited',cls:'warn',q:q%4+1}:{n:x.n,st:'Backorder',cls:'bad',q:0}})}
+function asProduct(c,h){const K=CLASSES[c.cls],spec=Object.entries(c.spec||{}),parts=asParts(c,h);
+  return `<div class="aspi"><div class="aspa"><div class="row" style="flex-wrap:nowrap;gap:12px;margin-bottom:10px">${asPhoto(c,'sm')}<div><b>${esc(asTitle(c))}</b><div class="note">${esc(K.label)}</div></div></div>
+   <dl class="asdl"><div><dt>Product family</dt><dd>${esc(K.plural)}</dd></div><div><dt>Product line</dt><dd>${esc(asModel(c))}</dd></div><div><dt>Revision</dt><dd>${asRev(c)} (current)</dd></div><div><dt>Category</dt><dd>${esc(K.label)}</dd></div></dl>
+   <h4>Technical specifications</h4><div class="asspec">${spec.map(([k,v])=>`<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('')||'<div class="note">No specification recorded.</div>'}</div></div>
+   <div class="aspb"><h4>Component health</h4>${h.comps.map(x=>`<div class="asrow"><span>${esc(x.n)}</span><span class="chip ${x.cls}">${x.st}</span></div>`).join('')}<button class="lnk" data-act="asTab" data-arg="product">View BOM and parts</button></div>
+   <div class="aspc"><h4>Parts availability</h4>${parts.map(x=>`<div class="asrow"><span>${esc(x.n)}</span><span class="tx-${x.cls}"><b>${x.st}</b>${x.q?` <span class="note num">${x.q}</span>`:''}</span></div>`).join('')}<button class="lnk" data-act="asTab" data-arg="product">View alternative parts</button></div></div>`}
+function asEcon(c){const r=c.recommendation,K=CLASSES[c.cls],q=c.qty;
+  const pos=r?sum(r.terms.filter(t=>t.amt>0).map(t=>t.amt)):Math.round(CC_EST[c.cls]*q),neg=r?sum(r.terms.filter(t=>t.amt<0).map(t=>t.amt)):0,net=r?r.net:Math.round(pos*.8),rg=r?Math.round((r.p90-r.p10)/2/Math.max(1,Math.abs(net))*100):null;
+  const age=Math.max(1,c.age),mt=Math.round(K.pnew*q*.018*age*(.8+asHex(c,'mt')%50/100)),pr=Math.round(mt*(.4+asHex(c,'pr')%40/100)),sv=Math.round((mt+pr)*(.9+asHex(c,'sv')%30/100)),avg=Math.round(sv/age);
+  const rs=ROWS.filter(x=>x.cls===c.cls&&x.route==='resale'&&x.status==='reconciled'&&x.actual>0),by=Array(12).fill(0),pu=[];rs.forEach(x=>{by[x.mi]++});
+  const unit=a=>med(a.map(x=>x.actual/x.q)),last3=rs.filter(x=>x.mi>=9),prev3=rs.filter(x=>x.mi>=6&&x.mi<9),tr=prev3.length&&last3.length?(unit(last3)/unit(prev3)-1)*100:0,price=rs.length?Math.round(unit(rs)*q):0;
+  const bars=by.slice(6),mx=Math.max(1,...bars),dem=(bars[3]+bars[4]+bars[5])/Math.max(1,bars[0]+bars[1]+bars[2]),dl=dem>=1.1?['Strong','ok']:dem>=.9?['Steady','warn']:['Softening','bad'];
+  const tile=(ic,cls,l,v,s)=>`<div class="asec ${cls}"><span class="kic">${ic}</span><div><span class="note">${l}</span><b class="num">${v}</b><span class="note">${s}</span></div></div>`;
+  return `<div class="asecon"><div class="seg" role="group" aria-label="Currency" style="margin-bottom:12px"><button data-act="asCur" data-arg="usd" aria-pressed="${S.at.cur==='usd'}">USD</button><button data-act="asCur" data-arg="local" aria-pressed="${S.at.cur==='local'}">Local currency</button></div>
+   <div class="asecs">${tile(ICON.analytics,'ok','Estimated recovery value',(r?'':'~')+asMoney(pos),r?'Gross of costs':'Estimate, evidence needed')}${tile(ICON.flag,'bad','Expected treatment cost',r?asMoney(neg):'—',r?'Prep, transfer, risk':'No route yet')}${tile(ICON.trend,'y','Predicted net recovery',(r?'':'~')+asMoney(net),rg!=null?'± '+rg+'% (P10–P90)':'Not yet predicted')}</div>
+   <div class="asec3"><div><h4>Historical costs (last ${Math.round(age)} years)</h4>${[['Maintenance',mt],['Parts replaced',pr],['Total service cost',sv],['Average cost per year',avg]].map(x=>`<div class="asrow"><span>${x[0]}</span><b class="num">${asMoney(x[1])}</b></div>`).join('')}<div class="note" style="margin-top:4px">Estimated from the service history.</div></div>
+    <div><h4>Market demand (resale)</h4><span class="chip ${dl[1]}">${dl[0]}</span><div class="asbars" role="img" aria-label="Resale sales per month for ${esc(K.plural)}">${bars.map((v,i)=>`<span data-tip="${MONTHS[6+i]} · ${v} resale sales"><i style="height:${Math.max(6,v/mx*100)}%"></i><em>${MONTHS[6+i]}</em></span>`).join('')}</div></div>
+    <div><h4>Comparable resale value</h4><div class="note">Avg. market price</div><b class="num" style="font:800 20px var(--f-display)">${price?asMoney(price):'—'}</b><div class="note" style="margin-top:8px">Price trend</div><b class="${tr>=0?'tx-ok':'tx-bad'}">${tr>=0?'▲':'▼'} ${Math.abs(tr).toFixed(0)}%</b> <span class="note">last 3 months</span></div></div></div>`}
+ACT.asCur=v=>{S.at.cur=v;route(true)};
+/* ---- eligibility, evidence quality, related assets ---- */
+function asElig(c){const d=c.demand||{},spec=c.spec||{},r=c.recommendation||(c.routes||[])[0],g=r?r.gates:null,yr=new Date(c.received).getUTCFullYear()-Math.max(0,Math.round(c.age))+Math.min(6,Math.round(CLASSES[c.cls].tau/2));
+  const warrOk=yr>=new Date(AS_OF).getUTCFullYear(),sil=/SIL/.test(spec['Safety rating']||''),lith=['drill','batch','it'].includes(c.cls),erase=c.cls==='it'&&spec['Data erasure']==='Pending';
+  const rows=[['Ownership',c.owner,'Eligible for all treatments','ok'],
+   ['Contract terms',d.lease?'Lease '+d.lease+', no restriction':'No contract restriction on file',d.lease?'Verified':'Not on file',d.lease?'ok':'line'],
+   ['Warranty',warrOk?'Active until '+yr:'Expired ('+yr+')',warrOk?'Active':'—',warrOk?'ok':'line'],
+   ['Safety and regulatory',sil?'Safety-rated unit ('+spec['Safety rating']+')':'No open safety alerts',sil?'Review':'Compliant',sil?'warn':'ok'],
+   ['Environmental',erase?'Data erasure certificate pending':lith?'Lithium battery handling required':'No special handling',erase||lith?'Follow guidelines':'Compliant',erase||lith?'warn':'ok']];
+  const gl=GATES,gs=g?g.map((x,i)=>`<span class="asgate ${x}" data-tip="${esc(gl[i]+': '+({pass:'passed',fail:'failed',skip:'not reached',warn:'passed with a warning'})[x])}"></span>`).join(''):'';
+  const pass=g?g.filter(x=>x==='pass').length:0;
+  return `<div class="aselig">${rows.map(x=>`<div class="asrow"><span><b>${x[0]}</b><div class="note">${esc(x[1])}</div></span><span class="chip ${x[3]}">${x[2]}</span></div>`).join('')}
+   <div class="asgates"><span class="note">Six eligibility gates${r?' for '+esc(r.plan||rid(r.id).short):''}</span><div class="asgl">${gs||'<span class="note">Not evaluated yet</span>'}</div>${g?`<b class="num">${pass} of 6 passed</b>`:''}</div></div>`}
+function asQuality(c){const ev=c.evidence||[],n=ev.length||1,cnt={ready:0,partial:0,missing:0,conflict:0};ev.forEach(e=>{const k=e.state==='stale'?'partial':e.state;cnt[k]=(cnt[k]||0)+1});
+  const score=Math.round((cnt.ready+.5*cnt.partial)/n*100),lab=score>=85?'Good':score>=65?'Fair':'Low',tone=score>=85?'ok':score>=65?'warn':'bad',pc=k=>Math.round((cnt[k]||0)/n*100),r=44,cc=2*Math.PI*r;let off=0;
+  const cols={ready:'var(--ok)',partial:'#D4A800',missing:'var(--chart7)',conflict:'var(--bad)'},seg=Object.keys(cols).filter(k=>cnt[k]).map(k=>{const l=cnt[k]/n*cc,dd=Math.max(0,l-2),e=`<circle cx="55" cy="55" r="${r}" fill="none" stroke="${cols[k]}" stroke-width="12" stroke-dasharray="${dd} ${cc-dd}" stroke-dashoffset="${-off}" transform="rotate(-90 55 55)"/>`;off+=l;return e}).join('');
+  const dot={ready:'ok',partial:'warn',stale:'warn',missing:'bad',conflict:'bad'};
+  return `<div class="asq"><div class="asqr"><svg viewBox="0 0 110 110" role="img" aria-label="Data confidence ${score} out of 100"><circle cx="55" cy="55" r="${r}" fill="none" stroke="var(--panel3)" stroke-width="12"/>${seg}<text x="55" y="54" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)" style="font-family:var(--f-display)">${score}</text><text x="55" y="69" text-anchor="middle" font-size="10" fill="var(--ink2)">/100</text></svg>
+   <div><div class="note">Data confidence</div><b class="tx-${tone}">${lab}</b><div class="asleg" style="margin-top:6px">${[['ready','Complete'],['partial','Partial'],['missing','Missing'],['conflict','Inconsistent']].map(x=>`<div><i style="background:${cols[x[0]]}"></i><span>${x[1]}</span><b class="num">${pc(x[0])}%</b></div>`).join('')}</div></div></div>
+   <h4>Key data sources</h4><div class="assrc">${ev.slice(0,6).map(e=>`<div class="asrow" data-tip="${esc(e.label+(e.note?' · '+e.note:''))}"><span class="row" style="gap:7px;flex-wrap:nowrap"><i class="dotc ${dot[e.state]||''}"></i>${esc(e.source)}</span><span class="note">${e.state==='missing'?'No data':'Updated '+esc(e.fresh)}</span></div>`).join('')}</div></div>`}
+function asRelCard(c,x){const st=ccStage(x),stl={approval:'Awaiting approval',exec:'Under treatment',await_insp:'Awaiting inspection',need:'Needs information',approved:'Approved',reeval:'Re-evaluate',noroute:'No route'}[st];
+  return `<a class="asrel" href="#/product/asset/${x.id}" data-act="go" data-arg="product/asset/${x.id}">${asPhoto(x,'xs')}<span class="asrt"><b>${asSerial(x)}</b><span class="note">${esc(asModel(x))} · ${x.assetId}</span><span class="note">${x.owner===c.owner?'Same customer':'Other customer'} · ${esc(x.location)} · ${stl}</span></span><span class="chip ${x.owner===c.owner?'y':'line'}">${x.owner===c.owner?'Similar':'Related'}</span></a>`}
+function asRelated(c){const rel=assetRelated(c);return `<div class="asrels">${rel.map(x=>asRelCard(c,x)).join('')||'<div class="empty"><b>No related assets</b></div>'}</div><button class="lnk" data-act="asTab" data-arg="related" style="margin-top:8px">View all (${CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).length})</button>`}
+function asOverview(c,h){return `<div class="asg"><div class="asg2 r1">${asPanel('Lifecycle evidence timeline',asTimelineHTML(c),'lifecycle','wide')}${asPanel('Condition intelligence',asCond(c),'condition')}</div>
+  <div class="asg2 r2">${asPanel('Product intelligence',asProduct(c,h),'product')}${asPanel('Economic intelligence',asEcon(c),'economic')}</div>
+  <div class="asg2 r3">${asPanel('Eligibility and compliance',asElig(c),'eligibility')}${asPanel('Data and evidence quality',asQuality(c),'data')}${asPanel('Related assets and fleet context',asRelated(c),'related')}</div></div>`}
+/* ---- focused tab views + compare ---- */
+const asTbl=(head,rows,cls)=>`<div class="tw"><table class="t static tight ${cls||''}"><thead><tr>${head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')}</tr></thead><tbody>${rows.join('')||`<tr><td colspan="${head.length}"><div class="empty"><b>Nothing to show</b></div></td></tr>`}</tbody></table></div>`;
+function asNet(x){return x.recommendation?x.recommendation.net:null}
+function asTabLifecycle(c){const dep=addDays(new Date(c.received),-Math.round(c.age*365)+90),n=Math.max(2,Math.round(c.age*1.4)+asHex(c,'wo')%3),K=CLASSES[c.cls],types=['Preventive maintenance','Inspection','Bearing and seal replacement','Corrective repair','Calibration and test','Firmware and settings update'];
+  const wo=Array.from({length:Math.min(n,8)},(_,i)=>{const d=addDays(dep,Math.round((i+1)/(n+1)*(c.age*365-120))),t=types[(asHex(c,'wt'+i))%types.length],cost=Math.round(K.pnew*c.qty*(.004+(asHex(c,'wc'+i)%30)/1500));
+    return `<tr><td class="mono">WO-${90000+asHex(c,'wn'+i)%9999}</td><td class="num nowrap">${fmtDY(d)}</td><td>${t}</td><td>${i%3===2?'FSM':'EAM'}</td><td class="r num">${money(cost)}</td><td><span class="chip ok">Closed</span></td></tr>`});
+  return asPanel('Lifecycle evidence timeline',asTimelineHTML(c,true))+asPanel('Service history',asTbl([['Work order'],['Date'],['Type'],['System'],['Cost','r'],['Status']],wo)+`<div class="note" style="margin-top:6px">Showing ${wo.length} of ${n} recorded work orders. Costs are estimates for this demo.</div>`)}
+function asTabCondition(c,h){const ev=(c.evidence||[]).filter(e=>['insp','eng','photo','svc'].includes(e.k)),pos=['36% 60%','70% 40%','20% 30%','55% 85%'];
+  const chk=ev.map(e=>`<tr><td>${esc(e.label)}</td><td>${esc(e.source)}</td><td><span class="chip ${({ready:'ok',partial:'warn',stale:'warn',missing:'bad',conflict:'bad'})[e.state]||'line'}">${({ready:'Complete',partial:'Partial',stale:'Stale',missing:'Missing',conflict:'Conflict'})[e.state]||e.state}</span></td><td class="note">${esc(e.note||'Updated '+e.fresh)}</td></tr>`);
+  return `<div class="asg2 r1b">${asPanel('Condition intelligence',asCond(c))}${asPanel('Component condition',h.comps.map(x=>`<div class="asrow"><span>${esc(x.n)}</span><span class="asmeter"><i style="width:${Math.round(x.h*100)}%;background:${x.cls==='ok'?'var(--ok)':x.cls==='warn'?'#D4A800':'var(--bad)'}"></i></span><b class="num">${Math.round(x.h*100)}</b><span class="chip ${x.cls}">${x.st}</span></div>`).join(''))}</div>
+   ${asPanel('Inspection evidence',asTbl([['Evidence'],['Source'],['State'],['Detail']],chk))}
+   ${asPanel('Photos',`<div class="asgal">${pos.map((p,i)=>`<div class="asimg zoomg" style="--op:${p}"><img src="assets/products/${AS_IMG[c.cls]}.webp" alt="${esc(c.product)} view ${i+1}" loading="lazy"></div>`).join('')}</div><div class="note" style="margin-top:6px">Close-up crops of the product photo. Inspection photos attach here when they arrive from the inspection system.</div>`)}`}
+function asTabProduct(c,h){const K=CLASSES[c.cls],parts=asParts(c,h);
+  const bom=h.comps.map((x,i)=>{const p=parts[i],lead=p.st==='In stock'?'2–3 days':p.st==='Limited'?'7–10 days':'21+ days',alt=asHex(c,'alt'+x.n)%3!==0;
+   return `<tr><td><b>${esc(x.n)}</b></td><td class="mono">${K.pre}-${String(1000+asHex(c,'pn'+x.n)%8999)}</td><td><span class="chip ${x.cls}">${x.st}</span></td><td class="${'tx-'+p.cls}"><b>${p.st}</b></td><td class="r num">${p.q}</td><td class="num">${lead}</td><td>${alt?'<span class="chip ok">Approved alternate</span>':'<span class="chip line">None approved</span>'}</td></tr>`});
+  return asPanel('Product intelligence',asProduct(c,h))+asPanel('Bill of materials and parts',asTbl([['Component'],['Part number'],['Health'],['Availability'],['In stock','r'],['Lead time'],['Alternates']],bom)+`<div class="note" style="margin-top:6px">Component health is modelled from grade and age. Part numbers and stock are illustrative until connected to the BOM and warehouse systems.</div>`)}
+function asTabEconomic(c){const rs=(c.routes||[]).slice().sort((a,b)=>b.net-a.net),rec=c.recommendation;
+  const rows=rs.map(r=>{const isR=rec&&r===rec;return `<tr class="${isR?'sel':''}"><td><b>${esc(r.plan||rid(r.id).name)}</b><div class="note">${esc(r.demandLabel||'')}</div></td><td class="r num"><b>${asMoney(r.net)}</b></td><td class="r num">${asMoney(r.p10)} to ${asMoney(r.p90)}</td><td>${isR?'<span class="chip y">Recommended</span>':r.excluded?`<span class="chip bad" data-tip="${esc(r.failReason||'')}">Excluded</span>`:'<span class="chip ok">Eligible</span>'}</td></tr>`});
+  const terms=rec?rec.terms.map(t=>`<tr><td>${esc(t.label)}</td><td class="r num ${t.amt<0?'tx-bad':'tx-ok'}">${asMoney(t.amt)}</td></tr>`):[];
+  return asPanel('Economic intelligence',asEcon(c))+`<div class="asg2 r1b">${asPanel('Route comparison',asTbl([['Route'],['Net','r'],['P10 to P90','r'],['Status']],rows))}${asPanel('How the recommended net is built',rec?asTbl([['Term'],['Amount','r']],terms.concat([`<tr><td><b>Predicted net</b></td><td class="r num"><b>${asMoney(rec.net)}</b></td></tr>`])):'<div class="empty"><b>No recommendation yet</b>Evidence is missing, so no route has been priced.</div>')}</div>`}
+function asTabEligibility(c){const r=c.recommendation||(c.routes||[])[0],gs=r?r.gates.map((x,i)=>`<tr><td><b>${i+1}. ${GATES[i]}</b></td><td><span class="chip ${({pass:'ok',fail:'bad',skip:'line',warn:'warn'})[x]}">${({pass:'Passed',fail:'Failed',skip:'Not reached',warn:'Warning'})[x]}</span></td><td class="note">${esc((r.gateNotes||[])[i]||(x==='fail'?r.failReason:''))}</td></tr>`):[];
+  const ex=(c.routes||[]).filter(x=>x.excluded).map(x=>`<tr><td>${esc(x.plan||rid(x.id).name)}</td><td>${esc(GATES[x.failGate]||'—')}</td><td class="note">${esc(x.failReason)}</td></tr>`);
+  return asPanel('Eligibility and compliance',asElig(c))+asPanel('Six eligibility gates'+(r?' · '+esc(r.plan||rid(r.id).short):''),asTbl([['Gate'],['Result'],['Reason']],gs)+`<div class="note" style="margin-top:6px">A failed gate withholds the route. No agent or connector can waive it. Policy version POL-3.2.</div>`)+(ex.length?asPanel('Routes withheld',asTbl([['Route'],['Failed gate'],['Reason']],ex)):'')}
+function asTabData(c){const ev=c.evidence||[],stl={ready:['Complete','ok'],partial:['Partial','warn'],stale:['Stale','warn'],missing:['Missing','bad'],conflict:['Conflict','bad']};
+  const rows=ev.map(e=>`<tr><td><b>${esc(e.label)}</b></td><td>${esc(e.source)}</td><td><span class="chip ${(stl[e.state]||['',''])[1]}">${(stl[e.state]||[e.state])[0]}</span></td><td class="num">${e.state==='missing'?'—':esc(e.fresh)}</td><td class="note">${esc(e.note||'')}</td></tr>`);
+  return `<div class="asg2 r1c">${asPanel('Data and evidence quality',asQuality(c))}${asPanel('Where this comes from',`<p class="note" style="margin-top:0">Every item is fetched from the system that owns it, with its source, freshness and confidence. The full request and processing trail is in the audit log.</p><div class="row" style="margin-top:10px"><button class="btn" data-act="go" data-arg="audit/log">Open audit log</button><button class="btn" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button><button class="btn" data-act="go" data-arg="integration/map">Source map</button></div>`)}</div>`+asPanel('All evidence items',asTbl([['Evidence'],['Source'],['State'],['Updated'],['Note']],rows))}
+function asTabRelated(c){const all=CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).sort((a,b)=>(b.owner===c.owner)-(a.owner===c.owner)||(a.id<b.id?-1:1)).slice(0,14);
+  const rows=all.map(x=>{const hh=assetHealth(x),n=asNet(x);return `<tr><td><div class="row" style="gap:10px;flex-wrap:nowrap">${asPhoto(x,'xs')}<span><b>${asSerial(x)}</b><div class="note">${x.id} · ${x.assetId}</div></span></div></td><td>${x.owner}</td><td>${esc(x.location)}</td><td>${x.grade?'Grade '+x.grade:'—'}</td><td class="r num">${hh.score}</td><td class="r num">${n==null?'—':money(n)}</td><td>${stageChip(x)}</td><td class="nowrap"><span class="tacts" style="display:inline-flex"><button class="tbtn" data-act="go" data-arg="product/asset/${x.id}">Open</button><button class="tbtn" data-act="asCompare" data-arg="${x.id}">Compare</button></span></td></tr>`});
+  return asPanel('Related assets and fleet context',asTbl([['Asset'],['Owner'],['Site'],['Grade'],['Health','r'],['Net','r'],['Status'],['']],rows)+`<div class="note" style="margin-top:6px">Showing the ${all.length} closest of ${CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).length} ${esc(CLASSES[c.cls].plural.toLowerCase())}: same customer first, then by return number.</div>`)}
+function assetTabBody(c,h){const t=S.at.tab;return ({overview:asOverview,lifecycle:asTabLifecycle,condition:asTabCondition,product:asTabProduct,economic:asTabEconomic,eligibility:asTabEligibility,data:asTabData,related:asTabRelated}[t]||asOverview)(c,h)}
+ACT.asCompare=id=>{const c=CASE_BY_ID[S.lastAsset];if(!c)return;const rel=assetRelated(c).filter(x=>x.id!==id),pick=[CASE_BY_ID[id]].filter(Boolean).concat(rel).slice(0,3),cols=[c].concat(pick);
+  const val=(x,k)=>{const hh=assetHealth(x),ev=x.evidence||[],q=Math.round((ev.filter(e=>e.state==='ready').length+.5*ev.filter(e=>e.state==='partial'||e.state==='stale').length)/Math.max(1,ev.length)*100);
+   return ({id:x.id+' · '+x.assetId,owner:x.owner,site:x.location,age:x.age+' years',grade:x.grade?'Grade '+x.grade:'Not graded',health:hh.score+' / 100',life:x.engLife,route:x.recommendation?(x.recommendation.plan||rid(x.recommendation.id).short):'None yet',net:x.recommendation?money(x.recommendation.net):'—',q:q+' / 100'})[k]};
+  const rows=[['id','Return · asset'],['owner','Owner'],['site','Site'],['age','Age'],['grade','Condition'],['health','Health score'],['life','Engineering life'],['route','Recommended route'],['net','Predicted net'],['q','Data confidence']];
+  openModal('Compare similar assets',`<div class="tw"><table class="t static tight ascmp"><thead><tr><th></th>${cols.map((x,i)=>`<th>${asPhoto(x,'xs')}<div>${asSerial(x)}${i===0?' <span class="chip y">This asset</span>':''}</div></th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr><td class="note">${r[1]}</td>${cols.map(x=>`<td>${esc(val(x,r[0]))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`,`<button class="btn ghost" data-act="closeModal">Close</button>`,true)};
+function assetPage(r){const c=CASE_BY_ID[r.b||S.lastAsset||'RT-1048'];
+  if(!c)return `<div class="empty"><b>Asset not found</b>Choose a returned asset from <a href="#/product/received">Returned assets</a>.</div>`;
+  S.lastAsset=c.id;const h=assetHealth(c);
+  return `<div class="as">${assetHead(c,h)}${assetTabs(c)}<div id="asBody">${assetTabBody(c,h)}</div></div>`}
+ACT.asTab=t=>{S.at.tab=t;route(true)};
+ACT.asSwitch=v=>{go('product/asset/'+v)};
+ACT.asCopy=()=>{const u=location.href;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>toast('Link copied.'),()=>toast('Copy this link: '+u,6000));const d=$('.asmenu');d&&d.removeAttribute('open')};
+ACT.asPrint=()=>{const d=$('.asmenu');d&&d.removeAttribute('open');setTimeout(()=>window.print(),200)};
+document.addEventListener('click',e=>{const d=$('.asmenu[open]');if(d&&!e.target.closest('.asmenu'))d.removeAttribute('open')});
+/*ASSET-END*/
 function aRows(){const f=S.fA;return visRows().filter(r=>(!f.tenant||r.tenant===f.tenant)&&(!f.cls||r.cls===f.cls)&&(!f.route||r.route===f.route)&&r.mi>=f.from&&r.mi<=f.to&&(!f.model||r.model===f.model))}
 function metrics(rows){
   const rc=rows.filter(r=>r.status==='reconciled');
@@ -2020,7 +2353,7 @@ function startSync(s,auto){
     if(!auto)toast(s.name+' synced: '+fmtN(n)+' records updated.');smPatch(s);sdSyncUI(s)};
   setTimeout(tick,160)}
 function smTick(){
-  const now=Date.now();
+  const now=Date.now();navBadges();
   $$('.tile[data-sid]').forEach(t=>{const s=SRC(t.dataset.sid);if(!s||s.syncing)return;const a=t.querySelector('[data-age]');a&&(a.textContent=srcAgeText(s));
     if(s.lastSync!=null){const v=srcFresh(s),fi=t.querySelector('[data-fi]'),fv=t.querySelector('[data-fv]');if(fi){fi.style.width=v+'%';fi.style.background=v<70?'var(--bad)':v<85?'#D4A800':''}if(fv)fv.textContent=v+'%'}});
   $$('[data-cc-clock]').forEach(el=>{el.textContent=ccClockText()});
@@ -2202,7 +2535,7 @@ ACT.sdMap=(v,el)=>{const sd=S.sd;sd.maps[+el.dataset.r][+el.dataset.c]=v;delete 
 ACT.sdMapDel=i=>{S.sd.maps.splice(+i,1);sdDirty();sdRender()};
 ACT.sdMapAdd=()=>{S.sd.maps.push(['','','','','']);sdDirty();sdRender();const l=$$('#drawer .maptbl tbody tr:last-child input')[0];l&&l.focus()};
 ACT.sdRevert=()=>{const id=S.sd.id,tab=S.sd.tab;sdOpen(id,tab);toast('Changes reverted to the saved configuration.')};
-ACT.gotoImport=()=>{closeDrawer(true);S.intTab='import';route(true)};
+ACT.gotoImport=()=>{closeDrawer(true);go('integration/import')};
 ACT.testConn=id=>{const s=SRC(id);toast(`${s.name}: authenticated, ${s.read.length} read and ${s.write.length} write operations reachable.`)};
 ACT.reconnect=id=>{if(!canMgr())return toast(NOMGR);const s=SRC(id);s.status='live';s.credAt=Date.now();s.lastSync=Date.now()-60000;s.freshMin=1;s.fresh='1 min';s.compl=Math.max(s.compl,93);s.conf=Math.max(s.conf,90);s.c0=s.compl;s.k0=s.conf;if(s.note)s.note='';
   const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Token refreshed and feed re-synced'});
@@ -2867,7 +3200,7 @@ function renderIntegration(){
   <div class="tabs" role="tablist">${T.map(t=>`<button role="tab" aria-selected="${tab===t[0]}" data-act="intTab" data-arg="${t[0]}">${t[1]}</button>`).join('')}</div>
   ${tab==='studio'?wfHTML():tab==='map'?intMap():tab==='tables'?tgHTML():tab==='models'?intModels():tab==='events'?evTable():tab==='conflicts'?intConflicts():intImport()}`;
 }
-ACT.intTab=a=>{S.intTab=a;route(true)};
+ACT.intTab=a=>{go('integration/'+a)};
 
 /* ===== MCP & Tools ===== */
 const toolById=id=>TOOLS.find(t=>t.id===id);
@@ -2929,7 +3262,7 @@ ACT.pgRun=()=>{const t=toolById(S.mcpTool),raw=S.pgInput!=null?S.pgInput:JSON.st
   const o=runTool(t.id,S.mcpAgent||autoAgent(t.id),S.mcpTenant,raw);S.pgOut=o;
   CALLS.unshift({ts:new Date(),agent:o.ag.name,tool:t.id,caseId:o.caseId||'—',tenant:S.mcpTenant,lat:o.ms,outcome:o.outcome,step:t.step[0]});route(true);const e=$('#pg-in');};
 ACT.schema=id=>{const t=toolById(id);openModal(id,`<p class="ink2" style="margin-top:0">${esc(t.desc)}</p><pre class="code">${jsonHtml(schemaOf(t))}</pre>`,`<button class="btn" data-act="closeModal">Close</button>`)};
-ACT.mcpDir=a=>{S.mcpDir=a;route(true)};ACT.mcpPerm=v=>{S.mcpPerm=v;route(true)};ACT.callFilter=a=>{S.callF=a;route(true)};
+ACT.mcpDir=a=>{go(a==='client'?'mcp/client':'mcp')};ACT.mcpPerm=v=>{S.mcpPerm=v;route(true)};ACT.callFilter=a=>{S.callF=a;route(true)};
 ACT.tryTool=a=>{S.mcpTool=a;S.mcpAgent=null;S.pgInput=null;S.pgOut=null;route(true);const p=$('#pg');p&&p.scrollIntoView({behavior:'smooth'})};
 function renderMcp(){
   const dir=S.mcpDir;
