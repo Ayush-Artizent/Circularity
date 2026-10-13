@@ -1,8 +1,45 @@
 # Circularity UI: what changed
 
-Open `index.html`, then go to **Integration** in the left menu. Everything below lives on that page, under the tabs along the top.
+Open `index.html`. The app now opens on the **Command Center** (Update 3). Updates 1 and 2 live under **Integration** in the left menu, on the tabs along the top.
 
-**Quick links:** [Update 1](#update-1-separate-systems-and-crud) · [Update 2](#update-2-live-connections-workflow-states-tables-and-health) · [Demo script](#two-minute-demo-script) · [Good to know](#good-to-know)
+**Quick links:** [Update 3: Command Center](#update-3-command-center-new-home-page) · [Update 1](#update-1-separate-systems-and-crud) · [Update 2](#update-2-live-connections-workflow-states-tables-and-health) · [Demo script](#two-minute-demo-script) · [Good to know](#good-to-know)
+
+---
+
+## Update 3: Command Center (new home page)
+
+**Where:** the first item in the left menu, **Command Center**. It is now the page the app opens on. The old Returned assets list is still there under **Product**.
+
+**What it replaces:** a long table of returned assets. The new page shows the same data as charts first, with the table below as the action list.
+
+**Top to bottom**
+
+| Section | What it shows | Click to |
+|---|---|---|
+| **Data health strip** | Integration health %, how many sources are live, stale or not connected | Open the Source map |
+| **Filters** | Tenant, site, asset class, recommended route, time horizon | Filter every number on the page |
+| **Needs attention now** | Up to four plain-language lines, such as "41 decisions await approval, 6 close within 5 days" | Filter the table to those assets |
+| **Five KPIs** | Assets in scope, potential recovery value, value at risk, CO₂e avoided opportunity, uplift vs baseline. Each has a change vs last month and a sparkline | Filter, or jump to Analytics. Hover for what the number means |
+| **Lifecycle portfolio** | Donut of where every asset is in the process | Click a slice or legend row to filter the table |
+| **Treatment opportunity** | Bars of predicted volume by recommended route | Click a bar to scope the whole page to that route |
+| **Value at risk by reason** | Delayed approval, condition deterioration, missing evidence, market price decline, capacity constraints | Click a reason to see those assets |
+| **Assets by time to action** | Donut by days left (under 5, 5–7, 8–10, over 10) | Click a slice |
+| **Actions to be prioritised** | Top 10 ranked by predicted value and urgency, with confidence bar, priority and status | Click a row to open the case |
+| **Emerging signals** | Closing decision windows, evidence gaps, stale market feed, re-evaluations, parts hotspots, late events | Click to filter or open the related page |
+| **Capacity and bottlenecks** | Repair centre, warehouses, inspection queue and execution load, coloured only when tight | Hover for the detail |
+| **Value realisation** | Predicted vs actual by month, recovery yield line, plus net recovery, cycle time and CO₂e. Switch between 3, 6 and 12 months | Hover a month |
+
+**Buttons:** **Refresh** (recomputes everything), **Share** (copies the page link), **Export** (opens print, choose *Save as PDF* for a one-page summary). **Ctrl+K** jumps to the search box.
+
+**Same numbers everywhere:** every figure comes from the same 128 live returns and 1,400 closed decisions as Product and Analytics. Awaiting approval is 41 on both pages, and the uplift matches Analytics when the filters match.
+
+**Works on phone, tablet and desktop**
+- **Desktop:** five KPIs in a row, four charts in a row, full table.
+- **Tablet:** KPIs and charts in two or three columns, table without the extra columns.
+- **Phone:** KPIs swipe sideways, charts stack, and each table row becomes a compact card. The side menu becomes a scrolling bar, and the search box takes the full width.
+- **Print:** the Export button prints a clean one-pager without menus or buttons.
+
+**Also fixed this round:** the new KPI strip on the Source map shared a style name with Analytics and could have changed how Analytics looked. It now has its own style name, so the two no longer affect each other.
 
 ---
 
@@ -132,6 +169,7 @@ A table graph for a system's data, with clusters and foreign keys.
 
 ## Two-minute demo script
 
+0. **Command Center** (opens first). Click the **Awaiting approval** slice, then a **Value at risk** reason, then a table row. Resize the window to show the phone layout.
 1. **Integration → Source map.** Point at the KPI strip and the live "Updated … ago" counters.
 2. Click the **API / JDBC / Native** badges, or use the **All methods** filter.
 3. Click **Edit** on **EAM**, switch **Connection method**, change the owner, press **Save changes**, then open **History**.
@@ -152,4 +190,5 @@ A table graph for a system's data, with clusters and foreign keys.
 - **Recycler partner** is a **flat file** import, so its Sync button is disabled. It is loaded from the **Manual import** tab.
 - The Source tables tab covers six systems. Other systems show no table model yet.
 - Vendor and product names are used to make the demo feel real. Data, volumes and run results are synthetic.
-- The colours, fonts and layout are the same as before. No other pages changed.
+- The Command Center uses planning assumptions for capacity limits and the value-at-risk factors. They are labelled as such when you hover, and are easy to change.
+- The colours and fonts are the same as before. The Command Center is new, and the Product, Analytics, MCP and Audit pages are unchanged.

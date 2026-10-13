@@ -435,14 +435,74 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 .tgfk{display:block;margin:6px auto 7px;border:1px solid var(--ink);background:var(--panel);border-radius:4px;font-size:11px;font-weight:600;padding:3px 10px;color:var(--ink)}.tgfk:hover{background:var(--yellow);border-color:var(--ink)}
 .tgctl{position:absolute;right:12px;bottom:12px;display:flex;gap:6px;align-items:center;z-index:5;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 6px;box-shadow:var(--shadow)}
 
-.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}
-.kpi{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--panel)}
-.kpi .kic{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--info-soft);color:var(--info)}.kpi .kic svg{width:20px;height:20px}
-.kpi.ok .kic{background:var(--ok-soft);color:var(--ok)}.kpi.warn .kic{background:var(--warn-soft);color:var(--warn)}.kpi.y .kic{background:var(--yellow-soft);color:var(--ink)}
-.kpi b{display:block;font:800 22px/1.1 var(--f-display)}.kpi span:not(.kic){font-size:12.5px;color:var(--ink2)}
+.hkpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.hkpi{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--panel)}
+.hkpi .kic{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--info-soft);color:var(--info)}.hkpi .kic svg{width:20px;height:20px}
+.hkpi.ok .kic{background:var(--ok-soft);color:var(--ok)}.hkpi.warn .kic{background:var(--warn-soft);color:var(--warn)}.hkpi.y .kic{background:var(--yellow-soft);color:var(--ink)}
+.hkpi b{display:block;font:800 22px/1.1 var(--f-display)}.hkpi span:not(.kic){font-size:12.5px;color:var(--ink2)}
 .hlth{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.hleg{flex:1;min-width:150px;display:grid;gap:7px;font-size:13px}.hleg div{display:flex;align-items:center;gap:8px}.hleg i{width:10px;height:10px;border-radius:50%;flex:none}.hleg b{margin-left:auto}
 .hbars{display:flex;align-items:flex-end;gap:3px;height:64px;margin-top:14px;border-bottom:1px solid var(--line2)}.hbars span{flex:1;display:flex;flex-direction:column-reverse;height:100%;justify-content:flex-start;cursor:help}.hbars span i{display:block;width:100%;min-height:0}
-@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.smside{grid-template-columns:1fr}}
+@media (max-width:1100px){.hkpis{grid-template-columns:repeat(2,minmax(0,1fr))}.smside{grid-template-columns:1fr}}
+
+/* ===== Command Center ===== */
+.cc{container-type:inline-size;container-name:cc}
+.ccact{gap:8px}.ccrf{text-align:right;line-height:1.3}
+.cchealth{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:13px;margin-bottom:12px}
+.ccbarf{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.ccf{display:flex;flex-direction:column;gap:3px;font-size:11.5px;font-weight:600;color:var(--ink2)}.ccf .sel{max-width:none;width:100%;height:36px}
+.ccactive{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.ccinsights{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.ccit{font:700 12px var(--f-display);text-transform:uppercase;letter-spacing:.04em;color:var(--ink2)}
+.ccin{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:500;text-align:left}.ccin:hover{background:var(--yellow-soft);border-color:var(--yellow)}
+.cckpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.cck{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:14px 16px;display:grid;gap:4px;align-content:start;position:relative;overflow:hidden}.cck:hover{border-color:var(--ink);box-shadow:var(--shadow)}
+.cck .cckt{display:flex;align-items:center;gap:9px}.cck .kic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--info-soft);color:var(--info);flex:none}.cck .kic svg{width:18px;height:18px}
+.cck.ok .kic{background:var(--ok-soft);color:var(--ok)}.cck.bad .kic{background:var(--bad-soft);color:var(--bad)}.cck.y .kic{background:var(--yellow-soft);color:var(--ink)}
+.ccl{font-weight:600;font-size:12.5px;color:var(--ink2)}
+.ccv{font:800 28px/1.1 var(--f-display);letter-spacing:-.02em}
+.ccs{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px}
+.ccd{font-weight:700;font-size:12px}.ccd.ok{color:var(--ok)}.ccd.bad{color:var(--bad)}
+.ccsp{display:block;height:26px;color:var(--ink2);margin-top:2px}.spk{width:100%;height:26px;display:block}.cck.ok .ccsp{color:var(--ok)}.cck.bad .ccsp{color:var(--bad)}
+.ccgrid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ccgrid3{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.5fr);gap:12px;margin-top:14px;align-items:start}
+.ccdn{display:grid;grid-template-columns:128px minmax(0,1fr);gap:10px;align-items:center}.ccdn svg{width:100%;height:auto;display:block}
+.dseg{cursor:pointer;transition:stroke-width .12s}.dseg:hover,.dseg.on{stroke-width:22}
+.ccleg{display:grid;gap:3px}
+.ccli{display:grid;grid-template-columns:10px minmax(0,1fr) auto 36px;align-items:center;gap:7px;border:0;background:none;text-align:left;padding:3px 4px;border-radius:5px;font-size:12px}.ccli:hover,.ccli.on{background:var(--panel2)}.ccli.on{box-shadow:inset 3px 0 var(--yellow)}.ccli i{width:10px;height:10px;border-radius:3px}.ccli em{font-style:normal;color:var(--muted);text-align:right}
+.ccbars{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;align-items:end;height:200px}
+.ccbar{display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:none;height:100%;padding:0 1px;font-size:11px;justify-content:flex-end;border-radius:6px}.ccbar:hover,.ccbar.on{background:var(--panel2)}
+.ccbc{flex:1;display:flex;align-items:flex-end;width:100%;max-width:38px}.ccbc i{display:block;width:100%;border-radius:4px 4px 0 0}.ccbv{font-weight:700;font-size:12px}.ccbl{color:var(--ink2);text-align:center;line-height:1.15;min-height:26px;font-size:11px}.ccbp{color:var(--muted)}
+.ccvlist{display:grid;gap:9px}
+.ccvr,.cccp{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 40px auto;align-items:center;gap:8px;border:0;background:none;text-align:left;padding:4px 6px;border-radius:6px;font-size:12.5px}.ccvr:hover,.ccvr.on{background:var(--panel2)}.ccvr.on{box-shadow:inset 3px 0 var(--yellow)}
+.cccp{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) 40px minmax(70px,auto)}
+.ccvb{height:9px;border-radius:5px;background:var(--panel3);overflow:hidden;display:block}.ccvb i{display:block;height:100%;border-radius:5px}.ccvl{overflow:hidden;text-overflow:ellipsis}
+.ccsgl{display:grid;gap:6px}.ccsg{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;border:1px solid var(--line2);background:var(--panel);border-radius:8px;padding:8px 10px;text-align:left}.ccsg:hover{background:var(--panel2);border-color:var(--line)}
+.sgi{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--info-soft);color:var(--info)}.sgi svg{width:17px;height:17px}.sgi.bad{background:var(--bad-soft);color:var(--bad)}.sgi.warn{background:var(--warn-soft);color:var(--warn)}.sgi.ok{background:var(--ok-soft);color:var(--ok)}
+.sgt{display:grid;min-width:0}.sgt b{font-size:13px}.sgt .note{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sgn{font-weight:700;font-size:13px}
+.ccrs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:10px}.ccrs div{display:grid}.ccrs b{font:800 18px var(--f-display)}.ccrs span{font-size:11.5px;color:var(--ink2)}
+.cccombo{width:100%;height:auto;display:block}
+.ccconf{display:flex;align-items:center;gap:7px}.ccconf .bar{width:54px}
+.cctab td{vertical-align:middle}.cctab tbody tr{cursor:pointer}.cctab tbody tr:hover{background:var(--panel2)}
+.ccfoot{margin-top:14px}
+@container cc (max-width:1240px){.cckpis{grid-template-columns:repeat(3,minmax(0,1fr))}.ccgrid4{grid-template-columns:repeat(2,minmax(0,1fr))}.ccgrid3{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ccgrid3 section:last-child{grid-column:1/-1}.cctr{display:none}.ccbarf{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@container cc (max-width:780px){.cckpis{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:6px}.cck{flex:0 0 70%;scroll-snap-align:start}.ccgrid4,.ccgrid3{grid-template-columns:1fr}.ccbarf{grid-template-columns:repeat(2,minmax(0,1fr))}.ccrs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cctab thead{display:none}.cctab,.cctab tbody{display:block}.cctab tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;padding:12px 14px;border-bottom:1px solid var(--line2)}.cctab td{display:block;padding:0;border:0}.cctab td::before{content:attr(data-l);display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:1px}.cctab td[data-l="#"],.cctab td:last-child{display:none}.cctab td[data-l="Asset"]{grid-column:1/-1}
+ .ccdn{grid-template-columns:110px minmax(0,1fr)}}
+@container cc (max-width:480px){.cck{flex-basis:84%}.ccv{font-size:26px}.ccrf{display:none}.ccdn{grid-template-columns:1fr}.ccdn svg{max-width:150px;margin:0 auto}.ccvr,.cccp{grid-template-columns:minmax(0,1fr) 40px}.ccvr .ccvb,.cccp .ccvb{grid-column:1/-1;order:3}.ccvr .note,.cccp .note{display:none}}
+@media print{.side,.top,#jmount,.ccact,.ccbarf,.ccinsights,.filters,.tbtn,.iconbtn{display:none!important}.app{display:block}.page{padding:0;max-width:none}.panel,.cck{break-inside:avoid;box-shadow:none}body{background:#fff}.ccgrid4{grid-template-columns:repeat(4,1fr)}.cckpis{grid-template-columns:repeat(5,1fr)}}
+
+@container cc (max-width:1400px){.cctr{display:none}}
+.ccgrid4 .ccdn{grid-template-columns:1fr;gap:8px}.ccgrid4 .ccdn svg{max-width:150px;margin:0 auto}
+.cctab td.nowrap{white-space:nowrap}
+
+@container cc (max-width:780px){
+ .cctab tr{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px}
+ .cctab td[data-l="Return"]{order:1}.cctab td[data-l="Priority"]{order:2}.cctab td[data-l="Status"]{order:3}.cctab td[data-l="Asset"]{order:4;grid-column:1/-1}.cctab td[data-l="Action"]{order:5;grid-column:1/-1}
+ .cctab td[data-l="Value"]{order:6;text-align:left!important}.cctab td[data-l="Deadline"]{order:7}.cctab td[data-l="Confidence"]{order:8}
+ .cctab td[data-l="Return"]::before,.cctab td[data-l="Priority"]::before,.cctab td[data-l="Status"]::before,.cctab td[data-l="Asset"]::before{display:none}
+ .cctab td[data-l="Status"]{text-align:right}
+}
+@media (max-width:860px){.top{flex-wrap:wrap}.search{flex:1 1 100%;max-width:none;order:-1}.tools{width:100%;justify-content:flex-start}}
+@media (max-width:640px){.top .pill:not(.demo){display:none}.tools .sel{max-width:130px}}
 </style>
 </head>
 <body>
@@ -1203,10 +1263,10 @@ document.addEventListener('input',e=>{const t=e.target.closest('[data-in]');if(t
 document.addEventListener('change',e=>{const t=e.target.closest('[data-ch]');if(t&&ACT[t.dataset.ch])ACT[t.dataset.ch](t.type==='checkbox'?t.checked:t.value,t,e)});
 ACT.closeDrawer=closeDrawer;ACT.closeModal=closeModal;
 /* route */
-function parse(){const h=location.hash.replace(/^#\/?/,'').split('?')[0].split('/').filter(Boolean);return{page:h[0]||'product',a:h[1]||null,b:h[2]||null}}
+function parse(){const h=location.hash.replace(/^#\/?/,'').split('?')[0].split('/').filter(Boolean);return{page:h[0]||'command',a:h[1]||null,b:h[2]||null}}
 function go(path){if(location.hash==='#/'+path)route();else location.hash='#/'+path}
 ACT.go=a=>{closeDrawer();closeModal();go(a)};
-const PAGES={product:{t:'Product',sub:'Decision Workbench',icon:'product',j:[2,3,4,5]},analytics:{t:'Analytics',sub:'Reconcile & learn',icon:'analytics',j:[10]},integration:{t:'Integration',sub:'Connection Fabric',icon:'integration',j:[1,6,7,8,9]},mcp:{t:'MCP & Tools',sub:'Agents within permissions',icon:'mcp',j:[2,3,4,5,6,10]},audit:{t:'Audit & provenance',sub:'What was fetched, from where',icon:'audit',j:[1,2,3,6,9,10]}};
+const PAGES={command:{t:'Command Center',sub:'Overview and priorities',icon:'command',j:[2,3,4,5,10]},product:{t:'Product',sub:'Decision Workbench',icon:'product',j:[2,3,4,5]},analytics:{t:'Analytics',sub:'Reconcile & learn',icon:'analytics',j:[10]},integration:{t:'Integration',sub:'Connection Fabric',icon:'integration',j:[1,6,7,8,9]},mcp:{t:'MCP & Tools',sub:'Agents within permissions',icon:'mcp',j:[2,3,4,5,6,10]},audit:{t:'Audit & provenance',sub:'What was fetched, from where',icon:'audit',j:[1,2,3,6,9,10]}};
 function shell(){
   $('#app').innerHTML=`<aside class="side"><div class="brand"><img src="${LOGO}" alt="Artizent"><small>Decision Intelligence Framework<br>Circularity</small></div>
   <nav class="nav" aria-label="Pages">${Object.entries(PAGES).map(([k,p])=>`<a href="#/${k}" data-nav="${k}">${ICON[p.icon]}<span>${p.t}<span class="sub">${p.sub}</span></span>${k==='product'?`<span class="cnt" id="navcnt"></span>`:''}</a>`).join('')}</nav>
@@ -1222,7 +1282,7 @@ function shell(){
   $('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;
 }
 ACT.theme=()=>{S.theme=S.theme==='dark'?'light':'dark';applyTheme();$('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;route(true)};
-ACT.tenant=v=>{S.tenant=v;route(true)};
+ACT.tenant=v=>{S.tenant=v;const t=$('#tsel');t&&(t.value=v);route(true)};
 ACT.role=v=>{S.role=v;try{localStorage.setItem('circ-role',v)}catch(e){}toast('Role: '+v+'. '+ROLES[v].desc);route(true)};
 function hideResults(){const r=$('#results');if(r)r.hidden=true}
 ACT.gsearch=v=>{const r=$('#results');v=v.trim().toLowerCase();if(v.length<2){r.hidden=true;return}
@@ -1231,7 +1291,7 @@ ACT.gsearch=v=>{const r=$('#results');v=v.trim().toLowerCase();if(v.length<2){r.
   r.innerHTML=(live.length||cl.length)?live.concat(cl).join(''):'<div class="empty"><b>No match</b>Try an RT-, asset or CS- number.</div>';r.hidden=false};
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))hideResults()});
 function route(keep){
-  const r=parse();if(!PAGES[r.page]){go('product');return}
+  const r=parse();if(!PAGES[r.page]){go('command');return}
   const y=keep?scrollY:0;
   $$('.nav a').forEach(a=>a.setAttribute('aria-current',a.dataset.nav===r.page?'page':'false'));
   if((r.page==='product'?r.a:null)!==S.lastCase){S.lastCase=r.page==='product'?r.a:null;S.scenOpen=false;S.scen={purchase:1,cost:1,service:1,market:1,demandOff:false};S.xtab='why'}
@@ -1240,7 +1300,7 @@ function route(keep){
   $('#jmount').innerHTML=journey(j);
   const nc=$('#navcnt');if(nc)nc.textContent=CASES.filter(c=>c.stage==='awaiting_approval').length;
   const v=$('#view');
-  try{v.innerHTML=({product:renderProduct,analytics:renderAnalytics,integration:renderIntegration,mcp:renderMcp,audit:renderAudit})[r.page](r)}catch(err){console.error(err);v.innerHTML=`<div class="empty"><b>This view could not be drawn</b>${esc(err.message)}. Reload the page; your data is synthetic and regenerates identically.</div>`}
+  try{v.innerHTML=({command:renderCommand,product:renderProduct,analytics:renderAnalytics,integration:renderIntegration,mcp:renderMcp,audit:renderAudit})[r.page](r)}catch(err){console.error(err);v.innerHTML=`<div class="empty"><b>This view could not be drawn</b>${esc(err.message)}. Reload the page; your data is synthetic and regenerates identically.</div>`}
   document.title=PAGES[r.page].t+' · Circularity Decision Workbench';
   if(!keep){window.scrollTo(0,0)}else window.scrollTo(0,y);
   if(typeof afterRender==='function')afterRender(r);
@@ -1564,6 +1624,157 @@ function afterRender(){if(typeof wfPaint==='function'&&S.wf&&$('#wfView'))wfPain
 /* ===== Analytics · reconcile & learn ===== */
 const kfmt=n=>{const a=Math.abs(n),s=n<0?'−':'';return a>=1e6?s+'$'+(a/1e6).toFixed(2)+'M':a>=1e3?s+'$'+Math.round(a/1e3)+'k':s+'$'+Math.round(a)};
 const med=a=>{if(!a.length)return 0;const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+/* ===== Command Center: one overview, every number from the same seeded world ===== */
+const CC_DAY=864e5;
+S.cc={site:'',cls:'',route:'',stage:'',reason:'',due:'',view:'',q:'',months:12,sort:'priority',ts:null};
+const CC_STAGES=[['await_insp','Awaiting inspection','var(--chart7)'],['need','Needs information','var(--chart5)'],['approval','Awaiting approval','var(--chart2)'],['approved','Approved · sending','var(--chart3)'],['exec','Executing','var(--chart1)'],['reeval','Re-evaluate','var(--chart4)'],['noroute','No viable route','var(--chart6)']];
+const CC_REASONS=['Delayed approval','Condition deterioration','Missing evidence','Market price decline','Capacity constraints'];
+const CC_DECAY={motor:.012,pump:.014,control:.03,drill:.025,batch:.03,it:.05};
+const CC_CAP={'Repair centre':45,'Warehouse 1':60,'Warehouse 2':60,'Inspection queue':30,'In execution':40};
+const CC_DUE=[['d5','< 5 days','var(--bad)'],['d7','5–7 days','#D4A800'],['d10','8–10 days','var(--chart2)'],['d11','> 10 days','var(--ok)']];
+ICON.command=IC('<rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M7 16l3.5-4.5 3 2.2L17.5 8"/>');
+ICON.trend=IC('<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>');
+ICON.leaf=IC('<path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14zM5 19l7-7"/>');
+ICON.refresh=IC('<path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v5h-5"/>');
+ICON.share=IC('<circle cx="6" cy="12" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 11l8-4M8 13l8 4"/>');
+ICON.export=IC('<path d="M12 3v12M7 10l5 5 5-5M5 20h14"/>');
+function ccStage(c){if(c.assessment==='Pending')return'await_insp';if(c.stage==='awaiting_approval')return'approval';if(c.stage==='approved')return'approved';if(c.stage==='executing')return'exec';if(c.stage==='reeval')return'reeval';if(c.assessment==='Review'||c.assessment==='Partial')return'need';return'noroute'}
+const ccNet=c=>c.recommendation?c.recommendation.net:0;
+const CC_EST=(()=>{const o={};Object.keys(CLASSES).forEach(k=>{const a=ROWS.filter(r=>r.cls===k&&r.route!=='exit'&&r.p50>0).map(r=>r.p50/r.q);o[k]=med(a)});return o})();
+const ccEst=c=>c.recommendation?ccNet(c):Math.round((CC_EST[c.cls]||0)*c.qty*.8);
+function ccLeft(c){const a=c.snapshot?c.snapshot.takenAt:c.received,w=c.recommendation?14:10;return Math.round(w-(AS_OF-new Date(a))/CC_DAY)}
+const ccDueKey=l=>l<5?'d5':l<8?'d7':l<11?'d10':'d11';
+function ccUtil(){const v=visCases(),n=l=>v.filter(c=>c.location===l).length;return{'Repair centre':n('Repair centre'),'Warehouse 1':n('Warehouse 1'),'Warehouse 2':n('Warehouse 2'),'Inspection queue':v.filter(c=>ccStage(c)==='await_insp').length,'In execution':v.filter(c=>c.stage==='executing'||c.stage==='approved').length}}
+function ccRisk(c,util){const st=ccStage(c),r={};if(st==='approval'||st==='reeval'){const n=ccNet(c),l=ccLeft(c);r['Condition deterioration']=n*(CC_DECAY[c.cls]||.02)*3;r['Delayed approval']=n*(l<5?.25:l<8?.1:.03);
+    if(c.recommendation&&c.recommendation.id==='resale'&&(SRC('mkt')||{}).status==='stale')r['Market price decline']=n*.06;
+    if(c.location==='Repair centre'&&util['Repair centre']/CC_CAP['Repair centre']>=.75)r['Capacity constraints']=n*.05}
+  else if(st==='need'||st==='await_insp'||st==='noroute')r['Missing evidence']=ccEst(c)*.3;
+  Object.keys(r).forEach(k=>{if(!(r[k]>0))delete r[k]});return r}
+function ccScope(){const f=S.cc,util=ccUtil(),out=visCases().filter(c=>(!f.site||c.location===f.site)&&(!f.cls||c.cls===f.cls)&&(!f.route||(c.recommendation&&c.recommendation.id===f.route)));
+  const net=sum(out.map(ccNet)),mx=Math.max(1,...out.map(ccEst));
+  out.forEach(c=>{c._st=ccStage(c);c._left=ccLeft(c);c._risk=ccRisk(c,util);c._var=sum(Object.values(c._risk));c._val=ccEst(c);c._due=ccDueKey(c._left);
+   c._score=(c._val/mx)*60+Math.max(0,Math.min(1,(10-c._left)/10))*40});
+  const act=out.filter(c=>['approval','reeval','need','await_insp','noroute'].includes(c._st)).sort((a,b)=>b._score-a._score);
+  act.forEach((c,i)=>{c._pri=i<act.length*.3?'High':i<act.length*.7?'Medium':'Low'});
+  return{all:out,act,util,net}}
+function ccRows(){const f=S.cc;return visRows().filter(r=>(!f.cls||r.cls===f.cls)&&(!f.route||r.route===f.route)&&r.mi>=12-f.months)}
+function ccSeries(fn,rows){const o=Array(12).fill(0);rows.forEach(r=>{o[r.mi]+=fn(r)});return o}
+function ccDelta(s,good=1){const a=s[11],b=s[10];if(!b)return null;const p=(a/b-1)*100,up=p>=0;return{txt:Math.abs(p).toFixed(0)+'%',arrow:up?'▲':'▼',cls:(up===(good>0))?'ok':'bad'}}
+function ccSpark(s){const mx=Math.max(...s),mn=Math.min(...s),d=mx-mn||1,pts=s.map((v,i)=>[(i/(s.length-1))*76+2,22-((v-mn)/d)*18]),last=pts[pts.length-1];
+  return `<svg class="spk" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle cx="${last[0]}" cy="${last[1]}" r="2.4" fill="currentColor"/></svg>`}
+const tFmt=n=>n>=1000?(n/1000).toFixed(1)+'k':String(Math.round(n));
+function ccDonut(items,cur,cTop,cBot,label){const tot=sum(items.map(i=>i.v))||1,r=52,c=2*Math.PI*r,pos=items.filter(i=>i.v>0);let off=0;
+  const segs=pos.map(i=>{const l=i.v/tot*c,g=pos.length>1?2.5:0,d=Math.max(0,l-g);const e=`<circle class="dseg ${cur===i.k?'on':''}" data-act="ccPick" data-arg="${i.k}" cx="70" cy="70" r="${r}" fill="none" stroke="${i.color}" stroke-width="18" stroke-dasharray="${d} ${c-d}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)" data-tip="${esc(i.label+' · '+fmtN(i.v)+' ('+Math.round(i.v/tot*100)+'%)'+(i.tip?' · '+i.tip:''))}"/>`;off+=l;return e}).join('');
+  return `<div class="ccdn"><svg viewBox="0 0 140 140" role="img" aria-label="${esc(label+': '+items.map(i=>i.label+' '+i.v).join(', '))}"><circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--panel3)" stroke-width="18"/>${segs}<text x="70" y="68" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)" style="font-family:var(--f-display)">${cTop}</text><text x="70" y="86" text-anchor="middle" font-size="11" fill="var(--ink2)">${cBot}</text></svg>
+  <div class="ccleg">${items.map(i=>`<button class="ccli ${cur===i.k?'on':''}" data-act="ccPick" data-arg="${i.k}" ${i.tip?`data-tip="${esc(i.tip)}"`:''}><i style="background:${i.color}"></i><span>${esc(i.label)}</span><b class="num">${fmtN(i.v)}</b><em class="num">${Math.round(i.v/tot*100)}%</em></button>`).join('')}</div></div>`}
+function ccKpiHTML(sc,rows,m){
+  const open=sc.all.filter(c=>c._st==='approval'||c._st==='reeval'),pot=sum(open.map(ccNet)),vr=sum(sc.all.map(c=>c._var)),
+   co2=sum(sc.all.filter(c=>c.recommendation).map(c=>(EMB[c.cls]||0)*c.qty*(CO2S[c.recommendation.id]||0)))/1000;
+  const sCnt=ccSeries(()=>1,visRows()),sPred=ccSeries(r=>Math.max(0,r.p50),visRows()),sCo=ccSeries(r=>r.co2e,visRows()),sUp=ccSeries(r=>r.status==='reconciled'?r.actual-r.baseline:0,visRows());
+  const k=(cls,ic,label,val,sub,d,s,act,arg,tip)=>`<button class="cck ${cls}" data-act="${act}" data-arg="${arg||''}" data-tip="${esc(tip)}"><span class="cckt"><span class="kic">${ic}</span><span class="ccl">${label}</span></span><span class="ccv num">${val}</span><span class="ccs">${d?`<span class="ccd ${d.cls}">${d.arrow} ${d.txt}</span>`:''}<span class="note">${sub}</span></span>${s?`<span class="ccsp">${ccSpark(s)}</span>`:''}</button>`;
+  const units=sum(sc.all.map(c=>c.qty));
+  return k('',ICON.batch,'Assets in scope',fmtN(sc.all.length),units.toLocaleString()+' units · vs prior month',ccDelta(sCnt),sCnt,'ccClear','','Returned assets matching the filters. The change compares closed decisions this month with last month.')
+   +k('ok',ICON.analytics,'Potential recovery value',kfmt(pot),open.length+' decisions open · predicted net',ccDelta(sPred),sPred,'ccPick','stage:approval','Predicted net recovery of decisions that still need a person: awaiting approval plus re-evaluation. Select to filter the table.')
+   +k('bad',ICON.flag,'Value at risk',kfmt(vr),(pot?Math.round(vr/Math.max(1,pot+sum(sc.all.filter(c=>c._st==='need'||c._st==='await_insp'||c._st==='noroute').map(c=>c._val)))*100):0)+'% of open value if no action',null,null,'ccScroll','ccVar','Predicted value exposed over the next 30 days if no action is taken: value decay, expiring decisions, missing evidence, stale market data and capacity. See the breakdown below.')
+   +k('ok',ICON.leaf,'CO₂e avoided opportunity',co2.toFixed(1)+' t','estimated · recommended routes',ccDelta(sCo),sCo,'go','analytics','Embodied-carbon factor by asset class × share avoided by the recommended route. Measured values are on Analytics.')
+   +k('y',ICON.trend,'Uplift vs baseline','+'+kfmt(m.uplift),'closed decisions · '+(m.base?'+'+((m.act/m.base-1)*100).toFixed(0)+'%':'—')+' vs sell-or-scrap',ccDelta(sUp),sUp,'go','analytics','Additional net recovery on reconciled decisions compared with the sell-or-scrap baseline. Same number as Analytics.')}
+function ccBarsHTML(items,label){const mx=Math.max(1,...items.map(i=>i.v)),tot=sum(items.map(i=>i.v))||1;
+  return `<div class="ccbars" role="img" aria-label="${esc(label+': '+items.map(i=>i.label+' '+i.v).join(', '))}">${items.map(i=>`<button class="ccbar ${S.cc.route===i.id?'on':''}" data-act="ccPick" data-arg="route:${i.id}" data-tip="${esc(i.label+' · '+fmtN(i.v)+' units ('+Math.round(i.v/tot*100)+'%) · '+kfmt(i.net)+' predicted net')}"><span class="ccbv num">${fmtN(i.v)}</span><span class="ccbc"><i style="height:${Math.max(3,i.v/mx*100)}%;background:${i.color}"></i></span><span class="ccbl">${esc(i.label)}</span><span class="ccbp num">${Math.round(i.v/tot*100)}%</span></button>`).join('')}</div>`}
+function ccVarHTML(sc){const by={};CC_REASONS.forEach(r=>by[r]=0);sc.all.forEach(c=>Object.keys(c._risk).forEach(k=>by[k]+=c._risk[k]));const tot=sum(Object.values(by))||1,mx=Math.max(1,...Object.values(by)),
+   col={'Delayed approval':'var(--bad)','Condition deterioration':'#D9651E','Missing evidence':'#D4A800','Market price decline':'var(--chart4)','Capacity constraints':'var(--chart5)'},
+   tip={'Delayed approval':'Decisions whose window is closing. The offer or demand can lapse.','Condition deterioration':'Monthly value decay of the asset class while it waits.','Missing evidence':'Value of assets that cannot be routed yet. Estimated from similar closed decisions.','Market price decline':'Resale recommendations priced from stale market comparables.','Capacity constraints':'Repair-centre load is above 75%, so prep may slip.'};
+  return CC_REASONS.map(r=>`<button class="ccvr ${S.cc.reason===r?'on':''}" data-act="ccPick" data-arg="reason:${esc(r)}" data-tip="${esc(tip[r])}"><span class="ccvl">${r}</span><span class="ccvb"><i style="width:${by[r]/mx*100}%;background:${col[r]}"></i></span><b class="num">${Math.round(by[r]/tot*100)}%</b><span class="note num">${kfmt(by[r])}</span></button>`).join('')}
+function ccComboHTML(rows){const f=S.cc,n=f.months,idx=[];for(let i=12-n;i<12;i++)idx.push(i);
+  const rc=rows.filter(r=>r.status==='reconciled'),P=idx.map(i=>sum(rc.filter(r=>r.mi===i).map(r=>r.p50))),A=idx.map(i=>sum(rc.filter(r=>r.mi===i).map(r=>r.actual))),Y=P.map((p,i)=>p?A[i]/p*100:0);
+  const W=600,H=230,L=46,R=44,T0=14,B=34,pw=(W-L-R)/n,mx=Math.max(1,...P,...A)*1.12,ymx=Math.max(120,Math.ceil(Math.max(...Y)/20)*20),yo=v=>H-B-(v/mx)*(H-B-T0),yy=v=>H-B-(v/ymx)*(H-B-T0);
+  const bars=idx.map((mi,i)=>{const x=L+i*pw,bw=Math.min(18,pw*.32);return `<g data-tip="${esc(MONTHS[mi]+' · predicted '+kfmt(P[i])+', actual '+kfmt(A[i])+', yield '+Y[i].toFixed(0)+'%')}"><rect x="${x+pw/2-bw-1}" y="${yo(P[i])}" width="${bw}" height="${H-B-yo(P[i])}" rx="2" fill="var(--chart7)"/><rect x="${x+pw/2+1}" y="${yo(A[i])}" width="${bw}" height="${H-B-yo(A[i])}" rx="2" fill="var(--chart1)"/><text x="${x+pw/2}" y="${H-12}" text-anchor="middle" font-size="11" fill="var(--ink2)">${MONTHS[mi]}</text></g>`}).join('');
+  const line=Y.map((v,i)=>`${i?'L':'M'}${L+i*pw+pw/2} ${yy(v)}`).join(''),dots=Y.map((v,i)=>`<circle cx="${L+i*pw+pw/2}" cy="${yy(v)}" r="3.2" fill="var(--panel)" stroke="var(--ok)" stroke-width="2"/>`).join('');
+  const grid=[0,.25,.5,.75,1].map(t=>`<line x1="${L}" x2="${W-R}" y1="${H-B-t*(H-B-T0)}" y2="${H-B-t*(H-B-T0)}" stroke="var(--line2)"/><text x="${L-6}" y="${H-B-t*(H-B-T0)+4}" text-anchor="end" font-size="10.5" fill="var(--muted)">${kfmt(mx*t).replace('$','')}</text><text x="${W-R+6}" y="${H-B-t*(H-B-T0)+4}" font-size="10.5" fill="var(--muted)">${Math.round(ymx*t)}%</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" class="cccombo" role="img" aria-label="Predicted versus actual net recovery by month, with recovery yield">${grid}${bars}<path d="${line}" fill="none" stroke="var(--ok)" stroke-width="2.2" stroke-linejoin="round"/>${dots}</svg>
+  <div class="legend"><span><i style="background:var(--chart7)"></i>Predicted</span><span><i style="background:var(--chart1)"></i>Actual</span><span><i style="background:var(--ok);height:3px;vertical-align:3px"></i>Recovery yield (actual ÷ predicted)</span></div>`}
+function ccSignals(sc){const a=[],v=sc.all,ap=v.filter(c=>c._st==='approval'),cl=ap.filter(c=>c._left<5);
+  if(cl.length)a.push({t:'Decision windows closing',n:cl.length+' assets',note:'Approval needed within 5 days',lvl:'bad',act:'stage:approval',ic:ICON.flag});
+  const ev=v.filter(c=>c._st==='need'||c._st==='await_insp');if(ev.length){const g={};ev.forEach(c=>{const k=c.blocked?c.blocked.action:'Request inspection';g[k]=(g[k]||0)+1});const top=Object.entries(g).sort((x,y)=>y[1]-x[1])[0];a.push({t:'Evidence gaps',n:ev.length+' assets',note:'Most common: '+top[0].toLowerCase()+' ('+top[1]+')',lvl:'warn',act:'stage:need',ic:ICON.audit})}
+  const mk=SRC('mkt');if(mk&&mk.status==='stale'){const n=v.filter(c=>c.recommendation&&c.recommendation.id==='resale').length;a.push({t:'Stale market feed',n:n+' assets',note:'Resale prices use last fresh comparables',lvl:'bad',act:'route:resale',ic:ICON.trend})}
+  const rv=v.filter(c=>c._st==='reeval');if(rv.length)a.push({t:'Re-evaluation needed',n:rv.length+' assets',note:rv[0].reevalReason||'Conditions changed',lvl:'warn',act:'stage:reeval',ic:ICON.refresh});
+  const rr2=visRows(),h={};rr2.filter(r=>r.mi>=9&&r.ero>0).forEach(r=>{const k=r.equip+' · '+r.comp;h[k]=(h[k]||0)+1});const pv={};rr2.filter(r=>r.mi>=6&&r.mi<9&&r.ero>0).forEach(r=>{const k=r.equip+' · '+r.comp;pv[k]=(pv[k]||0)+1});
+  const top=Object.entries(h).sort((x,y)=>y[1]-x[1])[0];if(top){const p=pv[top[0]]||0;a.push({t:'Parts demand hotspot',n:top[1]+' cases',note:top[0]+(p?' · '+(top[1]>=p?'▲':'▼')+' '+Math.abs(Math.round((top[1]/p-1)*100))+'% vs prior 3 months':''),lvl:'warn',act:'go:analytics',ic:ICON.pump})}
+  const late=EVENTS.filter(e=>/late|out of order/.test(e.ack)).length;if(late)a.push({t:'Late warehouse events',n:late+' events',note:'Reordered automatically; none lost',lvl:'ok',act:'go:integration',ic:ICON.integration});
+  return a.slice(0,5)}
+function ccSignalsHTML(sc){return ccSignals(sc).map(s=>`<button class="ccsg" data-act="ccPick" data-arg="${s.act}"><span class="sgi ${s.lvl}">${s.ic}</span><span class="sgt"><b>${esc(s.t)}</b><span class="note">${esc(s.note)}</span></span><span class="sgn num">${s.n}</span></button>`).join('')||'<div class="empty"><b>No signals</b>Nothing needs attention.</div>'}
+function ccCapHTML(sc){return Object.keys(CC_CAP).map(k=>{const u=sc.util[k]||0,p=u/CC_CAP[k],cl=p>=.9?'var(--bad)':p>=.75?'#D4A800':'var(--ok)',msg=p>=.9?'Over limit risk':p>=.75?'Tight':'Within limit';
+  return `<div class="cccp" data-tip="${esc(k+': '+u+' of '+CC_CAP[k]+' planned slots. Capacity values are configured planning figures in this demo.')}"><span class="ccvl">${k}</span><span class="ccvb"><i style="width:${Math.min(100,p*100)}%;background:${cl}"></i></span><b class="num">${Math.round(p*100)}%</b><span class="note" style="color:${p>=.75?cl:'var(--muted)'}">${msg}</span></div>`}).join('')}
+function ccHealthHTML(){const t=hhTotals(),st={live:0,stale:0,manual:0,unavailable:0};SOURCES.forEach(s=>st[s.status]++);
+  return `<span class="livedot"><i></i>Live</span><span><b class="num">${t.pct.toFixed(1)}%</b> integration health</span><span class="note">${st.live} sources live${st.stale?' · <b style="color:var(--warn)">'+st.stale+' stale</b>':''}${st.unavailable?' · <b style="color:var(--bad)">'+st.unavailable+' not connected</b>':''}${st.manual?' · '+st.manual+' manual':''}</span><a class="lnk" href="#/integration" data-act="ccGoMap">View connections</a>`}
+function ccInsightsHTML(sc){const o=[],cl=sc.all.filter(c=>c._st==='approval'&&c._left<5).length,ap=sc.all.filter(c=>c._st==='approval').length;
+  if(ap)o.push(['stage:approval',ap+' decisions await approval'+(cl?', '+cl+' close within 5 days':'')]);
+  const by={};sc.all.forEach(c=>Object.keys(c._risk).forEach(k=>by[k]=(by[k]||0)+c._risk[k]));const tot=sum(Object.values(by)),top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];
+  if(top)o.push(['reason:'+top[0],kfmt(tot)+' at risk, mostly '+top[0].toLowerCase()+' ('+Math.round(top[1]/tot*100)+'%)']);
+  if((SRC('mkt')||{}).status==='stale')o.push(['route:resale','Market feed is stale, so resale prices carry a warning']);
+  const ne=sc.all.filter(c=>c._st==='need'||c._st==='await_insp').length;if(ne)o.push(['stage:need',ne+' assets cannot be routed until evidence arrives']);
+  return o.slice(0,4).map(i=>`<button class="ccin" data-act="ccPick" data-arg="${esc(i[0])}">${esc(i[1])}</button>`).join('')}
+function ccFilters(sc){const f=S.cc,sel=(k,l,opts,cur)=>`<label class="ccf"><span>${l}</span><select class="sel" data-ch="ccF" data-k="${k}" aria-label="${l}"><option value="">All</option>${opts.map(o=>`<option value="${esc(o[0])}" ${String(o[0])===String(cur)?'selected':''}>${esc(o[1])}</option>`).join('')}</select></label>`;
+  const active=[];if(f.stage)active.push(['stage',(CC_STAGES.find(s=>s[0]===f.stage)||[0,f.stage])[1]]);if(f.route)active.push(['route',rid(f.route).short]);if(f.reason)active.push(['reason',f.reason]);if(f.due)active.push(['due',(CC_DUE.find(d=>d[0]===f.due)||[0,f.due])[1]]);
+  return `<div class="ccbarf"><label class="ccf"><span>Tenant</span><select class="sel" data-ch="tenant" aria-label="Tenant"><option>All</option>${TENANTS.map(t=>`<option ${S.tenant===t?'selected':''}>${t}</option>`).join('')}</select></label>
+   ${sel('site','Site',FACILITIES.map(x=>[x,x]),f.site)}${sel('cls','Asset class',Object.entries(CLASSES).map(([k,v])=>[k,v.label]),f.cls)}${sel('route','Recommended route',ROUTES.map(r=>[r.id,r.name]),f.route)}
+   <label class="ccf"><span>Time horizon</span><select class="sel" data-ch="ccMonths" aria-label="Time horizon for closed decisions"><option value="12" ${f.months===12?'selected':''}>Last 12 months</option><option value="6" ${f.months===6?'selected':''}>Last 6 months</option><option value="3" ${f.months===3?'selected':''}>Last 3 months</option></select></label></div>
+   ${active.length||f.site||f.cls||S.tenant!=='All'?`<div class="ccactive"><span class="note">Filtered:</span>${active.map(a=>`<button class="chip y chipb" data-act="ccUnpick" data-arg="${a[0]}">${esc(a[1])} ✕</button>`).join('')}${S.tenant!=='All'?`<span class="chip line">${S.tenant}</span>`:''}${f.site?`<span class="chip line">${f.site}</span>`:''}${f.cls?`<span class="chip line">${CLASSES[f.cls].label}</span>`:''}<button class="btn ghost sm" data-act="ccClear">Clear all</button></div>`:''}`}
+function ccTableRows(sc){const f=S.cc,q=f.q.trim().toLowerCase();let l=f.stage&&['exec','approved'].includes(f.stage)?sc.all.slice().sort((a,b)=>b._score-a._score):sc.act;
+  l=l.filter(c=>(!f.stage||c._st===f.stage)&&(!f.due||c._due===f.due)&&(!f.reason||c._risk[f.reason]>0)&&(!q||(c.id+' '+c.assetId+' '+c.product+' '+c.owner).toLowerCase().includes(q)));return l}
+function ccTableHTML(sc){const l=ccTableRows(sc),top=l.slice(0,10),pc={High:'bad',Medium:'warn',Low:'line'};
+  const trig=c=>c._st==='approval'?'Recommendation awaiting approval':c._st==='reeval'?(c.reevalReason||'Conditions changed'):c._st==='need'?'Evidence gap: '+(c.blocked?c.blocked.gateName:'condition'):c._st==='await_insp'?'Awaiting inspection':c._st==='noroute'?'No route passed the gates':'In motion',
+   act=c=>c.recommendation?(c.recommendation.plan||rid(c.recommendation.id).name):(c.blocked?c.blocked.action:'Request inspection'),
+   cons=c=>c.blocked?c.blocked.owner+' input needed':c.recommendation&&c.recommendation.demandStatus==='forecast'?'Forecast demand only':(c.location==='Repair centre'&&sc.util['Repair centre']/CC_CAP['Repair centre']>=.75?'Repair capacity':'None'),
+   btn=c=>c._st==='approval'?'Review':c._st==='reeval'?'Re-evaluate':c._st==='exec'||c._st==='approved'?'Track':'Investigate';
+  return `<div class="tw"><table class="t cctab"><thead><tr><th>#</th><th>Return</th><th>Asset</th><th class="cctr">Trigger</th><th>Recommended action</th><th class="r">Predicted value</th><th>Deadline</th><th>Confidence</th><th class="cctr">Constraints</th><th>Priority</th><th>Status</th><th></th></tr></thead><tbody>
+  ${top.map((c,i)=>{const r=c.recommendation,cf=r?Math.max(30,Math.min(97,Math.round((1-(r.p90-r.p10)/(2*Math.max(Math.abs(r.net),1)))*100))):null,dl=addDays(AS_OF,c._left);
+   return `<tr data-act="ccOpen" data-arg="${c.id}" tabindex="0"><td data-l="#">${i+1}</td><td data-l="Return" class="nowrap"><b>${c.id}</b></td><td data-l="Asset"><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(c.cls)}<span class="nowrap">${esc(c.product)}${c.qty>1?` <span class="note">×${c.qty}</span>`:''}<div class="note num">${c.assetId}</div></span></div></td><td class="cctr" data-l="Trigger">${esc(trig(c))}</td><td data-l="Action">${esc(act(c))}</td><td class="r num" data-l="Value"><b>${r?money(r.net):'~'+money(c._val)}</b>${r?'':'<div class="note">estimate</div>'}</td><td class="num nowrap" data-l="Deadline">${fmtD(dl)}<div class="note">${c._left<=0?'overdue':c._left+' d left'}</div></td><td data-l="Confidence">${cf==null?'<span class="muted">—</span>':`<span class="ccconf"><span class="bar"><i style="width:${cf}%;${cf<70?'background:#D4A800':'background:var(--ok)'}"></i></span><b class="num">${cf}%</b></span>`}</td><td class="cctr" data-l="Constraints">${esc(cons(c))}</td><td data-l="Priority"><span class="chip ${pc[c._pri]||'line'}">${c._pri||'—'}</span></td><td data-l="Status">${stageChip(c)}</td><td><span class="btn sm">${btn(c)}</span></td></tr>`}).join('')||`<tr><td colspan="12"><div class="empty"><b>No assets match</b>Clear a filter or search to see the full list.</div></td></tr>`}
+  </tbody></table></div><div class="filters" style="border-top:1px solid var(--line2);border-bottom:0;justify-content:space-between"><span class="note">Showing ${top.length} of ${l.length}, ranked by predicted value and urgency.</span><a class="btn sm" href="#/product">Open all returned assets</a></div>`}
+function ccClockText(){const d=asOfNow();return fmtDY(AS_OF)+', '+d.toISOString().slice(11,16)}
+function renderCommand(){
+  const sc=ccScope(),rows=ccRows(),m=metrics(rows),f=S.cc,tot=sc.all.length||1;
+  const stages=CC_STAGES.map(([k,l,c])=>({k:'stage:'+k,label:l,v:sc.all.filter(x=>x._st===k).length,color:c,tip:''}));
+  const tr=ROUTES.map(r=>{const a=sc.all.filter(c=>c.recommendation&&c.recommendation.id===r.id);return{id:r.id,label:r.short,v:sum(a.map(c=>c.qty)),net:sum(a.map(ccNet)),color:r.color}}).filter(x=>x.v>0);
+  const actable=sc.act,due=CC_DUE.map(([k,l,c])=>({k:'due:'+k,label:l,v:actable.filter(x=>x._due===k).length,color:c}));
+  const vr=sum(sc.all.map(c=>c._var));
+  return `<div class="cc">
+  <div class="phead"><div><h1>Circularity Command Center</h1><p>Identify, prioritise and act on lifecycle opportunities to maximise economic, operational and sustainability outcomes.</p></div>
+   <div class="row ccact"><span class="note ccrf">Last refreshed<br><b class="num" data-cc-clock>${ccClockText()}</b></span><button class="iconbtn" data-act="ccRefresh" aria-label="Refresh data" data-tip="Refresh">${ICON.refresh}</button><button class="btn" data-act="ccShare">${ICON.share}Share</button><button class="btn pri" data-act="ccExport">${ICON.export}Export</button></div></div>
+  <div class="cchealth" id="ccHealth">${ccHealthHTML()}</div>
+  ${ccFilters(sc)}
+  <div class="ccinsights"><span class="ccit">Needs attention now</span>${ccInsightsHTML(sc)}</div>
+  <div class="cckpis" id="ccKpis">${ccKpiHTML(sc,rows,m)}</div>
+  <div class="ccgrid4">
+   <section class="panel"><div class="ph"><h3>Lifecycle portfolio</h3></div><div class="pb">${ccDonut(stages,'stage:'+f.stage,fmtN(sc.all.length),'Assets','Lifecycle portfolio')}</div></section>
+   <section class="panel"><div class="ph"><h3>Treatment opportunity</h3><span class="note">Predicted volume (units)</span></div><div class="pb">${ccBarsHTML(tr,'Treatment opportunity')}</div></section>
+   <section class="panel" id="ccVar"><div class="ph"><h3>Value at risk by reason</h3><span class="note num">${kfmt(vr)}</span></div><div class="pb ccvlist">${ccVarHTML(sc)}</div></section>
+   <section class="panel"><div class="ph"><h3>Assets by time to action</h3></div><div class="pb">${ccDonut(due,'due:'+f.due,fmtN(actable.length),'Assets','Assets by time to action')}</div></section>
+  </div>
+  <section class="panel" style="margin-top:14px"><div class="ph"><div><h3>Actions to be prioritised</h3><div class="note">Ranked by predicted value and urgency. Select a row to investigate or act.</div></div></div>
+   <div class="filters"><div class="seg" role="group" aria-label="View">${[['','All opportunities'],['stage:approval','Awaiting approval'],['stage:need','Needs evidence'],['stage:reeval','Re-evaluate']].map(v=>`<button data-act="ccPick" data-arg="${v[0]||'stage:'}" aria-pressed="${(v[0]||'')===(f.stage?'stage:'+f.stage:'')}">${v[1]}</button>`).join('')}</div><input type="search" placeholder="Search opportunities" value="${esc(f.q)}" data-in="ccQ" aria-label="Search opportunities"><span class="grow"></span><span class="chip line">${ccTableRows(sc).length} opportunities</span></div>
+   <div id="ccTab">${ccTableHTML(sc)}</div></section>
+  <div class="ccgrid3">
+   <section class="panel"><div class="ph"><h3>Emerging signals</h3></div><div class="pb ccsgl" id="ccSig">${ccSignalsHTML(sc)}</div></section>
+   <section class="panel"><div class="ph"><h3>Capacity and bottlenecks</h3></div><div class="pb ccvlist">${ccCapHTML(sc)}</div></section>
+   <section class="panel"><div class="ph"><h3>Value realisation</h3><div class="seg" role="group" aria-label="Horizon">${[3,6,12].map(n=>`<button data-act="ccMonthsBtn" data-arg="${n}" aria-pressed="${f.months===n}">${n} mo</button>`).join('')}</div></div><div class="pb">
+    <div class="ccrs"><div data-tip="Actual net recovery on reconciled decisions in the period. Same as Analytics when filters match."><b class="num">${kfmt(m.act)}</b><span>Net recovery</span></div><div data-tip="Actual ÷ predicted net recovery on reconciled decisions."><b class="num">${m.rc.length&&sum(m.rc.map(r=>r.p50))?Math.round(m.act/sum(m.rc.map(r=>r.p50))*100):0}%</b><span>Recovery yield</span></div><div data-tip="Median days from decision to reconciled outcome."><b class="num">${m.days?m.days.toFixed(0):'—'} days</b><span>Cycle time</span></div><div data-tip="Estimated embodied-carbon avoided on reconciled decisions."><b class="num">${(sum(m.rc.map(r=>r.co2e))/1000).toFixed(0)} t</b><span>CO₂e avoided</span></div></div>${ccComboHTML(rows)}</div></section>
+  </div>
+  <p class="note ccfoot">Every figure here is computed from the same ${CASES.length} live returns and ${ROWS.length.toLocaleString()} closed decisions as Product and Analytics. Select any chart, bar or signal to filter the table. Capacity figures are configured planning values.</p></div>`}
+ACT.ccF=(v,el)=>{S.cc[el.dataset.k]=v;route(true)};
+ACT.ccMonths=v=>{S.cc.months=+v;route(true)};ACT.ccMonthsBtn=v=>{S.cc.months=+v;route(true)};
+ACT.ccPick=a=>{const i=a.indexOf(':'),k=a.slice(0,i),v=a.slice(i+1);if(k==='go'){ACT.go(v);return}const f=S.cc;
+  if(k==='stage'){f.stage=(v===''||f.stage===v)?'':v}else if(k==='route')f.route=f.route===v?'':v;else if(k==='reason')f.reason=f.reason===v?'':v;else if(k==='due')f.due=f.due===v?'':v;
+  route(true);const t=$('#ccTab');if(t&&(k==='stage'||k==='reason'||k==='due'))t.scrollIntoView({behavior:'smooth',block:'nearest'})};
+ACT.ccUnpick=k=>{S.cc[k]='';route(true)};
+ACT.ccClear=()=>{S.cc=Object.assign(S.cc,{site:'',cls:'',route:'',stage:'',reason:'',due:'',view:'',q:''});S.tenant='All';const t=$('#tsel');t&&(t.value='All');route(true)};
+ACT.ccQ=v=>{S.cc.q=v;const t=$('#ccTab');t&&(t.innerHTML=ccTableHTML(ccScope()))};
+ACT.ccOpen=id=>{closeDrawer(true);go('product/'+id)};
+ACT.ccScroll=id=>{const e=document.getElementById(id);e&&e.scrollIntoView({behavior:'smooth',block:'center'})};
+ACT.ccRefresh=()=>{route(true);toast('Refreshed. All figures recomputed from the latest data.')};
+ACT.ccShare=()=>{const u=location.href;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>toast('Link copied. It opens this Command Center.'),()=>toast('Copy this link to share: '+u,6000))};
+ACT.ccExport=()=>{toast('Opening the print dialog. Choose Save as PDF for a one-page summary.');setTimeout(()=>window.print(),400)};
+ACT.ccGoMap=()=>{S.intTab='map';go('integration')};
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();const g=$('#gs');g&&g.focus()}});
 function aRows(){const f=S.fA;return visRows().filter(r=>(!f.tenant||r.tenant===f.tenant)&&(!f.cls||r.cls===f.cls)&&(!f.route||r.route===f.route)&&r.mi>=f.from&&r.mi<=f.to&&(!f.model||r.model===f.model))}
 function metrics(rows){
   const rc=rows.filter(r=>r.status==='reconciled');
@@ -1734,7 +1945,7 @@ function smLogHTML(){return S.smLog.length?S.smLog.map(l=>{const s=SRC(l.id)||{v
 function intMap(){
   const f=SM_S();
   const dep=SOURCES.filter(s=>s.status==='unavailable'||s.status==='stale'||s.status==='manual');
-  return `<div class="kpis" id="smKpi">${smKpiHTML()}</div><div class="smbar"><div class="row smchips" id="smChips">${smChipsHTML()}</div><span class="grow"></span>
+  return `<div class="hkpis" id="smKpi">${smKpiHTML()}</div><div class="smbar"><div class="row smchips" id="smChips">${smChipsHTML()}</div><span class="grow"></span>
    <input type="search" id="smQ" class="smq" placeholder="Search system, vendor or owner" value="${esc(f.q)}" data-in="smQ" aria-label="Search sources">
    <label class="sr" for="smCat">Category</label><select class="sel" id="smCat" data-ch="smCat"><option value="">All categories</option>${Object.keys(SRC_CATS).map(c=>`<option value="${c}" ${f.cat===c?'selected':''}>${SRC_CATS[c]}</option>`).join('')}</select>
    <label class="sr" for="smMeth">Connection method</label><select class="sel" id="smMeth" data-ch="smMeth"><option value="">All methods</option>${Object.keys(CONN_METHODS).map(c=>`<option value="${c}" ${f.me===c?'selected':''}>${CONN_METHODS[c].label}</option>`).join('')}</select><button class="btn" data-act="srcSyncAll">Sync all</button><button class="btn pri" data-act="srcAdd" data-arg="">+ Add source</button></div>
@@ -1774,7 +1985,7 @@ function smExceptions(){const o=[];SOURCES.forEach(s=>{if(s.status==='unavailabl
   CONFLICTS.filter(c=>c.status==='open').forEach(c=>o.push({src:c.a.src,obj:c.asset,issue:c.kind+' differs from '+c.b.src,sev:'Medium',st:'Open'}));return o}
 function hhTotals(){hhInit();const t={ok:0,warn:0,bad:0};S.hh.forEach(b=>{t.ok+=b.ok;t.warn+=b.warn;t.bad+=b.bad});t.run=SOURCES.filter(s=>s.syncing).length+(S.wf?S.wf.list.filter(w=>w.running).length:0);const n=t.ok+t.warn+t.bad;t.pct=n?t.ok/n*100:100;return t}
 function smKpiHTML(){wfInit();const t=hhTotals(),conn=SOURCES.filter(s=>s.status!=='unavailable').length,tbl=Object.keys(TBL_MODELS).reduce((a,k)=>a+(S.tg.m[k]?S.tg.m[k].t.length:TBL_MODELS[k].t.length),0),pub=S.wf.list.filter(w=>w.status==='published').length;
-  const k=(cls,ic,v,l)=>`<div class="kpi ${cls}"><span class="kic">${ic}</span><div><b class="num">${v}</b><span>${l}</span></div></div>`;
+  const k=(cls,ic,v,l)=>`<div class="hkpi ${cls}"><span class="kic">${ic}</span><div><b class="num">${v}</b><span>${l}</span></div></div>`;
   return k('ok',ICON.integration,conn,'Connected sources')+k('info',ICON.product,tbl,'Tables modelled')+k('y',ICON.play,pub,'Workflows published')+k('warn',ICON.flag,smExceptions().length,'Mappings need attention')+k('ok',ICON.check,t.pct.toFixed(1)+'%','Integration health')}
 function smSideHTML(){const t=hhTotals(),r=54,c=2*Math.PI*r,n=t.ok+t.warn+t.bad||1;let off=0;
   const seg=(v,col)=>{const l=v/n*c,e=`<circle cx="70" cy="70" r="${r}" fill="none" stroke="${col}" stroke-width="16" stroke-dasharray="${l} ${c-l}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`;off+=l;return e};
@@ -1785,7 +1996,7 @@ function smSideHTML(){const t=hhTotals(),r=54,c=2*Math.PI*r,n=t.ok+t.warn+t.bad|
    <div class="hbars" aria-hidden="true">${S.hh.map((b,i)=>`<span data-tip="${String(i).padStart(2,'0')}:00 · ${b.ok} successful, ${b.warn} warnings, ${b.bad} failures"><i style="height:${b.bad/mx*100}%;background:var(--bad)"></i><i style="height:${b.warn/mx*100}%;background:#D4A800"></i><i style="height:${b.ok/mx*100}%;background:var(--ok)"></i></span>`).join('')}</div></div></div>
   <div class="panel"><div class="ph"><h3>Mapping exceptions</h3><span class="chip ${ex.length?'warn':'ok'}">${smExceptions().length} open</span></div><div class="tw"><table class="t static tight"><thead><tr><th>System</th><th>Issue</th><th>Severity</th><th>Status</th></tr></thead><tbody>${ex.map(e=>`<tr><td><b>${esc(e.src)}</b><div class="note">${esc(e.obj)}</div></td><td>${esc(e.issue)}</td><td><span class="chip ${sevc[e.sev]}">${e.sev}</span></td><td><span class="chip ${e.st==='Open'?'line':'y'}">${e.st}</span></td></tr>`).join('')||'<tr><td colspan="4"><div class="empty"><b>No exceptions</b>Every connected system is mapped and fresh.</div></td></tr>'}</tbody></table></div></div>
   <div class="panel"><div class="ph"><h3>Recent integration events</h3><button class="lnk" data-act="intTab" data-arg="events">View all</button></div><div class="tw"><table class="t static tight"><thead><tr><th>Time</th><th>System</th><th>Event</th><th>Status</th></tr></thead><tbody>${ev.map(e=>`<tr data-act="evDetail" data-arg="${e.id}" style="cursor:pointer"><td class="num nowrap">${new Date(e.ts).toISOString().slice(11,19)}</td><td>${esc(e.dest)}</td><td class="mono">${esc(e.type)}</td><td><span class="chip ${ackKind(e.ack)}">${esc(e.ack.length>16?e.ack.slice(0,15)+'…':e.ack)}</span></td></tr>`).join('')}</tbody></table></div></div>`}
-function smSideRefresh(){const e=$('#smSide');e&&(e.innerHTML=smSideHTML());const k=$('#smKpi');k&&(k.innerHTML=smKpiHTML())}
+function smSideRefresh(){const h=$('#ccHealth');h&&(h.innerHTML=ccHealthHTML());const e=$('#smSide');e&&(e.innerHTML=smSideHTML());const k=$('#smKpi');k&&(k.innerHTML=smKpiHTML())}
 function smRefresh(){const g=$('#smGrid');if(g){g.innerHTML=smGridHTML();const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}smSideRefresh()}
 function smPatch(s){const el=$(`.tile[data-sid="${s.id}"]`);if(el&&!el.matches(':focus-within'))el.outerHTML=srcTile(s);else if(el){const f=document.activeElement&&document.activeElement.dataset;el.outerHTML=srcTile(s);const n=$(`.tile[data-sid="${s.id}"] [data-act="${f&&f.act}"]`);n&&n.focus()}const c=$('#smChips');c&&(c.innerHTML=smChipsHTML())}
 function smLogAdd(s,text,kind){S.smLog.unshift({ts:Date.now(),id:s.id,text,kind:kind||'ok'});S.smLog.length=Math.min(S.smLog.length,16);const el=$('#smLog');if(el)el.innerHTML=smLogHTML();smSideRefresh()}
@@ -1812,6 +2023,7 @@ function smTick(){
   const now=Date.now();
   $$('.tile[data-sid]').forEach(t=>{const s=SRC(t.dataset.sid);if(!s||s.syncing)return;const a=t.querySelector('[data-age]');a&&(a.textContent=srcAgeText(s));
     if(s.lastSync!=null){const v=srcFresh(s),fi=t.querySelector('[data-fi]'),fv=t.querySelector('[data-fv]');if(fi){fi.style.width=v+'%';fi.style.background=v<70?'var(--bad)':v<85?'#D4A800':''}if(fv)fv.textContent=v+'%'}});
+  $$('[data-cc-clock]').forEach(el=>{el.textContent=ccClockText()});
   $$('[data-tgage]').forEach(el=>{const q=SRC(el.dataset.tgage);q&&(el.textContent=srcAgeText(q).replace(/^(Updated|Last import) /,''))});
   SOURCES.forEach(s=>{if(s.lastSync!=null){s.freshMin=(now-s.lastSync)/60000;s.fresh=srcAge(s.freshMin)}});
   if(now>=SM.next){SM.next=now+4500+Math.random()*7500;const pool=SOURCES.filter(s=>s.status==='live'&&!s.syncing&&s.lastSync!=null);if(pool.length)startSync(pool[Math.floor(Math.random()*pool.length)],true)}
