@@ -2,7 +2,42 @@
 
 Open `index.html`. The app now opens on the **Command Center** (Update 3). Updates 1 and 2 live under **Integration** in the left menu, on the tabs along the top.
 
-**Quick links:** [Update 5: Asset intelligence](#update-5-asset--product-intelligence) · [Update 4: Sidebar sections](#update-4-sidebar-with-sections) · [Update 3: Command Center](#update-3-command-center-new-home-page) · [Update 1](#update-1-separate-systems-and-crud) · [Update 2](#update-2-live-connections-workflow-states-tables-and-health) · [Demo script](#two-minute-demo-script) · [Good to know](#good-to-know)
+**Quick links:** [Update 6: Treatment intelligence](#update-6-treatment-intelligence) · [Update 5: Asset intelligence](#update-5-asset--product-intelligence) · [Update 4: Sidebar sections](#update-4-sidebar-with-sections) · [Update 3: Command Center](#update-3-command-center-new-home-page) · [Update 1](#update-1-separate-systems-and-crud) · [Update 2](#update-2-live-connections-workflow-states-tables-and-health) · [Demo script](#two-minute-demo-script) · [Good to know](#good-to-know)
+
+---
+
+## Update 6: Treatment Intelligence
+
+**Where:** open any returned asset (click a row in Returned assets, or **Evaluate treatments →** on the asset page). This is the old "Decision analysis" page, rebuilt into five connected panels. The address is unchanged, so every existing link still works.
+
+| Screenshot (desktop, top) | Bottom half | Phone |
+|---|---|---|
+| [![Top](docs/screenshots/treatment-top.webp)](docs/screenshots/treatment-top.webp) | [![Bottom](docs/screenshots/treatment-bottom.webp)](docs/screenshots/treatment-bottom.webp) | [![Phone](docs/screenshots/treatment-phone.webp)](docs/screenshots/treatment-phone.webp) |
+
+**Header buttons**
+- **Asset Decision Mode / Portfolio Optimization Mode:** the second one opens the Pool optimizer, which allocates assets that compete for the same demand.
+- **Save scenario**, **Compare (n)**, **Evidence snapshot**, and **Submit for review →** (for an Approver this opens the review and approval step; for other roles it queues it for an Approver).
+- Below it, a card with the product photo, key facts, a link back to **Asset Intelligence**, and four **business objective sliders** (net recovery, turnaround time, environmental impact, serviceability).
+
+**The five panels**
+
+| Panel | What it does |
+|---|---|
+| **1. Treatment eligibility and feasible pathways** | Every pathway with an **Eligible**, **Conditional** or **Restricted** tag and the reason. Click one to highlight it in the table and chart |
+| **2. Predicted outcomes and comparison** | A table per pathway: recovery value, cost, net recovery bar, cycle time, success probability, useful life, CO₂e avoided, and an objective **Fit** score. Tick up to three to compare, and see a net recovery vs cycle time chart |
+| **3. Recommendation and rationale** | The recommended pathway with its net and how much better it is than the next best, why, the key drivers, why the runner-up lost, binding constraints, and the two next-best alternatives. The existing **Approve** and **Review alternatives / override** buttons sit at the bottom |
+| **4. Scenario simulation (what-if)** | Four sliders (purchase price, prep and fees, service exposure, resale and lease income) and a cancelled-demand switch. The impact line updates as you drag. **Save scenario** keeps it for the asset, with **Load** and **Delete**. The approved recommendation never changes until it is re-evaluated |
+| **5. Execution readiness** | Six checks (repair capacity, parts, hazmat and battery rules, customer release, EAM work order, ERP reservation) with a status each, followed by the existing execution timeline |
+
+**Your weights matter:** the **Fit** column and a note in panel 3 show which pathway wins under your objective weights. If it differs from the approved recommendation, the page says so, without changing the approval.
+
+**Nothing was removed.** The evidence, prediction, options-and-gates, pool and explanation sections are all still there under **Detailed analysis**, and they follow the same scenario sliders.
+
+**Same numbers everywhere:** the recommended net is the same figure shown on Returned assets, Command Center and Asset Intelligence.
+
+**Cases with no recommendation yet** (awaiting inspection or evidence) still show all five panels, with a clear message and the existing "request evidence" action in panel 3.
+
+**Works on phone, tablet and desktop:** panels stack, wide tables scroll inside their panel, and nothing overflows the screen.
 
 ---
 
@@ -235,6 +270,7 @@ A table graph for a system's data, with clusters and foreign keys.
 
 ## Two-minute demo script
 
+0b. Open **any asset → Treatment Intelligence**. Drag a scenario slider, change an objective weight, tick pathways and press **Compare**, then **Save scenario**.
 0a. **Product → Asset intelligence** (or click an asset ID in Returned assets). Walk the eight tabs, then press **Compare similar assets**.
 0. **Command Center** (opens first). Click the **Awaiting approval** slice, then a **Value at risk** reason, then a table row. Resize the window to show the phone layout.
 1. **Integration → Source map.** Point at the KPI strip and the live "Updated … ago" counters.

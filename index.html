@@ -615,6 +615,38 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 .as .tw table.t.tight td{vertical-align:middle}
 @container as (max-width:900px){.asg2.r1b,.asg2.r1c{grid-template-columns:1fr}.asgal{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.as .aspn{break-inside:avoid}}
+
+/* ===== Treatment Intelligence ===== */
+.ti{container-type:inline-size;container-name:ti}
+.tin{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);font:800 12px var(--f-display);margin-right:6px}
+.ticx{grid-template-columns:200px minmax(0,1fr) 360px}
+.ticx .asfacts{grid-template-columns:repeat(5,minmax(0,1fr))}
+.tiobj .sl{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 40px;gap:8px;align-items:center;font-size:12.5px;margin-bottom:6px}.tiobj .sl label{font-weight:500}.tiobj input[type=range]{width:100%;accent-color:var(--ink)}
+.tig3{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr) minmax(0,1.15fr);gap:14px;align-items:start;margin-bottom:14px}
+.tig2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:start}
+.tipath{display:grid;gap:6px}
+.tipw{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;border:1px solid var(--line2);background:var(--panel);border-radius:8px;padding:9px 10px}
+.tipw:hover{background:var(--panel2);border-color:var(--line)}.tipw.on{background:var(--yellow-soft);border-color:var(--yellow);box-shadow:inset 3px 0 var(--yellow)}
+.tipd{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}.tipt{display:grid;min-width:0}.tipt b{font-size:13px}.tipt .note{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tinet{display:grid;gap:3px;min-width:96px}.tinet .bar{height:6px}
+.tisc{width:100%;height:auto;display:block}
+.tisc{max-width:640px;margin:0 auto}
+
+.tipt2 td,.tipt2 th{white-space:nowrap}
+.tirec{display:grid;gap:4px}.tirt{font:800 18px var(--f-display)}.tirv{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.tirv b{font:800 26px var(--f-display)}
+.tikv{display:grid;gap:8px;margin:8px 0}.tikv div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:8px;font-size:12.5px;padding-bottom:6px;border-bottom:1px solid var(--line2)}.tikv dt{color:var(--muted)}.tikv dd{margin:0}
+.tialt{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line2)}.tial-n{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--panel3);font-size:12px}.tialt-t{display:grid;min-width:0}.tialt-g{display:grid;text-align:right}
+.tidec{margin-top:14px}.tidec .best{box-shadow:none}
+.tisl .sl{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.4fr) 48px;gap:8px;align-items:center;font-size:12.5px;margin-bottom:8px}.tisl input[type=range]{width:100%;accent-color:var(--ink)}
+.tirdy{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}.tirdy b{font:800 20px var(--f-display)}.tirdy .lnk{margin-left:auto}
+.tidh{font:800 20px var(--f-display);margin:26px 0 6px}
+.tidetail .blk{margin-bottom:18px}
+@container ti (max-width:1380px){.tig3{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tig3>.tix2{grid-column:1/-1;order:3}.ticx{grid-template-columns:180px minmax(0,1fr)}.ticx .tiobj{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line2);padding-top:12px}.ticx .asfacts{grid-template-columns:repeat(4,minmax(0,1fr))}.tig2{grid-template-columns:1fr}}
+@container ti (max-width:760px){.tig3{grid-template-columns:1fr}.ticx{grid-template-columns:1fr}.ticx .asfacts{grid-template-columns:repeat(2,minmax(0,1fr))}.tikv div{grid-template-columns:1fr}.tiobj .sl,.tisl .sl{grid-template-columns:1fr 44px}.tiobj .sl label,.tisl .sl label{grid-column:1/-1}}
+@media print{.ti .tipw{break-inside:avoid}}
+.tirec .chip{justify-self:start}
+.ti .tig3>*,.ti .tig2>*,.ti .tig2>div{min-width:0}.tipath{grid-template-columns:minmax(0,1fr)}.ticx .asphoto{max-width:260px}.ti .tw{max-width:100%}.ti .blk{min-width:0}
+.smside>*{min-width:0}.smside .tw{max-width:100%}.smside .hlth{min-width:0}
 </style>
 </head>
 <body>
@@ -1586,17 +1618,6 @@ function flips(c){
   return out.sort((x,y)=>(x.pct==null?-1:Math.abs(x.pct))-(y.pct==null?-1:Math.abs(y.pct))).slice(0,4);
 }
 /* ===== case view ===== */
-function caseView(c){
-  const sr=scenRoutes(c);
-  return `<div class="casehead"><div><div class="crumbs"><a href="#/product">Returned assets</a> / ${c.id}</div><h1>${c.id} · Decision analysis</h1><div class="ink2" style="margin-top:4px">${esc(c.product)} · ${c.assetId} · ${c.location}${c.qty>1?' · '+c.qty+' units':''} · ${c.owner}</div></div>
-   <div class="row"><a class="btn" href="#/product/asset/${c.id}" data-act="go" data-arg="product/asset/${c.id}">Asset intelligence</a><button class="btn" data-act="scenToggle" aria-expanded="${S.scenOpen}">Scenario preview${scenActive()?' · active':''}</button><button class="btn" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button></div></div>
-  <div class="assetstrip"><div><div class="k">Engineering life</div><div class="v">${esc(c.engLife)}</div></div><div><div class="k">Condition</div><div class="v">${condChip(c)}</div></div><div><div class="k">Next inspection</div><div class="v">${esc(c.nextInspection)}</div></div><div><div class="k">Owner</div><div class="v">${c.owner}</div></div><div><div class="k">Received</div><div class="v">${fmtD(c.received)}${c.hero?'':''}</div></div>${c.qty>1?`<div><div class="k">Quantity</div><div class="v">${c.qty} units</div></div>`:''}<div><div class="k">Model</div><div class="v">${c.model}${c.snapshot?` · ${c.snapshot.id}`:''}</div></div></div>
-  ${c.stage==='reeval'?`<div class="callout bad" style="margin-bottom:14px"><b>Review triggered: ${esc(c.reevalReason)}.</b> The earlier recommendation is on hold until it is re-evaluated. <button class="btn sm" data-act="reeval" data-arg="${c.id}" style="margin-left:8px">Run re-evaluation</button></div>`:''}
-  ${S.scenOpen?scenPanel(c):''}
-  <div class="grid gmain"><div id="left">
-   ${evidenceBlock(c)}${predictBlock(c)}${optionsBlock(c,sr)}${specialBlock(c)}${c.pool?poolBlock(c):''}${explainBlock(c,sr)}</div>
-   <aside id="right">${bestCard(c,sr)}${execBlock(c)}</aside></div>`;
-}
 function evidenceBlock(c){
   const ev=c.evidence,rd=ev.filter(e=>e.state==='ready').length;
   return `<section class="blk" id="b-evidence"><div class="bh"><span class="bn">1</span><h2>Evidence readiness</h2>${stp(1)}<span class="sp"></span><span class="chip ${rd===ev.length?'ok':'warn'}">${rd} of ${ev.length} ready</span></div>
@@ -2108,6 +2129,100 @@ ACT.asCopy=()=>{const u=location.href;(navigator.clipboard?navigator.clipboard.w
 ACT.asPrint=()=>{const d=$('.asmenu');d&&d.removeAttribute('open');setTimeout(()=>window.print(),200)};
 document.addEventListener('click',e=>{const d=$('.asmenu[open]');if(d&&!e.target.closest('.asmenu'))d.removeAttribute('open')});
 /*ASSET-END*/
+/*TI-START*/
+/* ===== Treatment Intelligence: the decision page rebuilt as five connected panels ===== */
+S.ti={w:{net:50,time:20,env:15,serv:15},sel:null,focus:null,saved:{}};
+const TI_SERV={redeploy:1,relase:.85,resale:.4,intparts:.2,extparts:.15,material:.05,exit:0};
+const TI_OBJ=[['net','Maximize net recovery'],['time','Minimize turnaround time'],['env','Minimize environmental impact'],['serv','Preserve serviceability (redeploy)']];
+const tiCase=()=>CASE_BY_ID[parse().a];
+function tiM(c,x){const r=x.r,gross=sum(r.terms.filter(t=>t.amt>0).map(t=>t.amt)),cost=sum(r.terms.filter(t=>t.amt<0).map(t=>t.amt)),m=/^(\d+)\s*months/.exec(c.engLife||''),
+  days=Math.max(3,Math.round((BASE_DAYS[r.id]||25)*(r.variant==='refurb'?1.25:1)*(.8+asHex(c,'d'+r.plan)%35/100))),prob=Math.round(asClamp(100-Math.abs((r.p90-r.p10)/2/Math.max(1,Math.abs(r.net)))*60,55,98));
+  return{gross,cost,net:x.sn,days,prob,life:['redeploy','resale','relase'].includes(r.id)&&m?(+m[1]/12).toFixed(1)+' yrs':'—',co2:Math.round((EMB[c.cls]||0)*c.qty*(CO2S[r.id]||0))}}
+function tiRows(c,sr){const rows=sr.el.map(x=>Object.assign({x,r:x.r},tiM(c,x)));if(!rows.length)return rows;
+  const mn=a=>Math.min(...a),mx=a=>Math.max(...a),nets=rows.map(z=>z.net),ds=rows.map(z=>z.days),cs=rows.map(z=>z.co2),W=S.ti.w,ws=(W.net+W.time+W.env+W.serv)||1;
+  rows.forEach(z=>{const nn=(z.net-mn(nets))/((mx(nets)-mn(nets))||1),tt=1-(z.days-mn(ds))/((mx(ds)-mn(ds))||1),ee=(z.co2-mn(cs))/((mx(cs)-mn(cs))||1),ss=(z.prob/100)*(TI_SERV[z.r.id]||0);z.fit=Math.round(100*(W.net*nn+W.time*tt+W.env*ee+W.serv*ss)/ws)});
+  return rows}
+function tiElig(c,sr){return c.routes.map(r=>{const ex=sr.all.find(x=>x.r===r),restricted=ex&&ex.ex,warn=r.gates.includes('warn')||(!restricted&&r.demandStatus==='forecast'&&r.id!=='exit'&&r.id!=='material');
+  const st=restricted?['Restricted','bad',r.failReason||'Excluded in this scenario']:warn?['Conditional','warn',r.demandStatus==='forecast'?'Demand is a forecast; verify before committing':'A gate passed with a warning']:['Eligible','ok',r.unc||r.why||'All six gates passed'];
+  return{r,st,rt:rid(r.id)}}).sort((a,b)=>({ok:0,warn:1,bad:2})[a.st[1]]-({ok:0,warn:1,bad:2})[b.st[1]]||b.r.net-a.r.net)}
+function tiP1(c,sr){const el=tiElig(c,sr);
+  return asPanel('<span class="tin">1</span> Treatment eligibility and feasible pathways',el.length?`<p class="note" style="margin:0 0 8px">Based on condition, product, ownership, policy, parts and operating constraints. Select a pathway to highlight it.</p><div class="tipath">${el.map(e=>`<button class="tipw ${S.ti.focus===e.r.plan?'on':''}" data-act="tiFocus" data-arg="${esc(e.r.plan)}"><span class="tipd" style="background:${e.rt.color}"></span><span class="tipt"><b>${esc(e.r.plan)}</b><span class="note">${esc(e.st[2])}</span></span><span class="chip ${e.st[1]}">${e.st[0]}</span></button>`).join('')}</div>`:`<div class="empty"><b>No pathways evaluated</b>${c.blocked?esc(c.blocked.reason):'This asset needs evidence first.'}</div>`,null,'tix1')}
+function tiScatter(rows,rec){if(!rows.length)return'';const W=420,H=230,L=48,R=14,T0=12,B=34,dx=Math.max(...rows.map(r=>r.days))*1.2,ny=rows.map(r=>r.net),lo=Math.min(0,...ny),hi=Math.max(...ny)*1.15||1,X=v=>L+v/dx*(W-L-R),Y=v=>H-B-(v-lo)/((hi-lo)||1)*(H-B-T0);
+  const grid=[0,.25,.5,.75,1].map(t=>{const v=lo+(hi-lo)*t;return `<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line2)"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end" font-size="10" fill="var(--muted)">${kfmt(v).replace('$','')}</text>`}).join('');
+  const xt=[0,.25,.5,.75,1].map(t=>`<text x="${X(dx*t)}" y="${H-16}" text-anchor="middle" font-size="10" fill="var(--muted)">${Math.round(dx*t)}</text>`).join('');
+  const pts=rows.map(z=>{const cx=X(z.days),cy=Y(z.net),isR=rec&&z.r===rec,f=S.ti.focus===z.r.plan,sel=(S.ti.sel||[]).includes(z.r.plan);return `<g data-act="tiFocus" data-arg="${esc(z.r.plan)}" style="cursor:pointer" data-tip="${esc(z.r.plan+' · net '+money(z.net)+' · '+z.days+' days · '+z.prob+'% success')}">${isR||f?`<circle cx="${cx}" cy="${cy}" r="12" fill="none" stroke="var(--ink)" stroke-width="2"/>`:''}<circle cx="${cx}" cy="${cy}" r="${sel?8:6.5}" fill="${rid(z.r.id).color}" stroke="${sel?'var(--ink)':'var(--panel)'}" stroke-width="${sel?2:1.5}"/><text x="${cx+11}" y="${cy-8}" font-size="10" fill="var(--ink2)">${esc(rid(z.r.id).short)}</text></g>`}).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" class="tisc" role="img" aria-label="Net recovery against cycle time for each eligible pathway">${grid}${xt}<text x="${(L+W-R)/2}" y="${H-2}" text-anchor="middle" font-size="10.5" fill="var(--ink2)">Cycle time (days)</text><text transform="rotate(-90)" x="${-(H-B)/2}" y="12" text-anchor="middle" font-size="10.5" fill="var(--ink2)">Net recovery</text>${pts}</svg>`}
+function tiP2(c,sr,rows){const rec=c.chosen||c.recommendation,sel=S.ti.sel||[],mxn=Math.max(1,...rows.map(z=>Math.abs(z.net)));
+  const body=rows.length?`<p class="note" style="margin:0 0 8px">Model-predicted outcomes for each feasible pathway${scenActive()?'. <b>Scenario applied.</b>':'.'}</p><div class="tw"><table class="t static tight tipt2"><thead><tr><th></th><th>Pathway</th><th class="r">Recovery value</th><th class="r">Cost</th><th>Net recovery</th><th class="r">Cycle (days)</th><th class="r">Success</th><th class="r">Useful life</th><th class="r">CO₂e avoided</th><th class="r">Fit</th></tr></thead><tbody>${rows.map(z=>{const isR=rec&&z.r===rec;return `<tr class="${S.ti.focus===z.r.plan?'sel':''}"><td><input type="checkbox" ${sel.includes(z.r.plan)?'checked':''} data-ch="tiSel" data-arg="${esc(z.r.plan)}" aria-label="Compare ${esc(z.r.plan)}"></td><td><b>${esc(z.r.plan)}</b>${isR?' <span class="chip y">Recommended</span>':''}</td><td class="r num">${money(z.gross)}</td><td class="r num">${money(z.cost)}</td><td><span class="tinet"><b class="num">${money(z.net)}</b><span class="bar"><i style="width:${Math.max(4,Math.abs(z.net)/mxn*100)}%;${z.net<0?'background:var(--bad)':'background:var(--ok)'}"></i></span></span></td><td class="r num">${z.days}</td><td class="r num">${z.prob}%</td><td class="r num">${z.life}</td><td class="r num">${fmtN(z.co2)} kg</td><td class="r num"><b>${z.fit}</b></td></tr>`}).join('')}</tbody></table></div><h4 style="margin:12px 0 4px">Comparison chart (net recovery vs cycle time)</h4>${tiScatter(rows,rec)}`
+   :`<div class="empty"><b>No predictions yet</b>${c.blocked?esc(c.blocked.reason):'Evidence is needed before outcomes can be predicted.'}</div>`;
+  return asPanel('<span class="tin">2</span> Predicted outcomes and comparison',body,null,'tix2')}
+function tiP3(c,sr,rows){const r=c.chosen||c.recommendation;
+  if(!r)return asPanel('<span class="tin">3</span> Recommendation and rationale','<div class="best-wrap">'+bestCard(c,sr)+'</div>',null,'tix3');
+  const others=rows.filter(z=>z.r!==r).sort((a,b)=>b.r.net-a.r.net),next=others[0],me=rows.find(z=>z.r===r)||tiM(c,{r,sn:r.net}),pctUp=next&&next.r.net?Math.round((r.net-next.r.net)/Math.abs(next.r.net)*100):null,W=S.ti.w,top=rows.slice().sort((a,b)=>b.fit-a.fit)[0];
+  const drivers=r.terms.slice().sort((a,b)=>Math.abs(b.amt)-Math.abs(a.amt)).slice(0,2).map(t=>t.label).join(' and ').toLowerCase(),why=next?(()=>{const d=r.terms.map(t=>{const o=next.r.terms.find(u=>u.kind===t.kind);return{l:t.label,v:t.amt-(o?o.amt:0)}}).sort((a,b)=>Math.abs(b.v)-Math.abs(a.v))[0];return next.r.plan+' trails by '+money(r.net-next.r.net)+(d?', mostly on '+d.l.toLowerCase():'')+'.'})():'No other eligible pathway.';
+  const cons=c.blocked?c.blocked.reason:(r.demandStatus==='forecast'?'Demand is a forecast, so a haircut is included.':(sr.all.filter(x=>x.ex).length?sr.all.filter(x=>x.ex).length+' pathway(s) withheld by a gate.':'None for this asset.'));
+  const tag=z=>{const a=z.r.net>r.net?'Higher value':'Lower value',b=z.days<me.days?'Shorter cycle time':'Longer cycle time',cc=z.cost>me.cost?'Lower cost':'Higher cost';return [a+' · '+b,(z.prob<me.prob?'Higher risk':'Lower risk')+' · '+cc]};
+  return asPanel('<span class="tin">3</span> Recommendation and rationale',`<div class="tirec"><span class="chip ok">Recommended</span><div class="tirt">${esc(r.plan)}</div><div class="tirv"><span class="note">Expected net recovery</span><b class="num">${money(r.net)}</b>${pctUp!=null&&next?`<span class="${pctUp>=0?'tx-ok':'tx-bad'}">${pctUp>=0?'▲':'▼'} ${Math.abs(pctUp)}% vs next best alternative</span>`:''}</div></div>
+   <p class="ink2" style="margin:8px 0">${esc(r.why||'Highest expected net contribution among eligible pathways.')} ${me.prob}% success probability${me.days?' and about '+me.days+' days to complete':''}.</p>
+   <dl class="tikv"><div><dt>Business objectives</dt><dd>Value (${W.net}%), time (${W.time}%), sustainability (${W.env}%), serviceability (${W.serv}%)</dd></div><div><dt>Key drivers</dt><dd>${esc(drivers||'—')}</dd></div><div><dt>Why not ${next?esc(next.r.plan):'others'}?</dt><dd>${esc(why)}</dd></div><div><dt>Binding constraints</dt><dd>${esc(cons)}</dd></div></dl>
+   ${top&&top.r!==r?`<div class="callout" style="margin:8px 0"><b>With your objective weights</b>, ${esc(top.r.plan)} ranks first (fit ${top.fit} vs ${(rows.find(z=>z.r===r)||{fit:'—'}).fit}). The approved recommendation does not change until it is re-evaluated.</div>`:''}
+   <a class="lnk" href="#explain" data-act="tiExplain">View detailed explanation</a>
+   ${others.length?`<h4 style="margin:12px 0 6px">Next best alternatives</h4>${others.slice(0,2).map((z,i)=>{const t=tag(z);return `<div class="tialt"><b class="tial-n">${i+1}</b><span class="tialt-t"><b>${esc(z.r.plan)}</b><span class="note num">${money(z.net)} · ${z.days} days · ${z.prob}%</span></span><span class="tialt-g"><span class="note">${t[0]}</span><span class="note">${t[1]}</span></span></div>`}).join('')}`:''}
+   <div class="tidec">${bestCard(c,sr)}</div>`,null,'tix3')}
+function tiP4(c,sr,rows){const s=S.scen,sl=(k,l)=>`<div class="sl"><label for="sc-${k}">${l}</label><input id="sc-${k}" type="range" min="50" max="150" step="5" value="${Math.round(s[k]*100)}" data-in="scen" data-arg="${k}"><b class="num" id="scv-${k}">${tiAdj(s[k])}</b></div>`,sv=S.ti.saved[c.id]||[];
+  return asPanel('<span class="tin">4</span> Scenario simulation (what-if)',`<p class="note" style="margin:0 0 8px">Adjust the assumptions to see how the ranking would change. The approved recommendation stays as it is until re-evaluated.</p>
+   <div class="tisl">${sl('purchase','Avoided purchase price')}${sl('cost','Preparation, parts and fees')}${sl('service','Service exposure')}${sl('market','Resale price and lease income')}</div>
+   <label class="tog" style="margin:4px 0 8px"><input type="checkbox" ${s.demandOff?'checked':''} data-ch="scenDemand"> Confirmed internal demand is cancelled</label>
+   <div class="callout info" id="tiImpact">${tiImpact(c,sr)}</div>
+   <div class="row" style="margin-top:10px"><button class="btn" data-act="scenReset">Reset to base</button><button class="btn" data-act="tiSave">Save scenario</button><button class="btn pri" data-act="tiRecalc" ${c.routes.length?'':'disabled'}>Recalculate and optimise</button></div>
+   ${sv.length?`<h4 style="margin:12px 0 6px">Saved scenarios</h4>${sv.map(x=>`<div class="asrow"><span><b>${esc(x.name)}</b><div class="note">${esc(x.top)}</div></span><span class="tacts" style="display:inline-flex"><button class="tbtn" data-act="tiLoad" data-arg="${x.id}">Load</button><button class="tbtn dng" data-act="tiDelSc" data-arg="${x.id}">Delete</button></span></div>`).join('')}`:''}`,null,'tix4')}
+const tiAdj=v=>{const p=Math.round((v-1)*100);return(p>0?'+':'')+p+'%'};
+function tiImpact(c,sr){const r=c.chosen||c.recommendation;if(!c.routes.length)return 'No pathways to simulate until evidence arrives.';const t=sr.el[0],bn=r?r.net:0,sn=r?(scenActive()?scenNet(r):r.net):0,d=bn?Math.round((sn-bn)/Math.abs(bn)*100):0;
+  return `<b>Scenario impact (preview)</b><br>${scenActive()?'':'Base assumptions. '}${r?`Net for <b>${esc(r.plan)}</b> ${scenActive()?'moves from '+money(bn)+' to <b>'+money(sn)+'</b> ('+(d>=0?'+':'')+d+'%)':'is '+money(bn)}. `:''}${scenTopText(c,sr)}`}
+function tiP5(c){const r=c.chosen||c.recommendation,u=ccUtil(),rc=u['Repair centre']/CC_CAP['Repair centre'],h=assetHealth(c),parts=asParts(c,h),inS=parts.filter(p=>p.st==='In stock').length,eam=SRC('eam')||{status:'unavailable',name:'EAM'},erp=SRC('erp')||{status:'unavailable',name:'ERP'},lith=['drill','batch','it'].includes(c.cls),d=c.demand||{};
+  const items=!r?[['Evidence for a recommendation','Waiting on '+(c.blocked?c.blocked.owner:'inspection'),'Pending','warn']]:[
+   ['Repair facility available','Repair centre · '+Math.round(rc*100)+'% loaded',rc>=.9?'Constrained':'Confirmed',rc>=.9?'bad':'ok'],
+   ['Required parts available',inS+' of '+parts.length+' parts in stock',inS===parts.length?'Confirmed':inS>=parts.length-2?'Partly':'Backorder',inS===parts.length?'ok':inS>=parts.length-2?'warn':'bad'],
+   ['Hazmat and battery compliance',lith?'Lithium battery handling':'Not applicable',lith?'Check certificate':'Ready',lith?'warn':'ok'],
+   ['Customer release required',d.lease&&r.id!=='redeploy'?'Lease '+d.lease+' · contract review':'Not required',d.lease&&r.id!=='redeploy'?'Pending':'Ready',d.lease&&r.id!=='redeploy'?'warn':'ok'],
+   ['Create work order in EAM',eam.name+' · '+(eam.vendor||''),eam.status==='live'?'Ready':'Blocked',eam.status==='live'?'ok':'bad'],
+   [r.id==='redeploy'||r.id==='resale'?'Reserve stock in ERP':'Notify ERP finance',erp.name+' · '+(erp.vendor||''),erp.status==='live'?'Ready':'Blocked',erp.status==='live'?'ok':'bad']];
+  const ready=items.filter(i=>i[3]==='ok').length;
+  return asPanel('<span class="tin">5</span> Execution readiness',`<div class="tirdy"><b class="num">${ready} of ${items.length}</b><span class="note">checks ready</span><a class="lnk" href="#/integration/map" data-act="go" data-arg="integration/map">View system actions</a></div>${items.map(i=>`<div class="asrow"><span><b>${i[0]}</b><div class="note">${esc(i[1])}</div></span><span class="chip ${i[3]}">${i[2]}</span></div>`).join('')}`,null,'tix5')}
+function tiCtx(c){const h=assetHealth(c),f=assetFacts(c),pick=['Asset ID','Serial number','Product','Revision','Ownership','Location','Received','Age'],facts=f.filter(x=>pick.includes(x[0]));
+  return `<section class="aship ticx"><div class="asphoto">${asPhoto(c)}</div><div class="asmain"><div class="asttl"><h2>${esc(asTitle(c))}</h2><span class="chip line">${esc(CLASSES[c.cls].label)}</span>${stageChip(c)}</div><dl class="asfacts">${facts.map(x=>`<div><dt>${x[0]}</dt><dd>${esc(x[1])}</dd></div>`).join('')}<div><dt>Condition</dt><dd>${c.grade?'Grade '+c.grade+' ('+h.score+'/100)':esc(c.condition)}</dd></div><div><dt>Next inspection</dt><dd>${esc(c.nextInspection)}</dd></div></dl>
+   <a class="btn sm" style="margin-top:10px" href="#/product/asset/${c.id}" data-act="go" data-arg="product/asset/${c.id}">View in Asset Intelligence →</a></div>
+   <div class="ashealth tiobj"><h3>Business objectives <span class="note">(for optimisation)</span></h3>${TI_OBJ.map(o=>`<div class="sl"><label for="tw-${o[0]}">${o[1]}</label><input id="tw-${o[0]}" type="range" min="0" max="100" step="5" value="${S.ti.w[o[0]]}" data-in="tiW" data-arg="${o[0]}"><b class="num" id="twv-${o[0]}">${S.ti.w[o[0]]}%</b></div>`).join('')}</div></section>`}
+function tiA(c){const sr=scenRoutes(c),rows=tiRows(c,sr);return tiP1(c,sr)+tiP2(c,sr,rows)+tiP3(c,sr,rows)}
+function caseView(c){
+  const sr=scenRoutes(c),n=(S.ti.sel||[]).length;
+  if(!S.ti.sel||S.ti.selFor!==c.id){const rows=tiRows(c,sr).slice().sort((a,b)=>b.net-a.net);S.ti.sel=rows.slice(0,3).map(z=>z.r.plan);S.ti.selFor=c.id;S.ti.focus=null}
+  return `<div class="ti"><nav class="crumbs ascr" aria-label="Breadcrumb"><a href="#/product/received" data-act="go" data-arg="product/received">Assets</a> <span>›</span> <span>${esc(CLASSES[c.cls].plural)}</span> <span>›</span> <span>${esc(asModel(c))}</span> <span>›</span> <a href="#/product/asset/${c.id}" data-act="go" data-arg="product/asset/${c.id}">${c.assetId}</a> <span>›</span> <b>Treatment Intelligence</b></nav>
+  <div class="phead asph2"><div class="row" style="gap:14px;flex-wrap:nowrap;align-items:flex-start"><span class="asico">${ICON.analytics}</span><div><h1>Treatment Intelligence</h1><p>Evaluate, compare and optimise treatment pathways using predictive models and business constraints. <span class="note">${c.id}</span></p></div></div>
+   <div class="row asact"><div class="seg" role="group" aria-label="Mode"><button aria-pressed="true">Asset Decision Mode</button><button aria-pressed="false" data-act="tiMode">Portfolio Optimization Mode</button></div><button class="btn" data-act="tiSave" ${c.routes.length?'':'disabled'}>Save scenario</button><button class="btn" data-act="tiCompare" ${c.routes.length>1?'':'disabled'}>Compare (${(S.ti.sel||[]).length})</button><button class="btn" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button>${c.stage==='awaiting_approval'?`<button class="btn pri" data-act="tiSubmit" data-arg="${c.id}">Submit for review →</button>`:''}</div></div>
+  ${tiCtx(c)}
+  ${c.stage==='reeval'?`<div class="callout bad" style="margin-bottom:14px"><b>Review triggered: ${esc(c.reevalReason)}.</b> The earlier recommendation is on hold until it is re-evaluated. <button class="btn sm" data-act="reeval" data-arg="${c.id}" style="margin-left:8px">Run re-evaluation</button></div>`:''}
+  <div class="tig3" id="tiA">${tiA(c)}</div>
+  <div class="tig2">${tiP4(c,sr,tiRows(c,sr))}<div>${tiP5(c)}${execBlock(c)}</div></div>
+  <h2 class="tidh" id="explain">Detailed analysis</h2><p class="note" style="margin:-4px 0 10px">The evidence, predictions, gates and explanation behind the panels above.</p>
+  <div class="tidetail">${evidenceBlock(c)}${predictBlock(c)}${optionsBlock(c,sr)}${specialBlock(c)}${c.pool?poolBlock(c):''}${explainBlock(c,sr)}</div></div>`}
+function tiRefresh(){const c=tiCase();if(!c)return;const a=$('#tiA');a&&(a.innerHTML=tiA(c));const sr=scenRoutes(c),i=$('#tiImpact');i&&(i.innerHTML=tiImpact(c,sr));const o=$('#b-options');o&&(o.outerHTML=optionsBlock(c,sr))}
+ACT.scen=(v,el)=>{const k=el.dataset.arg;S.scen[k]=v/100;const e=$('#scv-'+k);e&&(e.textContent=tiAdj(v/100));tiRefresh()};
+ACT.tiW=(v,el)=>{const k=el.dataset.arg;S.ti.w[k]=+v;const e=$('#twv-'+k);e&&(e.textContent=v+'%');tiRefresh()};
+ACT.tiFocus=p=>{S.ti.focus=S.ti.focus===p?null:p;tiRefresh()};
+ACT.tiSel=(v,el)=>{const p=el.dataset.arg,s=S.ti.sel||(S.ti.sel=[]);if(v){if(s.length>=3){toast('Compare up to three pathways. Untick one first.');el.checked=false;return}if(!s.includes(p))s.push(p)}else S.ti.sel=s.filter(x=>x!==p);const b=$('[data-act=tiCompare]');b&&(b.textContent='Compare ('+S.ti.sel.length+')');const c=tiCase();const a=$('#tiA');a&&c&&(a.innerHTML=tiA(c))};
+ACT.tiRecalc=()=>{tiRefresh();const c=tiCase(),sr=scenRoutes(c);toast(sr.el[0]?'Re-ranked. Top pathway: '+sr.el[0].r.plan+'.':'No eligible pathway under these assumptions.')};
+ACT.tiExplain=()=>{const e=$('#b-explain')||$('#explain');e&&e.scrollIntoView({behavior:'smooth',block:'start'})};
+ACT.tiMode=()=>{const c=tiCase();toast('Portfolio mode optimises across assets that compete for the same demand.');go('product/pools')};
+ACT.tiSave=()=>{if(!canMgr()&&!can('request'))return toast('Your role cannot save scenarios.');const c=tiCase(),sr=scenRoutes(c),s=S.scen,parts=[['purchase','purchase price'],['cost','prep and fees'],['service','service'],['market','market']].filter(x=>s[x[0]]!==1).map(x=>x[1]+' '+tiAdj(s[x[0]]));
+  const arr=S.ti.saved[c.id]||(S.ti.saved[c.id]=[]),id='sc'+Date.now();arr.push({id,name:'Scenario '+(arr.length+1)+(parts.length?': '+parts.join(', '):': base'),top:sr.el[0]?sr.el[0].r.plan+' · '+money(sr.el[0].sn):'No eligible pathway',scen:Object.assign({},s),w:Object.assign({},S.ti.w)});route(true);toast('Scenario saved for '+c.id+'.')};
+ACT.tiLoad=id=>{const c=tiCase(),x=(S.ti.saved[c.id]||[]).find(y=>y.id===id);if(!x)return;S.scen=Object.assign({},x.scen);S.ti.w=Object.assign({},x.w);route(true);toast(x.name+' loaded.')};
+ACT.tiDelSc=id=>{const c=tiCase();S.ti.saved[c.id]=(S.ti.saved[c.id]||[]).filter(y=>y.id!==id);route(true)};
+ACT.tiSubmit=id=>{const c=CASE_BY_ID[id];if(can('approve'))ACT.approve(id+'|review');else toast('Submitted to the Approver queue for '+id+'. An Approver can now review and approve it.')};
+ACT.tiCompare=()=>{const c=tiCase(),sr=scenRoutes(c),rows=tiRows(c,sr),pick=(S.ti.sel||[]).map(p=>rows.find(z=>z.r.plan===p)).filter(Boolean);if(pick.length<2){toast('Tick at least two pathways to compare.');return}
+  const rec=c.chosen||c.recommendation,best=(k,dir)=>pick.reduce((a,b)=>(dir*(b[k]-a[k])>0?b:a),pick[0]),rowsd=[['Net recovery','net',v=>money(v),1],['Recovery value','gross',v=>money(v),1],['Treatment cost','cost',v=>money(v),1],['Cycle time (days)','days',v=>v,-1],['Success probability','prob',v=>v+'%',1],['CO₂e avoided','co2',v=>fmtN(v)+' kg',1],['Objective fit','fit',v=>v,1]];
+  openModal('Compare pathways · '+c.id,`<div class="tw"><table class="t static tight"><thead><tr><th></th>${pick.map(z=>`<th>${esc(z.r.plan)}${rec&&z.r===rec?' <span class="chip y">Recommended</span>':''}</th>`).join('')}</tr></thead><tbody>${rowsd.map(r=>{const b=best(r[1],r[3]);return `<tr><td class="note">${r[0]}</td>${pick.map(z=>`<td class="${z===b?'tx-ok':''}"><b>${r[2](z[r[1]])}</b></td>`).join('')}</tr>`}).join('')}<tr><td class="note">Gates passed</td>${pick.map(z=>`<td>${z.r.gates.filter(g=>g==='pass').length} of 6</td>`).join('')}</tr></tbody></table></div><p class="note" style="margin-top:8px">Green marks the best value in each row. Assumptions follow the scenario sliders on the page.</p>`,`<button class="btn ghost" data-act="closeModal">Close</button>`,true)};
+/*TI-END*/
 function aRows(){const f=S.fA;return visRows().filter(r=>(!f.tenant||r.tenant===f.tenant)&&(!f.cls||r.cls===f.cls)&&(!f.route||r.route===f.route)&&r.mi>=f.from&&r.mi<=f.to&&(!f.model||r.model===f.model))}
 function metrics(rows){
   const rc=rows.filter(r=>r.status==='reconciled');
