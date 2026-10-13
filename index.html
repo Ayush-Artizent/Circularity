@@ -403,6 +403,10 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 .wfname input{height:34px;min-width:260px;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:0 10px;font:700 14px var(--f-display)}
 .wfset{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}.wfset .fld{margin-bottom:0}.wfset .fld input,.wfset .fld select{height:34px;padding:0 10px}
 .wftbl td{vertical-align:top}.wftbl .tacts{flex-wrap:nowrap}
+
+.mbadge{display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink2);font-size:11px;font-weight:700;white-space:nowrap;flex:none}
+.vline{display:flex;align-items:center;gap:7px;margin-bottom:8px;min-width:0}.vline .vtxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.methodbox{border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:12px 14px;margin-bottom:14px}.methodbox .fld select,.methodbox .fld input{background:var(--panel)}
 </style>
 </head>
 <body>
@@ -1661,7 +1665,7 @@ SOURCES.forEach(s=>{s.c0=s.compl;s.k0=s.conf;s.credAt=_now0-((s.id.length*7)%70+
 const vInit=v=>v.replace(/[^A-Za-z0-9 ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
 const vHue=v=>{let h=7;for(const c of v)h=(h*31+c.charCodeAt(0))%360;return h};
 const vlogo=s=>`<span class="vlogo" style="--h:${vHue(s.vendor)}" aria-hidden="true">${esc(vInit(s.vendor))}</span>`;
-const SM_S=()=>S.sm||(S.sm={q:'',cat:'',st:''});
+const SM_S=()=>S.sm||(S.sm={q:'',cat:'',st:'',me:''});
 const SM={next:Date.now()+6000};
 S.smLog=SOURCES.filter(s=>s.lastSync!=null&&s.status!=='manual').sort((a,b)=>b.lastSync-a.lastSync).slice(0,6).map(s=>({ts:s.lastSync,id:s.id,kind:s.status==='stale'?'warn':'ok',text:s.status==='stale'?'Last successful pull. Feed token has since expired':'Sync completed · '+fmtN(rr(18,380))+' records'}));
 function srcAgeText(s){if(s.lastSync==null)return s.status==='unavailable'?'Not connected':'Never synced';
@@ -1675,15 +1679,15 @@ function srcTile(s){
   const unm=!unav&&!(MAPPINGS[s.id]||[]).length;
   return `<div class="tile ${s.status} ${s.syncing?'syncing':''}" data-sid="${s.id}" data-act="adapter" data-arg="${s.id}" tabindex="0" role="button" aria-label="${esc(s.name)}, ${esc(s.vendor)}. Open configuration.">
   <div class="row between" style="margin-bottom:6px;flex-wrap:nowrap"><span class="row" style="gap:9px;flex-wrap:nowrap;min-width:0">${vlogo(s)}<b class="tname">${esc(s.name)}</b></span>${s.syncing?'<span class="chip y">Syncing</span>':stChip(s.status)}</div>
-  <div class="note" style="margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(s.vendor)} · ${esc(s.mode)}</div>
+  <div class="note vline"><span class="mbadge" data-tip="${esc(CONN_METHODS[s.method].tip)}">${CONN_METHODS[s.method].badge}</span><span class="vtxt">${esc(s.vendor)}${CONN_METHODS[s.method].sched&&s.interval?' · '+s.interval+' min':''}</span></div>
   ${meter('Freshness',fr,1)}${meter('Complete',s.compl)}${meter('Confidence',s.conf)}
   ${s.syncing?`<div class="sprog" aria-hidden="true"><i data-sp style="width:${s.syncPct||0}%"></i></div>`:''}
   <div class="row between note" style="margin-top:8px;flex-wrap:nowrap"><span data-age="${s.id}">${s.syncing?'Syncing… '+(s.syncPct||0)+'%':srcAgeText(s)}</span><span>${s.step.map(n=>'S'+n).join(' ')}</span></div>
   <div class="tfoot"><span class="note">${fmtN(s.records)} records${unm?' · <b class="unm">No field mapping</b>':''}</span><span class="tacts"><button class="tbtn" data-act="srcEdit" data-arg="${s.id}" aria-label="Edit ${esc(s.name)}">Edit</button><button class="tbtn" data-act="srcSync" data-arg="${s.id}" ${s.syncing||unav||s.status==='manual'?'disabled':''} aria-label="Sync ${esc(s.name)} now">Sync</button><button class="tbtn dng" data-act="srcDel" data-arg="${s.id}" aria-label="Delete ${esc(s.name)}">Delete</button></span></div></div>`;
 }
 const addTile=c=>`<button class="tile addt" data-act="srcAdd" data-arg="${c}"><span class="plus">+</span><b>Add source</b><span class="note">${SRC_CATS[c]}</span></button>`;
-function smFilter(){const f=SM_S(),q=f.q.trim().toLowerCase();return SOURCES.filter(s=>(!f.cat||s.cat===f.cat)&&(!f.st||s.status===f.st)&&(!q||(s.name+' '+s.vendor+' '+s.owner+' '+s.mode+' '+s.id).toLowerCase().includes(q)))}
-function smGridHTML(){const f=SM_S(),list=smFilter(),filt=!!(f.q||f.st);
+function smFilter(){const f=SM_S(),q=f.q.trim().toLowerCase();return SOURCES.filter(s=>(!f.cat||s.cat===f.cat)&&(!f.st||s.status===f.st)&&(!f.me||s.method===f.me)&&(!q||(s.name+' '+s.vendor+' '+s.owner+' '+s.mode+' '+CONN_METHODS[s.method].label+' '+s.id).toLowerCase().includes(q)))}
+function smGridHTML(){const f=SM_S(),list=smFilter(),filt=!!(f.q||f.st||f.me);
   if(!list.length&&filt)return `<div class="empty"><b>No sources match</b>Clear the search or status filter, or add a new source.<div style="margin-top:10px"><button class="btn sm" data-act="smClear">Clear filters</button></div></div>`;
   return Object.keys(SRC_CATS).filter(c=>!f.cat||f.cat===c).map(c=>{const it=list.filter(x=>x.cat===c);if(!it.length&&filt)return'';
     return `<h3 class="catH">${SRC_CATS[c]}<span class="note">${SRC_CAT_NOTE[c]} · ${it.length} connected</span></h3><div class="tiles">${it.map(srcTile).join('')}${filt?'':addTile(c)}</div>`}).join('')}
@@ -1697,8 +1701,8 @@ function intMap(){
   return `<div class="smbar"><div class="row smchips" id="smChips">${smChipsHTML()}</div><span class="grow"></span>
    <input type="search" id="smQ" class="smq" placeholder="Search system, vendor or owner" value="${esc(f.q)}" data-in="smQ" aria-label="Search sources">
    <label class="sr" for="smCat">Category</label><select class="sel" id="smCat" data-ch="smCat"><option value="">All categories</option>${Object.keys(SRC_CATS).map(c=>`<option value="${c}" ${f.cat===c?'selected':''}>${SRC_CATS[c]}</option>`).join('')}</select>
-   <button class="btn" data-act="srcSyncAll">Sync all</button><button class="btn pri" data-act="srcAdd" data-arg="">+ Add source</button></div>
-  <p class="note" style="margin:0 0 4px">Each system is configured on its own. Select a source to edit its connection, operations, field mapping and sync history. <span class="livedot"><i></i>Live</span></p>
+   <label class="sr" for="smMeth">Connection method</label><select class="sel" id="smMeth" data-ch="smMeth"><option value="">All methods</option>${Object.keys(CONN_METHODS).map(c=>`<option value="${c}" ${f.me===c?'selected':''}>${CONN_METHODS[c].label}</option>`).join('')}</select><button class="btn" data-act="srcSyncAll">Sync all</button><button class="btn pri" data-act="srcAdd" data-arg="">+ Add source</button></div>
+  <p class="note" style="margin:0 0 4px">Each system is configured on its own. Each source shows how it connects: native connector, JDBC, API extractor, event API, Delta Sharing or flat file. Select one to edit it. <span class="livedot"><i></i>Live</span></p>
   <div id="smGrid">${smGridHTML()}</div>
   ${dep.length?`<div class="callout bad" style="margin-top:14px"><b>Integration dependencies.</b> ${dep.map(s=>`<button class="lnk" data-act="adapter" data-arg="${s.id}">${esc(s.name)} (${esc(s.vendor)})</button> is ${s.status==='unavailable'?'not connected':s.status==='stale'?'stale':'a manual import'}`).join('; ')}. Circularity names these as dependencies rather than inventing data.</div>`:''}
   <div class="sect"><div class="sh"><h2>Live sync activity</h2><span class="livedot"><i></i>Streaming</span></div><div class="panel" id="smLog" aria-live="off">${smLogHTML()}</div></div>
@@ -1757,16 +1761,138 @@ function smTick(){
   const sd=S.sd;if(sd&&sd.mode==='edit'){const el=$('#sdLive');const s=SRC(sd.id);if(el&&s)el.innerHTML=sdLiveHTML(s)}}
 ACT.smQ=v=>{SM_S().q=v;const g=$('#smGrid');g&&(g.innerHTML=smGridHTML())};
 ACT.smCat=v=>{SM_S().cat=v;smRefresh()};
+ACT.smMeth=v=>{SM_S().me=v;smRefresh()};
 ACT.smSt=v=>{const f=SM_S();f.st=f.st===v?'':v;smRefresh()};
-ACT.smClear=()=>{S.sm={q:'',cat:'',st:''};route(true)};
+ACT.smClear=()=>{S.sm={q:'',cat:'',st:'',me:''};route(true)};
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.tile[data-act]')){e.preventDefault();e.target.click()}});
 ACT.srcSync=id=>{if(!canMgr())return toast(NOMGR);startSync(SRC(id),false)};
 ACT.srcSyncAll=()=>{if(!canMgr())return toast(NOMGR);const l=SOURCES.filter(s=>s.status==='live'&&!s.syncing);l.forEach((s,i)=>setTimeout(()=>startSync(s,false),i*120));toast('Sync started for '+l.length+' live sources.')};
+/* ===== Connection methods (how a source delivers data) ===== */
+const CM_F=(k,l,t,def,o,req)=>({k,l,t,def,o,req});
+const CONN_METHODS={
+ native:{label:'Native connector',badge:'Native',sub:'Pre-built extractor, scheduled pull',tip:'Pre-built extractor for major enterprise systems such as SAP ECC, S/4HANA and Oracle EBS. Runs on a schedule or as an automated delta pull.',sched:1,url:1,auth:'OAuth 2.0 · mTLS',
+  fields:[CM_F('system','Source system','select','SAP S/4HANA',['SAP S/4HANA','SAP ECC','Oracle E-Business Suite','Oracle Fusion Cloud','Other']),CM_F('extract','Extraction mode','select','Automated delta pull',['Scheduled full pull','Automated delta pull']),CM_F('scope','Extraction scope (tables or objects)','text','','e.g. MARA, MARC, VBAP')]},
+ jdbc:{label:'JDBC extractor',badge:'JDBC',sub:'Relational database over JDBC/SQL',tip:'Standard relational database connection using a JDBC/SQL driver, direct or through an on-premise uplink server.',sched:1,url:0,auth:'Database user + password (vault)',
+  fields:[CM_F('host','Database host','text','','db.example.com',1),CM_F('port','Port','number',1521,'',1),CM_F('database','Database or service name','text','','e.g. PRODDB',1),CM_F('driver','JDBC driver','select','Oracle',['Oracle','SQL Server','PostgreSQL','MySQL','IBM Db2','SAP HANA']),CM_F('uplink','Network path','select','On-premise uplink server',['Direct connection','On-premise uplink server']),CM_F('schema','Schema','text','','e.g. INFODBA')]},
+ api:{label:'API extractor',badge:'API',sub:'Custom REST or OData extractor',tip:'Custom REST or OData extractor for cloud applications and bespoke systems. Set the interval to 0 for real-time pull with change events.',sched:1,url:1,auth:'OAuth 2.0 client credentials',
+  fields:[CM_F('spec','API style','select','REST',['REST','OData'],1),CM_F('pagination','Pagination','select','Cursor',['Cursor','Offset','None']),CM_F('rate','Rate limit (requests per minute)','number',100,'')]},
+ event:{label:'Event / Ingestion API',badge:'Event API',sub:'Real-time push into Circularity',tip:'The source pushes events straight into the Circularity ingestion API, or drops them in cloud storage such as AWS S3. Events are de-duplicated and ordered.',sched:0,url:1,auth:'API key',
+  fields:[CM_F('delivery','Delivery','select','Webhook',['Webhook','Message queue','Cloud storage drop (S3)']),CM_F('key','Idempotency key field','text','event_id','e.g. event_id'),CM_F('order','Ordering','select','By source timestamp',['By source timestamp','By arrival','By sequence number'])]},
+ delta:{label:'Delta Sharing',badge:'Delta Sharing',sub:'Zero-copy live read',tip:'Reads live data straight from the source platform (Databricks, Microsoft Fabric, Jira and others) without copying it.',sched:0,url:0,auth:'Bearer token (Delta Sharing profile)',
+  fields:[CM_F('platform','Source platform','select','Databricks',['Databricks','Microsoft Fabric','Jira','Snowflake','Other']),CM_F('endpoint','Sharing endpoint','text','','https://sharing.example.com/delta-sharing',1),CM_F('share','Share name','text','','e.g. emissions_factors',1),CM_F('table','Shared table','text','','e.g. schema.table')]},
+ file:{label:'Flat file upload',badge:'Flat file',sub:'CSV, Parquet, JSON or ZIP, up to 1 GB',tip:'Manual or static import of CSV, Parquet, JSON or ZIP files, capped at 1 GB per file. Supports evaluation, not live automation.',sched:0,url:0,auth:'SFTP drop · signed manifest',
+  fields:[CM_F('format','File format','select','CSV',['CSV','Parquet','JSON','ZIP'],1),CM_F('maxmb','Largest file (MB, limit 1024)','number',1024,''),CM_F('delivery','Delivery','select','SFTP drop',['SFTP drop','Manual upload']),CM_F('path','SFTP path','text','','e.g. /outbound/partner-rates.csv')]}
+};
+const CM_BY_LABEL=l=>Object.keys(CONN_METHODS).find(k=>CONN_METHODS[k].label===l);
+AUTH_OPTS.push('Database user + password (vault)','Bearer token (Delta Sharing profile)');
+const cfgDefaults=m=>{const o={};CONN_METHODS[m].fields.forEach(f=>o[f.k]=f.def);return o};
+function methodMode(m,iv){return m==='native'?'Native connector · Polling · '+iv+' min':m==='jdbc'?'JDBC · Polling · '+iv+' min':m==='api'?(iv?'API extractor · Polling · '+iv+' min':'API extractor · API + events'):m==='event'?'Event API · Events':m==='delta'?'Delta Sharing · API read (live)':'Flat file · CSV import'}
+function buildUrl(d){const c=d.cfg||{};if(d.method==='jdbc')return 'jdbc:'+String(c.driver||'').toLowerCase().replace(/\s+/g,'')+'://'+c.host+':'+c.port+'/'+c.database;if(d.method==='delta')return c.endpoint||'';if(d.method==='file')return c.delivery==='SFTP drop'?(c.path||''):'';return(d.url||'').trim()}
+const SRC_CFG={
+ crm:{method:'api',cfg:{spec:'REST',pagination:'Cursor',rate:100},interval:0},
+ lease:{method:'native',cfg:{system:'Oracle E-Business Suite',extract:'Scheduled full pull',scope:'OKC_K_HEADERS_B, OKL_K_LINES'},interval:15,read:['EXTRACT OKC_K_HEADERS_B','EXTRACT OKL_K_LINES','EXTRACT OKC_K_REL_OBJS']},
+ erp:{method:'native',cfg:{system:'SAP S/4HANA',extract:'Automated delta pull',scope:'MARD, MSEG, EKPO, EKKO, MBEW'},interval:5,read:['EXTRACT MARD','EXTRACT EKPO','EXTRACT MBEW']},
+ proc:{method:'api',cfg:{spec:'OData',pagination:'Offset',rate:60},interval:30},
+ eam:{method:'api',cfg:{spec:'REST',pagination:'Offset',rate:120},interval:0},
+ fsm:{method:'event',cfg:{delivery:'Webhook',key:'sys_id',order:'By source timestamp'},interval:0},
+ plm:{method:'jdbc',cfg:{host:'plm-db.northfield.example',port:1521,database:'TCPROD',driver:'Oracle',uplink:'On-premise uplink server',schema:'INFODBA'},interval:15,read:['SELECT * FROM INFODBA.PITEM','SELECT * FROM INFODBA.PITEMREVISION','SELECT * FROM INFODBA.PSOCCURRENCE'],auth:'Database user + password (vault)'},
+ bom:{method:'jdbc',cfg:{host:'bom-sql.northfield.example',port:1433,database:'InnovatorDB',driver:'SQL Server',uplink:'On-premise uplink server',schema:'innovator'},interval:15,read:['SELECT * FROM innovator.PART','SELECT * FROM innovator.PART_BOM','SELECT * FROM innovator.MANUFACTURER_PART'],auth:'Database user + password (vault)'},
+ qms:{method:'api',cfg:{spec:'REST',pagination:'Cursor',rate:60},interval:30},
+ eng:{method:'api',cfg:{spec:'REST',pagination:'Cursor',rate:60},interval:60},
+ wms:{method:'event',cfg:{delivery:'Message queue',key:'movement_id',order:'By sequence number'},interval:0},
+ rl:{method:'event',cfg:{delivery:'Webhook',key:'rma_id',order:'By arrival'},interval:0},
+ insp:{method:'api',cfg:{spec:'REST',pagination:'Cursor',rate:100},interval:0},
+ repair:{method:'event',cfg:{delivery:'Webhook',key:'repair_id',order:'By source timestamp'},interval:0},
+ iot:{method:'event',cfg:{delivery:'Message queue',key:'device_event_id',order:'By source timestamp'},interval:0},
+ mkt:{method:'api',cfg:{spec:'REST',pagination:'Offset',rate:30},interval:60},
+ dlr:{method:'api',cfg:{spec:'REST',pagination:'Cursor',rate:60},interval:0},
+ rcy:{method:'file',cfg:{format:'CSV',maxmb:200,delivery:'SFTP drop',path:'/outbound/partner-rates.csv'},interval:0},
+ esg:{method:'delta',cfg:{platform:'Databricks',endpoint:'https://sharing.persefoni.example/delta-sharing',share:'emission_factors',table:'factors.cradle_to_gate'},interval:0,read:['READ factors.cradle_to_gate','READ footprints.by_asset_class'],auth:'Bearer token (Delta Sharing profile)'}
+};
+SOURCES.forEach(s=>{const c=SRC_CFG[s.id];s.method=c.method;s.cfg=Object.assign(cfgDefaults(c.method),c.cfg);s.interval=c.interval;if(c.read)s.read=c.read;if(c.auth)s.auth=c.auth;
+  if(s.status==='unavailable')s.mode='Not connected';else{s.url=buildUrl(s);s.mode=methodMode(s.method,s.interval)}});
+/* ---- draft helpers ---- */
+const sdOff=sd=>sd.mode==='edit'&&!!SRC(sd.id)&&SRC(sd.id).status==='unavailable'&&/^Pending/.test(sd.d.auth);
+function sdOpen(id,tab){const s=SRC(id);if(!s)return;
+  S.sd={mode:'edit',id,tab:tab||'conn',dirty:false,test:null,errs:{},d:{type:s.type,name:s.name,vendor:s.vendor,ver:s.ver,env:s.env,url:s.url,method:s.method,cfg:Object.assign({},s.cfg),interval:s.interval,auth:s.auth,owner:s.owner},maps:(MAPPINGS[id]||[]).map(r=>r.slice()),ops:{read:s.read.slice(),write:s.write.slice()}};sdRender(true)}
+ACT.srcAdd=cat=>{if(!canMgr())return toast(NOMGR);
+  const type=Object.keys(SRC_TYPES).find(k=>SRC_TYPES[k].cat===(cat||'internal'))||'crm',t=SRC_TYPES[type];
+  S.sd={mode:'new',id:null,tab:'conn',dirty:true,test:null,errs:{},d:{type,name:t.label,vendor:t.vendors[0],ver:'',env:'Production',url:'',method:'api',cfg:cfgDefaults('api'),interval:0,auth:CONN_METHODS.api.auth,owner:''},maps:[],ops:{read:[],write:[]}};sdRender(true)};
+ACT.sdF=(v,el)=>{const sd=S.sd,k=el.dataset.k,d=sd.d;
+  if(k==='type'){const nk=Object.keys(SRC_TYPES).find(x=>SRC_TYPES[x].label===v),pt=SRC_TYPES[d.type];if(d.name===pt.label)d.name=SRC_TYPES[nk].label;d.type=nk;d.vendor=SRC_TYPES[nk].vendors[0];sdDirty();sdRender();return}
+  if(k==='method'){const nk=CM_BY_LABEL(v),m=CONN_METHODS[nk];d.method=nk;d.cfg=cfgDefaults(nk);d.auth=m.auth;d.interval=m.sched?(nk==='api'?0:(d.interval||15)):0;sd.errs={};sdDirty();sdRender();return}
+  if(k==='interval')d.interval=v===''?'':+v;else d[k]=v;
+  delete sd.errs[k];sdDirty()};
+ACT.sdC=(v,el)=>{const sd=S.sd,k=el.dataset.k;sd.d.cfg[k]=v;delete sd.errs['c_'+k];sdDirty();if(el.tagName==='SELECT')sdRender()};
+function cmField(f,v,sd){const e=sd.errs['c_'+f.k],id='sdc_'+f.k;
+  if(f.k==='path'&&sd.d.cfg.delivery!=='SFTP drop')return'';
+  return `<div class="fld"><label for="${id}">${f.l}${f.req?' *':''}</label>${f.t==='select'?`<select id="${id}" data-ch="sdC" data-k="${f.k}">${f.o.map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('')}</select>`:`<input id="${id}" ${f.t==='number'?'type="number"':''} value="${esc(v==null?'':v)}" data-in="sdC" data-k="${f.k}" placeholder="${esc(f.o||'')}" autocomplete="off" spellcheck="false">`}${e?`<div class="err">${esc(e)}</div>`:''}</div>`}
+function sdConnHTML(){const sd=S.sd,d=sd.d,e=sd.errs,s=sd.mode==='edit'?SRC(sd.id):null,t=SRC_TYPES[d.type],cm=CONN_METHODS[d.method],vs=t.vendors.includes(d.vendor)?t.vendors:[d.vendor].concat(t.vendors),au=AUTH_OPTS.includes(d.auth)?AUTH_OPTS:[d.auth].concat(AUTH_OPTS);
+  const tx=(k,l,o)=>`<div class="fld"><label for="sd_${k}">${l}</label><input id="sd_${k}" value="${esc(d[k]==null?'':d[k])}" data-in="sdF" data-k="${k}" autocomplete="off" ${o||''}>${e[k]?`<div class="err">${esc(e[k])}</div>`:''}</div>`;
+  const sl=(k,l,opts,cur,o)=>`<div class="fld"><label for="sd_${k}">${l}</label><select id="sd_${k}" data-ch="sdF" data-k="${k}" ${o||''}>${opts.map(x=>`<option value="${esc(x)}" ${x===cur?'selected':''}>${esc(x)}</option>`).join('')}</select>${e[k]?`<div class="err">${esc(e[k])}</div>`:''}</div>`;
+  const age=s?Math.floor((Date.now()-s.credAt)/86400000):0,left=s?s.credDays-age:0;
+  return `${s&&s.note?`<div class="callout ${s.status==='unavailable'?'bad':''}" style="margin-bottom:14px">${esc(s.note)}</div>`:''}
+  ${s?`<div id="sdLive">${sdLiveHTML(s)}</div>`:''}
+  <div class="grid g2" style="gap:0 14px">${tx('name','Display name','maxlength="60"')}${sl('type','System type',Object.keys(SRC_TYPES).map(k=>SRC_TYPES[k].label),SRC_TYPES[d.type].label,sd.mode==='edit'?'disabled':'')}
+  ${sl('vendor','Vendor product',vs,d.vendor)}${tx('ver','Product version','placeholder="e.g. 2023 FPS02"')}${sl('env','Environment',['Production','Staging','Sandbox'],d.env)}${tx('owner','Owner team','placeholder="e.g. Finance Systems"')}</div>
+  <div class="methodbox"><div class="fld" style="margin-bottom:6px"><label for="sd_method">Connection method</label><select id="sd_method" data-ch="sdF" data-k="method">${Object.keys(CONN_METHODS).map(k=>`<option value="${esc(CONN_METHODS[k].label)}" ${k===d.method?'selected':''}>${CONN_METHODS[k].label} · ${CONN_METHODS[k].sub}</option>`).join('')}</select></div><div class="note" style="margin-bottom:12px">${esc(cm.tip)}</div>
+  <div class="grid g2" style="gap:0 14px">${cm.fields.map(f=>cmField(f,d.cfg[f.k],sd)).join('')}</div>
+  ${cm.url?tx('url','Base URL or endpoint','placeholder="https://system.example.com/api" spellcheck="false"'):''}
+  ${cm.sched?`<div class="fld" style="max-width:260px"><label for="sd_interval">${d.method==='api'?'Poll interval (minutes, 0 = real time)':'Pull every (minutes)'}</label><input id="sd_interval" type="number" min="${d.method==='api'?0:1}" max="1440" value="${esc(d.interval)}" data-in="sdF" data-k="interval">${e.interval?`<div class="err">${esc(e.interval)}</div>`:''}</div>`:''}</div>
+  ${sl('auth','Authentication',au,d.auth)}
+  <div class="credrow"><div><b>Credentials</b><div class="note">${s?(left<0?'Secret expired '+(-left)+' days ago.':'Secret rotated '+age+' days ago · expires in '+left+' days.'):'Stored in the secrets vault after you save.'}</div></div>${s?'<button class="btn sm" data-act="sdRotate">Rotate credentials</button>':''}</div>
+  <div id="sdTest">${sdTestHTML()}</div>`}
+function sdValidate(){const sd=S.sd,d=sd.d,c=d.cfg,e={},off=sdOff(sd);
+  if(!d.name.trim())e.name='Enter a display name.';else if(SOURCES.some(x=>x.id!==sd.id&&x.name.toLowerCase()===d.name.trim().toLowerCase()&&x.vendor===d.vendor))e.name='A source with this name and vendor already exists.';
+  if(!off){const https=v=>/^https?:\/\/[^\s/]+(\/\S*)?$/i.test((v||'').trim());
+    if(/^Pending/.test(d.auth))e.auth='Choose an authentication method.';
+    if(CONN_METHODS[d.method].url&&!https(d.url))e.url='Enter a full URL starting with https://.';
+    if(d.method==='jdbc'){if(!/^[\w.-]+$/.test((c.host||'').trim()))e.c_host='Enter the database host name.';const p=+c.port;if(!(p>=1&&p<=65535))e.c_port='Enter a port from 1 to 65535.';if(!(c.database||'').trim())e.c_database='Enter the database or service name.'}
+    if(d.method==='delta'){if(!https(c.endpoint))e.c_endpoint='Enter the https:// sharing endpoint.';if(!(c.share||'').trim())e.c_share='Enter the share name.'}
+    if(d.method==='file'){const m=+c.maxmb;if(!(m>=1&&m<=1024))e.c_maxmb='The limit is 1 GB (1024 MB) per file.';if(c.delivery==='SFTP drop'&&!/^(\/|sftp:\/\/)\S+/.test((c.path||'').trim()))e.c_path='Enter the SFTP path, for example /outbound/file.csv.'}
+    if(d.method==='api'&&!(c.spec))e.c_spec='Choose REST or OData.';
+    if(CONN_METHODS[d.method].sched){const lo=d.method==='api'?0:1;if(!(d.interval!==''&&d.interval>=lo&&d.interval<=1440))e.interval='Enter '+lo+' to 1440 minutes.'}}
+  const rd=sd.ops.read.map(x=>x.trim()).filter(Boolean);if(!off&&!rd.length)e.ops='Add at least one read operation.';
+  if(sd.ops.read.concat(sd.ops.write).some(x=>x.trim()&&!/^(GET|POST|PUT|PATCH|DELETE|IMPORT|SELECT|EXTRACT|READ|SUBSCRIBE)\s+\S+/i.test(x.trim())))e.ops='Each operation starts with a verb, for example GET /assets or SELECT * FROM table.';
+  const seen=new Set();sd.maps.forEach((m,i)=>{if(!m[0].trim())e['m'+i+'_0']='x';if(!m[2].trim())e['m'+i+'_2']='x';if(m[2].trim()&&seen.has(m[2].trim()+'|'+m[0].trim()))e['m'+i+'_2']='x';seen.add(m[2].trim()+'|'+m[0].trim())});
+  if(Object.keys(e).some(k=>/^m\d/.test(k)))e.maps='Every mapping row needs a source field and a canonical field, and rows cannot repeat.';
+  return e}
+const SD_CONN_KEYS=k=>['name','url','auth','interval'].includes(k)||/^c_/.test(k);
+ACT.sdSave=()=>{if(!canMgr())return toast(NOMGR);const sd=S.sd,d=sd.d,errs=sdValidate();
+  if(Object.keys(errs).length){sd.errs=errs;const n=Object.keys(errs).filter(k=>k!=='maps'&&k!=='ops'&&!/^m\d/.test(k)).length+(errs.maps?1:0)+(errs.ops?1:0);
+    const tab=Object.keys(errs).some(SD_CONN_KEYS)?'conn':errs.ops?'ops':'map';sd.tab=tab;sdRender();toast('Fix '+n+' item'+(n>1?'s':'')+' before saving. Errors are marked in the form.');return}
+  const off=sdOff(sd),read=sd.ops.read.map(x=>x.trim()).filter(Boolean),write=sd.ops.write.map(x=>x.trim()).filter(Boolean),csv=d.method==='file',maps=sd.maps.map(m=>m.map(x=>x.trim()));
+  const cm=CONN_METHODS[d.method],iv=cm.sched?+d.interval:0;
+  const base={name:d.name.trim(),vendor:d.vendor,ver:d.ver.trim(),env:d.env,url:off?'':buildUrl(d),method:d.method,cfg:Object.assign({},d.cfg),mode:off?'Not connected':methodMode(d.method,iv),interval:iv,auth:d.auth,owner:d.owner.trim()||'Unassigned',read,write,rw:csv?'Read (import)':off?'—':write.length?(read.length?'Read / write':'Write'):'Read'};
+  if(sd.mode==='new'){const t=SRC_TYPES[d.type],sd0=SRC_SEED[d.type];let id=d.type,n=2;while(SRC(id))id=d.type+'_'+n++;
+    const s=Object.assign({id,type:d.type,cat:t.cat,short:t.short,status:csv?'manual':'live',freshMin:null,compl:0,conf:0,c0:0,k0:0,inputs:sd0.inputs,authority:sd0.authority.slice(),step:sd0.step.slice(),records:0,cfgVer:'1.0',lastSync:csv?Date.now():null,fresh:csv?'just now':'—',updatedBy:S.role,updatedAt:Date.now(),credAt:Date.now(),credDays:180,runs:[],audit:[{ver:'1.0',who:S.role,ts:Date.now(),change:'Connection created'}]},base);
+    SOURCES.push(s);MAPPINGS[id]=maps;rebuildLookups();wfAddForSource(s);srcEvent(s,'connector.created','acknowledged',s.vendor+' connected as '+s.name+' via '+cm.label+' ('+s.env+')');smLogAdd(s,'Connection created via '+cm.label+'. Initial sync starting.');smRefresh();
+    toast(s.name+' ('+s.vendor+') connected. Initial sync started.');S.sd=null;sdOpen(id,'ops');
+    if(!csv)setTimeout(()=>startSync(s,false),400);wfPaletteRefresh();return}
+  const s=SRC(sd.id),ch=[],cmp=(k,l)=>{if(String(s[k])!==String(base[k]))ch.push(l)};
+  cmp('name','display name');cmp('vendor','vendor product');cmp('ver','version');cmp('env','environment');cmp('method','connection method');cmp('url','endpoint');cmp('auth','authentication');cmp('interval','schedule');cmp('owner','owner');
+  if(JSON.stringify(s.cfg)!==JSON.stringify(base.cfg)&&s.method===base.method)ch.push('method settings');
+  if(read.join('|')!==s.read.join('|')||write.join('|')!==s.write.join('|'))ch.push('operations');
+  if(JSON.stringify(maps)!==JSON.stringify(MAPPINGS[s.id]||[]))ch.push('field mapping ('+maps.length+' rows)');
+  const wasOff=s.status==='unavailable'&&!off&&!csv;
+  Object.assign(s,base);MAPPINGS[s.id]=maps;
+  if(wasOff){s.status='live';ch.push('connected')}else if(csv&&s.status!=='manual'){s.status='manual';ch.push('switched to flat file import')}else if(!csv&&s.status==='manual'){s.status='live';ch.push('switched to a live feed')}
+  if(!ch.length){toast('No changes to save.');sd.dirty=false;sdFoot();return}
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.updatedAt=Date.now();s.updatedBy=S.role;s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Updated '+ch.join(', ')});
+  rebuildLookups();srcEvent(s,'connector.updated','acknowledged','Config v'+s.cfgVer+': '+ch.join(', '));smLogAdd(s,'Configuration saved · v'+s.cfgVer+' ('+ch.join(', ')+')');
+  sd.dirty=false;sd.errs={};sd.test=null;sdRender();smPatch(s);wfPaletteRefresh();wfPaint2();toast(s.name+' saved. Configuration is now v'+s.cfgVer+'.');
+  if(wasOff)setTimeout(()=>startSync(s,false),400)};
+ACT.sdTest=()=>{const sd=S.sd,d=sd.d;const er=sdValidate(),bad=Object.keys(er).filter(SD_CONN_KEYS);
+  if(bad.length){sd.errs=er;sd.test={ok:false,msg:'Fix the highlighted connection settings first.'};if(sd.tab!=='conn')sd.tab='conn';sdRender();return}
+  sd.test={state:'running'};if(sd.tab!=='conn'){sd.tab='conn';sdRender()}else{const el=$('#sdTest');el&&(el.innerHTML=sdTestHTML())}$('#sdTest')&&$('#sdTest').scrollIntoView({block:'nearest'});
+  setTimeout(()=>{if(S.sd!==sd)return;const s=sd.mode==='edit'?SRC(sd.id):null,ms=rr(70,320),cm=CONN_METHODS[d.method];
+    if(s&&s.status==='stale'&&s.url===buildUrl(d))sd.test={ok:false,msg:'HTTP 401 Unauthorized. The feed token expired; use Refresh token and re-sync or rotate credentials.'};
+    else if(sdOff(sd))sd.test={ok:false,msg:'No connection configured. Choose an authentication method and complete the settings.'};
+    else sd.test={ok:true,msg:cm.label+' reached in '+ms+' ms. '+sd.ops.read.filter(x=>x.trim()).length+' read and '+sd.ops.write.filter(x=>x.trim()).length+' write operations available.'};
+    const e2=$('#sdTest');e2&&(e2.innerHTML=sdTestHTML())},rr(700,1300))};
 /* ---- source drawer: create, edit, save, delete (draft model) ---- */
 const sdModeSel=m=>/^Polling/.test(m)?'Polling':/^Events/.test(m)?'Events':m;
 const CANON_PFX={'Asset & component':'asset','Condition & eligibility':'condition','Demand opportunity':'demand','Intervention':'intervention','Route candidate':'route','Decision':'decision','Outcome':'outcome'};
-function sdOpen(id,tab){const s=SRC(id);if(!s)return;
-  S.sd={mode:'edit',id,tab:tab||'conn',dirty:false,test:null,errs:{},d:{type:s.type,name:s.name,vendor:s.vendor,ver:s.ver,env:s.env,url:s.url,mode:s.mode,interval:s.interval||15,auth:s.auth,owner:s.owner},maps:(MAPPINGS[id]||[]).map(r=>r.slice()),ops:{read:s.read.slice(),write:s.write.slice()}};sdRender(true)}
 function sdTitle(){const sd=S.sd;if(sd.mode==='new')return 'Add source';const s=SRC(sd.id);return `<span class="row" style="gap:10px;flex-wrap:nowrap">${vlogo(s)}<span>${esc(s.name)}</span>${s.syncing?'<span class="chip y">Syncing</span>':stChip(s.status)}</span>`}
 function sdSub(){const sd=S.sd;if(sd.mode==='new')return 'Connect a system. Each system is its own connector.';const s=SRC(sd.id);return esc(s.vendor)+' adapter · config v'+s.cfgVer}
 function sdLiveHTML(s){return `<dl class="kv sdlive"><dt>Status</dt><dd>${s.syncing?'<span class="chip y">Syncing '+(s.syncPct||0)+'%</span>':stChip(s.status)}</dd><dt>Last sync</dt><dd><span class="num">${s.lastSync==null?(s.status==='unavailable'?'Not connected':'Never'):esc(srcAgeText(s).replace(/^(Updated|Last import) /,''))}</span></dd><dt>Freshness · completeness · confidence</dt><dd class="num">${s.lastSync==null?'—':srcFresh(s)+'% · '+s.compl+'% · '+s.conf+'%'}</dd><dt>Records</dt><dd class="num">${fmtN(s.records)}</dd><dt>Source authority for</dt><dd>${s.authority.length?esc(s.authority.join(', ')):'—'}</dd></dl>`}
@@ -1774,18 +1900,7 @@ function sdSyncUI(s){const sd=S.sd;if(!sd||sd.mode!=='edit'||sd.id!==s.id||!$('#
 function sdTabBody(){const sd=S.sd,d=sd.d,e=sd.errs;
   const tx=(k,l,o)=>`<div class="fld"><label for="sd_${k}">${l}</label><input id="sd_${k}" value="${esc(d[k]==null?'':d[k])}" data-in="sdF" data-k="${k}" autocomplete="off" ${o||''}>${e[k]?`<div class="err">${esc(e[k])}</div>`:''}</div>`;
   const sl=(k,l,opts,cur,o)=>`<div class="fld"><label for="sd_${k}">${l}</label><select id="sd_${k}" data-ch="sdF" data-k="${k}" ${o||''}>${opts.map(x=>`<option value="${esc(x)}" ${x===cur?'selected':''}>${esc(x)}</option>`).join('')}</select>${e[k]?`<div class="err">${esc(e[k])}</div>`:''}</div>`;
-  if(sd.tab==='conn'){const s=sd.mode==='edit'?SRC(sd.id):null,t=SRC_TYPES[d.type],vs=t.vendors.includes(d.vendor)?t.vendors:[d.vendor].concat(t.vendors);
-    const msel=sdModeSel(d.mode),mo=MODE_OPTS.includes(msel)?MODE_OPTS:[msel].concat(MODE_OPTS),au=AUTH_OPTS.includes(d.auth)?AUTH_OPTS:[d.auth].concat(AUTH_OPTS);
-    const age=s?Math.floor((Date.now()-s.credAt)/86400000):0,left=s?s.credDays-age:0;
-    return `${s&&s.note?`<div class="callout ${s.status==='unavailable'?'bad':''}" style="margin-bottom:14px">${esc(s.note)}</div>`:''}
-    ${s?`<div id="sdLive">${sdLiveHTML(s)}</div>`:''}
-    <div class="grid g2" style="gap:0 14px">${tx('name','Display name','maxlength="60"')}${sl('type','System type',Object.keys(SRC_TYPES).map(k=>SRC_TYPES[k].label),SRC_TYPES[d.type].label,sd.mode==='edit'?'disabled':'')}
-    ${sl('vendor','Vendor product',vs,d.vendor)}${tx('ver','Product version','placeholder="e.g. 2023 FPS02"')}${sl('env','Environment',['Production','Staging','Sandbox'],d.env)}${tx('owner','Owner team','placeholder="e.g. Finance Systems"')}</div>
-    ${tx('url','Base URL or endpoint','placeholder="https://system.example.com/api" spellcheck="false"')}
-    <div class="grid g2" style="gap:0 14px">${sl('auth','Authentication',au,d.auth)}${sl('mode','Update method',mo,msel)}</div>
-    ${msel==='Polling'?`<div class="fld" style="max-width:220px"><label for="sd_interval">Poll interval (minutes)</label><input id="sd_interval" type="number" min="1" max="1440" value="${esc(d.interval)}" data-in="sdF" data-k="interval">${e.interval?`<div class="err">${esc(e.interval)}</div>`:''}</div>`:''}
-    <div class="credrow"><div><b>Credentials</b><div class="note">${s?(left<0?'Secret expired '+(-left)+' days ago.':'Secret rotated '+age+' days ago · expires in '+left+' days.'):'Stored in the secrets vault after you save.'}</div></div>${s?'<button class="btn sm" data-act="sdRotate">Rotate credentials</button>':''}</div>
-    <div id="sdTest">${sdTestHTML()}</div>`}
+  if(sd.tab==='conn')return sdConnHTML();
   if(sd.tab==='ops'){const blk=(w,t,ph)=>`<h4 style="margin:0 0 6px">${t}</h4>${sd.ops[w].map((o,i)=>`<div class="oprow"><input class="mono" value="${esc(o)}" placeholder="${ph}" data-in="sdOp" data-w="${w}" data-i="${i}" aria-label="${t} ${i+1}" spellcheck="false"><button class="iconbtn sm" data-act="sdOpDel" data-arg="${w}:${i}" aria-label="Remove operation">${ICON.close}</button></div>`).join('')||'<div class="note" style="margin-bottom:6px">None configured.'+(w==='write'?' Circularity cannot write to this system.':'')+'</div>'}<button class="btn sm" data-act="sdOpAdd" data-arg="${w}" style="margin:6px 0 18px">+ Add ${w} operation</button>`;
     return `<p class="note" style="margin-top:0">Operations Circularity may call on this system. Write operations only run after Human approval.</p>${blk('read','Read operations','GET /resource')}${blk('write','Write operations','POST /resource')}${e.ops?`<div class="err">${esc(e.ops)}</div>`:''}`}
   if(sd.tab==='map'){const pf=Object.values(CANON_PFX);
@@ -1809,15 +1924,7 @@ function sdRender(first){const sd=S.sd;if(!sd)return;
   sdFoot()}
 ACT.adapter=id=>sdOpen(id);ACT.srcEdit=id=>sdOpen(id);
 ACT.sdTab=t=>{S.sd.tab=t;sdRender()};
-ACT.srcAdd=cat=>{if(!canMgr())return toast(NOMGR);
-  const type=Object.keys(SRC_TYPES).find(k=>SRC_TYPES[k].cat===(cat||'internal'))||'crm',t=SRC_TYPES[type];
-  S.sd={mode:'new',id:null,tab:'conn',dirty:true,test:null,errs:{},d:{type,name:t.label,vendor:t.vendors[0],ver:'',env:'Production',url:'',mode:'API + events',interval:15,auth:AUTH_OPTS[0],owner:''},maps:[],ops:{read:[],write:[]}};sdRender(true)};
 function sdDirty(){S.sd.dirty=true;S.sd.warned=false;sdFoot()}
-ACT.sdF=(v,el)=>{const sd=S.sd,k=el.dataset.k,d=sd.d;
-  if(k==='type'){const nk=Object.keys(SRC_TYPES).find(x=>SRC_TYPES[x].label===v),pt=SRC_TYPES[d.type];if(d.name===pt.label)d.name=SRC_TYPES[nk].label;d.type=nk;d.vendor=SRC_TYPES[nk].vendors[0];sdDirty();sdRender();return}
-  if(k==='mode'){d.mode=v==='Polling'?'Polling · '+(d.interval||15)+' min':v;sdDirty();sdRender();return}
-  if(k==='interval'){d.interval=v===''?'':+v;if(/^Polling/.test(d.mode))d.mode='Polling · '+d.interval+' min'}else d[k]=v;
-  delete sd.errs[k];sdDirty()};
 ACT.sdOp=(v,el)=>{S.sd.ops[el.dataset.w][+el.dataset.i]=v;delete S.sd.errs.ops;sdDirty()};
 ACT.sdOpDel=a=>{const [w,i]=a.split(':');S.sd.ops[w].splice(+i,1);sdDirty();sdRender()};
 ACT.sdOpAdd=w=>{S.sd.ops[w].push('');sdDirty();sdRender();const l=$$(`#drawer input[data-w="${w}"]`).pop();l&&l.focus()};
@@ -1826,48 +1933,6 @@ ACT.sdMapDel=i=>{S.sd.maps.splice(+i,1);sdDirty();sdRender()};
 ACT.sdMapAdd=()=>{S.sd.maps.push(['','','','','']);sdDirty();sdRender();const l=$$('#drawer .maptbl tbody tr:last-child input')[0];l&&l.focus()};
 ACT.sdRevert=()=>{const id=S.sd.id,tab=S.sd.tab;sdOpen(id,tab);toast('Changes reverted to the saved configuration.')};
 ACT.gotoImport=()=>{closeDrawer(true);S.intTab='import';route(true)};
-function sdValidate(){const sd=S.sd,d=sd.d,e={},s=sd.mode==='edit'?SRC(sd.id):null,off=d.mode==='Not connected';
-  if(!d.name.trim())e.name='Enter a display name.';else if(SOURCES.some(x=>x.id!==sd.id&&x.name.toLowerCase()===d.name.trim().toLowerCase()&&x.vendor===d.vendor))e.name='A source with this name and vendor already exists.';
-  if(!off){if(!/^(https?|sftp):\/\/[^\s/]+(\/\S*)?$/i.test((d.url||'').trim()))e.url='Enter a full URL starting with https:// or sftp://.';
-    if(/^Pending/.test(d.auth))e.auth='Choose an authentication method.';
-    if(/^Polling/.test(d.mode)&&!(d.interval>=1&&d.interval<=1440))e.interval='Enter 1 to 1440 minutes.'}
-  const rd=sd.ops.read.map(x=>x.trim()).filter(Boolean);if(!off&&!rd.length)e.ops='Add at least one read operation.';
-  if(sd.ops.read.concat(sd.ops.write).some(x=>x.trim()&&!/^(GET|POST|PUT|PATCH|DELETE|IMPORT)\s+\S+/i.test(x.trim())))e.ops='Each operation starts with a method, for example GET /assets.';
-  const seen=new Set();sd.maps.forEach((m,i)=>{if(!m[0].trim())e['m'+i+'_0']='x';if(!m[2].trim())e['m'+i+'_2']='x';if(m[2].trim()&&seen.has(m[2].trim()+'|'+m[0].trim()))e['m'+i+'_2']='x';seen.add(m[2].trim()+'|'+m[0].trim())});
-  if(Object.keys(e).some(k=>/^m\d/.test(k)))e.maps='Every mapping row needs a source field and a canonical field, and rows cannot repeat.';
-  return e}
-ACT.sdSave=()=>{if(!canMgr())return toast(NOMGR);const sd=S.sd,d=sd.d,errs=sdValidate();
-  if(Object.keys(errs).length){sd.errs=errs;sdRender();const n=Object.keys(errs).filter(k=>k!=='maps'&&k!=='ops').length+(errs.maps?1:0)+(errs.ops?1:0);toast('Fix '+n+' item'+(n>1?'s':'')+' before saving. Errors are marked in the form.');
-    const tab=['name','url','auth','interval'].some(k=>errs[k])?'conn':errs.ops?'ops':'map';if(sd.tab!==tab){sd.tab=tab;sdRender()}return}
-  const read=sd.ops.read.map(x=>x.trim()).filter(Boolean),write=sd.ops.write.map(x=>x.trim()).filter(Boolean),csv=d.mode==='Controlled CSV import',off=d.mode==='Not connected';
-  const rw=csv?'Read (import)':off?'—':write.length?(read.length?'Read / write':'Write'):'Read',maps=sd.maps.map(m=>m.map(x=>x.trim()));
-  const base={name:d.name.trim(),vendor:d.vendor,ver:d.ver.trim(),env:d.env,url:d.url.trim(),mode:d.mode,interval:/^Polling/.test(d.mode)?+d.interval:0,auth:d.auth,owner:d.owner.trim()||'Unassigned',read,write,rw};
-  if(sd.mode==='new'){const t=SRC_TYPES[d.type],sd0=SRC_SEED[d.type];let id=d.type,n=2;while(SRC(id))id=d.type+'_'+n++;
-    const s=Object.assign({id,type:d.type,cat:t.cat,short:t.short,status:csv?'manual':'live',freshMin:null,compl:0,conf:0,c0:0,k0:0,inputs:sd0.inputs,authority:sd0.authority.slice(),step:sd0.step.slice(),records:0,cfgVer:'1.0',lastSync:csv?Date.now():null,fresh:csv?'just now':'—',updatedBy:S.role,updatedAt:Date.now(),credAt:Date.now(),credDays:180,runs:[],audit:[{ver:'1.0',who:S.role,ts:Date.now(),change:'Connection created'}]},base);
-    SOURCES.push(s);MAPPINGS[id]=maps;rebuildLookups();wfAddForSource(s);srcEvent(s,'connector.created','acknowledged',s.vendor+' connected as '+s.name+' ('+s.env+')');smLogAdd(s,'Connection created. Initial sync starting.');smRefresh();
-    toast(s.name+' ('+s.vendor+') connected. Initial sync started.');S.sd={mode:'edit',id,tab:'ops',dirty:false,test:null,errs:{},d:{type:s.type,name:s.name,vendor:s.vendor,ver:s.ver,env:s.env,url:s.url,mode:s.mode,interval:s.interval||15,auth:s.auth,owner:s.owner},maps:maps.map(r=>r.slice()),ops:{read:read.slice(),write:write.slice()}};sdRender();
-    if(!csv)setTimeout(()=>startSync(s,false),400);wfPaletteRefresh();return}
-  const s=SRC(sd.id),ch=[],cmp=(k,l)=>{if(String(s[k])!==String(base[k]))ch.push(l)};
-  cmp('name','display name');cmp('vendor','vendor product');cmp('ver','version');cmp('env','environment');cmp('url','endpoint');cmp('auth','authentication');cmp('mode','update method');cmp('owner','owner');
-  if(read.join('|')!==s.read.join('|')||write.join('|')!==s.write.join('|'))ch.push('operations');
-  if(JSON.stringify(maps)!==JSON.stringify(MAPPINGS[s.id]||[]))ch.push('field mapping ('+maps.length+' rows)');
-  const wasOff=s.status==='unavailable'&&!off&&!csv;
-  Object.assign(s,base);MAPPINGS[s.id]=maps;
-  if(wasOff){s.status='live';ch.push('connected')}else if(csv&&s.status!=='manual'){s.status='manual';ch.push('switched to manual import')}else if(!csv&&s.status==='manual'){s.status='live';ch.push('switched to live feed')}
-  if(!ch.length){toast('No changes to save.');sd.dirty=false;sdFoot();return}
-  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.updatedAt=Date.now();s.updatedBy=S.role;s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Updated '+ch.join(', ')});
-  rebuildLookups();srcEvent(s,'connector.updated','acknowledged','Config v'+s.cfgVer+': '+ch.join(', '));smLogAdd(s,'Configuration saved · v'+s.cfgVer+' ('+ch.join(', ')+')');
-  sd.dirty=false;sd.errs={};sd.test=null;sdRender();smPatch(s);wfPaletteRefresh();wfPaint2();toast(s.name+' saved. Configuration is now v'+s.cfgVer+'.');
-  if(wasOff)setTimeout(()=>startSync(s,false),400)};
-ACT.sdTest=()=>{const sd=S.sd,d=sd.d;sd.test={state:'running'};const el=$('#sdTest');if(sd.tab!=='conn'){sd.tab='conn';sdRender()}else if(el)el.innerHTML=sdTestHTML();$('#sdTest')&&$('#sdTest').scrollIntoView({block:'nearest'});
-  setTimeout(()=>{if(!S.sd||S.sd!==sd)return;const s=sd.mode==='edit'?SRC(sd.id):null,ms=rr(70,320);
-    const urlOk=/^(https?|sftp):\/\/[^\s/]+(\/\S*)?$/i.test((d.url||'').trim());
-    if(!urlOk)sd.test={ok:false,msg:'The endpoint is not a valid URL. Use https:// or sftp://.'};
-    else if(/^Pending/.test(d.auth))sd.test={ok:false,msg:'No authentication method is configured yet.'};
-    else if(s&&s.status==='stale'&&s.url===d.url)sd.test={ok:false,msg:'HTTP 401 Unauthorized. The feed token expired; use Refresh token and re-sync or rotate credentials.'};
-    else if(s&&s.status==='unavailable'&&s.mode==='Not connected'&&d.mode==='Not connected')sd.test={ok:false,msg:'No connection configured. Choose an update method and enter the endpoint.'};
-    else sd.test={ok:true,msg:'Authenticated in '+ms+' ms. '+sd.ops.read.filter(x=>x.trim()).length+' read and '+sd.ops.write.filter(x=>x.trim()).length+' write operations reachable.'};
-    const e2=$('#sdTest');e2&&(e2.innerHTML=sdTestHTML())},rr(700,1300))};
 ACT.testConn=id=>{const s=SRC(id);toast(`${s.name}: authenticated, ${s.read.length} read and ${s.write.length} write operations reachable.`)};
 ACT.reconnect=id=>{if(!canMgr())return toast(NOMGR);const s=SRC(id);s.status='live';s.credAt=Date.now();s.lastSync=Date.now()-60000;s.freshMin=1;s.fresh='1 min';s.compl=Math.max(s.compl,93);s.conf=Math.max(s.conf,90);s.c0=s.compl;s.k0=s.conf;if(s.note)s.note='';
   const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Token refreshed and feed re-synced'});
