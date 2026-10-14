@@ -2,7 +2,7 @@
 
 **Purpose of this file:** a self-contained brief for a fresh session. It does not assume any earlier conversation. Read it top to bottom, then start at **Phase 0**.
 
-**Status:** plan only. No RBAC code has been written yet. The Product Owner answered the open questions on 2026-10-14; the answers are recorded in **section 9** and folded into sections 3 and 4. Anything the PO did not answer directly is marked **(assumed)**.
+**Status:** implemented on branch `feature/rbac-adaptive-ui` (phases 0 to 6, 2026-10-14). The Product Owner's answers are in **section 9**; points still marked **(assumed)** are open. Code map: the policy lives between `/*RBAC-START*/` and `/*RBAC-END*/` in `index.html` (`ROLE_POLICY`, `PERM_ACTS`, `ACCOUNTS`, `can`, `canPage`, `canRoute`, `homeFor`); sign-in, requests, the Command Center layouts (`CC_LAYOUT`) and comments follow it. The user-facing walk-through is **Update 7** in `CHANGES.md`.
 
 > Compliance note: access control is a compliance-adjacent topic. Per Kinective policy, the role matrix and any wording about access, security or regulation should be reviewed by Kinective's Legal team before it is relied on or acted on.
 
