@@ -647,6 +647,36 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 .tirec .chip{justify-self:start}
 .ti .tig3>*,.ti .tig2>*,.ti .tig2>div{min-width:0}.tipath{grid-template-columns:minmax(0,1fr)}.ticx .asphoto{max-width:260px}.ti .tw{max-width:100%}.ti .blk{min-width:0}
 .smside>*{min-width:0}.smside .tw{max-width:100%}.smside .hlth{min-width:0}
+
+/* simulated sign-in and account menu */
+.si{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--bg)}
+.sibox{width:min(1000px,100%);display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
+.sil{background:var(--side);color:var(--side-ink);padding:28px 26px;display:flex;flex-direction:column;gap:14px}
+.sil img{width:150px;height:auto}
+.sil h1{font:800 26px/1.15 var(--f-display);margin:6px 0 0;color:var(--side-ink)}
+.sil p{color:var(--side-mut);margin:0;font-size:13.5px;line-height:1.5}
+.sinote{margin-top:auto;border:1px solid color-mix(in srgb,var(--yellow) 45%,transparent);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.45;color:var(--side-ink)}
+.sir{padding:24px 26px;min-width:0}
+.sir h2{font:700 19px var(--f-display);margin:0}
+.sigrp{margin-top:18px}.sigrp h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;font-weight:600}
+.silist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:10px}
+.sia{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:start;text-align:left;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer;font:inherit}
+.sia:hover{border-color:var(--ink2);background:var(--panel2)}
+.sia:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.sia b{display:block;font-size:14px}.sia .note{display:block;font-size:12.5px;margin-top:3px;line-height:1.4}
+.siav{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--yellow-ink);font:800 12.5px var(--f-display);flex:none}
+@media (max-width:760px){.sibox{grid-template-columns:1fr}.sil{padding:20px}.sil h1{font-size:22px}.sir{padding:18px 16px}}
+.acctm{position:relative}
+.acctm>summary{list-style:none;cursor:pointer}.acctm>summary::-webkit-details-marker{display:none}
+.acchip{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:12.5px;white-space:nowrap}
+.acchip:hover{background:var(--panel2)}.acchip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.acchip .siav{width:26px;height:26px;font-size:10.5px}
+.acchip small{color:var(--muted);font-size:12px}
+.acmenu{position:absolute;right:0;top:calc(100% + 6px);z-index:80;width:290px;max-width:calc(100vw - 32px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:6px}
+.acmenu .acd{padding:10px;border-bottom:1px solid var(--line2);margin-bottom:4px}
+.acmenu button{display:block;width:100%;text-align:left;padding:9px 10px;border:0;background:none;border-radius:6px;font:inherit;color:var(--ink);cursor:pointer}
+.acmenu button:hover,.acmenu button:focus-visible{background:var(--panel2)}
+@media (max-width:640px){.acchip small{display:none}}
 </style>
 </head>
 <body>
@@ -1381,9 +1411,9 @@ const stpn=(n)=>{const j=JSTEPS[n-1];return `<span class="stp ${j[2]==='built'?'
 const CLS_ICON={motor:'motor',pump:'pump',control:'control',drill:'drill',batch:'batch',it:'it'};
 const thumb=cls=>`<span class="thumb">${ICON[CLS_ICON[cls]]}</span>`;
 /* state */
-const S={role:'Approver',tenant:'All',theme:'light',q:{kpi:'all',text:'',cond:'',loc:'',owner:'',assess:'',sortK:'priority',sortD:1,limit:25,view:'received'},scen:{purchase:1,cost:1,service:1,market:1,demandOff:false},scenOpen:false,expand:{},xtab:'why',aTab:null,
+const S={role:'',tenant:'All',theme:'light',q:{kpi:'all',text:'',cond:'',loc:'',owner:'',assess:'',sortK:'priority',sortD:1,limit:25,view:'received'},scen:{purchase:1,cost:1,service:1,market:1,demandOff:false},scenOpen:false,expand:{},xtab:'why',aTab:null,
   fA:{tenant:'',cls:'',route:'',from:0,to:11,model:''},drill:null,intTab:'studio',mcpDir:'server',mcpTool:'get_case_evidence',mcpTenant:'Customer A',mcpPerm:'Customer A',poolSel:null,csv:null,sel:null,seq:{apr:161,wo:94000}};
-try{const t=localStorage.getItem('circ-theme');if(t)S.theme=t;const r=localStorage.getItem('circ-role');if(r)S.role=r}catch(e){}
+try{const t=localStorage.getItem('circ-theme');if(t)S.theme=t}catch(e){}
 function applyTheme(){document.documentElement.dataset.theme=S.theme;try{localStorage.setItem('circ-theme',S.theme)}catch(e){}}
 applyTheme();
 /*RBAC-START*/
@@ -1454,14 +1484,13 @@ function canRoute(r){const p=r.page;if(!PAGES[p]||!canPage(p))return false;
   return !r.a||!RB_SECS[p]||canPage(p,r.a)}
 /*RBAC-END*/
 const ROLES=ROLE_POLICY;
-S.acct=ACCOUNTS.find(a=>a.role===S.role)||ACCOUNTS[0];S.role=S.acct.role;
 const visCases=()=>CASES.filter(c=>tenantOK(c.owner)&&(S.tenant==='All'||c.owner===S.tenant));
 const visRows=()=>ROWS.filter(r=>tenantOK(r.tenant)&&(S.tenant==='All'||r.tenant===S.tenant));
 /* toasts, drawer, modal */
 function toast(msg,ms=3200){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>t.remove(),ms)}
-function openDrawer(html,title,sub,foot){$('#drawer').innerHTML=`<div class="dh"><div style="flex:1;min-width:0"><h2>${title}</h2><div class="note">${sub||''}</div></div><button class="iconbtn" data-act="closeDrawer" aria-label="Close panel">${ICON.close}</button></div><div class="db">${html}</div>${foot?`<div class="df">${foot}</div>`:''}`;$('#scrim').classList.add('on');$('#drawer').classList.add('on');$('#drawer').setAttribute('aria-hidden','false');setTimeout(()=>$('#drawer .iconbtn')&&$('#drawer .iconbtn').focus(),50)}
+function openDrawer(html,title,sub,foot){$('#drawer').innerHTML=`<div class="dh"><div style="flex:1;min-width:0"><h2>${title}</h2><div class="note">${sub||''}</div></div><button class="iconbtn" data-act="closeDrawer" aria-label="Close panel">${ICON.close}</button></div><div class="db">${html}</div>${foot?`<div class="df">${foot}</div>`:''}`;$('#scrim').classList.add('on');$('#drawer').classList.add('on');$('#drawer').setAttribute('aria-hidden','false');rbPrune($('#drawer'));setTimeout(()=>$('#drawer .iconbtn')&&$('#drawer .iconbtn').focus(),50)}
 function closeDrawer(force){if(!force&&S.sd&&S.sd.dirty&&!S.sd.warned){S.sd.warned=true;toast('You have unsaved changes. Save or Revert them, or close again to discard.');return}S.sd=null;$('#drawer').classList.remove('wide');$('#scrim').classList.remove('on');$('#drawer').classList.remove('on');$('#drawer').setAttribute('aria-hidden','true')}
-function openModal(title,body,foot,wide){const m=$('#modal');m.innerHTML=`<div class="box ${wide?'wide':''}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="mh"><h2>${title}</h2><button class="iconbtn" data-act="closeModal" aria-label="Close">${ICON.close}</button></div><div class="mb">${body}</div>${foot?`<div class="mf">${foot}</div>`:''}</div>`;m.classList.add('on');setTimeout(()=>{const f=$('#modal input,#modal textarea,#modal select,#modal .btn');f&&f.focus()},40)}
+function openModal(title,body,foot,wide){const m=$('#modal');m.innerHTML=`<div class="box ${wide?'wide':''}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="mh"><h2>${title}</h2><button class="iconbtn" data-act="closeModal" aria-label="Close">${ICON.close}</button></div><div class="mb">${body}</div>${foot?`<div class="mf">${foot}</div>`:''}</div>`;m.classList.add('on');rbPrune(m);setTimeout(()=>{const f=$('#modal input,#modal textarea,#modal select,#modal .btn');f&&f.focus()},40)}
 function closeModal(){$('#modal').classList.remove('on')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('#modal').classList.contains('on'))closeModal();else if($('#drawer').classList.contains('on'))closeDrawer();hideResults()}});
 /* tooltips */
@@ -1500,11 +1529,11 @@ S.navOpen={};S.navRail=false;
 try{const n=JSON.parse(localStorage.getItem('circ-nav')||'{}');if(n.open)S.navOpen=n.open;S.navRail=!!n.rail}catch(e){}
 const navSave=()=>{try{localStorage.setItem('circ-nav',JSON.stringify({open:S.navOpen,rail:S.navRail}))}catch(e){}};
 const navIsOpen=g=>!!S.navOpen[g];
-const navHref=(g,k)=>'#/'+g.id+(g.id==='product'&&k==='asset'?'/asset/'+(S.lastAsset||'RT-1048'):k?'/'+k:'');
+const navHref=(g,k)=>'#/'+g.id+(g.id==='product'&&k==='asset'?'/asset/'+rbLastAsset():k?'/'+k:'');
 function navHTML(){
-  return `<nav class="nav" aria-label="Pages">${NAV.map(g=>{const open=navIsOpen(g.id);
-   return `<div class="ng" data-g="${g.id}"><div class="ngr"><a class="ngh" href="${navHref(g,g.mode?g.kids[0][0]:'')}" data-nav="${g.id}" aria-label="${g.label}">${ICON[g.icon]}<span class="ngl">${g.label}<span class="sub">${g.sub}</span></span>${g.id==='product'?'<span class="cnt" id="navcnt"></span>':''}${g.id==='integration'?'<span class="cnt" id="navint"></span>':''}</a><button class="chev" data-act="navToggle" data-arg="${g.id}" aria-expanded="${open}" aria-controls="ns-${g.id}" aria-label="${g.label}: show sections"></button></div>
-   <div class="nsub" id="ns-${g.id}" role="group" aria-label="${g.label} sections" ${open?'':'hidden'}>${g.kids.map(k=>`<a class="nsl" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}">${k[1]}${k[3]?`<span class="cnt2" data-nb="${k[3]}"></span>`:''}</a>`).join('')}</div></div>`}).join('')}</nav>`}
+  return `<nav class="nav" aria-label="Pages">${navGroups().map(g=>{const open=navIsOpen(g.id),kids=navKids(g);
+   return `<div class="ng" data-g="${g.id}"><div class="ngr"><a class="ngh" href="${navHref(g,g.mode?kids[0][0]:'')}" data-nav="${g.id}" aria-label="${g.label}">${ICON[g.icon]}<span class="ngl">${g.label}<span class="sub">${g.sub}</span></span>${g.id==='product'?'<span class="cnt" id="navcnt"></span>':''}${g.id==='integration'?'<span class="cnt" id="navint"></span>':''}</a><button class="chev" data-act="navToggle" data-arg="${g.id}" aria-expanded="${open}" aria-controls="ns-${g.id}" aria-label="${g.label}: show sections"></button></div>
+   <div class="nsub" id="ns-${g.id}" role="group" aria-label="${g.label} sections" ${open?'':'hidden'}>${kids.map(k=>`<a class="nsl" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}">${k[1]}${k[3]?`<span class="cnt2" data-nb="${k[3]}"></span>`:''}</a>`).join('')}</div></div>`}).join('')}</nav>`}
 function navActiveKey(r){const g=NAV.find(x=>x.id===r.page);if(!g)return'';if(r.page==='product'){return 'product/'+((r.a==='expected'||r.a==='pools'||r.a==='asset')?r.a:'received')}
   if(r.page==='integration')return 'integration/'+(r.a&&INT_TABS.includes(r.a)?r.a:S.intTab);if(r.page==='mcp')return 'mcp/'+(r.a||'');return r.a?r.page+'/'+r.a:''}
 function navSync(r){const key=navActiveKey(r);
@@ -1512,12 +1541,12 @@ function navSync(r){const key=navActiveKey(r);
   $$('.ngh').forEach(a=>a.setAttribute('aria-current',a.dataset.nav===r.page?'page':'false'));
   $$('.ng').forEach(g=>{const on=g.dataset.g===r.page;g.classList.toggle('active',on);const o=navIsOpen(g.dataset.g),s=$('#ns-'+g.dataset.g),c=g.querySelector('.chev');s&&(s.hidden=!o);c&&c.setAttribute('aria-expanded',o)});
   $$('.nsl,.nfi').forEach(a=>a.setAttribute('aria-current',a.dataset.nk===key?'true':'false'));
-  const sn=$('#subnav'),g=NAV.find(x=>x.id===r.page);if(sn)sn.innerHTML=g?`<span class="snt">${g.label}</span>${g.kids.map(k=>`<a class="snl" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}" aria-current="${g.id+'/'+k[0]===key}">${k[1]}</a>`).join('')}`:'';
+  const sn=$('#subnav'),g=NAV.find(x=>x.id===r.page);if(sn)sn.innerHTML=g&&canPage(g.id)?`<span class="snt">${g.label}</span>${navKids(g).map(k=>`<a class="snl" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}" aria-current="${g.id+'/'+k[0]===key}">${k[1]}</a>`).join('')}`:'';
   $$('[data-nk="product/asset"]').forEach(a=>a.setAttribute('href',navHref(NAV[1],'asset')));
   navBadges()}
 function navBadges(){const conf=CONFLICTS.filter(c=>c.status==='open').length,iss=SOURCES.filter(s=>s.status==='stale'||s.status==='unavailable').length,wf=S.wf?S.wf.list.filter(w=>w.status==='published'&&w.last&&w.last.state==='failed').length:0,v={conf,srcissue:iss,wffail:wf};
   $$('[data-nb]').forEach(el=>{const n=v[el.dataset.nb]||0;el.textContent=n||'';el.hidden=!n;el.classList.toggle('bad',el.dataset.nb!=='conf'||n>0)});
-  const ni=$('#navint');if(ni){ni.textContent=conf||'';ni.hidden=!conf}}
+  const ni=$('#navint'),cn=canPage('integration','conflicts')?conf:0;if(ni){ni.textContent=cn||'';ni.hidden=!cn}}
 function anchorScroll(r){const f=ANCH[r.page]&&ANCH[r.page][r.a];if(!r.a){window.scrollTo({top:0,behavior:'smooth'});return}const el=f&&f();if(el){$$('[data-anchor]').forEach(x=>x.removeAttribute('data-anchor'));el.setAttribute('data-anchor','1');el.scrollIntoView({behavior:'smooth',block:'start'})}}
 ACT.navToggle=g=>{S.navOpen[g]=!navIsOpen(g);navSave();const s=$('#ns-'+g),c=$(`.ng[data-g="${g}"] .chev`);s&&(s.hidden=!S.navOpen[g]);c&&c.setAttribute('aria-expanded',S.navOpen[g])};
 ACT.navRail=()=>{S.navRail=!S.navRail;navSave();$('.app').classList.toggle('rail',S.navRail);const b=$('.railbtn');b&&(b.setAttribute('aria-pressed',S.navRail),b.setAttribute('aria-label',S.navRail?'Expand sidebar':'Collapse sidebar'));navFlyHide(true)};
@@ -1527,7 +1556,7 @@ function navFlyHide(now){clearTimeout(NF.t);clearTimeout(NF.s);const f=$('#nfly'
 function navFlyShow(gid,el){const g=NAV.find(x=>x.id===gid);if(!g||innerWidth<=860)return;const rail=$('.app').classList.contains('rail');if(!rail&&navIsOpen(gid))return;
   let f=$('#nfly');if(!f){f=document.createElement('div');f.id='nfly';f.className='nfly';f.setAttribute('role','menu');document.body.appendChild(f);f.addEventListener('mouseenter',()=>clearTimeout(NF.t));f.addEventListener('mouseleave',()=>navFlyHide())}
   const key=navActiveKey(parse()),v={conf:CONFLICTS.filter(c=>c.status==='open').length,srcissue:SOURCES.filter(s=>s.status==='stale'||s.status==='unavailable').length,wffail:S.wf?S.wf.list.filter(w=>w.status==='published'&&w.last&&w.last.state==='failed').length:0};
-  f.innerHTML=`<div class="nfh"><b>${g.label}</b><span class="note">${g.sub}</span></div>${g.kids.map(k=>`<a class="nfi" role="menuitem" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}" aria-current="${g.id+'/'+k[0]===key}"><span class="nft">${k[1]}${k[3]&&v[k[3]]?`<span class="cnt2">${v[k[3]]}</span>`:''}</span><span class="note">${k[2]||''}</span></a>`).join('')}`;
+  f.innerHTML=`<div class="nfh"><b>${g.label}</b><span class="note">${g.sub}</span></div>${navKids(g).map(k=>`<a class="nfi" role="menuitem" href="${navHref(g,k[0])}" data-nk="${g.id}/${k[0]}" aria-current="${g.id+'/'+k[0]===key}"><span class="nft">${k[1]}${k[3]&&v[k[3]]?`<span class="cnt2">${v[k[3]]}</span>`:''}</span><span class="note">${k[2]||''}</span></a>`).join('')}`;
   const r=el.getBoundingClientRect(),sb=$('.side').getBoundingClientRect();f.style.left=(sb.right+6)+'px';f.classList.add('on');f.style.top=Math.max(8,Math.min(r.top-4,innerHeight-f.offsetHeight-8))+'px'}
 document.addEventListener('mouseover',e=>{const g=e.target.closest&&e.target.closest('.ng');if(!g||!$('.side')||!$('.side').contains(g))return;clearTimeout(NF.t);clearTimeout(NF.s);NF.s=setTimeout(()=>navFlyShow(g.dataset.g,g.querySelector('.ngr')),110)});
 document.addEventListener('mouseout',e=>{const side=$('.side');if(!side||!e.target.closest||!e.target.closest('.side'))return;if(!e.relatedTarget||!(e.relatedTarget.closest&&(e.relatedTarget.closest('.ng')||e.relatedTarget.closest('#nfly'))))navFlyHide()});
@@ -1540,29 +1569,65 @@ function shell(){
   ${navHTML()}
   <button class="railbtn" data-act="navRail" aria-pressed="false" aria-label="Collapse sidebar">${ICON.railc}</button><div class="side-foot"><b>Northfield Industrial Leasing</b><br>3 customer tenants · 8 sites<br><span class="note" style="color:var(--side-mut)">Synthetic data, seed 20261007</span></div></aside>
   <div class="main"><header class="top" role="banner">
-   <div class="search"><label class="sr" for="gs">Search cases</label>${ICON.search}<input id="gs" type="search" placeholder="Search return, asset, or closed case ID" autocomplete="off" data-in="gsearch"><div class="results" id="results" hidden></div></div>
-   <div class="tools"><label class="sr" for="tsel">Tenant</label><select class="sel" id="tsel" data-ch="tenant"><option>All</option>${TENANTS.map(t=>`<option>${t}</option>`).join('')}</select>
+   <div class="search"><label class="sr" for="gs">Search cases</label>${ICON.search}<input id="gs" type="search" placeholder="${canPage('product','case')?'Search return, asset, or closed case ID':'Search sources by system or vendor'}" autocomplete="off" data-in="gsearch"><div class="results" id="results" hidden></div></div>
+   <div class="tools"><label class="sr" for="tsel">Tenant</label><select class="sel" id="tsel" data-ch="tenant">${tenantOpts(S.tenant)}</select>
    <span class="pill" data-tip="All screens are computed as of this date">As of ${fmtDY(AS_OF)}</span>
    <button class="pill demo" data-act="dataChecks" data-tip="Open the data integrity checks"><span class="dot"></span>Demo data</button>
-   <label class="sr" for="rsel">Role</label><select class="sel" id="rsel" data-ch="role" data-tip="Role changes what you can do">${Object.keys(ROLES).map(r=>`<option ${r===S.role?'selected':''}>${r}</option>`).join('')}</select>
+   ${acctMenuHTML()}
    <button class="iconbtn" data-act="theme" aria-label="Toggle theme" id="thm"></button></div></header>
    <div class="subnav" id="subnav"></div><div id="jmount"></div><main class="page" id="view" tabindex="-1"></main></div>`;
   $('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;
   $('#app').classList.toggle('rail',S.navRail);const rb=$('.railbtn');rb&&(rb.setAttribute('aria-pressed',S.navRail),rb.setAttribute('aria-label',S.navRail?'Expand sidebar':'Collapse sidebar'));
 }
-ACT.theme=()=>{S.theme=S.theme==='dark'?'light':'dark';applyTheme();$('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;route(true)};
-ACT.tenant=v=>{S.tenant=v;const t=$('#tsel');t&&(t.value=v);route(true)};
-ACT.role=v=>{S.acct=ACCOUNTS.find(a=>a.role===v)||ACCOUNTS[0];S.role=S.acct.role;try{localStorage.setItem('circ-role',v)}catch(e){}toast('Role: '+v+'. '+ROLES[v].desc);route(true)};
+/* ===== Simulated sign-in: one demo account per role, no passwords, nothing leaves the browser ===== */
+const RB_AV={Planner:'PL',Approver:'AP',Engineer:'EN',Finance:'FI',Developer:'DE',Admin:'AD'};
+function sessionLoad(){try{const raw=localStorage.getItem('circ-session');if(raw){const o=JSON.parse(raw),a=o&&ACCT(o.acct);if(a)return a}
+  const old=localStorage.getItem('circ-role');if(old){localStorage.removeItem('circ-role');const a=ACCOUNTS.find(x=>x.role===old);if(a){localStorage.setItem('circ-session',JSON.stringify({acct:a.id}));return a}}}catch(e){}return null}
+function setAcct(a){S.acct=a||null;S.role=a?a.role:'';S.tenant='All';S.lastR=null;try{a?localStorage.setItem('circ-session',JSON.stringify({acct:a.id})):localStorage.removeItem('circ-session')}catch(e){}}
+function signInHTML(){const card=a=>{const P=ROLE_POLICY[a.role];return `<button class="sia" data-act="signIn" data-arg="${a.id}"><span class="siav" aria-hidden="true">${RB_AV[a.role]}</span><span><b>${esc(a.label)}</b><span class="note">${esc(P.desc)}</span></span></button>`};
+  return `<div class="si"><div class="sibox"><div class="sil"><img src="${LOGO}" alt="Artizent"><h1>Circularity<br>Decision Workbench</h1><p>Choose a demo account. Each role sees only the pages, panels and actions that belong to its job.</p>
+   <div class="sinote"><b>Simulated sign-in.</b> These are demo accounts with synthetic labels. There are no passwords and no real authentication; all data is synthetic.</div></div>
+  <div class="sir"><div class="row between"><h2>Sign in as</h2><button class="iconbtn" data-act="theme" aria-label="Toggle theme" id="thm">${S.theme==='dark'?ICON.sun:ICON.moon}</button></div><p class="note" style="margin:0">Your choice is remembered on this device until you sign out.</p>
+   <div class="sigrp"><h3>Planners (one per customer tenant)</h3><div class="silist">${ACCOUNTS.filter(a=>a.role==='Planner').map(card).join('')}</div></div>
+   <div class="sigrp"><h3>Other roles</h3><div class="silist">${ACCOUNTS.filter(a=>a.role!=='Planner').map(card).join('')}</div></div></div></div></div>`}
+function renderSignIn(){closeDrawer(true);closeModal();const app=$('#app');app.classList.remove('rail');app.innerHTML=signInHTML();document.title='Sign in · Circularity Decision Workbench';const f=$('.sia');f&&f.focus()}
+function rbGoHome(){const h='#/'+homeFor(S.acct.role);if(location.hash===h)route();else location.hash=h}
+ACT.signIn=id=>{const a=ACCT(id);if(!a)return;setAcct(a);shell();const r=parse(),ok=location.hash.length>2&&canRoute(r)===true;if(ok)route();else rbGoHome();
+  toast('Signed in as '+a.label+'. '+ROLE_POLICY[a.role].desc,4200)};
+ACT.signOut=()=>{const l=who();setAcct(null);renderSignIn();toast('Signed out of '+l+'.')};
+ACT.switchAcct=()=>{setAcct(null);renderSignIn();toast('Choose an account to continue.')};
+function acctMenuHTML(){const a=S.acct,P=pol();return `<details class="acctm"><summary class="acchip" aria-label="Signed in as ${esc(a.label)}. Account menu"><span class="siav" aria-hidden="true">${RB_AV[a.role]}</span><b>${esc(a.role)}</b>${a.tenant?`<small>${esc(a.tenant)}</small>`:''}<span aria-hidden="true">▾</span></summary>
+  <div class="acmenu" role="menu"><div class="acd"><b>${esc(a.label)}</b><div class="note">${esc(P.desc)}</div>${P.tenantScoped?`<div class="note" style="margin-top:6px">Tenants: ${esc(allowedTenants().join(', '))}</div>`:''}</div>
+  ${can('requestTenant')?'<button role="menuitem" data-act="tenantReq">Request tenant access</button>':''}<button role="menuitem" data-act="switchAcct">Switch account</button><button role="menuitem" data-act="signOut">Sign out</button></div></details>`}
+document.addEventListener('click',e=>{const d=$('.acctm[open]');if(d&&(!e.target.closest('.acctm')||e.target.closest('.acmenu button')))d.removeAttribute('open')});
+function tenantOpts(cur){const P=pol(),sc=P&&P.tenantScoped,al=allowedTenants();
+  return `<option value="All" ${cur==='All'?'selected':''}>${sc?'All my tenants':'All tenants'}</option>`+TENANTS.map(t=>al.includes(t)?`<option value="${t}" ${t===cur?'selected':''}>${t}</option>`:`<option value="${t}" disabled>${t} · locked</option>`).join('')+(sc&&can('requestTenant')&&al.length<TENANTS.length?'<option value="__req">Request access…</option>':'')}
+/* controls the role may never use are removed (buttons) or made read-only (fields), whenever anything renders */
+let RB_SEL={key:'',sel:''};
+function rbSelector(){const d=[...rbDenied()].sort(),k=(S.acct?S.acct.id:'')+d.join();if(RB_SEL.key!==k)RB_SEL={key:k,sel:d.map(a=>`[data-act="${a}"],[data-in="${a}"],[data-ch="${a}"]`).join(',')};return RB_SEL.sel}
+function rbPrune(root){const sel=rbSelector();if(!sel)return;(root||document).querySelectorAll(sel).forEach(el=>{if(el.dataset.act){el.remove();return}if(!el.disabled){el.disabled=true;el.setAttribute('aria-readonly','true')}})}
+new MutationObserver(()=>{if(S.acct)rbPrune()}).observe(document.body,{childList:true,subtree:true});
+function rbBounce(msg){toast(msg,4200);S.bounce={from:location.hash,to:homeFor(S.acct.role),msg};const h='#/'+homeFor(S.acct.role);if(location.hash!==h)location.replace(h)}
+const rbLastAsset=()=>{const c=CASE_BY_ID[S.lastAsset];return c&&tenantOK(c.owner)?c.id:((myCases()[0]||{}).id||'RT-1048')};
+const navKids=g=>g.kids.filter(k=>canPage(g.id,k[0]));
+const navGroups=()=>NAV.filter(g=>canPage(g.id)&&navKids(g).length);
+ACT.theme=()=>{S.theme=S.theme==='dark'?'light':'dark';applyTheme();const t=$('#thm');t&&(t.innerHTML=S.theme==='dark'?ICON.sun:ICON.moon);route(true)};
+ACT.tenant=(v,el)=>{if(v==='__req'){el&&(el.value=S.tenant);ACT.tenantReq&&ACT.tenantReq();return}if(v!=='All'&&!tenantOK(v)){el&&(el.value=S.tenant);toast('Request access to '+v+' first.');return}S.tenant=v;$$('select[data-ch=tenant]').forEach(t=>t.value=v);route(true)};
 function hideResults(){const r=$('#results');if(r)r.hidden=true}
 ACT.gsearch=v=>{const r=$('#results');v=v.trim().toLowerCase();if(v.length<2){r.hidden=true;return}
-  const live=CASES.filter(c=>(c.id+' '+c.assetId+' '+c.product+' '+c.owner).toLowerCase().includes(v)).slice(0,6).map(c=>`<button data-act="openCase" data-arg="${c.id}">${thumb(c.cls)}<span><b>${c.id}</b> · ${esc(c.product)}<br><span class="note">${c.assetId} · ${c.owner} · ${c.assessment}</span></span></button>`);
-  const cl=ROWS.filter(c=>(c.id+' '+c.assetId).toLowerCase().includes(v)).slice(0,4).map(c=>`<button data-act="openClosed" data-arg="${c.id}">${thumb(c.cls)}<span><b>${c.id}</b> · closed ${CLASSES[c.cls].label.toLowerCase()}<br><span class="note">${ROUTES.find(x=>x.id===c.route).name} · ${c.status}</span></span></button>`);
-  r.innerHTML=(live.length||cl.length)?live.concat(cl).join(''):'<div class="empty"><b>No match</b>Try an RT-, asset or CS- number.</div>';r.hidden=false};
+  const live=(canPage('product','case')?myCases():[]).filter(c=>(c.id+' '+c.assetId+' '+c.product+' '+c.owner).toLowerCase().includes(v)).slice(0,6).map(c=>`<button data-act="openCase" data-arg="${c.id}">${thumb(c.cls)}<span><b>${c.id}</b> · ${esc(c.product)}<br><span class="note">${c.assetId} · ${c.owner} · ${c.assessment}</span></span></button>`);
+  const cl=(canPage('analytics')?ROWS.filter(c=>tenantOK(c.tenant)):[]).filter(c=>(c.id+' '+c.assetId).toLowerCase().includes(v)).slice(0,4).map(c=>`<button data-act="openClosed" data-arg="${c.id}">${thumb(c.cls)}<span><b>${c.id}</b> · closed ${CLASSES[c.cls].label.toLowerCase()}<br><span class="note">${ROUTES.find(x=>x.id===c.route).name} · ${c.status}</span></span></button>`);
+  const sr=canPage('integration','map')&&!canPage('product','case')?SOURCES.filter(s=>(s.name+' '+s.vendor+' '+s.owner).toLowerCase().includes(v)).slice(0,6).map(s=>`<button data-act="srcFind" data-arg="${s.id}">${vlogo(s)}<span><b>${esc(s.name)}</b> · ${esc(s.vendor)}<br><span class="note">${esc(s.owner)} · ${esc(s.status)}</span></span></button>`):[];
+  r.innerHTML=(live.length||cl.length||sr.length)?live.concat(cl,sr).join(''):`<div class="empty"><b>No match</b>${canPage('product','case')?'Try an RT-, asset or CS- number.':'Try a system name or vendor.'}</div>`;r.hidden=false};
+ACT.srcFind=id=>{hideResults();sdOpen(id)};
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))hideResults()});
 function route(keep){
-  const r=parse();if(!PAGES[r.page]){go('command');return}
+  if(!S.acct){renderSignIn();return}
+  const r=parse();if(!PAGES[r.page]){rbBounce('Page not found. Showing your home page.');return}
+  const ok=canRoute(r);if(ok!==true){rbBounce(ok==='tenant'?'That record belongs to a tenant you cannot see. Use the tenant menu to request access.':'Not available for the '+S.acct.role+' view.');return}
   const y=keep?scrollY:0;
   if(r.page==='integration'&&INT_TABS.includes(r.a))S.intTab=r.a;
+  if(r.page==='integration'&&!canPage('integration',S.intTab))S.intTab=RB_SECS.integration.find(x=>canPage('integration',x));
   if(r.page==='mcp')S.mcpDir=r.a==='client'?'client':'server';
   const L=S.lastR;S.lastR=r;
   if(!keep&&ANCH[r.page]&&L&&L.page===r.page&&!(r.page==='mcp'&&(r.a==='client')!==(L.a==='client'))){navSync(r);anchorScroll(r);return}
@@ -1571,11 +1636,12 @@ function route(keep){
   const isCase=r.page==='product'&&r.a&&/^RT-/.test(r.a)&&CASE_BY_ID[r.a];
   const j=r.page==='product'&&isCase?[2,3,4,5,6]:PAGES[r.page].j;
   $('#jmount').innerHTML=journey(j);
-  const nc=$('#navcnt');if(nc)nc.textContent=CASES.filter(c=>c.stage==='awaiting_approval').length;
+  const nc=$('#navcnt');if(nc)nc.textContent=visCases().filter(c=>c.stage==='awaiting_approval').length;
   const v=$('#view');
   try{v.innerHTML=({command:renderCommand,product:renderProduct,analytics:renderAnalytics,integration:renderIntegration,mcp:renderMcp,audit:renderAudit})[r.page](r)}catch(err){console.error(err);v.innerHTML=`<div class="empty"><b>This view could not be drawn</b>${esc(err.message)}. Reload the page; your data is synthetic and regenerates identically.</div>`}
   document.title=PAGES[r.page].t+' · Circularity Decision Workbench';
   if(!keep){window.scrollTo(0,0)}else window.scrollTo(0,y);
+  rbPrune();
   if(typeof afterRender==='function')afterRender(r,keep);
 }
 window.addEventListener('hashchange',()=>route());
@@ -1634,7 +1700,7 @@ function queueTable(){
 function expectedTable(){
   return `<div class="callout info" style="margin-bottom:12px">Expected returns support planning only. Any commitment stays conditional until the asset is received and inspected.</div>
   <div class="panel"><div class="tw"><table class="t"><thead><tr><th>Signal</th><th>Product</th><th>Owner</th><th>Expected</th><th>Source</th><th>Planning range</th><th>Status</th></tr></thead><tbody>
-  ${EXPECTED.filter(e=>S.tenant==='All'||e.owner===S.tenant).map(e=>`<tr data-act="expDetail" data-arg="${e.id}"><td><b>${e.id}</b></td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(e.cls)}${e.product}</div></td><td>${e.owner}</td><td>${e.date} Oct</td><td>${e.signal}</td><td class="num">${e.range}</td><td><span class="chip line">Conditional</span></td></tr>`).join('')}</tbody></table></div></div>`;
+  ${EXPECTED.filter(e=>tenantOK(e.owner)&&(S.tenant==='All'||e.owner===S.tenant)).map(e=>`<tr data-act="expDetail" data-arg="${e.id}"><td><b>${e.id}</b></td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(e.cls)}${e.product}</div></td><td>${e.owner}</td><td>${e.date} Oct</td><td>${e.signal}</td><td class="num">${e.range}</td><td><span class="chip line">Conditional</span></td></tr>`).join('')}</tbody></table></div></div>`;
 }
 function renderProduct(r){
   if(r.a==='expected')S.q.view='expected';else if(r.a==='received')S.q.view='received';
@@ -1643,7 +1709,7 @@ function renderProduct(r){
   if(r.a&&CASE_BY_ID[r.a])return caseView(CASE_BY_ID[r.a]);
   const v=S.q.view;
   return `<div class="phead"><div><h1>Returned assets</h1><p>Inspect the inventory, establish readiness, evaluate the best use. Each case below runs steps 2–5 of the journey; execution continues in your systems.</p></div>
-   <div class="row"><div class="seg" role="group" aria-label="View"><button data-act="qview" data-arg="received" aria-pressed="${v==='received'}">Received</button><button data-act="qview" data-arg="expected" aria-pressed="${v==='expected'}">Expected (${EXPECTED.length})</button></div><a class="btn" href="#/product/pools">Pool optimizer</a></div></div>
+   <div class="row"><div class="seg" role="group" aria-label="View"><button data-act="qview" data-arg="received" aria-pressed="${v==='received'}">Received</button><button data-act="qview" data-arg="expected" aria-pressed="${v==='expected'}">Expected (${EXPECTED.filter(e=>tenantOK(e.owner)).length})</button></div><a class="btn" href="#/product/pools">Pool optimizer</a></div></div>
    ${v==='received'?kpiStrip()+'<div style="height:14px"></div>'+queueTable():expectedTable()}`;
 }
 /* queue interactions */
@@ -1751,9 +1817,9 @@ function dupLedger(){return `<h4 style="margin:14px 0 6px">Reservation ledger</h
    <tr><td class="num">09:42</td><td>RT-1052 pool-optimized</td><td>D-302 Site 6 project</td><td class="num">2</td><td><span class="chip ok">Reserved (2 of 2 left)</span></td></tr>
    <tr><td class="num">09:43</td><td>Retry of 09:42 instruction (same key)</td><td>D-302</td><td class="num">8</td><td><span class="chip warn">Deduplicated</span></td></tr></tbody></table></div>`}
 function poolsPage(){
-  const ids=['RT-1048','RT-1052'];
+  const ids=['RT-1048','RT-1052'].filter(id=>tenantOK(CASE_BY_ID[id].owner));
   return `<div class="phead"><div><div class="crumbs"><a href="#/product">Returned assets</a> / Pool optimizer</div><h1>Pool optimizer</h1><p>Scarce assets, components, repair capacity and buyer demand are matched across the whole pool, with each resource allocated once.</p></div></div>
-  <div class="grid g2">${ids.map(id=>{const c=CASE_BY_ID[id],p=POOLS[id];return `<div class="panel"><div class="ph"><h3>${id==='RT-1048'?'Motors for Site 3 and Site 5':'Tool batches for Site 2, Site 6 and the dealer lot'}</h3>${stp(4)}</div><div class="pb"><div class="grid g2"><div><div class="note">Per-asset greedy</div><div class="num" style="font:800 26px var(--f-display)">${money(p.greedy.total)}</div></div><div><div class="note">Pool-optimized</div><div class="num" style="font:800 26px var(--f-display)">${money(p.optimal.total)}</div></div></div><div class="callout ok" style="margin:12px 0">Pool optimization adds <b>${money(p.uplift)}</b> and prevents duplicate allocation.</div><div class="note">Assets: ${p.supplies.map(s=>s.id).join(', ')} · Demand lines: ${p.dests.map(d=>d.id).join(', ')}</div><div style="margin-top:12px"><a class="btn pri" href="#/product/${id}">Open ${id}</a></div></div></div>`}).join('')}</div>`;
+  ${ids.length?'':'<div class="empty"><b>No pools in your tenants</b>Pools appear here when they include assets from a tenant you can see.</div>'}<div class="grid g2">${ids.map(id=>{const c=CASE_BY_ID[id],p=POOLS[id];return `<div class="panel"><div class="ph"><h3>${id==='RT-1048'?'Motors for Site 3 and Site 5':'Tool batches for Site 2, Site 6 and the dealer lot'}</h3>${stp(4)}</div><div class="pb"><div class="grid g2"><div><div class="note">Per-asset greedy</div><div class="num" style="font:800 26px var(--f-display)">${money(p.greedy.total)}</div></div><div><div class="note">Pool-optimized</div><div class="num" style="font:800 26px var(--f-display)">${money(p.optimal.total)}</div></div></div><div class="callout ok" style="margin:12px 0">Pool optimization adds <b>${money(p.uplift)}</b> and prevents duplicate allocation.</div><div class="note">Assets: ${p.supplies.map(s=>s.id).join(', ')} · Demand lines: ${p.dests.map(d=>d.id).join(', ')}</div><div style="margin-top:12px"><a class="btn pri" href="#/product/${id}">Open ${id}</a></div></div></div>`}).join('')}</div>`;
 }
 /* explain & trace */
 function explainBlock(c,sr){
@@ -1795,7 +1861,7 @@ function bestCard(c,sr){
   const spend=defaultSpend(c,r);
   let actions='';
   if(st==='awaiting_approval'){
-    actions=`<div class="row" style="flex-direction:column;align-items:stretch;gap:8px"><button class="btn pri lg" data-act="approve" data-arg="${c.id}" ${can('approve')?'':`aria-disabled="true" data-why="Only the Approver role can approve. You are signed in as ${S.role}."`}>${ICON.check} ${isHold?'Approve hold':r.poolNet?'Approve allocation':'Approve '+(r.id==='redeploy'?'redeployment':'recommendation')}</button><button class="btn" data-act="approve" data-arg="${c.id}|review" ${can('approve')?'':'aria-disabled="true" data-why="Only the Approver role can review and override."'}>Review alternatives / override</button></div>${can('approve')?'':`<p class="note" style="margin:8px 0 0">You are ${S.role}. <a href="#" data-act="asApprover">Switch to Approver</a> to approve.</p>`}`;
+    actions=`<div class="row" style="flex-direction:column;align-items:stretch;gap:8px"><button class="btn pri lg" data-act="approve" data-arg="${c.id}" ${can('approve')?'':`aria-disabled="true" data-why="Only the Approver role can approve. You are signed in as ${S.role}."`}>${ICON.check} ${isHold?'Approve hold':r.poolNet?'Approve allocation':'Approve '+(r.id==='redeploy'?'redeployment':'recommendation')}</button><button class="btn" data-act="approve" data-arg="${c.id}|review" ${can('approve')?'':'aria-disabled="true" data-why="Only the Approver role can review and override."'}>Review alternatives / override</button></div>${can('approve')?'':`<p class="note" style="margin:8px 0 0">Signed in as ${esc(who())}. An Approver approves this decision.</p>`}`;
   }else if(st==='reeval'){actions=`<button class="btn pri" style="width:100%" data-act="reeval" data-arg="${c.id}">Run re-evaluation</button>`}
   else if(c.approval){actions=`<div class="callout ok"><b>${esc(c.approval.ref)}</b><br>${c.override?'Override approved':'Approved'} by ${esc(c.approval.by)} · ${fmtD(c.approval.at)}<br><span class="note">${esc(c.approval.rationale)}</span></div><div class="row" style="margin-top:10px"><button class="btn" data-act="viewInstr" data-arg="${c.id}">Review work instructions</button></div>`}
   const flipLine=flips(c)[0];
@@ -1804,7 +1870,6 @@ function bestCard(c,sr){
    ${actions}<div style="margin-top:12px">${stateLine}</div></div>`;
 }
 function defaultSpend(c,r){return Math.round(-sum(r.terms.filter(t=>t.kind==='prep'&&t.amt<0).map(t=>t.amt)))}
-ACT.asApprover=()=>{S.acct=ACCT('approver');S.role='Approver';$('#rsel').value='Approver';route(true);toast('Role: Approver')};
 function execBlock(c){
   const r=c.chosen||c.recommendation;if(!r)return '';
   const steps=stepsOf(c),started=!!c.exec;
@@ -1979,7 +2044,7 @@ function ccInsightsHTML(sc){const o=[],cl=sc.all.filter(c=>c._st==='approval'&&c
   return o.slice(0,4).map(i=>`<button class="ccin" data-act="ccPick" data-arg="${esc(i[0])}">${esc(i[1])}</button>`).join('')}
 function ccFilters(sc){const f=S.cc,sel=(k,l,opts,cur)=>`<label class="ccf"><span>${l}</span><select class="sel" data-ch="ccF" data-k="${k}" aria-label="${l}"><option value="">All</option>${opts.map(o=>`<option value="${esc(o[0])}" ${String(o[0])===String(cur)?'selected':''}>${esc(o[1])}</option>`).join('')}</select></label>`;
   const active=[];if(f.stage)active.push(['stage',(CC_STAGES.find(s=>s[0]===f.stage)||[0,f.stage])[1]]);if(f.route)active.push(['route',rid(f.route).short]);if(f.reason)active.push(['reason',f.reason]);if(f.due)active.push(['due',(CC_DUE.find(d=>d[0]===f.due)||[0,f.due])[1]]);
-  return `<div class="ccbarf"><label class="ccf"><span>Tenant</span><select class="sel" data-ch="tenant" aria-label="Tenant"><option>All</option>${TENANTS.map(t=>`<option ${S.tenant===t?'selected':''}>${t}</option>`).join('')}</select></label>
+  return `<div class="ccbarf"><label class="ccf"><span>Tenant</span><select class="sel" data-ch="tenant" aria-label="Tenant">${tenantOpts(S.tenant)}</select></label>
    ${sel('site','Site',FACILITIES.map(x=>[x,x]),f.site)}${sel('cls','Asset class',Object.entries(CLASSES).map(([k,v])=>[k,v.label]),f.cls)}${sel('route','Recommended route',ROUTES.map(r=>[r.id,r.name]),f.route)}
    <label class="ccf"><span>Time horizon</span><select class="sel" data-ch="ccMonths" aria-label="Time horizon for closed decisions"><option value="12" ${f.months===12?'selected':''}>Last 12 months</option><option value="6" ${f.months===6?'selected':''}>Last 6 months</option><option value="3" ${f.months===3?'selected':''}>Last 3 months</option></select></label></div>
    ${active.length||f.site||f.cls||S.tenant!=='All'?`<div class="ccactive"><span class="note">Filtered:</span>${active.map(a=>`<button class="chip y chipb" data-act="ccUnpick" data-arg="${a[0]}">${esc(a[1])} ✕</button>`).join('')}${S.tenant!=='All'?`<span class="chip line">${S.tenant}</span>`:''}${f.site?`<span class="chip line">${f.site}</span>`:''}${f.cls?`<span class="chip line">${CLASSES[f.cls].label}</span>`:''}<button class="btn ghost sm" data-act="ccClear">Clear all</button></div>`:''}`}
@@ -2062,7 +2127,7 @@ function asRing(h){const cols={Excellent:'var(--ok)',Good:'#5FAE7B',Fair:'#D4A80
 function asPhoto(c,cls){const f=AS_IMG[c.cls];return `<div class="asimg ${cls||''}"><img src="assets/products/${f}.webp" alt="${esc(c.product)}, ${esc(c.mfr)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><span class="asph" hidden>${thumb(c.cls)}<span>${esc(CLASSES[c.cls].label)}</span></span>${c.qty>1?`<span class="asqty">×${c.qty}</span>`:''}</div>`}
 function assetFacts(c){const d=c.demand||{};return [['Asset ID',c.assetId],['Serial number',asSerial(c)],['Product',asModel(c)],['Manufacturer',c.mfr],['Revision',asRev(c)],['Ownership',c.owner+(d.lease?' · lease '+d.lease:'')],
    ['Location',c.location],['Site demand',d.site?d.site+(d.confirmed?' · confirmed':' · forecast'):'None matched'],['Received',fmtDY(c.received)],['Age',c.age+' years'],['Engineering life',c.engLife],['Next inspection',c.nextInspection]]}
-function assetSelect(c){return `<label class="sr" for="asSw">Switch asset</label><select class="sel asw" id="asSw" data-ch="asSwitch" aria-label="Switch asset">${CASES.map(x=>`<option value="${x.id}" ${x.id===c.id?'selected':''}>${x.id} · ${esc(x.product)} · ${x.assetId}</option>`).join('')}</select>`}
+function assetSelect(c){return `<label class="sr" for="asSw">Switch asset</label><select class="sel asw" id="asSw" data-ch="asSwitch" aria-label="Switch asset">${myCases().map(x=>`<option value="${x.id}" ${x.id===c.id?'selected':''}>${x.id} · ${esc(x.product)} · ${x.assetId}</option>`).join('')}</select>`}
 function assetHead(c,h){
   const base=location.href.split('#')[0],link=base+'#/product/asset/'+c.id;
   return `<nav class="crumbs ascr" aria-label="Breadcrumb"><a href="#/product/received" data-act="go" data-arg="product/received">Assets</a> <span>›</span> <span>${esc(CLASSES[c.cls].plural)}</span> <span>›</span> <span>${esc(asModel(c))}</span> <span>›</span> <b>${c.assetId}</b></nav>
@@ -2075,7 +2140,7 @@ function assetHead(c,h){
    <div class="ashealth"><h3>Overall asset health</h3>${asRing(h)}<div class="note" style="margin-top:6px">${h.est?'Estimated: no inspection grade yet.':'Grade '+c.grade+' · modelled from grade, age and class life.'}</div></div></section>`}
 function assetTabs(c){const rel=assetRelated(c);return `<div class="astabbar"><div class="tabs" role="tablist" aria-label="Asset sections">${AS_TABS.map(t=>`<button role="tab" aria-selected="${S.at.tab===t[0]}" data-act="asTab" data-arg="${t[0]}">${t[1]}${t[0]==='related'?' ('+rel.length+')':''}</button>`).join('')}</div>
    <div class="row asbtns"><button class="btn" data-act="asCompare">Compare similar assets</button><a class="btn pri" href="#/product/${c.id}" data-act="go" data-arg="product/${c.id}">Evaluate treatments →</a></div></div>`}
-function assetRelated(c){return CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).sort((a,b)=>(b.owner===c.owner)-(a.owner===c.owner)||(a.location===c.location?-1:1)-(b.location===c.location?-1:1)||(a.id<b.id?-1:1)).slice(0,3)}
+function assetRelated(c){return myCases().filter(x=>x.id!==c.id&&x.cls===c.cls).sort((a,b)=>(b.owner===c.owner)-(a.owner===c.owner)||(a.location===c.location?-1:1)-(b.location===c.location?-1:1)||(a.id<b.id?-1:1)).slice(0,3)}
 
 /* ---- shared panel + timeline + condition ---- */
 const asPanel=(t,b,tab,cls)=>`<section class="panel aspn ${cls||''}"><div class="ph"><h3>${t}</h3>${tab?`<button class="lnk" data-act="asTab" data-arg="${tab}">View details</button>`:''}</div><div class="pb">${b}</div></section>`;
@@ -2148,7 +2213,7 @@ function asQuality(c){const ev=c.evidence||[],n=ev.length||1,cnt={ready:0,partia
    <h4>Key data sources</h4><div class="assrc">${ev.slice(0,6).map(e=>`<div class="asrow" data-tip="${esc(e.label+(e.note?' · '+e.note:''))}"><span class="row" style="gap:7px;flex-wrap:nowrap"><i class="dotc ${dot[e.state]||''}"></i>${esc(e.source)}</span><span class="note">${e.state==='missing'?'No data':'Updated '+esc(e.fresh)}</span></div>`).join('')}</div></div>`}
 function asRelCard(c,x){const st=ccStage(x),stl={approval:'Awaiting approval',exec:'Under treatment',await_insp:'Awaiting inspection',need:'Needs information',approved:'Approved',reeval:'Re-evaluate',noroute:'No route'}[st];
   return `<a class="asrel" href="#/product/asset/${x.id}" data-act="go" data-arg="product/asset/${x.id}">${asPhoto(x,'xs')}<span class="asrt"><b>${asSerial(x)}</b><span class="note">${esc(asModel(x))} · ${x.assetId}</span><span class="note">${x.owner===c.owner?'Same customer':'Other customer'} · ${esc(x.location)} · ${stl}</span></span><span class="chip ${x.owner===c.owner?'y':'line'}">${x.owner===c.owner?'Similar':'Related'}</span></a>`}
-function asRelated(c){const rel=assetRelated(c);return `<div class="asrels">${rel.map(x=>asRelCard(c,x)).join('')||'<div class="empty"><b>No related assets</b></div>'}</div><button class="lnk" data-act="asTab" data-arg="related" style="margin-top:8px">View all (${CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).length})</button>`}
+function asRelated(c){const rel=assetRelated(c);return `<div class="asrels">${rel.map(x=>asRelCard(c,x)).join('')||'<div class="empty"><b>No related assets</b></div>'}</div><button class="lnk" data-act="asTab" data-arg="related" style="margin-top:8px">View all (${myCases().filter(x=>x.id!==c.id&&x.cls===c.cls).length})</button>`}
 function asOverview(c,h){return `<div class="asg"><div class="asg2 r1">${asPanel('Lifecycle evidence timeline',asTimelineHTML(c),'lifecycle','wide')}${asPanel('Condition intelligence',asCond(c),'condition')}</div>
   <div class="asg2 r2">${asPanel('Product intelligence',asProduct(c,h),'product')}${asPanel('Economic intelligence',asEcon(c),'economic')}</div>
   <div class="asg2 r3">${asPanel('Eligibility and compliance',asElig(c),'eligibility')}${asPanel('Data and evidence quality',asQuality(c),'data')}${asPanel('Related assets and fleet context',asRelated(c),'related')}</div></div>`}
@@ -2178,16 +2243,16 @@ function asTabEligibility(c){const r=c.recommendation||(c.routes||[])[0],gs=r?r.
 function asTabData(c){const ev=c.evidence||[],stl={ready:['Complete','ok'],partial:['Partial','warn'],stale:['Stale','warn'],missing:['Missing','bad'],conflict:['Conflict','bad']};
   const rows=ev.map(e=>`<tr><td><b>${esc(e.label)}</b></td><td>${esc(e.source)}</td><td><span class="chip ${(stl[e.state]||['',''])[1]}">${(stl[e.state]||[e.state])[0]}</span></td><td class="num">${e.state==='missing'?'—':esc(e.fresh)}</td><td class="note">${esc(e.note||'')}</td></tr>`);
   return `<div class="asg2 r1c">${asPanel('Data and evidence quality',asQuality(c))}${asPanel('Where this comes from',`<p class="note" style="margin-top:0">Every item is fetched from the system that owns it, with its source, freshness and confidence. The full request and processing trail is in the audit log.</p><div class="row" style="margin-top:10px"><button class="btn" data-act="go" data-arg="audit/log">Open audit log</button><button class="btn" data-act="snapshot" data-arg="${c.id}">Evidence snapshot</button><button class="btn" data-act="go" data-arg="integration/map">Source map</button></div>`)}</div>`+asPanel('All evidence items',asTbl([['Evidence'],['Source'],['State'],['Updated'],['Note']],rows))}
-function asTabRelated(c){const all=CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).sort((a,b)=>(b.owner===c.owner)-(a.owner===c.owner)||(a.id<b.id?-1:1)).slice(0,14);
+function asTabRelated(c){const all=myCases().filter(x=>x.id!==c.id&&x.cls===c.cls).sort((a,b)=>(b.owner===c.owner)-(a.owner===c.owner)||(a.id<b.id?-1:1)).slice(0,14);
   const rows=all.map(x=>{const hh=assetHealth(x),n=asNet(x);return `<tr><td><div class="row" style="gap:10px;flex-wrap:nowrap">${asPhoto(x,'xs')}<span><b>${asSerial(x)}</b><div class="note">${x.id} · ${x.assetId}</div></span></div></td><td>${x.owner}</td><td>${esc(x.location)}</td><td>${x.grade?'Grade '+x.grade:'—'}</td><td class="r num">${hh.score}</td><td class="r num">${n==null?'—':money(n)}</td><td>${stageChip(x)}</td><td class="nowrap"><span class="tacts" style="display:inline-flex"><button class="tbtn" data-act="go" data-arg="product/asset/${x.id}">Open</button><button class="tbtn" data-act="asCompare" data-arg="${x.id}">Compare</button></span></td></tr>`});
-  return asPanel('Related assets and fleet context',asTbl([['Asset'],['Owner'],['Site'],['Grade'],['Health','r'],['Net','r'],['Status'],['']],rows)+`<div class="note" style="margin-top:6px">Showing the ${all.length} closest of ${CASES.filter(x=>x.id!==c.id&&x.cls===c.cls).length} ${esc(CLASSES[c.cls].plural.toLowerCase())}: same customer first, then by return number.</div>`)}
+  return asPanel('Related assets and fleet context',asTbl([['Asset'],['Owner'],['Site'],['Grade'],['Health','r'],['Net','r'],['Status'],['']],rows)+`<div class="note" style="margin-top:6px">Showing the ${all.length} closest of ${myCases().filter(x=>x.id!==c.id&&x.cls===c.cls).length} ${esc(CLASSES[c.cls].plural.toLowerCase())}: same customer first, then by return number.</div>`)}
 function assetTabBody(c,h){const t=S.at.tab;return ({overview:asOverview,lifecycle:asTabLifecycle,condition:asTabCondition,product:asTabProduct,economic:asTabEconomic,eligibility:asTabEligibility,data:asTabData,related:asTabRelated}[t]||asOverview)(c,h)}
 ACT.asCompare=id=>{const c=CASE_BY_ID[S.lastAsset];if(!c)return;const rel=assetRelated(c).filter(x=>x.id!==id),pick=[CASE_BY_ID[id]].filter(Boolean).concat(rel).slice(0,3),cols=[c].concat(pick);
   const val=(x,k)=>{const hh=assetHealth(x),ev=x.evidence||[],q=Math.round((ev.filter(e=>e.state==='ready').length+.5*ev.filter(e=>e.state==='partial'||e.state==='stale').length)/Math.max(1,ev.length)*100);
    return ({id:x.id+' · '+x.assetId,owner:x.owner,site:x.location,age:x.age+' years',grade:x.grade?'Grade '+x.grade:'Not graded',health:hh.score+' / 100',life:x.engLife,route:x.recommendation?(x.recommendation.plan||rid(x.recommendation.id).short):'None yet',net:x.recommendation?money(x.recommendation.net):'—',q:q+' / 100'})[k]};
   const rows=[['id','Return · asset'],['owner','Owner'],['site','Site'],['age','Age'],['grade','Condition'],['health','Health score'],['life','Engineering life'],['route','Recommended route'],['net','Predicted net'],['q','Data confidence']];
   openModal('Compare similar assets',`<div class="tw"><table class="t static tight ascmp"><thead><tr><th></th>${cols.map((x,i)=>`<th>${asPhoto(x,'xs')}<div>${asSerial(x)}${i===0?' <span class="chip y">This asset</span>':''}</div></th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr><td class="note">${r[1]}</td>${cols.map(x=>`<td>${esc(val(x,r[0]))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`,`<button class="btn ghost" data-act="closeModal">Close</button>`,true)};
-function assetPage(r){const c=CASE_BY_ID[r.b||S.lastAsset||'RT-1048'];
+function assetPage(r){const c=CASE_BY_ID[r.b||rbLastAsset()];
   if(!c)return `<div class="empty"><b>Asset not found</b>Choose a returned asset from <a href="#/product/received">Returned assets</a>.</div>`;
   S.lastAsset=c.id;const h=assetHealth(c);
   return `<div class="as">${assetHead(c,h)}${assetTabs(c)}<div id="asBody">${assetTabBody(c,h)}</div></div>`}
@@ -2393,7 +2458,7 @@ function renderAnalytics(){
   return `<div class="phead"><div><h1>Analytics</h1><p>Predicted and actual results stay linked, so each decision teaches the next one. The four success measures from the framework lead; every number drills to its cases.</p></div></div>
   <div class="panel" style="margin-bottom:16px"><div class="filters" style="border:0">
    <span class="note">From</span><select class="sel" data-ch="faFrom" aria-label="From month">${MONTHS.map((x,i)=>`<option value="${i}" ${i===f.from?'selected':''}>${x}</option>`).join('')}</select><span class="note">to</span><select class="sel" data-ch="faTo" aria-label="To month">${MONTHS.map((x,i)=>`<option value="${i}" ${i===f.to?'selected':''}>${x}</option>`).join('')}</select>
-   ${sel('tenant',TENANTS.map(t=>[t,t]),f.tenant,'Tenant: '+(S.tenant==='All'?'all':'global filter on'))}${sel('cls',Object.entries(CLASSES).map(([k,v])=>[k,v.label]),f.cls,'Asset class')}${sel('route',ROUTES.map(r=>[r.id,r.name]),f.route,'Route')}
+   ${sel('tenant',allowedTenants().map(t=>[t,t]),f.tenant,'Tenant: '+(S.tenant==='All'?'all':'global filter on'))}${sel('cls',Object.entries(CLASSES).map(([k,v])=>[k,v.label]),f.cls,'Asset class')}${sel('route',ROUTES.map(r=>[r.id,r.name]),f.route,'Route')}
    <button class="btn ghost sm" data-act="fReset">Reset filters</button><span class="grow"></span><span class="chip line">${rows.length.toLocaleString()} decisions · ${m.rc.length.toLocaleString()} reconciled</span></div></div>
   <div class="kpis" style="grid-template-columns:repeat(4,minmax(0,1fr))">
    ${kpi('+'+kfmt(m.uplift),'additional net recovery vs baseline',`${kfmt(m.act)} recovered vs ${kfmt(m.base)} baseline (${m.base?'+'+((m.act/m.base-1)*100).toFixed(0)+'%':'—'})`,'drillAll')}
@@ -3378,7 +3443,7 @@ ACT.tgFkOk=()=>{const m=tgModel(S.tg.src),f=S.tgF,a=f.a+'.'+f.ac,b=f.b+'.'+f.bc;
 ACT.tgFkDel=i=>{if(!canMgr())return toast(NOMGR);const m=tgModel(S.tg.src),f=m.fk.splice(+i,1)[0];route(true);toastAct(f[0]+' → '+f[1]+' removed.','Undo',()=>{m.fk.splice(Math.min(+i,m.fk.length),0,f);route(true)})};
 function renderIntegration(){
   const tab=S.intTab,open=CONFLICTS.filter(c=>c.status==='open').length;
-  const T=[['studio','Workflow studio'],['map','Source map'],['tables','Source tables'],['models','Canonical models'],['events','Event stream'],['conflicts','Conflict queue ('+open+')'],['import','Manual import']];
+  const T=[['studio','Workflow studio'],['map','Source map'],['tables','Source tables'],['models','Canonical models'],['events','Event stream'],['conflicts','Conflict queue ('+open+')'],['import','Manual import']].filter(t=>canPage('integration',t[0]));
   return `<div class="phead"><div><h1>Connection Fabric</h1><p>Existing lease, ERP, asset, repair, warehouse and service systems keep owning their transactions. Circularity assembles their evidence, sends approved instructions back, and reconciles what returns.</p></div></div>
   <div class="tabs" role="tablist">${T.map(t=>`<button role="tab" aria-selected="${tab===t[0]}" data-act="intTab" data-arg="${t[0]}">${t[1]}</button>`).join('')}</div>
   ${tab==='studio'?wfHTML():tab==='map'?intMap():tab==='tables'?tgHTML():tab==='models'?intModels():tab==='events'?evTable():tab==='conflicts'?intConflicts():intImport()}`;
@@ -3540,7 +3605,7 @@ function auditEntries(){
   const out=[];
   visCases().forEach(c=>c.evidence.forEach(e=>{if(e.state==='missing')return;const p=provFor(c,e);
     out.push({id:'AU-'+p.id,kind:'fetch',ts:p.fetchedAt,source:p.sourceName,caseId:c.id,asset:c.assetId,item:e.label,key:e.k,request:p.request,result:p.status==='partial'?'Partial record':'1 record · '+(p.table||'—'),used:p.usedIn.slice(0,2).join('; '),status:p.status,p})}));
-  EVENTS.forEach(ev=>{const c=ev.caseId&&CASE_BY_ID[ev.caseId];if(c&&S.tenant!=='All'&&c.owner!==S.tenant)return;
+  EVENTS.forEach(ev=>{const c=ev.caseId&&CASE_BY_ID[ev.caseId];if(c?(!tenantOK(c.owner)||(S.tenant!=='All'&&c.owner!==S.tenant)):pol().tenantScoped)return;
     out.push({id:'AE-'+ev.id,kind:'event',ts:new Date(ev.ts),source:ev.dest,caseId:ev.caseId||'—',asset:c?c.assetId:'—',item:ev.type,key:'event',request:(ev.dir==='out'?'Outbound ':'Inbound ')+ev.type+(ev.key&&ev.key!=='—'?' · '+ev.key:''),result:ev.ack,used:ev.decisionId?`Decision ${ev.decisionId}${ev.approval?' · '+ev.approval:''}`:'Fabric housekeeping',status:'recorded',ev})});
   return out;
 }
@@ -3575,7 +3640,7 @@ ACT.auEntry=id=>{const x=auditEntries().find(e=>e.id===id);if(!x){toast('Entry n
 
 /* ===== boot ===== */
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-act][tabindex]')){e.preventDefault();e.target.click()}});
-shell();route();
+S.acct=sessionLoad();S.role=S.acct?S.acct.role:'';if(S.acct){shell();route()}else renderSignIn();
 
 setInterval(()=>{try{smTick()}catch(e){console.error(e)}},1000);
 </script>
