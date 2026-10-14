@@ -1386,10 +1386,77 @@ const S={role:'Approver',tenant:'All',theme:'light',q:{kpi:'all',text:'',cond:''
 try{const t=localStorage.getItem('circ-theme');if(t)S.theme=t;const r=localStorage.getItem('circ-role');if(r)S.role=r}catch(e){}
 function applyTheme(){document.documentElement.dataset.theme=S.theme;try{localStorage.setItem('circ-theme',S.theme)}catch(e){}}
 applyTheme();
-const ROLES={Planner:{approve:false,request:true,assess:false,confirm:false,desc:'Prepares cases and requests evidence. Cannot approve.'},Approver:{approve:true,request:true,assess:false,confirm:false,desc:'Approves routes, spend and sale terms; can override with a reason.'},Engineer:{approve:false,request:true,assess:true,confirm:false,desc:'Records assessments and test results. Cannot waive a failed gate.'},Finance:{approve:false,request:false,assess:false,confirm:true,desc:'Confirms receipts and avoided spend when outcomes return.'}};
-const can=a=>ROLES[S.role][a];
-const visCases=()=>CASES.filter(c=>S.tenant==='All'||c.owner===S.tenant);
-const visRows=()=>ROWS.filter(r=>S.tenant==='All'||r.tenant===S.tenant);
+/*RBAC-START*/
+/* ===== Roles, demo accounts and the access policy: the only place that decides who sees and does what ===== */
+const AS_TAB_IDS=['overview','lifecycle','condition','product','economic','eligibility','data','related'];
+const RB_SECS={command:['kpis','approvals','outcomes','charts','actions','signals','value','health'],product:['received','expected','pools','asset','case'],
+ analytics:['waterfall','pipeline','mix','predicted','models','pool','overrides','eng','sustain'],integration:['studio','map','tables','models','events','conflicts','import'],
+ mcp:['catalog','agents','playground','perms','calls','client','proposals'],audit:['log','gaps'],access:['accounts','delegations','requests']};
+/* each permission names the controls (data-act, data-in, data-ch) it unlocks; a role without the permission never gets those controls rendered */
+const PERM_ACTS={
+ 'approve.decisions':['approve','confirmApprove','apRoute','wfApprove'],
+ submit:['tiSubmit'],request:['reqEvidence'],assess:['simResult'],confirm:['confirmOutcome'],reeval:['reeval'],execSim:['advance','replay'],
+ scenario:['tiSave','tiLoad','tiDelSc','tiRecalc'],
+ manageIntegrations:['srcAdd','srcSync','srcSyncAll','srcDel','srcDelOk','srcDelType','sdSave','sdRevert','sdTest','sdRotate','sdRotateOk','sdOpAdd','sdOpDel','sdMapAdd','sdMapDel','reconnect','sdF','sdC','sdOp','sdMap',
+  'tgAdd','tgAddOk','tgEdit','tgEditOk','tgDel','tgFkNew','tgFkOk','tgFkDel','tgFkF','tgFkWhy','taN','resolveConf','escConf','csvSample','csvValidate','csvCommit','csvText','csvFile','gotoImport'],
+ manageWorkflows:['wfNew','wfNewOk','wfSave','wfPublish','wfToggle','wfRunNow','wfDup','wfDelAsk','wfDelOk','wfDel','wfDelEdge','wfDiscard','wfReset','wfRun','wfFail','wfName','wfOwn','wfMin','wfTrig','nwF','nwName','wfConnTo'],
+ useTools:['pgRun','tryTool','pgReset','pgTool','pgAgent','pgTenant','pgInput'],
+ proposeMcp:['mcpPropose','mcpProposeOk'],requestTenant:['tenantReq','tenantReqOk'],comment:['cmAdd'],manageAccess:['delegToggle']};
+const PERM_ALIAS={approve:'approve.decisions'};
+const ROLE_POLICY={
+ Planner:{desc:'Prepares cases in their own tenant, requests evidence and submits decisions for review.',landing:'command',tenantScoped:true,
+  perms:['submit','request','reeval','execSim','scenario','requestTenant'],
+  pages:{command:['kpis','charts','actions','signals'],product:['received','expected','pools','asset','case'],analytics:['waterfall','pipeline','mix','predicted','models','pool','overrides'],audit:['log','gaps']},asTabs:AS_TAB_IDS},
+ Approver:{desc:'Approves or declines what Admin delegates: decisions and overrides, MCP server proposals and tenant access.',landing:'command',
+  perms:['approve.decisions','approve.mcp','approve.tenantAccess','request','reeval','execSim','scenario'],
+  pages:{command:['kpis','approvals','charts','actions','signals','value'],product:['received','expected','pools','asset','case'],analytics:RB_SECS.analytics,integration:['events','conflicts'],mcp:['catalog','agents','perms','calls','client','proposals'],audit:['log','gaps']},asTabs:AS_TAB_IDS},
+ Engineer:{desc:'Inspects assets, records assessments and test results, and owns technical eligibility.',landing:'product/asset',
+  perms:['request','assess','execSim'],
+  pages:{command:['kpis','charts','actions','signals'],product:['received','expected','asset','case'],analytics:['eng','sustain'],integration:['map','tables','models'],mcp:['catalog','agents','perms','calls','client','proposals'],audit:['log','gaps']},
+  asTabs:['overview','lifecycle','condition','product','eligibility','data','related']},
+ Finance:{desc:'Confirms outcomes and tracks recovery, avoided spend and variance. Reads and comments on the audit log and Source map.',landing:'analytics',
+  perms:['confirm','comment'],
+  pages:{command:['kpis','outcomes','charts','value'],product:['received','expected','pools','asset','case'],analytics:RB_SECS.analytics,integration:['map'],audit:['log','gaps']},
+  asTabs:['overview','lifecycle','economic','data','related']},
+ Developer:{desc:'Connects sources, builds workflows, proposes MCP servers and governs agent tools.',landing:'integration/map',
+  perms:['manageIntegrations','manageWorkflows','useTools','proposeMcp','comment'],
+  pages:{command:['kpis','health'],integration:RB_SECS.integration,mcp:RB_SECS.mcp,audit:['log','gaps']},asTabs:[]},
+ Admin:{desc:'Every permission on every page and tenant, plus accounts, Approver delegations and access requests.',landing:'command',all:true,perms:Object.keys(PERM_ACTS).concat('approve.mcp','approve.tenantAccess'),pages:RB_SECS,asTabs:AS_TAB_IDS}
+};
+/* demo accounts: synthetic labels only, never personal names */
+const ACCOUNTS=[
+ {id:'planner-a',role:'Planner',tenant:'Customer A',label:'Planner · Customer A'},{id:'planner-b',role:'Planner',tenant:'Customer B',label:'Planner · Customer B'},{id:'planner-c',role:'Planner',tenant:'Customer C',label:'Planner · Customer C'},
+ {id:'approver',role:'Approver',label:'Approver'},{id:'engineer',role:'Engineer',label:'Engineer'},{id:'finance',role:'Finance',label:'Finance'},{id:'developer',role:'Developer',label:'Developer'},{id:'admin',role:'Admin',label:'Admin'}];
+const ACCT=id=>ACCOUNTS.find(a=>a.id===id);
+S.acct=null;S.deleg={decisions:true,mcp:true,tenantAccess:true};S.grants={};
+const pol=()=>S.acct?ROLE_POLICY[S.acct.role]:null;
+function can(p){p=PERM_ALIAS[p]||p;const P=pol();if(!P)return false;if(P.all)return true;if(!P.perms.includes(p))return false;
+  if(S.acct.role==='Approver'&&p.indexOf('approve.')===0)return !!S.deleg[p.slice(8)];return true}
+function canPage(page,sec){const P=pol();if(!P)return false;const l=P.pages[page];if(!l)return false;return !sec||l.includes(sec)}
+const see=(page,sec)=>canPage(page,sec);
+const asTabOK=t=>{const P=pol();return !!P&&P.asTabs.includes(t)};
+const homeFor=role=>(ROLE_POLICY[role]||ROLE_POLICY.Planner).landing;
+const who=()=>S.acct?S.acct.label:'—';
+/* tenant scope: a Planner sees their home tenant plus any tenant an Approver or Admin granted */
+const allowedTenants=()=>{const P=pol();if(!P||!P.tenantScoped)return TENANTS.slice();return TENANTS.filter(t=>t===S.acct.tenant||(S.grants[S.acct.id]||[]).includes(t))};
+const tenantOK=t=>allowedTenants().includes(t);
+const myCases=()=>CASES.filter(c=>tenantOK(c.owner));
+/* actions a role may never take: removed from the page, inputs made read-only, clicks refused */
+function rbDenied(){const s=new Set();if(!S.acct)return s;if(pol().all)return s;
+  const ok=new Set();Object.keys(PERM_ACTS).forEach(p=>{if(can(p))PERM_ACTS[p].forEach(a=>ok.add(a))});
+  Object.keys(PERM_ACTS).forEach(p=>{if(!can(p))PERM_ACTS[p].forEach(a=>{if(!ok.has(a))s.add(a)})});return s}
+/* route check: true, false, or 'tenant' when the record belongs to a tenant the account cannot see */
+function canRoute(r){const p=r.page;if(!PAGES[p]||!canPage(p))return false;
+  if(p==='product'){if(!r.a||['received','expected','pools'].includes(r.a))return canPage(p,r.a||'received');
+    if(r.a==='asset'){if(!canPage(p,'asset'))return false;const c=r.b&&CASE_BY_ID[r.b];return c&&!tenantOK(c.owner)?'tenant':true}
+    if(CASE_BY_ID[r.a]){if(!canPage(p,'case'))return false;return tenantOK(CASE_BY_ID[r.a].owner)?true:'tenant'}return canPage(p,'received')}
+  if(p==='mcp'&&r.a==='client')return canPage(p,'client');
+  return !r.a||!RB_SECS[p]||canPage(p,r.a)}
+/*RBAC-END*/
+const ROLES=ROLE_POLICY;
+S.acct=ACCOUNTS.find(a=>a.role===S.role)||ACCOUNTS[0];S.role=S.acct.role;
+const visCases=()=>CASES.filter(c=>tenantOK(c.owner)&&(S.tenant==='All'||c.owner===S.tenant));
+const visRows=()=>ROWS.filter(r=>tenantOK(r.tenant)&&(S.tenant==='All'||r.tenant===S.tenant));
 /* toasts, drawer, modal */
 function toast(msg,ms=3200){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>t.remove(),ms)}
 function openDrawer(html,title,sub,foot){$('#drawer').innerHTML=`<div class="dh"><div style="flex:1;min-width:0"><h2>${title}</h2><div class="note">${sub||''}</div></div><button class="iconbtn" data-act="closeDrawer" aria-label="Close panel">${ICON.close}</button></div><div class="db">${html}</div>${foot?`<div class="df">${foot}</div>`:''}`;$('#scrim').classList.add('on');$('#drawer').classList.add('on');$('#drawer').setAttribute('aria-hidden','false');setTimeout(()=>$('#drawer .iconbtn')&&$('#drawer .iconbtn').focus(),50)}
@@ -1402,9 +1469,10 @@ document.addEventListener('mouseover',e=>{const t=e.target.closest('[data-tip]')
 document.addEventListener('mousemove',e=>{const tip=$('#tip');if(tip.style.display==='block'){tip.style.left=Math.min(e.clientX+12,innerWidth-270)+'px';tip.style.top=(e.clientY+14)+'px'}});
 /* action delegation */
 const ACT={};
-document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t||t.disabled||t.getAttribute('aria-disabled')==='true'){if(t&&t.dataset.why)toast(t.dataset.why);return}const f=ACT[t.dataset.act];if(f){e.preventDefault();f(t.dataset.arg,t,e)}});
-document.addEventListener('input',e=>{const t=e.target.closest('[data-in]');if(t&&ACT[t.dataset.in])ACT[t.dataset.in](t.value,t,e)});
-document.addEventListener('change',e=>{const t=e.target.closest('[data-ch]');if(t&&ACT[t.dataset.ch])ACT[t.dataset.ch](t.type==='checkbox'?t.checked:t.value,t,e)});
+const rbRefuse=a=>{if(!rbDenied().has(a))return false;toast('Not available for the '+(S.acct?S.acct.role:'signed-out')+' view.');return true};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t||t.disabled||t.getAttribute('aria-disabled')==='true'){if(t&&t.dataset.why)toast(t.dataset.why);return}const f=ACT[t.dataset.act];if(f){e.preventDefault();if(rbRefuse(t.dataset.act))return;f(t.dataset.arg,t,e)}});
+document.addEventListener('input',e=>{const t=e.target.closest('[data-in]');if(t&&ACT[t.dataset.in]&&!rbRefuse(t.dataset.in))ACT[t.dataset.in](t.value,t,e)});
+document.addEventListener('change',e=>{const t=e.target.closest('[data-ch]');if(t&&ACT[t.dataset.ch]&&!rbRefuse(t.dataset.ch))ACT[t.dataset.ch](t.type==='checkbox'?t.checked:t.value,t,e)});
 ACT.closeDrawer=closeDrawer;ACT.closeModal=closeModal;
 /* route */
 function parse(){const h=location.hash.replace(/^#\/?/,'').split('?')[0].split('/').filter(Boolean);return{page:h[0]||'command',a:h[1]||null,b:h[2]||null}}
@@ -1484,7 +1552,7 @@ function shell(){
 }
 ACT.theme=()=>{S.theme=S.theme==='dark'?'light':'dark';applyTheme();$('#thm').innerHTML=S.theme==='dark'?ICON.sun:ICON.moon;route(true)};
 ACT.tenant=v=>{S.tenant=v;const t=$('#tsel');t&&(t.value=v);route(true)};
-ACT.role=v=>{S.role=v;try{localStorage.setItem('circ-role',v)}catch(e){}toast('Role: '+v+'. '+ROLES[v].desc);route(true)};
+ACT.role=v=>{S.acct=ACCOUNTS.find(a=>a.role===v)||ACCOUNTS[0];S.role=S.acct.role;try{localStorage.setItem('circ-role',v)}catch(e){}toast('Role: '+v+'. '+ROLES[v].desc);route(true)};
 function hideResults(){const r=$('#results');if(r)r.hidden=true}
 ACT.gsearch=v=>{const r=$('#results');v=v.trim().toLowerCase();if(v.length<2){r.hidden=true;return}
   const live=CASES.filter(c=>(c.id+' '+c.assetId+' '+c.product+' '+c.owner).toLowerCase().includes(v)).slice(0,6).map(c=>`<button data-act="openCase" data-arg="${c.id}">${thumb(c.cls)}<span><b>${c.id}</b> · ${esc(c.product)}<br><span class="note">${c.assetId} · ${c.owner} · ${c.assessment}</span></span></button>`);
@@ -1736,7 +1804,7 @@ function bestCard(c,sr){
    ${actions}<div style="margin-top:12px">${stateLine}</div></div>`;
 }
 function defaultSpend(c,r){return Math.round(-sum(r.terms.filter(t=>t.kind==='prep'&&t.amt<0).map(t=>t.amt)))}
-ACT.asApprover=()=>{S.role='Approver';$('#rsel').value='Approver';route(true);toast('Role: Approver')};
+ACT.asApprover=()=>{S.acct=ACCT('approver');S.role='Approver';$('#rsel').value='Approver';route(true);toast('Role: Approver')};
 function execBlock(c){
   const r=c.chosen||c.recommendation;if(!r)return '';
   const steps=stepsOf(c),started=!!c.exec;
@@ -1770,7 +1838,7 @@ ACT.confirmApprove=id=>{
   const isOv=t!==c.recommendation;const ref='APR-2026-10-'+String(S.seq.apr++).padStart(4,'0');
   c.chosen=t;c.stage='approved';
   mkExec(c,0,1);
-  c.approval={ref,by:S.role==='Approver'?'You (Approver)':S.role,at:new Date(),rationale:why,spend:+$('#ap-spend').value,terms:$('#ap-terms').value};
+  c.approval={ref,by:who(),at:new Date(),rationale:why,spend:+$('#ap-spend').value,terms:$('#ap-terms').value};
   if(isOv)c.override={rec:c.recommendation.plan,chosen:t.plan,reason:why};
   c.exec.ref=ref;c.exec.approver=c.approval.by;c.exec.approvedAt=new Date();c.exec.steps[0].state='active';
   const x=c.exec;pushEvent({dir:'out',type:'instruction.sent',caseId:c.id,decisionId:x.decisionId,approval:ref,ver:1,dest:x.steps[0].sys,ack:'sent · awaiting ack',key:'idem-'+hashId(c.id+ref).slice(0,6).toLowerCase(),retries:0,note:isOv?'Override approved with reason':''});
@@ -2214,7 +2282,7 @@ ACT.tiSel=(v,el)=>{const p=el.dataset.arg,s=S.ti.sel||(S.ti.sel=[]);if(v){if(s.l
 ACT.tiRecalc=()=>{tiRefresh();const c=tiCase(),sr=scenRoutes(c);toast(sr.el[0]?'Re-ranked. Top pathway: '+sr.el[0].r.plan+'.':'No eligible pathway under these assumptions.')};
 ACT.tiExplain=()=>{const e=$('#b-explain')||$('#explain');e&&e.scrollIntoView({behavior:'smooth',block:'start'})};
 ACT.tiMode=()=>{const c=tiCase();toast('Portfolio mode optimises across assets that compete for the same demand.');go('product/pools')};
-ACT.tiSave=()=>{if(!canMgr()&&!can('request'))return toast('Your role cannot save scenarios.');const c=tiCase(),sr=scenRoutes(c),s=S.scen,parts=[['purchase','purchase price'],['cost','prep and fees'],['service','service'],['market','market']].filter(x=>s[x[0]]!==1).map(x=>x[1]+' '+tiAdj(s[x[0]]));
+ACT.tiSave=()=>{if(!can('scenario'))return toast('Your role cannot save scenarios.');const c=tiCase(),sr=scenRoutes(c),s=S.scen,parts=[['purchase','purchase price'],['cost','prep and fees'],['service','service'],['market','market']].filter(x=>s[x[0]]!==1).map(x=>x[1]+' '+tiAdj(s[x[0]]));
   const arr=S.ti.saved[c.id]||(S.ti.saved[c.id]=[]),id='sc'+Date.now();arr.push({id,name:'Scenario '+(arr.length+1)+(parts.length?': '+parts.join(', '):': base'),top:sr.el[0]?sr.el[0].r.plan+' · '+money(sr.el[0].sn):'No eligible pathway',scen:Object.assign({},s),w:Object.assign({},S.ti.w)});route(true);toast('Scenario saved for '+c.id+'.')};
 ACT.tiLoad=id=>{const c=tiCase(),x=(S.ti.saved[c.id]||[]).find(y=>y.id===id);if(!x)return;S.scen=Object.assign({},x.scen);S.ti.w=Object.assign({},x.w);route(true);toast(x.name+' loaded.')};
 ACT.tiDelSc=id=>{const c=tiCase();S.ti.saved[c.id]=(S.ti.saved[c.id]||[]).filter(y=>y.id!==id);route(true)};
@@ -2350,8 +2418,8 @@ ACT.drillAvoid=()=>setDrill('Confirmed avoided spend',r=>r.avoided>0);ACT.drillP
 /* ===== Integration · Connection Fabric ===== */
 const stChip=s=>({live:'<span class="chip ok">Live</span>',manual:'<span class="chip dk">Manual import</span>',unavailable:'<span class="chip bad">Unavailable</span>',stale:'<span class="chip warn">Stale</span>'})[s];
 const ackKind=a=>/^acknowledged$/.test(a)?'ok':/conflict|stale|failed/.test(a)?'bad':/sent/.test(a)?'line':'warn';
-const canMgr=()=>can('approve')||can('assess');
-const NOMGR='Your role cannot change integrations. Switch to Approver or Engineer.';
+const canMgr=()=>can('manageIntegrations');
+const NOMGR='Only the Developer or Admin changes integrations.',NOWF='Only the Developer or Admin changes workflows.';
 const fmtN=n=>Number(n).toLocaleString('en-US');
 const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
 const asOfNow=()=>new Date(AS_OF.getTime()+Date.now()-_now0);
@@ -2583,7 +2651,7 @@ ACT.sdSave=()=>{if(!canMgr())return toast(NOMGR);const sd=S.sd,d=sd.d,errs=sdVal
   const cm=CONN_METHODS[d.method],iv=cm.sched?+d.interval:0;
   const base={name:d.name.trim(),vendor:d.vendor,ver:d.ver.trim(),env:d.env,url:off?'':buildUrl(d),method:d.method,cfg:Object.assign({},d.cfg),mode:off?'Not connected':methodMode(d.method,iv),interval:iv,auth:d.auth,owner:d.owner.trim()||'Unassigned',read,write,rw:csv?'Read (import)':off?'—':write.length?(read.length?'Read / write':'Write'):'Read'};
   if(sd.mode==='new'){const t=SRC_TYPES[d.type],sd0=SRC_SEED[d.type];let id=d.type,n=2;while(SRC(id))id=d.type+'_'+n++;
-    const s=Object.assign({id,type:d.type,cat:t.cat,short:t.short,status:csv?'manual':'live',freshMin:null,compl:0,conf:0,c0:0,k0:0,inputs:sd0.inputs,authority:sd0.authority.slice(),step:sd0.step.slice(),records:0,cfgVer:'1.0',lastSync:csv?Date.now():null,fresh:csv?'just now':'—',updatedBy:S.role,updatedAt:Date.now(),credAt:Date.now(),credDays:180,runs:[],audit:[{ver:'1.0',who:S.role,ts:Date.now(),change:'Connection created'}]},base);
+    const s=Object.assign({id,type:d.type,cat:t.cat,short:t.short,status:csv?'manual':'live',freshMin:null,compl:0,conf:0,c0:0,k0:0,inputs:sd0.inputs,authority:sd0.authority.slice(),step:sd0.step.slice(),records:0,cfgVer:'1.0',lastSync:csv?Date.now():null,fresh:csv?'just now':'—',updatedBy:who(),updatedAt:Date.now(),credAt:Date.now(),credDays:180,runs:[],audit:[{ver:'1.0',who:who(),ts:Date.now(),change:'Connection created'}]},base);
     SOURCES.push(s);MAPPINGS[id]=maps;rebuildLookups();wfAddForSource(s);srcEvent(s,'connector.created','acknowledged',s.vendor+' connected as '+s.name+' via '+cm.label+' ('+s.env+')');smLogAdd(s,'Connection created via '+cm.label+'. Initial sync starting.');smRefresh();
     toast(s.name+' ('+s.vendor+') connected. Initial sync started.');S.sd=null;sdOpen(id,'ops');
     if(!csv)setTimeout(()=>startSync(s,false),400);wfPaletteRefresh();return}
@@ -2596,7 +2664,7 @@ ACT.sdSave=()=>{if(!canMgr())return toast(NOMGR);const sd=S.sd,d=sd.d,errs=sdVal
   Object.assign(s,base);MAPPINGS[s.id]=maps;
   if(wasOff){s.status='live';ch.push('connected')}else if(csv&&s.status!=='manual'){s.status='manual';ch.push('switched to flat file import')}else if(!csv&&s.status==='manual'){s.status='live';ch.push('switched to a live feed')}
   if(!ch.length){toast('No changes to save.');sd.dirty=false;sdFoot();return}
-  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.updatedAt=Date.now();s.updatedBy=S.role;s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Updated '+ch.join(', ')});
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.updatedAt=Date.now();s.updatedBy=who();s.audit.unshift({ver:s.cfgVer,who:who(),ts:Date.now(),change:'Updated '+ch.join(', ')});
   rebuildLookups();srcEvent(s,'connector.updated','acknowledged','Config v'+s.cfgVer+': '+ch.join(', '));smLogAdd(s,'Configuration saved · v'+s.cfgVer+' ('+ch.join(', ')+')');
   sd.dirty=false;sd.errs={};sd.test=null;sdRender();smPatch(s);wfPaletteRefresh();wfPaint2();toast(s.name+' saved. Configuration is now v'+s.cfgVer+'.');
   if(wasOff)setTimeout(()=>startSync(s,false),400)};
@@ -2653,13 +2721,13 @@ ACT.sdRevert=()=>{const id=S.sd.id,tab=S.sd.tab;sdOpen(id,tab);toast('Changes re
 ACT.gotoImport=()=>{closeDrawer(true);go('integration/import')};
 ACT.testConn=id=>{const s=SRC(id);toast(`${s.name}: authenticated, ${s.read.length} read and ${s.write.length} write operations reachable.`)};
 ACT.reconnect=id=>{if(!canMgr())return toast(NOMGR);const s=SRC(id);s.status='live';s.credAt=Date.now();s.lastSync=Date.now()-60000;s.freshMin=1;s.fresh='1 min';s.compl=Math.max(s.compl,93);s.conf=Math.max(s.conf,90);s.c0=s.compl;s.k0=s.conf;if(s.note)s.note='';
-  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Token refreshed and feed re-synced'});
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:who(),ts:Date.now(),change:'Token refreshed and feed re-synced'});
   srcEvent(s,'feed.restored','acknowledged','Token refreshed; latest records re-pulled');smLogAdd(s,'Token refreshed. Feed restored.');
   if(S.sd&&S.sd.id===id){S.sd.test=null;sdRender()}smPatch(s);toast(s.name+' is live again. Predictions no longer carry a stale-feed warning.');wfPaint2();setTimeout(()=>startSync(s,false),300)};
 ACT.sdRotate=()=>{if(!canMgr())return toast(NOMGR);const s=SRC(S.sd.id);
   openModal('Rotate credentials for '+esc(s.name),`<p class="note" style="margin-top:0">${esc(s.vendor)} · ${esc(s.auth)}. The new secret is written to the vault. It is never shown again.</p><div class="fld"><label for="rotSecret">New client secret or API key</label><input id="rotSecret" type="password" autocomplete="new-password" placeholder="Paste the new secret"><div class="err" id="rotErr"></div></div><div class="fld"><label for="rotDays">Expires after</label><select id="rotDays"><option value="90">90 days</option><option value="180" selected>180 days</option><option value="365">365 days</option></select></div>`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="sdRotateOk" data-arg="${s.id}">Save credentials</button>`)};
 ACT.sdRotateOk=id=>{const v=$('#rotSecret').value;if(v.length<8){$('#rotErr').textContent='Enter at least 8 characters.';return}const s=SRC(id);s.credAt=Date.now();s.credDays=+$('#rotDays').value;
-  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:S.role,ts:Date.now(),change:'Credentials rotated'});srcEvent(s,'credential.rotated','acknowledged','Secret rotated; old secret revoked');smLogAdd(s,'Credentials rotated');closeModal();
+  const [a,b]=s.cfgVer.split('.');s.cfgVer=a+'.'+(+b+1);s.audit.unshift({ver:s.cfgVer,who:who(),ts:Date.now(),change:'Credentials rotated'});srcEvent(s,'credential.rotated','acknowledged','Secret rotated; old secret revoked');smLogAdd(s,'Credentials rotated');closeModal();
   if(s.status==='stale'){ACT.reconnect(id);return}if(S.sd&&S.sd.id===id)sdRender();toast('Credentials updated for '+s.name+'.')};
 ACT.srcDel=id=>{if(!canMgr())return toast(NOMGR);const s=SRC(id),use=wfUsing(id),mp=(MAPPINGS[id]||[]).length;
   openModal('Delete '+esc(s.name)+'?',`<p style="margin-top:0">This disconnects <b>${esc(s.vendor)}</b> from Circularity. Events already received stay in the stream and the audit trail.</p>
@@ -2695,7 +2763,7 @@ ACT.efQ=v=>{S.ef.q=v;const t=$('#view .panel:last-child');route(true);const i=$(
 ACT.evDetail=id=>{const e=EVENTS.find(x=>x.id===id);openDrawer(`<div class="row" style="margin-bottom:10px"><span class="chip ${e.dir==='out'?'dk':'line'}">${e.dir==='out'?'Outbound':'Inbound'}</span><span class="chip ${ackKind(e.ack)}">${esc(e.ack)}</span></div>${e.note?`<div class="callout" style="margin-bottom:12px">${esc(e.note)}</div>`:''}<pre class="code">${jsonHtml({event:e.id,type:e.type,at:new Date(e.ts).toISOString(),caseId:e.caseId,decisionId:e.decisionId,approvalRef:e.approval,instructionVersion:e.ver,destination:e.dest,acknowledgement:e.ack,idempotencyKey:e.key,retries:e.retries||0})}</pre>`,e.type,e.id,e.caseId&&CASE_BY_ID[e.caseId]?`<a class="btn" href="#/product/${e.caseId}" data-act="go" data-arg="product/${e.caseId}">Open ${e.caseId}</a>`:'')};
 /* conflicts */
 function intConflicts(){return `<p class="ink2" style="margin-top:0;max-width:75ch">When two systems disagree, Circularity names the source with authority, flags the conflict and holds any dependent route. It does not pick silently.</p><div class="grid g3">${CONFLICTS.map(c=>`<div class="panel" style="${c.status==='open'?'border-top:4px solid var(--bad)':'border-top:4px solid var(--ok)'}"><div class="ph"><h3>${c.kind}</h3><span class="chip ${c.status==='open'?'bad':'ok'}">${c.status==='open'?'Open · '+c.since:'Resolved'}</span></div><div class="pb"><b>${c.asset}</b><div class="grid g2" style="margin:10px 0"><div class="panel flat" style="padding:8px"><div class="note">${c.a.src}</div><b>${esc(c.a.val)}</b></div><div class="panel flat" style="padding:8px"><div class="note">${c.b.src}</div><b>${esc(c.b.val)}</b></div></div><dl class="kv"><dt>Source authority</dt><dd>${c.authority}</dd><dt>Impact</dt><dd>${esc(c.impact)}</dd></dl>${c.status==='open'?`<div class="row" style="margin-top:12px"><button class="btn sm pri" data-act="resolveConf" data-arg="${c.id}">Accept ${c.authority}</button><button class="btn sm" data-act="escConf" data-arg="${c.id}">Escalate to owner</button></div>`:`<div class="note" style="margin-top:10px">Resolved in favour of ${c.authority}. Held routes were released for re-evaluation.</div>`}</div></div>`).join('')}</div>`}
-ACT.resolveConf=id=>{if(!can('request')&&!can('assess')){toast('Your role cannot resolve conflicts.');return}const c=CONFLICTS.find(x=>x.id===id);c.status='resolved';pushEvent({dir:'in',type:'conflict.resolved',caseId:null,decisionId:null,approval:null,ver:null,dest:c.a.src+' vs '+c.b.src,ack:'acknowledged',key:'—',note:c.kind+' conflict on '+c.asset+' resolved by source authority '+c.authority});toast(`${c.id} resolved: ${c.authority} is authoritative for ${c.kind.toLowerCase()}.`);route(true)};
+ACT.resolveConf=id=>{if(!canMgr()){toast(NOMGR);return}const c=CONFLICTS.find(x=>x.id===id);c.status='resolved';pushEvent({dir:'in',type:'conflict.resolved',caseId:null,decisionId:null,approval:null,ver:null,dest:c.a.src+' vs '+c.b.src,ack:'acknowledged',key:'—',note:c.kind+' conflict on '+c.asset+' resolved by source authority '+c.authority});toast(`${c.id} resolved: ${c.authority} is authoritative for ${c.kind.toLowerCase()}.`);route(true)};
 ACT.escConf=id=>toast('Escalated to the data owner. The conflict stays open and dependent routes stay held.');
 /* manual import */
 function intImport(){
@@ -2886,23 +2954,23 @@ ACT.wfBack=()=>{const c=S.wf.cur;if(c.dirty&&!c.warned){c.warned=true;toast('You
 ACT.wfName=v=>{const c=S.wf.cur;c.name=v;wfDirty()};ACT.wfOwn=v=>{S.wf.cur.owner=v;wfDirty()};
 ACT.wfMin=v=>{const m=+v;if(m>=1&&m<=1440){S.wf.cur.trig.min=m;wfDirty()}};
 ACT.wfTrig=v=>{const c=S.wf.cur;c.trig=v==='schedule'?{t:'schedule',min:15}:{t:v};wfDirty();route(true)};
-ACT.wfSave=()=>{if(!canMgr())return toast(NOMGR);const c=S.wf.cur;if(!c.name.trim()){toast('Enter a workflow name before saving.');return}
+ACT.wfSave=()=>{if(!can('manageWorkflows'))return toast(NOWF);const c=S.wf.cur;if(!c.name.trim()){toast('Enter a workflow name before saving.');return}
  c.name=c.name.trim();const [a,b]=c.ver.split('.');c.ver=a+'.'+(+b+1);c.updated=Date.now();c.dirty=false;c.warned=false;c.saved=wfSnap(c);toast(c.name+' saved as v'+c.ver+'.');route(true)};
 ACT.wfDiscard=()=>{const c=S.wf.cur;if(!c.saved)return;const o=JSON.parse(c.saved);c.graph=o.g;c.name=o.m.name;c.owner=o.m.owner;c.trig=o.m.trig;c.dirty=false;c.warned=false;wfRunClear();S.wf.sel=null;route(true);toast('Changes discarded. Back to v'+c.ver+'.')};
 ACT.wfReset=()=>{const c=S.wf.cur;wfRunClear();c.graph=wfBuild(c.tpl);S.wf.sel=null;c.dirty=true;route(true);toast('Workflow reset to its template. Save to keep it.')};
-ACT.wfPublish=()=>{if(!canMgr())return toast(NOMGR);const c=S.wf.cur;
+ACT.wfPublish=()=>{if(!can('manageWorkflows'))return toast(NOWF);const c=S.wf.cur;
  if(c.status==='published'){c.status='draft';toast(c.name+' unpublished. It will no longer run on its trigger.');route(true);return}
  const er=wfValidate(wfGraph(),c.kind).filter(x=>x.sev==='error');if(er.length){toast('Cannot publish: '+er.length+' error'+(er.length>1?'s':'')+' in the checks. Fix them first.');const k=$('#wfChecks');k&&k.scrollIntoView({block:'nearest',behavior:'smooth'});return}
  if(c.dirty){c.saved=wfSnap(c);const [a,b]=c.ver.split('.');c.ver=a+'.'+(+b+1);c.dirty=false}
  c.status='published';c.updated=Date.now();toast(c.name+' published as v'+c.ver+'. It runs on its trigger: '+trigText(c.trig)+'.');route(true)};
-ACT.wfToggle=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);
+ACT.wfToggle=id=>{if(!can('manageWorkflows'))return toast(NOWF);const w=WFW(id);
  if(w.status==='draft'){const er=wfValidate(wfGraphOf(w),w.kind).filter(x=>x.sev==='error');if(er.length){toast('Cannot publish '+w.name+': '+er[0].msg);return}w.status='published';toast(w.name+' published.')}
  else if(w.status==='published'){w.status='paused';toast(w.name+' paused. Scheduled runs stop until you resume it.')}else{w.status='published';toast(w.name+' resumed.')}
  wfRowPatch(w)};
-ACT.wfRunNow=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);if(w.status==='draft'){const o=wfSimOutcome(w);if(o.state==='failed'){toast(w.name+' is a draft with errors: '+o.note);return}}wfStartRun(w,'Manual')};
-ACT.wfDup=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);let n=100;while(S.wf.list.some(x=>x.id==='WF-'+n))n++;
+ACT.wfRunNow=id=>{if(!can('manageWorkflows'))return toast(NOWF);const w=WFW(id);if(w.status==='draft'){const o=wfSimOutcome(w);if(o.state==='failed'){toast(w.name+' is a draft with errors: '+o.note);return}}wfStartRun(w,'Manual')};
+ACT.wfDup=id=>{if(!can('manageWorkflows'))return toast(NOWF);const w=WFW(id);let n=100;while(S.wf.list.some(x=>x.id==='WF-'+n))n++;
  const c=Object.assign({},w,{id:'WF-'+n,name:w.name+' (copy)',status:'draft',ver:'0.1',graph:JSON.parse(JSON.stringify(wfGraphOf(w))),dirty:false,running:false,last:null,runsN:0,okN:0,trig:Object.assign({},w.trig),updated:Date.now(),warned:false});c.saved=wfSnap(c);S.wf.list.push(c);toast('Copy created as a draft: '+c.name+'.');if(S.wf.cur){S.wf.cur=c;S.wf.sel=null;route(true)}else wfListRefresh()};
-ACT.wfDelAsk=id=>{if(!canMgr())return toast(NOMGR);const w=WFW(id);openModal('Delete '+esc(w.name)+'?',`<p style="margin-top:0">This removes <b>${esc(w.name)}</b> (${w.id}, v${w.ver}) and stops its trigger. Source systems and run history are not affected.</p>${w.status==='published'?'<div class="callout">This workflow is published. Anything that depends on its trigger will stop running.</div>':''}`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn danger" data-act="wfDelOk" data-arg="${id}">Delete workflow</button>`)};
+ACT.wfDelAsk=id=>{if(!can('manageWorkflows'))return toast(NOWF);const w=WFW(id);openModal('Delete '+esc(w.name)+'?',`<p style="margin-top:0">This removes <b>${esc(w.name)}</b> (${w.id}, v${w.ver}) and stops its trigger. Source systems and run history are not affected.</p>${w.status==='published'?'<div class="callout">This workflow is published. Anything that depends on its trigger will stop running.</div>':''}`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn danger" data-act="wfDelOk" data-arg="${id}">Delete workflow</button>`)};
 ACT.wfDelOk=id=>{const i=S.wf.list.findIndex(x=>x.id===id);if(i<0)return;const w=S.wf.list[i];S.wf.list.splice(i,1);closeModal();if(S.wf.cur===w){S.wf.cur=null;S.wf.sel=null;wfRunClear()}route(true);
  toastAct(w.name+' deleted.','Undo',()=>{if(S.wf.list.includes(w))return;S.wf.list.splice(Math.min(i,S.wf.list.length),0,w);route(true);toast(w.name+' restored.')})};
 function wfNewRender(){const n=S.wfn,rd=SOURCES.filter(s=>s.read.length||s.status==='unavailable'),wr=SOURCES.filter(s=>s.write.length),auto=n.type==='ingest'?'Ingest · '+(SRC(n.src)||{vendor:''}).vendor:n.type==='out'?'Outbound · '+(SRC(n.src)||{vendor:''}).vendor:n.type==='dec'?'Decision workflow':'New pipeline';
@@ -2911,7 +2979,7 @@ function wfNewRender(){const n=S.wfn,rd=SOURCES.filter(s=>s.read.length||s.statu
   ${n.type==='ingest'||n.type==='out'?`<div class="fld"><label for="nwSrc">${n.type==='ingest'?'Source system':'Target system'}</label><select id="nwSrc" data-ch="nwF" data-k="src">${list.map(s=>`<option value="${s.id}" ${n.src===s.id?'selected':''}>${esc(srcLabel(s))} · ${esc(s.vendor)}</option>`).join('')}</select></div>`:''}
   ${n.type==='out'?`<div class="fld"><label for="nwCh">Delivery method</label><select id="nwCh" data-ch="nwF" data-k="ch">${chs.map(c=>`<option value="${c}" ${n.ch===c?'selected':''}>${({api:'Outbound API call',event:'Event trigger',file:'Interface file',proc:'Process orchestration'})[c]}</option>`).join('')}</select></div>`:''}
   <div class="fld"><label for="nwName">Name</label><input id="nwName" value="${esc(n.name)}" placeholder="${esc(auto)}" data-in="nwName" maxlength="80"></div>`,`<button class="btn ghost" data-act="closeModal">Cancel</button><button class="btn pri" data-act="wfNewOk">Create workflow</button>`)}
-ACT.wfNew=()=>{if(!canMgr())return toast(NOMGR);const f=SOURCES.find(s=>s.read.length)||SOURCES[0];S.wfn={type:'ingest',src:f?f.id:'',ch:'api',name:''};wfNewRender()};
+ACT.wfNew=()=>{if(!can('manageWorkflows'))return toast(NOWF);const f=SOURCES.find(s=>s.read.length)||SOURCES[0];S.wfn={type:'ingest',src:f?f.id:'',ch:'api',name:''};wfNewRender()};
 ACT.nwF=(v,el)=>{const n=S.wfn,k=el.dataset.k;n[k]=v;if(k==='type'){const l=v==='ingest'?SOURCES.filter(s=>s.read.length||s.status==='unavailable'):SOURCES.filter(s=>s.write.length);if(!l.some(s=>s.id===n.src))n.src=l[0]?l[0].id:''}if(k==='type'||k==='src')n.ch=(DELIVER[n.src]||['api'])[0];wfNewRender()};
 ACT.nwName=v=>{S.wfn.name=v};
 ACT.wfNewOk=()=>{wfInit();const n=S.wfn,s=SRC(n.src);if((n.type==='ingest'||n.type==='out')&&!s){toast('Choose a system first.');return}
