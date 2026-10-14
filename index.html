@@ -687,6 +687,15 @@ ul.impact{margin:0 0 14px;padding-left:18px;color:var(--ink2)}ul.impact li{margi
 .axd:last-child{border-bottom:0}.axd .note{display:block;margin-top:2px}.axd input{width:18px;height:18px;accent-color:var(--ink)}
 #ccApprovals{margin-bottom:14px}
 @media (max-width:640px){.rqrow{flex-direction:column}.rqa{justify-content:flex-start}}
+
+/* role-specific Command Center layouts */
+.ccrole{vertical-align:middle;font:600 12px var(--f-body);margin-left:6px;position:relative;top:-3px}
+.cckpis[data-n="4"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ccgrid4[data-n="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}.ccgrid4[data-n="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}.ccgrid4[data-n="1"]{grid-template-columns:minmax(0,1fr)}
+.ccgrid3[data-n="2"]{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}.ccgrid3[data-n="1"]{grid-template-columns:minmax(0,1fr)}
+#ccOutcomes{margin-bottom:14px}#ccDevHealth{margin-top:4px}
+@container cc (max-width:1240px){.cckpis[data-n="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}.ccgrid4[data-n="3"]{grid-template-columns:repeat(2,minmax(0,1fr))}.ccgrid4[data-n="3"]>section:last-child{grid-column:1/-1}.ccgrid3[data-n="2"] section:last-child{grid-column:auto}}
+@container cc (max-width:780px){.ccgrid4[data-n],.ccgrid3[data-n]{grid-template-columns:1fr}.ccgrid4[data-n="3"]>section:last-child{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -1531,7 +1540,7 @@ const NAV=[
 const INT_TABS=['studio','map','tables','models','events','conflicts','import'];
 const byHead=t=>()=>{const h=$$('#view h2,#view h3').find(x=>x.textContent.toLowerCase().includes(t.toLowerCase()));return h?(h.closest('.panel,.sect,section')||h):null};
 const ANCH={
- command:{approvals:()=>$('#ccApprovals'),outcomes:()=>$('#ccOutcomes'),health:()=>$('#ccDevHealth'),kpis:()=>$('#ccKpis'),charts:()=>$('.ccgrid4'),actions:()=>$('#ccTab')&&$('#ccTab').closest('section'),signals:()=>$('#ccSig')&&$('#ccSig').closest('section'),value:byHead('Value realisation')},
+ command:{approvals:()=>$('#ccApprovals'),outcomes:()=>$('#ccOutcomes'),health:()=>$('#ccDevHealth'),kpis:()=>$('#ccKpis'),charts:()=>$('#ccCharts'),actions:()=>$('#ccActions'),signals:()=>$('#ccSignals'),value:()=>$('#ccValue')},
  analytics:{waterfall:byHead('Recovery waterfall'),pipeline:byHead('Pipeline'),mix:byHead('Route mix'),predicted:byHead('Predicted vs actual'),models:byHead('Model versions'),pool:byHead('Pool efficiency'),overrides:byHead('Overrides'),eng:byHead('Engineering economic'),sustain:byHead('Sustainability')},
  access:{accounts:()=>$('#axAccounts'),delegations:()=>$('#axDeleg'),requests:()=>$('#axReqs')},
  mcp:{proposals:()=>$('#mcpProps'),catalog:byHead('Tool catalog'),agents:byHead('Agent registry'),playground:byHead('Playground'),perms:byHead('Permission matrix'),calls:byHead('Call log')},
@@ -1584,7 +1593,7 @@ function shell(){
   <button class="railbtn" data-act="navRail" aria-pressed="false" aria-label="Collapse sidebar">${ICON.railc}</button><div class="side-foot"><b>Northfield Industrial Leasing</b><br>3 customer tenants · 8 sites<br><span class="note" style="color:var(--side-mut)">Synthetic data, seed 20261007</span></div></aside>
   <div class="main"><header class="top" role="banner">
    <div class="search"><label class="sr" for="gs">Search cases</label>${ICON.search}<input id="gs" type="search" placeholder="${canPage('product','case')?'Search return, asset, or closed case ID':'Search sources by system or vendor'}" autocomplete="off" data-in="gsearch"><div class="results" id="results" hidden></div></div>
-   <div class="tools"><label class="sr" for="tsel">Tenant</label><select class="sel" id="tsel" data-ch="tenant">${tenantOpts(S.tenant)}</select>
+   <div class="tools">${canPage('product')?`<label class="sr" for="tsel">Tenant</label><select class="sel" id="tsel" data-ch="tenant">${tenantOpts(S.tenant)}</select>`:''}
    <span class="pill" data-tip="All screens are computed as of this date">As of ${fmtDY(AS_OF)}</span>
    <button class="pill demo" data-act="dataChecks" data-tip="Open the data integrity checks"><span class="dot"></span>Demo data</button>
    ${acctMenuHTML()}
@@ -1627,6 +1636,7 @@ const navKids=g=>g.kids.filter(k=>canPage(g.id,k[0]));
 const navGroups=()=>NAV.filter(g=>canPage(g.id)&&navKids(g).length);
 /* ===== Requests: tenant access and MCP server proposals, decided by a delegated Approver or by Admin ===== */
 const REQ_SCOPE={tenant:'tenantAccess',mcp:'mcp'},REQ_KIND={tenant:'Tenant access',mcp:'MCP server proposal'};
+const dlab=d=>d[1].toLowerCase().replace('mcp','MCP');
 const DELEG=[['decisions','Decisions and overrides','Approve, decline or override treatment decisions and held workflow runs.'],['mcp','MCP server proposals','Approve or decline new MCP servers the Developer proposes.'],['tenantAccess','Tenant access','Approve or decline Planner requests to see another tenant.']];
 S.reqs=[
  {id:'REQ-304',kind:'tenant',status:'pending',by:'Planner · Customer B',byId:'planner-b',at:addDays(AS_OF,-.4),tenant:'Customer A',reason:'Customer A and Customer B share the Site 3 motor pool. I need to see Customer A returns to plan redeployment.'},
@@ -1676,9 +1686,9 @@ ACT.mcpProposeOk=()=>{const v=k=>($('#mp-'+k).value||'').trim(),tools=v('t').spl
   if(bad){e.textContent=bad;e.hidden=false;return}
   const r={id:'REQ-'+(REQ_SEQ++),kind:'mcp',status:'pending',by:who(),byId:S.acct.id,at:asOfNow(),server:{name:v('n'),owner:v('o'),purpose:v('p'),tools,access:v('a'),data:v('d')}};
   S.reqs.unshift(r);rbLog('mcp.proposal.submitted',r.server.name+' · '+r.server.access);closeModal();toast(r.id+' submitted. It waits for an Approver or Admin.',4200);route(true)};
-ACT.delegToggle=(v,el)=>{if(!can('manageAccess'))return;const k=el.dataset.arg,d=DELEG.find(x=>x[0]===k);S.deleg[k]=!!v;rbLog('delegation.changed','Approver '+(v?'may now decide ':'may no longer decide ')+d[1].toLowerCase());
-  toast(v?'The Approver can now decide '+d[1].toLowerCase()+'.':d[1]+' are now decided by Admin only.',4200);route(true)};
-function ccInboxHTML(){const l=inboxReqs(),dec=can('approve.decisions')?visCases().filter(c=>c.stage==='awaiting_approval').length:0,sc=S.acct.role==='Approver'?DELEG.filter(d=>S.deleg[d[0]]).map(d=>d[1].toLowerCase()):null;
+ACT.delegToggle=(v,el)=>{if(!can('manageAccess'))return;const k=el.dataset.arg,d=DELEG.find(x=>x[0]===k);S.deleg[k]=!!v;rbLog('delegation.changed','Approver '+(v?'may now decide ':'may no longer decide ')+dlab(d));
+  toast(v?'The Approver can now decide '+dlab(d)+'.':d[1]+' are now decided by Admin only.',4200);route(true)};
+function ccInboxHTML(){const l=inboxReqs(),dec=can('approve.decisions')?visCases().filter(c=>c.stage==='awaiting_approval').length:0,sc=S.acct.role==='Approver'?DELEG.filter(d=>S.deleg[d[0]]).map(dlab):null;
   return `<section class="panel" id="ccApprovals"><div class="ph"><div><h3>Approvals inbox</h3><div class="note">${sc?'Delegated to you by Admin: '+(sc.join(', ')||'nothing at the moment'):'Every scope, as Admin'}</div></div><span class="sp"></span>${dec?`<button class="btn sm" data-act="ccPick" data-arg="stage:approval">${dec} decision${dec>1?'s':''} await approval</button>`:''}</div>
    <div class="pb">${reqListHTML(l,['Nothing waiting for you','Tenant access requests and MCP server proposals appear here.'])}</div></section>`}
 function mcpPropHTML(){const l=S.reqs.filter(r=>r.kind==='mcp');
@@ -1712,7 +1722,7 @@ function route(keep){
   navSync(r);
   if((r.page==='product'?r.a:null)!==S.lastCase){S.lastCase=r.page==='product'?r.a:null;S.scenOpen=false;S.scen={purchase:1,cost:1,service:1,market:1,demandOff:false};S.xtab='why'}
   const isCase=r.page==='product'&&r.a&&/^RT-/.test(r.a)&&CASE_BY_ID[r.a];
-  const j=r.page==='product'&&isCase?[2,3,4,5,6]:PAGES[r.page].j;
+  const j=r.page==='product'&&isCase?[2,3,4,5,6]:r.page==='command'&&!canPage('product')?[1,6,7,8,9]:PAGES[r.page].j;
   $('#jmount').innerHTML=journey(j);
   const nc=$('#navcnt');if(nc)nc.textContent=visCases().filter(c=>c.stage==='awaiting_approval').length;
   const v=$('#view');
@@ -2108,11 +2118,11 @@ function ccSignals(sc){const a=[],v=sc.all,ap=v.filter(c=>c._st==='approval'),cl
   const top=Object.entries(h).sort((x,y)=>y[1]-x[1])[0];if(top){const p=pv[top[0]]||0;a.push({t:'Parts demand hotspot',n:top[1]+' cases',note:top[0]+(p?' · '+(top[1]>=p?'▲':'▼')+' '+Math.abs(Math.round((top[1]/p-1)*100))+'% vs prior 3 months':''),lvl:'warn',act:'go:analytics',ic:ICON.pump})}
   const late=EVENTS.filter(e=>/late|out of order/.test(e.ack)).length;if(late)a.push({t:'Late warehouse events',n:late+' events',note:'Reordered automatically; none lost',lvl:'ok',act:'go:integration',ic:ICON.integration});
   return a.slice(0,5)}
-function ccSignalsHTML(sc){return ccSignals(sc).map(s=>`<button class="ccsg" data-act="ccPick" data-arg="${s.act}"><span class="sgi ${s.lvl}">${s.ic}</span><span class="sgt"><b>${esc(s.t)}</b><span class="note">${esc(s.note)}</span></span><span class="sgn num">${s.n}</span></button>`).join('')||'<div class="empty"><b>No signals</b>Nothing needs attention.</div>'}
+function ccSignalsHTML(sc){return ccSignals(sc).filter(s=>s.act.indexOf('go:')!==0||rbPath(s.act.slice(3))).map(s=>`<button class="ccsg" data-act="ccPick" data-arg="${s.act}"><span class="sgi ${s.lvl}">${s.ic}</span><span class="sgt"><b>${esc(s.t)}</b><span class="note">${esc(s.note)}</span></span><span class="sgn num">${s.n}</span></button>`).join('')||'<div class="empty"><b>No signals</b>Nothing needs attention.</div>'}
 function ccCapHTML(sc){return Object.keys(CC_CAP).map(k=>{const u=sc.util[k]||0,p=u/CC_CAP[k],cl=p>=.9?'var(--bad)':p>=.75?'#D4A800':'var(--ok)',msg=p>=.9?'Over limit risk':p>=.75?'Tight':'Within limit';
   return `<div class="cccp" data-tip="${esc(k+': '+u+' of '+CC_CAP[k]+' planned slots. Capacity values are configured planning figures in this demo.')}"><span class="ccvl">${k}</span><span class="ccvb"><i style="width:${Math.min(100,p*100)}%;background:${cl}"></i></span><b class="num">${Math.round(p*100)}%</b><span class="note" style="color:${p>=.75?cl:'var(--muted)'}">${msg}</span></div>`}).join('')}
 function ccHealthHTML(){const t=hhTotals(),st={live:0,stale:0,manual:0,unavailable:0};SOURCES.forEach(s=>st[s.status]++);
-  return `<span class="livedot"><i></i>Live</span><span><b class="num">${t.pct.toFixed(1)}%</b> integration health</span><span class="note">${st.live} sources live${st.stale?' · <b style="color:var(--warn)">'+st.stale+' stale</b>':''}${st.unavailable?' · <b style="color:var(--bad)">'+st.unavailable+' not connected</b>':''}${st.manual?' · '+st.manual+' manual':''}</span><a class="lnk" href="#/integration" data-act="ccGoMap">View connections</a>`}
+  return `<span class="livedot"><i></i>Live</span><span><b class="num">${t.pct.toFixed(1)}%</b> integration health</span><span class="note">${st.live} sources live${st.stale?' · <b style="color:var(--warn)">'+st.stale+' stale</b>':''}${st.unavailable?' · <b style="color:var(--bad)">'+st.unavailable+' not connected</b>':''}${st.manual?' · '+st.manual+' manual':''}</span>${rbPath('integration/map')?'<a class="lnk" href="#/integration/map" data-act="ccGoMap">View connections</a>':''}`}
 function ccInsightsHTML(sc){const o=[],cl=sc.all.filter(c=>c._st==='approval'&&c._left<5).length,ap=sc.all.filter(c=>c._st==='approval').length;
   if(ap)o.push(['stage:approval',ap+' decisions await approval'+(cl?', '+cl+' close within 5 days':'')]);
   const by={};sc.all.forEach(c=>Object.keys(c._risk).forEach(k=>by[k]=(by[k]||0)+c._risk[k]));const tot=sum(Object.values(by)),top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];
@@ -2138,36 +2148,79 @@ function ccTableHTML(sc){const l=ccTableRows(sc),top=l.slice(0,10),pc={High:'bad
    return `<tr data-act="ccOpen" data-arg="${c.id}" tabindex="0"><td data-l="#">${i+1}</td><td data-l="Return" class="nowrap"><b>${c.id}</b></td><td data-l="Asset"><div class="row" style="gap:8px;flex-wrap:nowrap">${thumb(c.cls)}<span class="nowrap">${esc(c.product)}${c.qty>1?` <span class="note">×${c.qty}</span>`:''}<div class="note num">${c.assetId}</div></span></div></td><td class="cctr" data-l="Trigger">${esc(trig(c))}</td><td data-l="Action">${esc(act(c))}</td><td class="r num" data-l="Value"><b>${r?money(r.net):'~'+money(c._val)}</b>${r?'':'<div class="note">estimate</div>'}</td><td class="num nowrap" data-l="Deadline">${fmtD(dl)}<div class="note">${c._left<=0?'overdue':c._left+' d left'}</div></td><td data-l="Confidence">${cf==null?'<span class="muted">—</span>':`<span class="ccconf"><span class="bar"><i style="width:${cf}%;${cf<70?'background:#D4A800':'background:var(--ok)'}"></i></span><b class="num">${cf}%</b></span>`}</td><td class="cctr" data-l="Constraints">${esc(cons(c))}</td><td data-l="Priority"><span class="chip ${pc[c._pri]||'line'}">${c._pri||'—'}</span></td><td data-l="Status">${stageChip(c)}</td><td><span class="btn sm">${btn(c)}</span></td></tr>`}).join('')||`<tr><td colspan="12"><div class="empty"><b>No assets match</b>Clear a filter or search to see the full list.</div></td></tr>`}
   </tbody></table></div><div class="filters" style="border-top:1px solid var(--line2);border-bottom:0;justify-content:space-between"><span class="note">Showing ${top.length} of ${l.length}, ranked by predicted value and urgency.</span><a class="btn sm" href="#/product">Open all returned assets</a></div>`}
 function ccClockText(){const d=asOfNow();return fmtDY(AS_OF)+', '+d.toISOString().slice(11,16)}
+/* role-specific Command Center: each role gets its own key figures and panels from the same seeded world */
+const CC_LAYOUT={
+ Planner:{sub:'Prepare cases, close evidence gaps and submit decisions for review.',kpis:['scope','awaiting','gaps','closing'],charts:['lifecycle','due'],actions:1,row:['signals'],ops:1},
+ Approver:{sub:'Decide what is waiting for you: treatment decisions, spend and sale terms, and the requests Admin delegated to you.',kpis:['awaitVal','potential','risk','closing','inbox'],inbox:1,charts:['var','due'],actions:1,row:['capacity','value'],ops:1},
+ Engineer:{sub:'Inspection queue, failed eligibility gates, condition and parts at risk.',kpis:['inspq','gatefail','graded','parts'],charts:['lifecycle','treat'],actions:1,row:['signals','capacity'],ops:1,health:'strip'},
+ Finance:{sub:'Recovered value, uplift against the baseline, avoided spend and outcomes waiting for confirmation.',kpis:['net','uplift','yield','avoided','co2m'],outcomes:1,charts:['treat'],row:['value'],fin:1,health:'strip'},
+ Developer:{sub:'Health of connected systems, workflows, conflicts and MCP server proposals.',kpis:['ihealth','srcattn','wffail','conf','props'],health:'full'},
+ Admin:{sub:'Identify, prioritise and act on lifecycle opportunities to maximise economic, operational and sustainability outcomes.',kpis:['inbox','potential','risk','ihealth','uplift'],inbox:1,outcomes:1,charts:['lifecycle','treat','var','due'],actions:1,row:['signals','capacity','value'],ops:1,health:'full'}};
+const rbPath=p=>{const h=String(p).replace(/^#?\/?/,'').split('/');return canRoute({page:h[0],a:h[1]||null,b:h[2]||null})===true};
+function ccOutcomesHTML(){const l=visCases().filter(c=>c.stage==='closed'&&!c.outcome),done=visCases().filter(c=>c.outcome).length;
+  return `<section class="panel" id="ccOutcomes"><div class="ph"><div><h3>Outcomes to confirm</h3><div class="note">Execution finished; Finance confirms the economic result.</div></div><span class="sp"></span><span class="chip ${l.length?'warn':'ok'}">${l.length} waiting</span></div>
+  ${l.length?`<div class="tw"><table class="t cctab"><thead><tr><th>Return</th><th>Asset</th><th>Route</th><th class="r">Predicted net</th><th></th></tr></thead><tbody>${l.map(c=>{const r=c.chosen||c.recommendation;return `<tr data-act="ccOpen" data-arg="${c.id}" tabindex="0"><td data-l="Return"><b>${c.id}</b></td><td data-l="Asset">${esc(c.product)} <span class="note">${c.assetId}</span></td><td data-l="Route">${esc(r?r.plan:'—')}</td><td class="r num" data-l="Predicted">${r?money(r.net):'—'}</td><td><span class="btn sm">Open to confirm</span></td></tr>`}).join('')}</tbody></table></div>`
+   :`<div class="pb"><div class="empty"><b>Nothing to confirm right now</b>Cases appear here when execution systems report an outcome. ${done} outcome${done===1?'':'s'} confirmed this session.</div></div>`}</section>`}
+function ccKpiSet(keys,sc,rows,m){
+  const k=(cls,ic,label,val,sub,d,s,act,arg,tip)=>`<button class="cck ${cls}" data-act="${act}" data-arg="${esc(arg||'')}" data-tip="${esc(tip)}"><span class="cckt"><span class="kic">${ic}</span><span class="ccl">${label}</span></span><span class="ccv num">${val}</span><span class="ccs">${d?`<span class="ccd ${d.cls}">${d.arrow} ${d.txt}</span>`:''}<span class="note">${sub}</span></span>${s?`<span class="ccsp">${ccSpark(s)}</span>`:''}</button>`;
+  const st=x=>sc.all.filter(c=>c._st===x),ap=st('approval'),open=sc.all.filter(c=>c._st==='approval'||c._st==='reeval'),pot=sum(open.map(ccNet)),vr=sum(sc.all.map(c=>c._var)),vR=visRows();
+  const sCnt=()=>ccSeries(()=>1,vR),sPred=()=>ccSeries(r=>Math.max(0,r.p50),vR),sUp=()=>ccSeries(r=>r.status==='reconciled'?r.actual-r.baseline:0,vR),sAct=()=>ccSeries(r=>r.status==='reconciled'?r.actual:0,vR);
+  const cl=ap.filter(c=>c._left<5).length,gaps=sc.all.filter(c=>c._st==='need'||c._st==='await_insp').length,yp=sum(m.rc.map(r=>r.p50));
+  const D={
+   scope:()=>k('',ICON.batch,'Assets in scope',fmtN(sc.all.length),sum(sc.all.map(c=>c.qty)).toLocaleString()+' units · vs prior month',ccDelta(sCnt()),sCnt(),'ccClear','','Returned assets matching the filters. The change compares closed decisions this month with last month.'),
+   awaiting:()=>k('y',ICON.check,'Awaiting approval',fmtN(ap.length),kfmt(sum(ap.map(ccNet)))+' predicted net · with an Approver',null,null,'ccPick','stage:approval','Decisions you prepared that now wait for an Approver. Select to filter the table.'),
+   awaitVal:()=>k('ok',ICON.check,'Awaiting approval',kfmt(sum(ap.map(ccNet))),ap.length+' decisions · predicted net',null,null,'ccPick','stage:approval','Predicted net recovery of decisions waiting for your approval. Select to filter the table.'),
+   gaps:()=>k('bad',ICON.audit,'Evidence gaps',fmtN(gaps),'assets cannot be routed yet',null,null,'ccPick','stage:need','Assets waiting for inspection or missing evidence. They cannot get a recommendation until it arrives.'),
+   closing:()=>k(cl?'bad':'ok',ICON.flag,'Closing within 5 days',fmtN(cl),'decision windows · act first',null,null,'ccPick','due:d5','Decisions awaiting approval whose window closes in under 5 days.'),
+   potential:()=>k('ok',ICON.analytics,'Potential recovery value',kfmt(pot),open.length+' decisions open · predicted net',ccDelta(sPred()),sPred(),'ccPick','stage:approval','Predicted net recovery of decisions that still need a person: awaiting approval plus re-evaluation. Select to filter the table.'),
+   risk:()=>k('bad',ICON.flag,'Value at risk',kfmt(vr),(pot?Math.round(vr/Math.max(1,pot+sum(sc.all.filter(c=>c._st==='need'||c._st==='await_insp'||c._st==='noroute').map(c=>c._val)))*100):0)+'% of open value if no action',null,null,'ccScroll','ccVar','Predicted value exposed over the next 30 days if no action is taken. See the breakdown below.'),
+   inbox:()=>{const n=inboxReqs().length;return k(n?'y':'ok',ICON.access,'Requests waiting',fmtN(n),'tenant access and MCP proposals',null,null,'ccScroll','ccApprovals','Requests in the scopes you can decide. They are listed in the Approvals inbox below.')},
+   inspq:()=>k('',ICON.audit,'Inspection queue',fmtN(st('await_insp').length),'assets awaiting inspection',null,null,'ccPick','stage:await_insp','Returned assets with no inspection yet. Select to filter the table.'),
+   gatefail:()=>{const n=sc.all.filter(c=>c.blocked).length;return k(n?'bad':'ok',ICON.flag,'Failed gates',fmtN(n),'exceptions waiting for evidence',null,null,'ccPick','stage:need','Cases where an eligibility gate failed or evidence is missing. No route is approvable until it passes.')},
+   graded:()=>{const g=sc.all.filter(c=>c.grade),ab=g.filter(c=>c.grade==='A'||c.grade==='B').length;return k('ok',ICON.check,'Graded A or B',(g.length?Math.round(ab/g.length*100):0)+'%',ab+' of '+g.length+' graded assets',null,null,'go','product/received','Share of inspected assets in the top two condition grades.')},
+   parts:()=>{const n=sc.all.filter(c=>asParts(c,assetHealth(c)).some(p=>p.st==='Backorder')).length;return k(n?'bad':'ok',ICON.pump,'Parts on backorder',fmtN(n),'assets with a part on backorder · illustrative',null,null,'go','product/received','Assets with at least one component on backorder. Part availability is illustrative until the warehouse system is connected.')},
+   net:()=>k('ok',ICON.analytics,'Net recovery',kfmt(m.act),m.rc.length+' reconciled decisions · '+S.cc.months+' months',ccDelta(sAct()),sAct(),'go','analytics/waterfall','Actual net recovery on reconciled decisions in the period. Same as Analytics when filters match.'),
+   uplift:()=>k('y',ICON.trend,'Uplift vs baseline','+'+kfmt(m.uplift),'closed decisions · '+(m.base?'+'+((m.act/m.base-1)*100).toFixed(0)+'%':'—')+' vs sell-or-scrap',ccDelta(sUp()),sUp(),'go','analytics','Additional net recovery on reconciled decisions compared with the sell-or-scrap baseline. Same number as Analytics.'),
+   yield:()=>k('',ICON.check,'Recovery yield',(yp?Math.round(m.act/yp*100):0)+'%','actual ÷ predicted on reconciled',null,null,'go','analytics/predicted','Actual net recovery divided by the predicted P50 on the same reconciled decisions.'),
+   avoided:()=>k('ok',ICON.export,'Avoided spend',kfmt(m.avoided),'ERP-confirmed purchases not made',null,null,'go','analytics','Purchases avoided by redeploying assets or using recovered parts, confirmed in ERP.'),
+   co2m:()=>k('ok',ICON.leaf,'CO₂e avoided',(sum(m.rc.map(r=>r.co2e))/1000).toFixed(0)+' t','estimated on reconciled decisions',null,null,'go','analytics/sustain','Estimated embodied carbon avoided on reconciled decisions. Measured values are on Analytics.'),
+   ihealth:()=>{const t=hhTotals();return k(t.pct>=95?'ok':'bad',ICON.integration,'Integration health',t.pct.toFixed(1)+'%','successful syncs and events · 24 h',null,null,'go','integration/map','Share of syncs and events in the last 24 hours that succeeded.')},
+   srcattn:()=>{const l=SOURCES.filter(s=>s.status==='stale'||s.status==='unavailable');return k(l.length?'bad':'ok',ICON.flag,'Sources needing attention',fmtN(l.length),l.map(s=>s.name).join(', ')||'all sources fresh',null,null,'go','integration/map','Sources that are stale or not connected.')},
+   wffail:()=>{wfInit();const n=S.wf.list.filter(w=>wfStat(w)==='failing').length;return k(n?'bad':'ok',ICON.play,'Failing workflows',fmtN(n),'published, last run failed',null,null,'go','integration/studio','Published workflows whose last run failed.')},
+   conf:()=>{const n=CONFLICTS.filter(c=>c.status==='open').length;return k(n?'bad':'ok',ICON.integration,'Open conflicts',fmtN(n),'systems that disagree',null,null,'go','integration/conflicts','Records where two systems disagree. Dependent routes stay held until resolved.')},
+   props:()=>{const l=myReqs().filter(r=>r.kind==='mcp');return k('y',ICON.mcp,'My MCP proposals',fmtN(l.filter(r=>r.status==='pending').length)+' pending',l.filter(r=>r.status==='approved').length+' approved · '+l.filter(r=>r.status==='declined').length+' declined',null,null,'go','mcp/proposals','Servers you proposed and their review status.')}};
+  return keys.map(x=>D[x]()).join('')}
 function renderCommand(){
-  const sc=ccScope(),rows=ccRows(),m=metrics(rows),f=S.cc,tot=sc.all.length||1;
+  const L=CC_LAYOUT[S.acct.role],sc=ccScope(),rows=ccRows(),m=metrics(rows),f=S.cc;
   const stages=CC_STAGES.map(([k,l,c])=>({k:'stage:'+k,label:l,v:sc.all.filter(x=>x._st===k).length,color:c,tip:''}));
   const tr=ROUTES.map(r=>{const a=sc.all.filter(c=>c.recommendation&&c.recommendation.id===r.id);return{id:r.id,label:r.short,v:sum(a.map(c=>c.qty)),net:sum(a.map(ccNet)),color:r.color}}).filter(x=>x.v>0);
   const actable=sc.act,due=CC_DUE.map(([k,l,c])=>({k:'due:'+k,label:l,v:actable.filter(x=>x._due===k).length,color:c}));
   const vr=sum(sc.all.map(c=>c._var));
+  const CH={lifecycle:()=>`<section class="panel"><div class="ph"><h3>Lifecycle portfolio</h3></div><div class="pb">${ccDonut(stages,'stage:'+f.stage,fmtN(sc.all.length),'Assets','Lifecycle portfolio')}</div></section>`,
+   treat:()=>`<section class="panel"><div class="ph"><h3>Treatment opportunity</h3><span class="note">Predicted volume (units)</span></div><div class="pb">${ccBarsHTML(tr,'Treatment opportunity')}</div></section>`,
+   var:()=>`<section class="panel" id="ccVar"><div class="ph"><h3>Value at risk by reason</h3><span class="note num">${kfmt(vr)}</span></div><div class="pb ccvlist">${ccVarHTML(sc)}</div></section>`,
+   due:()=>`<section class="panel"><div class="ph"><h3>Assets by time to action</h3></div><div class="pb">${ccDonut(due,'due:'+f.due,fmtN(actable.length),'Assets','Assets by time to action')}</div></section>`};
+  const RW={signals:()=>`<section class="panel"><div class="ph"><h3>Emerging signals</h3></div><div class="pb ccsgl" id="ccSig">${ccSignalsHTML(sc)}</div></section>`,
+   capacity:()=>`<section class="panel"><div class="ph"><h3>Capacity and bottlenecks</h3></div><div class="pb ccvlist">${ccCapHTML(sc)}</div></section>`,
+   value:()=>`<section class="panel" id="ccValue"><div class="ph"><h3>Value realisation</h3><div class="seg" role="group" aria-label="Horizon">${[3,6,12].map(n=>`<button data-act="ccMonthsBtn" data-arg="${n}" aria-pressed="${f.months===n}">${n} mo</button>`).join('')}</div></div><div class="pb">
+    <div class="ccrs"><div data-tip="Actual net recovery on reconciled decisions in the period. Same as Analytics when filters match."><b class="num">${kfmt(m.act)}</b><span>Net recovery</span></div><div data-tip="Actual ÷ predicted net recovery on reconciled decisions."><b class="num">${m.rc.length&&sum(m.rc.map(r=>r.p50))?Math.round(m.act/sum(m.rc.map(r=>r.p50))*100):0}%</b><span>Recovery yield</span></div><div data-tip="Median days from decision to reconciled outcome."><b class="num">${m.days?m.days.toFixed(0):'—'} days</b><span>Cycle time</span></div><div data-tip="Estimated embodied-carbon avoided on reconciled decisions."><b class="num">${(sum(m.rc.map(r=>r.co2e))/1000).toFixed(0)} t</b><span>CO₂e avoided</span></div></div>${ccComboHTML(rows)}</div></section>`};
+  const charts=(L.charts||[]),row=(L.row||[]);
   return `<div class="cc">
-  <div class="phead"><div><h1>Circularity Command Center</h1><p>Identify, prioritise and act on lifecycle opportunities to maximise economic, operational and sustainability outcomes.</p></div>
+  <div class="phead"><div><h1>Circularity Command Center <span class="chip line ccrole">${esc(S.acct.role)} view</span></h1><p>${esc(L.sub)}</p></div>
    <div class="row ccact"><span class="note ccrf">Last refreshed<br><b class="num" data-cc-clock>${ccClockText()}</b></span><button class="iconbtn" data-act="ccRefresh" aria-label="Refresh data" data-tip="Refresh">${ICON.refresh}</button><button class="btn" data-act="ccShare">${ICON.share}Share</button><button class="btn pri" data-act="ccExport">${ICON.export}Export</button></div></div>
-  ${canPage('command','approvals')?ccInboxHTML():''}
-  <div class="cchealth" id="ccHealth">${ccHealthHTML()}</div>
-  ${ccFilters(sc)}
-  <div class="ccinsights"><span class="ccit">Needs attention now</span>${ccInsightsHTML(sc)}</div>
-  <div class="cckpis" id="ccKpis">${ccKpiHTML(sc,rows,m)}</div>
-  <div class="ccgrid4">
-   <section class="panel"><div class="ph"><h3>Lifecycle portfolio</h3></div><div class="pb">${ccDonut(stages,'stage:'+f.stage,fmtN(sc.all.length),'Assets','Lifecycle portfolio')}</div></section>
-   <section class="panel"><div class="ph"><h3>Treatment opportunity</h3><span class="note">Predicted volume (units)</span></div><div class="pb">${ccBarsHTML(tr,'Treatment opportunity')}</div></section>
-   <section class="panel" id="ccVar"><div class="ph"><h3>Value at risk by reason</h3><span class="note num">${kfmt(vr)}</span></div><div class="pb ccvlist">${ccVarHTML(sc)}</div></section>
-   <section class="panel"><div class="ph"><h3>Assets by time to action</h3></div><div class="pb">${ccDonut(due,'due:'+f.due,fmtN(actable.length),'Assets','Assets by time to action')}</div></section>
-  </div>
-  <section class="panel" style="margin-top:14px"><div class="ph"><div><h3>Actions to be prioritised</h3><div class="note">Ranked by predicted value and urgency. Select a row to investigate or act.</div></div></div>
+  ${L.health?`<div class="cchealth" id="ccHealth">${ccHealthHTML()}</div>`:''}
+  ${L.ops||L.fin?ccFilters(sc):''}
+  ${L.ops?`<div class="ccinsights"><span class="ccit">Needs attention now</span>${ccInsightsHTML(sc)}</div>`:''}
+  <div class="cckpis" id="ccKpis" data-n="${L.kpis.length}">${ccKpiSet(L.kpis,sc,rows,m)}</div>
+  ${L.inbox&&canPage('command','approvals')?ccInboxHTML():''}
+  ${L.outcomes&&canPage('command','outcomes')?ccOutcomesHTML():''}
+  ${charts.length?`<div class="ccgrid4" id="ccCharts" data-n="${charts.length}">${charts.map(x=>CH[x]()).join('')}</div>`:''}
+  ${L.actions?`<section class="panel" id="ccActions" style="margin-top:14px"><div class="ph"><div><h3>Actions to be prioritised</h3><div class="note">Ranked by predicted value and urgency. Select a row to investigate or act.</div></div></div>
    <div class="filters"><div class="seg" role="group" aria-label="View">${[['','All opportunities'],['stage:approval','Awaiting approval'],['stage:need','Needs evidence'],['stage:reeval','Re-evaluate']].map(v=>`<button data-act="ccPick" data-arg="${v[0]||'stage:'}" aria-pressed="${(v[0]||'')===(f.stage?'stage:'+f.stage:'')}">${v[1]}</button>`).join('')}</div><input type="search" placeholder="Search opportunities" value="${esc(f.q)}" data-in="ccQ" aria-label="Search opportunities"><span class="grow"></span><span class="chip line">${ccTableRows(sc).length} opportunities</span></div>
-   <div id="ccTab">${ccTableHTML(sc)}</div></section>
-  <div class="ccgrid3">
-   <section class="panel"><div class="ph"><h3>Emerging signals</h3></div><div class="pb ccsgl" id="ccSig">${ccSignalsHTML(sc)}</div></section>
-   <section class="panel"><div class="ph"><h3>Capacity and bottlenecks</h3></div><div class="pb ccvlist">${ccCapHTML(sc)}</div></section>
-   <section class="panel"><div class="ph"><h3>Value realisation</h3><div class="seg" role="group" aria-label="Horizon">${[3,6,12].map(n=>`<button data-act="ccMonthsBtn" data-arg="${n}" aria-pressed="${f.months===n}">${n} mo</button>`).join('')}</div></div><div class="pb">
-    <div class="ccrs"><div data-tip="Actual net recovery on reconciled decisions in the period. Same as Analytics when filters match."><b class="num">${kfmt(m.act)}</b><span>Net recovery</span></div><div data-tip="Actual ÷ predicted net recovery on reconciled decisions."><b class="num">${m.rc.length&&sum(m.rc.map(r=>r.p50))?Math.round(m.act/sum(m.rc.map(r=>r.p50))*100):0}%</b><span>Recovery yield</span></div><div data-tip="Median days from decision to reconciled outcome."><b class="num">${m.days?m.days.toFixed(0):'—'} days</b><span>Cycle time</span></div><div data-tip="Estimated embodied-carbon avoided on reconciled decisions."><b class="num">${(sum(m.rc.map(r=>r.co2e))/1000).toFixed(0)} t</b><span>CO₂e avoided</span></div></div>${ccComboHTML(rows)}</div></section>
-  </div>
-  <p class="note ccfoot">Every figure here is computed from the same ${CASES.length} live returns and ${ROWS.length.toLocaleString()} closed decisions as Product and Analytics. Select any chart, bar or signal to filter the table. Capacity figures are configured planning values.</p></div>`}
+   <div id="ccTab">${ccTableHTML(sc)}</div></section>`:''}
+  ${row.length?`<div class="ccgrid3" id="ccSignals" data-n="${row.length}">${row.map(x=>RW[x]()).join('')}</div>`:''}
+  ${L.health==='full'?`<div class="sect" id="ccDevHealth"><div class="sh"><h2>Integration health</h2><span class="livedot"><i></i>Live</span><span class="grow"></span><a class="btn sm" href="#/integration/map">Open Source map</a></div><div class="grid g3 smside" id="smSide" style="align-items:start">${smSideHTML()}</div></div>`:''}
+  <p class="note ccfoot">${L.health==='full'&&!L.ops?`Figures come from the ${SOURCES.length} connected sources, ${(S.wf?S.wf.list.length:0)} workflows and the live event stream.`:`Every figure here is computed from the same ${visCases().length} live returns and ${visRows().length.toLocaleString()} closed decisions as Product and Analytics${S.acct.tenant?' for your tenants':''}. Select any chart, bar or signal to filter. Capacity figures are configured planning values.`}</p></div>`}
 ACT.ccF=(v,el)=>{S.cc[el.dataset.k]=v;route(true)};
 ACT.ccMonths=v=>{S.cc.months=+v;route(true)};ACT.ccMonthsBtn=v=>{S.cc.months=+v;route(true)};
 ACT.ccPick=a=>{const i=a.indexOf(':'),k=a.slice(0,i),v=a.slice(i+1);if(k==='go'){ACT.go(v);return}const f=S.cc;
